@@ -49,8 +49,7 @@
 <bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 	<property name="definitions">
 		<list>
-<!-- 			<value>/WEB-INF/tiles/default-config.xml</value> -->
-<!-- 			<value>/WEB-INF/tiles/advance-config.xml</value> -->
+			<value>/WEB-INF/tiles/*-config.xml</value>
 		</list>
 	</property>
 </bean>
