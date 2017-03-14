@@ -9,7 +9,7 @@ public class nav_controller {
 	@RequestMapping("/")
 	public ModelAndView main_nav() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/mainNav");
+		mav.setViewName("mainNav");
 		return mav;
 	}
 
