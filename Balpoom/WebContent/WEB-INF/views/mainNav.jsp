@@ -12,7 +12,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">
-					<img alt="logo" src="/WEB-INF/images/Logo.png"/>
+					<img alt="logo" src="/images/Logo.png" width="100px" height="50px"/>
 				</a>
 			</div>
 			<ul class="nav navbar-nav">
