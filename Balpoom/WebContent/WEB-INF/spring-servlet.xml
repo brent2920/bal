@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:c="http://www.springframework.org/schema/c" 
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:lang="http://www.springframework.org/schema/lang" 
 	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:cache="http://www.springframework.org/schema/cache" 
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
@@ -20,47 +20,37 @@
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-	<mvc:annotation-driven/>
-	<mvc:default-servlet-handler/>
-	
-	<!-- @request-MApping을 포함한 기타 MVC 구동에 필요한 어노테이션을 활성화 -->
-	
-<!-- 	<bean class="controller.hellocontroller"/> -->
-<context:component-scan base-package="controller"/>
-<context:component-scan base-package="models"/>
-<context:component-scan base-package="view"/>
-<context:component-scan base-package="mybatis"/>
-<!-- viewresolver 설정을 변경해보자 -->
-<!-- viewResolver 여러개를 설정해줄수가 있는데 우선순위가 중요함 
-	마지막이 InternalResourceViewResolver 가 작동되게 함 
- -->
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
 
-<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-	<property name="order" value="1"/>
-</bean>
-<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/"/>
-		<property name="suffix" value=".jsp"/>
-		<property name="order" value="9"/>
-</bean>
-<!-- 뷰이름을 등록된 타일에서도 검색을 할수 있게됨 /실제 타일을 정의하고 만드려면 tile api가 필요 -->
-<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="8"/>
+	<context:component-scan base-package="controller" />
+	<context:component-scan base-package="models" />
+	<context:component-scan base-package="view" />
+	<context:component-scan base-package="mybatis" />
 
-<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-	<property name="definitions">
-		<list>
-			<value>/WEB-INF/tiles/*-config.xml</value>
-		</list>
-	</property>
-</bean>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="9" />
+	</bean>
 
-<!-- <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"> -->
-		<!-- </bean> -->
-<!-- orm setting -->
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="8" />
+
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/*-config.xml</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean class="org.apache.tomcat.jdbc.pool.DataSource" id="datasource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-	<property name="url" value="jdbc:oracle:thin:@121.134.125.131:1521:xe" />
+		<property name="url" value="jdbc:oracle:thin:@121.134.125.131:1521:xe" />
 		<property name="username" value="bal" />
 		<property name="password" value="oracle" />
 	</bean>
