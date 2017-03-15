@@ -2,15 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="room">
 
-	<insert id="insertList" parameterType="java.util.HashMap">
+<!-- Parameter Type / Result Type은 필요에 따라 추가 -->
+	<insert id="insertList">
+		
+	</insert>
+	
+	<insert id="insertOne">
 	
 	</insert>
 	
-	<insert id="insertOne" parameterType="java.util.HashMap">
 	
-	</insert>
+	<select id="getRoomInfo">
 	
+	</select>
 	
-	<select id="getRoomInfo"></select>
+	<select id="getRoomList">
+	
+	</select>
 	
 </mapper>

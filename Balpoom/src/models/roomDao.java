@@ -18,10 +18,10 @@ public class roomDao {
 
 	/* ================================================================
 	 * DB서버에 데이터 등록
-	 * insertAllRoom : 초기 DB작업용
-	 * insertOne : 매물 등록용
+	 * setAllRoom : 초기 DB작업용
+	 * setOneRoom : 매물 등록용
 	 * ================================================================*/
-	public int insertAllRoom(List<Map<String, Object>> rList) {
+	public int setAllRoom(List<Map<String, Object>> rList) {
 		SqlSession session = factory.openSession();
 		System.out.println("DB Size : " + rList.size());
 		int r = 0;
@@ -39,7 +39,7 @@ public class roomDao {
 		return r;
 	}
 
-	public int insertOneRoom(Map<String, Object> rInfo) {
+	public int setOneRoom(Map<String, Object> rInfo) {
 		SqlSession session = factory.openSession();
 		System.out.println("Room Info : " + rInfo.toString());
 		int r = 0;

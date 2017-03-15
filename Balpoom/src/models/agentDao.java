@@ -16,18 +16,18 @@ public class agentDao {
 	SqlSessionFactory factory;
 
 	/* ================================================================
-	 * ¹æ Á¤º¸ DB ÀúÀå
-	 * insertAllRoom : ÃÊ±â µ¥ÀÌÅÍ ¼¼ÆÃ¿ë
-	 * insertOne : ¹æµî·Ï¿ë
+	 * ì¤‘ê°œì¸ ì •ë³´ DBì„œë²„ì— ë“±ë¡
+	 * insertAllAgent : ì´ˆê¸° ì¤‘ê°œì¸ ë°ì´í„° ë“±ë¡ìš©
+	 * insertOne : ï¿½ï¿½ï¿½Ï¿ï¿½
 	 * ================================================================*/
-	public int insertAllRoom(List<Map<String, Object>> rList) {
+	public int insertAllAgent(List<Map<String, Object>> aList) {
 		SqlSession session = factory.openSession();
-		System.out.println("DB Size : " + rList.size());
+		System.out.println("DB Size : " + aList.size());
 		int r = 0;
 
 		try {
-			for (int i = 0; i < rList.size(); i++) {
-				r = session.insert("room.insertList", rList);
+			for (int i = 0; i < aList.size(); i++) {
+				r = session.insert("agent.insertAgentList", aList);
 				session.commit();
 			}
 		} catch (Exception e) {
@@ -38,13 +38,13 @@ public class agentDao {
 		return r;
 	}
 
-	public int insertOneRoom(Map<String, Object> rInfo) {
+	public int insertOneAgent(Map<String, Object> rInfo) {
 		SqlSession session = factory.openSession();
-		System.out.println("Room Info : " + rInfo.toString());
+		System.out.println("Agent Info : " + rInfo.toString());
 		int r = 0;
 
 		try {
-			r = session.insert("room.insertOne", rInfo);
+			r = session.insert("agent.insertOneAgent", rInfo);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,19 +56,18 @@ public class agentDao {
 	
 	
 	/* ================================================================
-	 * ¹æ Á¤º¸ DB¿¡¼­ °¡Á®¿À±â
-	 * getSelectedRoomInfo : ¼¼ºÎ ¹æÁ¤º¸ È­¸é ¶ç¿ï ¶§
-	 * insertOne : ¹æµî·Ï¿ë
+	 * ì¤‘ê°œì¸ ì •ë³´ ê´€ë ¨
+	 * getSelectedRoomAgentInfo : ì¤‘ê°œì¸ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	 * ================================================================*/
-	public HashMap<String, Object> getSelectedRoomInfo(int regNum) {
+	public HashMap<String, Object> getSelectedRoomAgentInfo(int agntNum) {
 		SqlSession session = factory.openSession();
-		System.out.println("Registration Number : " + regNum);
+		System.out.println("Agent Number : " + agntNum);
 		
 		HashMap<String, Object> rInfo = null;
 		
 		try {
 			rInfo = new HashMap<>();
-			rInfo = session.selectOne("room.getRoomInfo", regNum);
+			rInfo = session.selectOne("agent.getAgentInfo", agntNum);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,6 +76,4 @@ public class agentDao {
 		}
 		return rInfo;
 	}
-	
-	
 }
