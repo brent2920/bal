@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="room">
+<mapper namespace="agent">
 
-	<insert id="insertList" parameterType="java.util.HashMap">
+	<select id="getRoomList" parameterType="java.util.List" resultType="java.util.List">
 	
-	</insert>
+	</select>
 	
-	<insert id="insertOne" parameterType="java.util.HashMap">
+	<select id="getRoom">
 	
-	</insert>
+	</select>
 	
 </mapper>

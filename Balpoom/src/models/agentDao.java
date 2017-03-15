@@ -1,6 +1,5 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class roomDao {
+public class agentDao {
 
 	@Autowired
 	SqlSessionFactory factory;
 
 	/* ================================================================
-	 * DBì„œë²„ì— ë°ì´í„° ë“±ë¡
-	 * insertAllRoom : ì´ˆê¸° DBì‘ì—…ìš©
-	 * insertOne : ë§¤ë¬¼ ë“±ë¡ìš©
+	 * ¹æ Á¤º¸ DB ÀúÀå
+	 * insertAllRoom : ÃÊ±â µ¥ÀÌÅÍ ¼¼ÆÃ¿ë
+	 * insertOne : ¹æµî·Ï¿ë
 	 * ================================================================*/
 	public int insertAllRoom(List<Map<String, Object>> rList) {
 		SqlSession session = factory.openSession();
@@ -57,9 +56,9 @@ public class roomDao {
 	
 	
 	/* ================================================================
-	 * DBì„œë²„ì—ì„œ ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
-	 * getSelectedRoomInfo : ìƒì„¸ ë§¤ë¬¼ì •ë³´ ì¡°íšŒì‹œ ì‚¬ìš©
-	 * getRoomList : ë°© ê²€ìƒ‰í™”ë©´ì—ì„œ ì˜¤ë¥¸ìª½ ë°© ë¦¬ìŠ¤íŠ¸ ë„ìš¸ ë•Œ
+	 * ¹æ Á¤º¸ DB¿¡¼­ °¡Á®¿À±â
+	 * getSelectedRoomInfo : ¼¼ºÎ ¹æÁ¤º¸ È­¸é ¶ç¿ï ¶§
+	 * insertOne : ¹æµî·Ï¿ë
 	 * ================================================================*/
 	public HashMap<String, Object> getSelectedRoomInfo(int regNum) {
 		SqlSession session = factory.openSession();
@@ -78,20 +77,6 @@ public class roomDao {
 		}
 		return rInfo;
 	}
-
-	public List<HashMap<String, Object>> getRoomList(List<HashMap<String, Double>> viewport) {
-		SqlSession session = factory.openSession();
-		System.out.println("Viewport Values : " + viewport.toString());
-		List<HashMap<String, Object>> rList = null;
-		
-		try {
-			rList = new ArrayList<>();
-			rList = session.selectList("room.getRoomList", viewport);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return rList;
-	}
+	
+	
 }
