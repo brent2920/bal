@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+.container-fluid {
+	font-size: 15px;
+}
+</style>
 	
 <nav class="navbar navbar-inverse" style="border-radius: 0px; margin-bottom: 0px;">
 	<div class="container-fluid">
@@ -33,11 +39,12 @@
 					<li><a href="#">개인 회원가입</a></li>
 					<li><a href="#">공인중개사 회원가입</a></li>
 				</ul></li>
-			<li><a href="#"> <!-- 						<span class="glyphicon glyphicon-log-in"></span> 로그인 -->
-					<span class="glyphicon glyphicon-user" data-toggle="modal"
-					data-target="#myModal">로그인</span> <!-- 모델 바디 -->
-
-			</a>
+			<li>
+				<a href="#">
+						<span class="glyphicon glyphicon-user" data-toggle="modal"
+						data-target="#myModal">로그인</span>
+	
+				</a>
 				<div class="modal fade" id="myModal" role="dialog">
 					<form action="/login/loginHandler" method="post">
 						<div class="modal-dialog">
@@ -60,7 +67,7 @@
 										<label for="inputdefault">비밀번호</label> <input
 											class="form-control" id="inputdefault" type="text">
 									</div>
-									<button type="button" class="btn btn-success">로그인</button>
+									<button type="button" class="btn btn-success" style="background-color: #04B486;">로그인</button>
 
 								</div>
 								<div class="modal-footer">
@@ -71,7 +78,8 @@
 
 						</div>
 					</form>
-				</div></li>
+				</div>
+			</li>
 		</ul>
 	</div>
 </nav>

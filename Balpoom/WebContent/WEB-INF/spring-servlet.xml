@@ -58,13 +58,10 @@
 		<!-- </bean> -->
 <!-- orm setting -->
 
-	<!-- orm setting -->
-	<!-- orm setting -->
 	<bean class="org.apache.tomcat.jdbc.pool.DataSource" id="datasource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-<!-- 		<property name="url" value="jdbc:oracle:thin:@192.168.10.1:1521:xe" /> -->
-	<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
-		<property name="username" value="sw" />
+	<property name="url" value="jdbc:oracle:thin:@121.134.125.131:1521:xe" />
+		<property name="username" value="bal" />
 		<property name="password" value="oracle" />
 	</bean>
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -75,7 +72,4 @@
 		</property>
 		<property name="dataSource" ref="datasource" />
 	</bean>
-
-
-
 </beans>
