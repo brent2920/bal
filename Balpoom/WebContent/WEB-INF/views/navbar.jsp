@@ -15,7 +15,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="/">
-			<img alt="logo" src="/images/logo.png" width="70px" height="30px" />
+				<img alt="발품로고" src="/images/logo.png" width="70px" height="20px" />
 			</a>
 		</div>
 		<ul class="nav navbar-nav">
@@ -58,24 +58,21 @@
 								<div class="modal-body">
 
 									<div class="form-group">
-										<label for="inputdefault">이메일</label> <input
-											class="form-control" id="inputdefault" type="text">
+										<label for="inputdefault">이메일</label>
+										<input class="form-control" id="inputdefault" type="text">
 									</div>
-
 
 									<div class="form-group">
-										<label for="inputdefault">비밀번호</label> <input
-											class="form-control" id="inputdefault" type="text">
+										<label for="inputdefault">비밀번호</label>
+										<input class="form-control" id="inputdefault" type="text">
 									</div>
 									<button type="button" class="btn btn-success" style="background-color: #04B486;">로그인</button>
-
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
 								</div>
 							</div>
-
 						</div>
 					</form>
 				</div>
