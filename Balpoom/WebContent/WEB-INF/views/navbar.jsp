@@ -19,7 +19,7 @@
 			</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">방 검색</a></li>
+			<li class="active"><a href="/search">방 검색</a></li>
 			<li><a href="#">관심목록</a></li>
 			<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
 			<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
