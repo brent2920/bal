@@ -8,9 +8,16 @@
 <div>
 	<tiles:insertAttribute name="navbar" />
 </div>
-<div style="margin: auto;">
-	<tiles:insertAttribute name="detail" />
+<div class="row" style="min-height: 80%;">
+	<div style="margin-left: 4em; margin-right: 4em;">
+		<div class="col-sm-8">
+			<tiles:insertAttribute name="detail" />
+		</div>
+		<div class="col-sm-4">
+			<!-- 중개사 정보 타일삽입 -->
+		</div>
+	</div>
 </div>
-<div style="min-height: 10%;">
+<div>
 	<tiles:insertAttribute name="footer" />
 </div>

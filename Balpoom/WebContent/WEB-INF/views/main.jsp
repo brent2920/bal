@@ -12,8 +12,8 @@
 }
 
 .main_search_area {
-    position: absolute;
-    bottom: 20%;
+    position: relative;
+    top: 82.3%;
     background-color: rgba(0,0,0,.5);
     padding-bottom: 16px;
     padding-top: 30px;

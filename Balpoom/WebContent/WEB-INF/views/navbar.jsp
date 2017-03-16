@@ -14,8 +14,8 @@
 <nav class="navbar navbar-inverse" style="border-radius: 0px; margin-bottom: 0px;">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#"> <img alt="logo"
-				src="/images/logo.png" width="70px" height="30px" />
+			<a class="navbar-brand" href="/">
+			<img alt="logo" src="/images/logo.png" width="70px" height="30px" />
 			</a>
 		</div>
 		<ul class="nav navbar-nav">

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 	
-<title>[매물번호]제목</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,6 +16,10 @@
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
 	width: 100%;
 /* 	margin: auto; */
+}
+
+.carousel {
+	width: 75%;
 }
 
 h1, h2, h3, h4 {
@@ -52,7 +55,6 @@ td {
 </style>
 
 <div class="container-fluid bg-3">
-	<!-- 매물 정보 -->
 	<div class="container">
 		<br>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -95,9 +97,7 @@ td {
 			</a>
 		</div>
 	</div>
-	<!-- 매물정보 -->
 </div>
-<br>
 
 <div style="margin: 2em;">
 	<h3>매물 정보</h3>
@@ -132,7 +132,6 @@ td {
 		</tr>
 	</table>
 </div>
-<br/>
 
 <div style="margin: 2em;">
 	<h3>상세설명</h3>
@@ -140,7 +139,8 @@ td {
 		내용
 	</span>
 </div>
-	<hr/>
+<hr/>
+
 <div style="margin: 2em;">
 	<h3>위치 및 주변 편의시설</h3>
 	<span>
