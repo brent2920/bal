@@ -17,26 +17,9 @@ public class agentDao {
 
 	/* ================================================================
 	 * 중개인 정보 DB서버에 등록
-	 * insertAllAgent : 초기 중개인 데이터 등록용
+	 * insertAllAgent : 초기 중개인 데이터 등록용 ==> databaseDao로 이동
 	 * insertOne : 중개인 정보 DB서버에 저장
 	 * ================================================================*/
-	public int insertAllAgent(List<Map<String, Object>> aList) {
-		SqlSession session = factory.openSession();
-		System.out.println("DB Size : " + aList.size());
-		int r = 0;
-
-		try {
-			for (int i = 0; i < aList.size(); i++) {
-				r = session.insert("agent.insertAgentList", aList);
-				session.commit();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return r;
-	}
 
 	public int insertOneAgent(Map<String, Object> rInfo) {
 		SqlSession session = factory.openSession();

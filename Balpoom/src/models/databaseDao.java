@@ -21,18 +21,17 @@ public class databaseDao {
 	@Autowired
 	SqlSessionFactory factory;
 
-	public void Test01() throws Exception {
+	public int Test01() throws Exception {
+		int r = 0;
 		SqlSession session = factory.openSession();
 		try {
 
 			Map<String, Object> map = new HashMap<>();
 
-			BufferedReader brr = new BufferedReader(
-					new FileReader("D:\\numbers.txt"));
+			BufferedReader brr = new BufferedReader(new FileReader("D:\\numbers.txt"));
 
-			int i = 0;
-			while (i < 100) {
-				i++;
+			while (true) {
+
 				String str1 = brr.readLine();
 
 				URL url = new URL("https://api.zigbang.com/v3/items?detail=true&item_ids=[" + str1 + "]");
@@ -78,7 +77,7 @@ public class databaseDao {
 				String b_option = jo1.get("options").toString();
 				String b_detail = jo1.get("description").toString();
 				String b_location = jo1.get("address1").toString();
-				String id = jo1.get("user_no").toString();
+				String id = jo1.get("user_email").toString();
 				String b_nstation = jo1.get("near_subways").toString();
 				String b_petpossible = jo1.get("pets_text").toString();
 				String[] str = jo1.get("random_location").toString().split(",");
@@ -107,7 +106,7 @@ public class databaseDao {
 				map.put("b_longitude", b_longitude);
 				map.put("id", id);
 
-				int r = session.insert("room.insertList", map);
+				r = session.insert("room.insertList", map);
 				if (r == 1) {
 					session.commit();
 				}
@@ -124,5 +123,85 @@ public class databaseDao {
 			session.close();
 
 		}
+		return r;
+	}
+
+	public int Test02() throws Exception {
+		int r =0;
+		SqlSession session = factory.openSession();
+		try {
+
+			Map<String, Object> map = new HashMap<>();
+
+			BufferedReader brr = new BufferedReader(new FileReader("d:\\numbers.txt"));
+
+			while (true) {
+
+				String str1 = brr.readLine();
+
+				URL url = new URL("https://api.zigbang.com/v3/items?detail=true&item_ids=[" + str1 + "]");
+
+				BufferedReader br = null;
+				try {
+					br = new BufferedReader(new InputStreamReader(url.openStream()));
+				} catch (IOException e) {
+
+					e.printStackTrace();
+					continue;
+				}
+				String result = "";
+				while (true) {
+					String str = br.readLine();
+					if (str == null) {
+						break;
+					} else
+						result += str;
+				}
+				br.close();
+
+				JSONParser jp = new JSONParser();
+				JSONObject jo = (JSONObject) jp.parse(result);
+				JSONArray ja = (JSONArray) jo.get("items");
+				JSONObject joo = (JSONObject) ja.get(0);
+				JSONObject jo1 = (JSONObject) joo.get("item");
+
+				String bk_officename = jo1.get("agent_name").toString();
+				String bk_num = jo1.get("bjd_code").toString();
+				String bk_address = jo1.get("agent_address1").toString();
+				String bk_agentnum = jo1.get("agent_phone").toString();
+				String bk_regname = jo1.get("user_name").toString();
+				String bk_contact = jo1.get("original_user_phone").toString();
+				String bk_email = jo1.get("agent_email").toString();
+				String bk_password = jo1.get("user_no").toString();
+				String id = jo1.get("user_email").toString();
+
+				map.put("bk_officename", bk_officename);
+				map.put("bk_num", bk_num);
+				map.put("bk_address", bk_address);
+				map.put("bk_agentnum", bk_agentnum);
+				map.put("bk_regname", bk_regname);
+				map.put("bk_contact", bk_contact);
+				map.put("bk_email", bk_email);
+				map.put("bk_password", bk_password);
+				map.put("id", id);
+
+				 r = session.insert("agent.insertAgentList", map);
+				if (r == 1) {
+					session.commit();
+				}
+
+				if (str1 == null)
+					break;
+			}
+			brr.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+
+		}
+		return r;
 	}
 }
