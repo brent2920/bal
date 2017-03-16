@@ -28,7 +28,7 @@ public class databaseDao {
 			Map<String, Object> map = new HashMap<>();
 
 			BufferedReader brr = new BufferedReader(
-					new FileReader("C:\\users\\admin\\Documents\\īī���� ���� ����\\numbers.txt"));
+					new FileReader("D:\\numbers.txt"));
 
 			int i = 0;
 			while (i < 100) {
