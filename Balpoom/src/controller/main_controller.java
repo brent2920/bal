@@ -11,4 +11,10 @@ public class main_controller {
 		ModelAndView mav = new ModelAndView("t_main");
 		return mav;
 	}
+	
+	@RequestMapping("/detail")
+	public ModelAndView detailViewHandler() {
+		ModelAndView mav = new ModelAndView("t_detail");
+		return mav;
+	}
 }

@@ -18,7 +18,7 @@ public class agentDao {
 	/* ================================================================
 	 * 중개인 정보 DB서버에 등록
 	 * insertAllAgent : 초기 중개인 데이터 등록용
-	 * insertOne : ���Ͽ�
+	 * insertOne : 중개인 정보 DB서버에 저장
 	 * ================================================================*/
 	public int insertAllAgent(List<Map<String, Object>> aList) {
 		SqlSession session = factory.openSession();
@@ -56,7 +56,7 @@ public class agentDao {
 	
 	
 	/* ================================================================
-	 * 중개인 정보 관련
+	 * 중개인 정보 가져오기
 	 * getSelectedRoomAgentInfo : 중개인 정보 가져오기
 	 * ================================================================*/
 	public HashMap<String, Object> getSelectedRoomAgentInfo(int agntNum) {

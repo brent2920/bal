@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="t_main" template="/WEB-INF/views/template.jsp">
+	<definition name="t_main" template="/WEB-INF/views/templates/main_template.jsp">
 		<put-attribute name="title" value="발품 | 더이상 허위매물에 속지말자" />
 		<put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp" />
 		<put-attribute name="main" value="/WEB-INF/views/main.jsp" />
 		<put-attribute name="board" value="/WEB-INF/views/main_board.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+	</definition>
+	
+	<definition name="t_detail" template="/WEB-INF/views/templates/detail_template.jsp">
+		<put-attribute name="title" value="발품 | 더이상 허위매물에 속지말자" />
+		<put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/detailInfo/detail_main.jsp" />
+		<!-- 중개사 부분 타일 삽입 -->
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
 	</definition>
 </tiles-definitions>
