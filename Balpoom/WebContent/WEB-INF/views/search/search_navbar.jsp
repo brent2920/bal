@@ -228,11 +228,12 @@
 		</ul>
 		
 		<!-- 검색창 -->
-		<form class="navbar-form navbar-left">
+		<form class="navbar-form navbar-right" style="margin-top: 5px; margin-bottom: 5px;">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" class="form-control" placeholder="원하시는 지역명, 지하철역을 입력해주세요"
+					style="width: 300px; height: 40px;">
 				<div class="input-group-btn">
-					<button class="btn btn-default" type="submit">
+					<button class="btn btn-default" type="submit" style="height: 40px;">
 						<i class="glyphicon glyphicon-search"></i>
 					</button>
 				</div>
