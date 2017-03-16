@@ -18,26 +18,9 @@ public class roomDao {
 
 	/* ================================================================
 	 * DB서버에 데이터 등록
-	 * setAllRoom : 초기 DB작업용
+	 * setAllRoom : 초기 DB작업용 ==> databaseDao로 이동
 	 * setOneRoom : 매물 등록용
 	 * ================================================================*/
-	public int setAllRoom(List<Map<String, Object>> rList) {
-		SqlSession session = factory.openSession();
-		System.out.println("DB Size : " + rList.size());
-		int r = 0;
-
-		try {
-			for (int i = 0; i < rList.size(); i++) {
-				r = session.insert("room.insertList", rList);
-				session.commit();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return r;
-	}
 
 	public int setOneRoom(Map<String, Object> rInfo) {
 		SqlSession session = factory.openSession();

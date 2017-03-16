@@ -3,7 +3,12 @@
 <mapper namespace="room">
 
 <!-- Parameter Type / Result Type은 필요에 따라 추가 -->
-	<insert id="insertList">
+	<insert id="insertList" parameterType="java.util.HashMap">
+		insert into data values(#{sell_num},#{b_title},#{b_deposit},
+		#{b_mpay},#{b_rkind},#{b_floor},#{b_area},#{b_gpay},
+		#{b_glist},#{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},
+		#{b_option},#{b_detail},#{b_location},#{b_nstation},#{b_petpossible},
+		#{b_latitude},#{b_longitude},#{id})
 		
 	</insert>
 	
