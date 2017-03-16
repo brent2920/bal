@@ -67,7 +67,7 @@ td {
 			</ol>
 
 			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox" style="overflow: ">
+			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<img src="images/room.jpg" width="260" height="145">
 				</div>

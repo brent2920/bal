@@ -12,6 +12,12 @@ public class main_controller {
 		return mav;
 	}
 	
+	@RequestMapping("/search")
+	public ModelAndView searchHandler() {
+		ModelAndView mav = new ModelAndView("t_search");
+		return mav;
+	}
+	
 	@RequestMapping("/detail")
 	public ModelAndView detailViewHandler() {
 		ModelAndView mav = new ModelAndView("t_detail");

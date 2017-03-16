@@ -25,4 +25,11 @@ public class nav_controller {
 		mav.setViewName("/watch/watchmain");
 		return mav;
 	}
+	
+	@RequestMapping("/watch")
+	public ModelAndView watch() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/watch/watchmain");
+		return mav;
+	}
 }
