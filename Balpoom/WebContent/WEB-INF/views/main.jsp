@@ -21,7 +21,7 @@
 </style>
 
 <div class="main_visual" style="width: 100%; height: 80%; overflow: hidden;
-	background-image: url(&quot;/images/mainImg.jpg&quot;)">
+	background-image: url(&quot;images/mainImg.jpg&quot;)">
 	<div class="main_search_area" style="margin: auto;" align="center">
 		<form>
 			<div class="input-group" style="width: 45%;">
@@ -36,8 +36,4 @@
 			</div>
 		</form>
 	</div>
-</div>
-
-        
-
-						
+</div>						
