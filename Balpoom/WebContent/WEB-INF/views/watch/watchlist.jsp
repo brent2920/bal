@@ -26,7 +26,7 @@
 	<div style="height: 2px"></div>
 	
 	
-	<div style="height: 6%; background-color: #222222; color: #919191; line-height: 46px; padding-left: 26%">> 검색 결과 (?)</div>
+	<div style="height: 6%; background-color: #222222; color: #919191; line-height: 46px; padding-left: 26%">> 검색 결과 (결과 개수)</div>
 	
 	
 	<div class="well row" style="height: 75%; overflow-x:hidden; overflow-y:auto; background-color: white; margin: 0; padding: 0;">
