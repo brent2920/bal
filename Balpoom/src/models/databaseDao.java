@@ -166,7 +166,7 @@ public class databaseDao {
 				JSONObject jo1 = (JSONObject) joo.get("item");
 
 				String bk_officename = jo1.get("agent_name").toString();
-				String bk_num = jo1.get("bjd_code").toString();
+				int bk_num = Integer.parseInt(jo1.get("bjd_code").toString());
 				String bk_address = jo1.get("agent_address1").toString();
 				String bk_agentnum = jo1.get("agent_phone").toString();
 				String bk_regname = jo1.get("user_name").toString();
