@@ -9,12 +9,18 @@
 	<tiles:insertAttribute name="navbar" />
 </div>
 <div class="row" style="min-height: 80%;">
-	<div style="margin-left: 4em; margin-right: 4em;">
+	<div style="margin-left: 4em; margin-right: 4em; margin-top: ">
 		<div class="col-sm-8">
 			<tiles:insertAttribute name="detail" />
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-3">
+		<div  style="margin-left:42m; margin-top: 5em;">
 			<!-- 중개사 정보 타일삽입 -->
+			<tiles:insertAttribute name="broker" />
+		</div>
+		</div>
+		<div class="col-sm-1">
+		
 		</div>
 	</div>
 </div>
