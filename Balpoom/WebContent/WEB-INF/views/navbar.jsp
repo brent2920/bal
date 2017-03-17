@@ -79,7 +79,7 @@
 							class="glyphicon glyphicon-user"></span> ${sessionScope.id }
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="/myinfo"><span data-toggle="modal"
+							<li><a href="t_info"><span data-toggle="modal"
 									data-target="#myInfo">내 정보 수정</span></a></li>
 							<li><a href="#">회원 탈퇴</a></li>
 						</ul></li>
@@ -187,66 +187,7 @@
 				</div>
 			</form>
 		</div>
-		<!-- 내 정보 수정 ===================================== -->
-		<div class="modal fade"  id="myinfo" role="dialog">
-			<form action="" method="get">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">내 정보 수정</h4>
-						</div>
-						<div class="modal-body">
-
-							<div class="form-group">
-								<label for="inputdefault">이름</label> <input class="form-control"
-									name="id" type="text">
-							</div>
-
-							<div class="form-group">
-								<label for="inputdefault">이메일</label> <input
-									class="form-control" name="email" type="email" required>
-							</div>
-							<div class="form-group">
-								<label for="inputdefault">비밀번호</label> <input
-									class="form-control" name="pass1" type="password" id="pass">
-							</div>
-							<div class="form-group">
-								<label for="inputdefault">비밀번호 확인 <span id="cmpResult"></span></label>
-								<input class="form-control" name="pass2" type="password">
-							</div>
-
-							<div class="form-group">
-								<label for="inputdefault">전화번호</label><br /> <select
-									class="form-control" style="float: left; width: 100px"
-									name="telenum1">
-									<option value="010">010</option>
-									<option value="011">011</option>
-									<option value="016">016</option>
-									<option value="017">017</option>
-									<option value="018">018</option>
-									<option value="019">019</option>
-								</select> <input class="form-control" name="telenum2" type="text"
-									style="width: 100px; float: left;"> <input
-									class="form-control" name="telenum3" type="text"
-									style="width: 100px; float: left;">
-							</div>
-							<br />
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success"
-								style="background-color: #04B486;">가입</button>
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-
-
-
+		
 		</li>
 		</ul>
 	</div>
@@ -254,7 +195,7 @@
 
 
 <script>
-	var flag1 = false, flag2 = false;
+	var flag1 = true, flag2 = false;
 	function sbtChange() {
 		if (flag1 && flag2) {
 			document.getElementById("sbt").disabled = false;
@@ -266,8 +207,7 @@
 
 	function passCompare() {
 
-		var flag = document.getElementById("pass").value == document
-				.getElementById("rpass").value;
+		var flag = document.getElementById("pass").value == document.getElementById("rpass").value;
 		if (flag) {
 			flag2 = true;
 			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치합니다";

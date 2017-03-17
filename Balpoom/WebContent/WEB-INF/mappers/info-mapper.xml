@@ -5,4 +5,8 @@
 <select id="find" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from join where id=#{id}
 </select>
+
+<update id="change" parameterType="java.util.HashMap">
+	update join set id = #{id} , telenum = #{telenum}, pass1 = #{pass1} , pass2 = #{pass2} where id=#{sid}
+</update>
 </mapper>
