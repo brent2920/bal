@@ -8,7 +8,7 @@
 		#{b_mpay},#{b_rkind},#{b_floor},#{b_area},#{b_gpay},
 		#{b_glist},#{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},
 		#{b_option},#{b_detail},#{b_location},#{b_nstation},#{b_petpossible},
-		#{b_latitude},#{b_longitude},#{id})
+		#{b_latitude},#{b_longitude},#{id},0,0)
 		
 	</insert>
 	
