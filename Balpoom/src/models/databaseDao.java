@@ -24,14 +24,16 @@ public class databaseDao {
 	public int Test01() throws Exception {
 		int r = 0;
 		SqlSession session = factory.openSession();
+		Map<String, Object> map = new HashMap<>();
+		int cnt = 0;
 		try {
 
-			Map<String, Object> map = new HashMap<>();
 
 			BufferedReader brr = new BufferedReader(new FileReader("D:\\numbers.txt"));
 
 			while (true) {
-
+			
+				
 				String str1 = brr.readLine();
 
 				URL url = new URL("https://api.zigbang.com/v3/items?detail=true&item_ids=[" + str1 + "]");
@@ -75,7 +77,7 @@ public class databaseDao {
 				String b_rinfo = jo1.get("title").toString();
 				String b_enterdate = jo1.get("movein_date").toString();
 				String b_option = jo1.get("options").toString();
-				String b_detail = jo1.get("description").toString();
+				String b_detail = jo1.get("description").toString().trim();
 				String b_location = jo1.get("address1").toString();
 				String id = jo1.get("user_email").toString();
 				String b_nstation = jo1.get("near_subways").toString();
@@ -108,6 +110,7 @@ public class databaseDao {
 
 				r = session.insert("room.insertList", map);
 				if (r == 1) {
+					cnt++;
 					session.commit();
 				}
 
@@ -121,8 +124,9 @@ public class databaseDao {
 			session.rollback();
 		} finally {
 			session.close();
-
+			
 		}
+		System.out.println(cnt);
 		return r;
 	}
 
