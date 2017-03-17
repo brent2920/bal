@@ -24,5 +24,8 @@
 	<select id="getRoomList">
 		
 	</select>
+	<select id="room_deposit" resultType="java.util.HashMap">
+		select * from ROOM where B_DEPOSIT=1000
+	</select>
 	
 </mapper>

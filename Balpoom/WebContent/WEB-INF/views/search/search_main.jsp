@@ -104,12 +104,17 @@
 <!-- 							style="color: white; font-size: 14px; text-decoration: none; color: #919191;"> -->
 <!-- 							다음 &gt; -->
 <!-- 						</a> -->
-								<div id="paging"/>
+								<div id="paging"></div>
 					</div>
 				</div>
 			</div>
 		</nav>
 	</div>
 </div>
-
-
+<script>
+$(document).ready(function() {
+    $("#paging").append(PagingHelper.pagingHtml(1001)); 
+    //해당 영역에 페이징 문자열 출력 
+    //class에대한 스타일 정의 필요.
+});
+</script>

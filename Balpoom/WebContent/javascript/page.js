@@ -18,7 +18,8 @@
 
 
     var PagingHelper = {
-        'data' : {
+        
+    	'data' : {
              currentPage :1     // 현재페이지
             //,startPage : 1    // 시작페이지
             ,pageSize : 5       // 페이지 사이즈 (화면 출력 페이지 수)
@@ -111,7 +112,7 @@
             console.log(this.data.currentPage+"/"+this.data.startnum +"/"+this.data.lastnum);
             //alert(this.data.currentPage+"/"+this.data.startnum +"/"+this.data.lastnum);
             
-            //리스트 불러오는 ajax호출
+            //리스트 불러오는 ajax 호출
             //////////////////////////
             $("#paging").html(this.pagingHtml()); 
         }
@@ -123,11 +124,6 @@
 
 //PagingHelper.data.totalCnt = 1001;
 
-$(document).ready(function() {
-    $("#paging").append(PagingHelper.pagingHtml(1001)); 
-    //해당 영역에 페이징 문자열 출력 
-    //class에대한 스타일 정의 필요.
-});
 
 	
 	
