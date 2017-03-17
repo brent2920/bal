@@ -23,4 +23,5 @@ public class main_controller {
 		ModelAndView mav = new ModelAndView("t_detail");
 		return mav;
 	}
+
 }

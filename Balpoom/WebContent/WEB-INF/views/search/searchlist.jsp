@@ -4,7 +4,34 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+ <style>
+    #paging > ul {
+        list-style-type:none;
+}
+    
+    #paging > ul li {
+        font-size: 1.1em;
+        display:inline-block;
+        cursor:pointer;
+        padding: 0 3px;
+}
+    #paging > ul > li:hover {
+        /*background: #fbfbfb;*/
+        /*font-weight:bold;*/
+        color: #0080ff;
+    }
+    
 
+    #paging > ul > li.selected {
+        color: #0080ff;
+        font-size:1.2em;
+        font-weight:bold;
+        cursor:default;
+
+}
+    
+ </style>
 
 <nav class="navbar navbar-inverse" style="padding: 0%; margin: 0%">
 	<div class="container-fluid">
@@ -54,4 +81,8 @@
 	<div style="height: 6%; background-color: #222222; color: #919191; line-height: 46px; padding-left: 50%;">
 		<a href="#" style="color:white; font-size: 14px; text-decoration: none; color: #919191;"> PREV < </a>
 		<a href="#"	 style="color:white; font-size: 14px; text-decoration: none; color: #919191;"> > NEXT </a>
-		</div>
+		
+
+	</div>
+	
+	

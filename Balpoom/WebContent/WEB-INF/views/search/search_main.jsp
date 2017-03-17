@@ -5,12 +5,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="/javascript/page.js"></script>
+<link rel="stylesheet" href="/css/page.css">
+
   <!-- 구글 지도 연동 -->
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap"
 		async defer>
 </script>
+ 
 
 <!-- 구글 지도 -->				
 <div class="well row" style="margin: 0; padding: 0; ">
@@ -92,14 +96,15 @@
 				<div align="center">
 					<div id="snav" style="height: 7%; width: 100%; 
 						border-radius: 0%; background-color: #222222; line-height: 48px">
-						<a href="#"
-							style="color: white; font-size: 14px; text-decoration: none; color: #919191;">
-							&lt; 이전 
-						</a> 
-						<a href="#" 
-							style="color: white; font-size: 14px; text-decoration: none; color: #919191;">
-							다음 &gt;
-						</a>
+<!-- 						<a href="#" -->
+<!-- 							style="color: white; font-size: 14px; text-decoration: none; color: #919191;"> -->
+<!-- 							&lt; 이전  -->
+<!-- 						</a>  -->
+<!-- 						<a href="#"  -->
+<!-- 							style="color: white; font-size: 14px; text-decoration: none; color: #919191;"> -->
+<!-- 							다음 &gt; -->
+<!-- 						</a> -->
+								<div id="paging"/>
 					</div>
 				</div>
 			</div>
@@ -108,23 +113,3 @@
 </div>
 
 
-
-<script>
-	function initMap() {
-		//var pos = { lat : ${json.results[0].geometry.location.lat },lng : ${json.results[0].geometry.location.lng } };
-		var map = new google.maps.Map(document.getElementById('map'), {
-			"center" : { lat: 37.5172363, lng: 127.0473248},											// 변수명으로 설정 가능		
-			"scrollwheel" : true,	//false 로 할경우 마우스 휠 작동이 안된다
-			"zoom" : 15
-		});
-		 var marker = new google.maps.Marker({
-	          "map" : map,	// 이 map 은 위에 var map 
-	          "position" : { lat: 37.5172363, lng: 127.0473248}, 									// 변수명으로 설정 가능	
-	          "title" : '${param.addr}'
-	    });
-	}
-	
-	setTimeout(initMap,1000);
-</script>
-	
-	
