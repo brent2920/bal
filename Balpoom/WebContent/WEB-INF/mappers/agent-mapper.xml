@@ -5,14 +5,14 @@
 <!-- Parameter Type / Result Type은 필요에 따라 추가 -->
 	<insert id="insertAgentList" parameterType="java.util.HashMap">
 	insert into agent values(#{bk_officename},#{bk_num},#{bk_address},#{bk_agentnum},
-	#{bk_regname},#{bk_contact},#{bk_email},#{bk_password},#{id})
+	#{bk_contact},#{bk_email},#{bk_password},#{id},#{sell_num},#{bk_regname})
 	</insert>
 
 	<insert id="insertOneAgent">
-	
+		
 	</insert>
 
-	<select id="getAgentInfo">
-	
+	<select id="getAgentInfo" parameterType="java.util.HashMap">
+		
 	</select>
 </mapper>

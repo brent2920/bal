@@ -35,7 +35,7 @@ public class databaseDao {
 			
 				
 				String str1 = brr.readLine();
-
+				
 				URL url = new URL("https://api.zigbang.com/v3/items?detail=true&item_ids=[" + str1 + "]");
 
 				BufferedReader br = null;
@@ -85,7 +85,10 @@ public class databaseDao {
 				String[] str = jo1.get("random_location").toString().split(",");
 				double b_latitude = Double.parseDouble(str[0]);
 				double b_longitude = Double.parseDouble(str[1]);
-
+				String b_local1 = jo1.get("local1").toString();
+				String b_local2 = jo1.get("local2").toString();
+				String b_local3 = jo1.get("local3").toString();
+				
 				map.put("sell_num", sell_num);
 				map.put("b_title", b_title);
 				map.put("b_deposit", b_deposit);
@@ -107,7 +110,10 @@ public class databaseDao {
 				map.put("b_latitude", b_latitude);
 				map.put("b_longitude", b_longitude);
 				map.put("id", id);
-
+				map.put("b_local1", b_local1);
+				map.put("b_local2", b_local2);
+				map.put("b_local3", b_local3);
+				
 				r = session.insert("room.insertList", map);
 				if (r == 1) {
 					cnt++;
@@ -170,7 +176,7 @@ public class databaseDao {
 				JSONObject jo1 = (JSONObject) joo.get("item");
 
 				String bk_officename = jo1.get("agent_name").toString();
-				int bk_num = Integer.parseInt(jo1.get("bjd_code").toString());
+				String bk_num = jo1.get("bjd_code").toString();
 				String bk_address = jo1.get("agent_address1").toString();
 				String bk_agentnum = jo1.get("agent_phone").toString();
 				String bk_regname = jo1.get("user_name").toString();
@@ -178,6 +184,7 @@ public class databaseDao {
 				String bk_email = jo1.get("agent_email").toString();
 				String bk_password = jo1.get("user_no").toString();
 				String id = jo1.get("user_email").toString();
+				int sell_num = Integer.parseInt(jo1.get("id").toString());
 
 				map.put("bk_officename", bk_officename);
 				map.put("bk_num", bk_num);
@@ -188,7 +195,8 @@ public class databaseDao {
 				map.put("bk_email", bk_email);
 				map.put("bk_password", bk_password);
 				map.put("id", id);
-
+				map.put("sell_num", sell_num);
+				
 				 r = session.insert("agent.insertAgentList", map);
 				if (r == 1) {
 					session.commit();
@@ -208,4 +216,6 @@ public class databaseDao {
 		}
 		return r;
 	}
+
+	
 }

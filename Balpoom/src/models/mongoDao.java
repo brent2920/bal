@@ -24,7 +24,7 @@ public class mongoDao {
 			String str1 = brr.readLine();
 
 			try {
-				Document doc = Jsoup.connect("https://www.zigbang.com/items1/" + str1).get();
+				Document doc = Jsoup.connect("https://www.zigbang.com/items1/"+ str1).get();
 				Element image = doc.select(".bxslider").get(0);
 
 				String[] images = image.html().toString().split("\\n");

@@ -8,7 +8,8 @@
 		#{b_mpay},#{b_rkind},#{b_floor},#{b_area},#{b_gpay},#{b_glist},
 		#{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},'불가능',
 		#{b_option},#{b_detail},#{b_location},#{b_nstation},
-		#{b_latitude},#{b_longitude},#{b_petpossible},#{id},0,0)
+		#{b_latitude},#{b_longitude},#{b_petpossible},#{id},0,0,
+		#{b_local1},#{b_local2},#{b_local3})
 		
 	</insert>
 	<insert id="insertOne">
@@ -16,12 +17,12 @@
 	</insert>
 	
 	
-	<select id="getRoomInfo">
-	
+	<select id="getRoomInfo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+	select * from room where SELL_NUM = #{regNum}
 	</select>
 	
 	<select id="getRoomList">
-	
+		
 	</select>
 	
 </mapper>
