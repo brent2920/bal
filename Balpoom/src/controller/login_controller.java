@@ -34,7 +34,7 @@ public class login_controller {
 				session.setAttribute("id", uid);
 				mav.setViewName("t_main");
 			}else{
-				mav.addObject("msg","¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù");
+				mav.addObject("msg","ì´ë©”ì¼ ì´ë‚˜ íŒ¨ìŠ¤ì›Œë“œê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤");
 				mav.setViewName("t_main");
 			
 				

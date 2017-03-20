@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- <meta charset="utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +15,11 @@
 	font-size: 15px;
 }
 </style>
+<c:if test="${msg ne null }">
+	<script>
+	window.alert("${msg }");
+	</script>
+</c:if>
 
 <nav class="navbar navbar-inverse"
 	style="border-radius: 0px; margin-bottom: 0px;">
@@ -54,59 +60,56 @@
 
 
 			<c:otherwise>
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 				<c:choose>
 					<c:when test="${sessionScope.id != null }">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/"> <img alt="발품로고"
-						src="/images/logo.png" width="70px" height="20px" />
-					</a>
-				</div>
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="search">방 검색</a></li>
-					<li><a href="#">관심목록</a></li>
-					<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
-					<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
-					<!-- 					<ul class="dropdown-menu"> -->
-					<!-- 						<li><a href="#">Page 1-1</a></li> -->
-					<!-- 						<li><a href="#">Page 1-2</a></li> -->
-					<!-- 						<li><a href="#">Page 1-3</a></li> -->
-					<!-- 					</ul></li> -->
-					<li><a href="#">방 등록</a></li>
-				</ul>
-			
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#"> <span
-							class="glyphicon glyphicon-user"></span> ${sessionScope.id }
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="t_info"><span data-toggle="modal"
-									data-target="#myInfo">내 정보 수정</span></a></li>
-							<li><a href="#">회원 탈퇴</a></li>
-						</ul></li>
-					<li><a href="/logout"> <span
-							class="glyphicon glyphicon-user" data-toggle="modal"
-							data-target="">로그아웃</span>
-							</c:when>
+						<div class="navbar-header">
+							<a class="navbar-brand" href="/"> <img alt="발품로고"
+								src="/images/logo.png" width="70px" height="20px" />
+							</a>
+						</div>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="search">방 검색</a></li>
+							<li><a href="#">관심목록</a></li>
+							<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
+							<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
+							<!-- 					<ul class="dropdown-menu"> -->
+							<!-- 						<li><a href="#">Page 1-1</a></li> -->
+							<!-- 						<li><a href="#">Page 1-2</a></li> -->
+							<!-- 						<li><a href="#">Page 1-3</a></li> -->
+							<!-- 					</ul></li> -->
+							<li><a href="#">방 등록</a></li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#"> <span
+									class="glyphicon glyphicon-user"></span> ${sessionScope.id }
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="t_info"><span data-toggle="modal"
+											data-target="#myInfo">내 정보 수정</span></a></li>
+									<li><a href="#">회원 탈퇴</a></li>
+								</ul></li>
+							<li><a href="/logout"> <span
+									class="glyphicon glyphicon-user" data-toggle="modal"
+									data-target="">로그아웃</span>
+					</c:when>
 					<c:otherwise>
-						window.alert(${requestScope.msg })
+						<script>
+						 	window.alert("${msg }");
+						 </script>
 					</c:otherwise>
-							
-					</c:choose>		
-							
-							
-							
-							
-							
-							
-							
-							
+				</c:choose>
+
+
+
+
 			</c:otherwise>
 		</c:choose>
 
@@ -129,12 +132,14 @@
 
 							<div class="form-group">
 								<label for="inputdefault">이메일</label> <input
-									class="form-control" id="inputdefault" type="text" name="Eemail">
+									class="form-control" id="inputdefault" type="text"
+									name="Eemail">
 							</div>
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호</label> <input
-									class="form-control" id="inputdefault" type="password" name="password">
+									class="form-control" id="inputdefault" type="password"
+									name="password">
 							</div>
 							<button type="submit" class="btn btn-success"
 								style="background-color: #04B486;">로그인</button>
@@ -150,7 +155,7 @@
 
 
 
-<!-- 회원가입 -->
+		<!-- 회원가입 -->
 
 		<div class="modal fade" id="myJoin" role="dialog">
 			<form action="/join" method="post">
@@ -170,17 +175,18 @@
 							</div>
 
 							<div class="form-group">
-								<label for="inputdefault">이메일<span id="EchkResult"></span></label> <input
-									class="form-control" name="Eemail" type="email" id="Eemail">
+								<label for="inputdefault">이메일<span id="EchkResult"></span></label>
+								<input class="form-control" name="Eemail" type="email"
+									id="Eemail">
 							</div>
 							<div class="form-group">
 								<label for="inputdefault">비밀번호</label> <input
-									class="form-control" name="password" type="password" id="pass" >
+									class="form-control" name="password" type="password" id="pass">
 							</div>
 							<div class="form-group">
 								<label for="inputdefault">비밀번호 확인<span id="cmpResult"></span>
-								</label> <input class="form-control" type="password" 
-									id="rpass" onkeyup="javascript:passCompare()">
+								</label> <input class="form-control" type="password" id="rpass"
+									onkeyup="javascript:passCompare()">
 							</div>
 
 							<div class="form-group">
@@ -210,7 +216,7 @@
 				</div>
 			</form>
 		</div>
-		
+
 		</li>
 		</ul>
 	</div>
@@ -218,58 +224,52 @@
 
 
 <script>
-
-	
-	var flag1 =true, flag2 =false;
+	var flag1 = true, flag2 = false;
 	function sbtChange() {
-		if(flag1 && flag2 ) {
+		if (flag1 && flag2) {
 			document.getElementById("sbt").disabled = false;
-		}else {
+		} else {
 			document.getElementById("sbt").disabled = true;
 		}
 	}
 	// string .. length 라는 property 가 존재함.. 문자열 길이.
-	
-	function passCompare( ) {
-		
-		var flag = document.getElementById("pass").value == document.getElementById("rpass").value;
-		if(flag) {
-			flag2 =true;
+
+	function passCompare() {
+
+		var flag = document.getElementById("pass").value == document
+				.getElementById("rpass").value;
+		if (flag) {
+			flag2 = true;
 			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치합니다.";
 			document.getElementById("cmpResult").style.color = "green";
-		}else {
-			flag2 =false;
+		} else {
+			flag2 = false;
 			document.getElementById("cmpResult").style.color = "red";
 			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치하지 않습니다.";
 		}
 		sbtChange();
 	}
-	
-	
-	
+
 	// 이메일 중복 여부 확인
-	
+
 	document.getElementById("Eemail").onblur = function() {
 		var xhr1 = new XMLHttpRequest();
 		// this .. 이 스크립트를 호출시킨 DOM 객체
 		// document.getElementById("id") 
-		xhr1.open("get", "/EmailcheckAjax?Eemail="+this.value, true);
+		xhr1.open("get", "/EmailcheckAjax?Eemail=" + this.value, true);
 		xhr1.send();
 		xhr1.onreadystatechange = function() {
-			if(xhr1.readyState==4 && xhr1.status==200) {
+			if (xhr1.readyState == 4 && xhr1.status == 200) {
 				var txt1 = xhr1.responseText;
 				console.log(txt1);
-				if(txt1 == 'YYYYY') {
-					document.getElementById("EchkResult").innerHTML = "이미 등록되어 있는 이메일 주소 입니다"; 
-					document.getElementById("EchkResult").style.color= "red";
-				}else {
+				if (txt1 == 'YYYYY') {
+					document.getElementById("EchkResult").innerHTML = "이미 등록되어 있는 이메일 주소 입니다";
+					document.getElementById("EchkResult").style.color = "red";
+				} else {
 					document.getElementById("EchkResult").innerHTML = "사용 가능한 이메일 주소 입니다";
-					document.getElementById("EchkResult").style.color="green";
+					document.getElementById("EchkResult").style.color = "green";
 				}
 			}
 		};
 	};
-	
-	
-	
 </script>

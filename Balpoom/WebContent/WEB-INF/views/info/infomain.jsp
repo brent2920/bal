@@ -126,11 +126,6 @@
 			$("#file").trigger("click")
 	})
 	
-// 	$(function(){ 
-//   		 $('#file').change(function(){ 
-//       			$('#uimg').attr('src', this.value); 
-//   		 }); 
-// 	}); 
 	function readURL(input) {
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
