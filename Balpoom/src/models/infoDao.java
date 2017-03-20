@@ -27,6 +27,7 @@ public class infoDao {
 		return map;
 	}
 	
+	
 	public int infochange(Map map){
 		SqlSession session = factory.openSession();
 		int r = 0;
@@ -34,6 +35,19 @@ public class infoDao {
 		try{
 			r = session.update("info.change",map);
 			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return r;
+	}
+	
+	public int passcheckAjax (Map map){
+		SqlSession session = factory.openSession();
+		int r = 0;
+		try{
+			r = session.selectOne("info.passcheckAjax",map);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

@@ -4,6 +4,6 @@
 
 <mapper namespace="login">
 	<select id="find" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		select * from join where email=#{email} and pass1=#{pass1}
+		select * from join where email=#{email} and password=#{password}
 	</select>
 </mapper>

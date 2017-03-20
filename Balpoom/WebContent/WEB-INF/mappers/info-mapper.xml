@@ -6,7 +6,12 @@
 		select * from join where id=#{id}
 </select>
 
+<select id="passcheckAjax" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+	select count(*) from join where id=#{id} and password=#{password}
+</select>
+
+
 <update id="change" parameterType="java.util.HashMap">
-	update join set id = #{id} , telenum = #{telenum}, pass1 = #{pass1} , pass2 = #{pass2} where id=#{sid}
+	update join set id = #{id} , telenum = #{telenum}, password=#{password}, uimg=#{uimg} where id=#{sid}
 </update>
 </mapper>
