@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<meta charset="utf-8">
+<!-- <meta charset="utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,7 +26,7 @@
 					</a>
 				</div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">방 검색</a></li>
+					<li class="active"><a href="search">방 검색</a></li>
 					<li><a href="#">관심목록</a></li>
 					<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
 					<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
@@ -55,13 +54,21 @@
 
 
 			<c:otherwise>
+			
+			
+			
+			
+			
+			
+				<c:choose>
+					<c:when test="${sessionScope.id != null }">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/"> <img alt="발품로고"
 						src="/images/logo.png" width="70px" height="20px" />
 					</a>
 				</div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">방 검색</a></li>
+					<li class="active"><a href="search">방 검색</a></li>
 					<li><a href="#">관심목록</a></li>
 					<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
 					<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
@@ -72,7 +79,7 @@
 					<!-- 					</ul></li> -->
 					<li><a href="#">방 등록</a></li>
 				</ul>
-
+			
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#"> <span
@@ -86,6 +93,20 @@
 					<li><a href="/logout"> <span
 							class="glyphicon glyphicon-user" data-toggle="modal"
 							data-target="">로그아웃</span>
+							</c:when>
+					<c:otherwise>
+						window.alert(${requestScope.msg })
+					</c:otherwise>
+							
+					</c:choose>		
+							
+							
+							
+							
+							
+							
+							
+							
 			</c:otherwise>
 		</c:choose>
 
@@ -113,7 +134,7 @@
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호</label> <input
-									class="form-control" id="inputdefault" type="text" name="pass1">
+									class="form-control" id="inputdefault" type="password" name="password">
 							</div>
 							<button type="submit" class="btn btn-success"
 								style="background-color: #04B486;">로그인</button>
@@ -129,8 +150,10 @@
 
 
 
+<!-- 회원가입 -->
+
 		<div class="modal fade" id="myJoin" role="dialog">
-			<form action="/join" method="get">
+			<form action="/join" method="post">
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
@@ -142,13 +165,13 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label for="inputdefault">이름</label> <input class="form-control"
-									name="id" type="text">
+								<label for="inputdefault">이름</label><input class="form-control"
+									name="id" type="text" id="id">
 							</div>
 
 							<div class="form-group">
-								<label for="inputdefault">이메일</label> <input
-									class="form-control" name="email" type="email">
+								<label for="inputdefault">이메일<span id="EchkResult"></span></label> <input
+									class="form-control" name="Eemail" type="email" id="Eemail">
 							</div>
 							<div class="form-group">
 								<label for="inputdefault">비밀번호</label> <input
@@ -195,28 +218,76 @@
 
 
 <script>
-	var flag1 = true, flag2 = false;
+	
+// 	document.getElementById("id").onblur = function() {
+// 		var xhr = new XMLHttpRequest();
+// 		xhr.open("get", "/checkAjax?id="+this.value, true);
+// 		xhr.send();
+// 		xhr.onreadystatechange = function() {
+// 			if(xhr.readyState==4 && xhr.status==200) {
+// 				var txt = xhr.responseText;
+// 				console.log(txt);
+// 				if(txt == 'YYYYY') {
+// 					document.getElementById("chkResult").innerHTML = '사용가능';
+// 					document.getElementById("chkResult").style.color='green';
+// 				}else {
+// 					document.getElementById("chkResult").innerHTML = '사용불가능';
+// 					document.getElementById("chkResult").style.color='red';
+// 				}
+// 			}
+// 		};
+// 	};
+	
+	var flag1 =true, flag2 =false;
 	function sbtChange() {
-		if (flag1 && flag2) {
+		if(flag1 && flag2 ) {
 			document.getElementById("sbt").disabled = false;
-		} else {
+		}else {
 			document.getElementById("sbt").disabled = true;
 		}
 	}
 	// string .. length 라는 property 가 존재함.. 문자열 길이.
-
-	function passCompare() {
-
+	
+	function passCompare( ) {
+		
 		var flag = document.getElementById("pass").value == document.getElementById("rpass").value;
-		if (flag) {
-			flag2 = true;
-			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치합니다";
+		if(flag) {
+			flag2 =true;
+			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치합니다.";
 			document.getElementById("cmpResult").style.color = "green";
-		} else {
-			flag2 = false;
+		}else {
+			flag2 =false;
 			document.getElementById("cmpResult").style.color = "red";
-			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치하지 않습니다";
+			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치하지 않습니다.";
 		}
 		sbtChange();
 	}
+	
+	
+	
+	// 이메일 중복 여부 확인
+	
+	document.getElementById("Eemail").onblur = function() {
+		var xhr1 = new XMLHttpRequest();
+		// this .. 이 스크립트를 호출시킨 DOM 객체
+		// document.getElementById("id") 
+		xhr1.open("get", "/EmailcheckAjax?Eemail="+this.value, true);
+		xhr1.send();
+		xhr1.onreadystatechange = function() {
+			if(xhr1.readyState==4 && xhr1.status==200) {
+				var txt1 = xhr1.responseText;
+				console.log(txt1);
+				if(txt1 == 'YYYYY') {
+					document.getElementById("EchkResult").innerHTML = "이미 등록되어 있는 이메일 주소 입니다"; 
+					document.getElementById("EchkResult").style.color= "red";
+				}else {
+					document.getElementById("EchkResult").innerHTML = "사용 가능한 이메일 주소 입니다";
+					document.getElementById("EchkResult").style.color="green";
+				}
+			}
+		};
+	};
+	
+	
+	
 </script>

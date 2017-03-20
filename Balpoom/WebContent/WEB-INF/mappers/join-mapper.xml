@@ -4,7 +4,17 @@
 
 <mapper namespace="join">
 	<insert id="add" parameterType="java.util.HashMap">
-		insert into join values(#{id}, #{email}, #{pass1}, #{pass2}, #{telenum},sysdate)
+		insert into join values(#{id}, #{email}, #{password},  #{telenum},sysdate, #{uimg})
 	</insert>
+	
+<!-- 	<select id="ajax" parameterType="java.lang.String" resultType="java.lang.Integer"> -->
+<!-- 		select count(*) from join where id=#{id} -->
+<!-- 	</select> -->
+<!-- </mapper> -->
+
+
+<select id="emailajax" parameterType="java.lang.String" resultType="java.lang.Boolean">
+		select count(*) from join where email=#{email}
+	</select>
 </mapper>
 

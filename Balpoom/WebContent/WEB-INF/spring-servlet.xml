@@ -20,17 +20,21 @@
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-	<mvc:annotation-driven />
+		
 	<mvc:default-servlet-handler />
+	<mvc:annotation-driven />
 
 	<context:component-scan base-package="controller" />
 	<context:component-scan base-package="models" />
 	<context:component-scan base-package="view" />
 	<context:component-scan base-package="mybatis" />
 
-	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<property name="order" value="1" />
-	</bean>
+<!-- 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"> -->
+<!-- 		<property name="order"  value="1" /> -->
+<!-- 	</bean> -->
+<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
+	
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -38,7 +42,7 @@
 		<property name="order" value="9" />
 	</bean>
 
-	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="8" />
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2" />
 
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
@@ -62,4 +66,20 @@
 		</property>
 		<property name="dataSource" ref="datasource" />
 	</bean>
+	
+	
+	
+		<!-- 멀티파트 요청 처리용 빈 등록 / 파일용 -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
+		id="multipartResolver">
+		<property name="uploadTempDir" value="/temp"/> 
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="maxUploadSize" value="-1"/> 
+	</bean>												
+																		
+<!-- 																		 D:\springtest\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring-test -->
+												
+	
+	
+	
 </beans>

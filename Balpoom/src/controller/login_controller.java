@@ -1,7 +1,9 @@
 package controller;
 
-import java.util.HashMap;
+import java.io.IOException;
+
 import java.util.Map;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -20,13 +22,22 @@ public class login_controller {
 	loginDao ldao;
 	
 		@RequestMapping("/login")
-		public ModelAndView mav(@RequestParam Map map, HttpSession session){
+		public ModelAndView mav(@RequestParam Map map, HttpSession session  ) throws IOException {
 			ModelAndView mav = new ModelAndView();
-			Map id = ldao.login(map);			
-			String uid = (String)id.get("ID");	
-			if(uid != null){
+			
+		
+			Map id = ldao.login(map);		
+
+			
+			if(id != null){
+				String uid = (String)id.get("ID");	
 				session.setAttribute("id", uid);
 				mav.setViewName("t_main");
+			}else{
+				mav.addObject("msg","아이디 또는 비밀번호가 일치하지 않습니다");
+				mav.setViewName("t_main");
+			
+				
 			}
 			return mav;
 		}

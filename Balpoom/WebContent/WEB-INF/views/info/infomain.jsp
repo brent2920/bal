@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-    
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,9 +9,10 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
 	<style>
 	table{
-	bgColor=#424242;
+
 	
 	
 	}
@@ -23,12 +22,18 @@
 		height: 60px;
 		background-color: #B0C4DE;
 		font-size: 12px;
+		text-align: center;
 	}
 	#memo{
-		width: 490px;
+		width: 400px; //490
 		height: 60px;
-		padding-left: 4%;
+		padding-left: 2%;
 
+	}
+	#memo1{
+		width: 410px; //490
+		height: 60px;
+		padding-left: 1%;
 	}
 	#btn{
 		text-align: center;
@@ -36,35 +41,44 @@
 		height: 100px;
 	
 	}
-	#bt{
+	#Isbt{
 		width: 260px;
 		height: 60px;
 	
 	}
+	#btc{
+		width: 260px;
+		height: 60px;
+		background-color: #e7e7e7; color: black;
+	}
 		
-	
-	
 	</style>
-	
-	<div style="padding-left:30%; padding-top:6%; padding-bottom:6%">
-	<form action="/infochange">
-	<h3 style="font-family: ³ª´®°íµñ"><img alt="¹ßÇ°·Î°í" src="/images/logo.png" width="70px" height="20px" />È¸¿ø Á¤º¸ ¼öÁ¤</h3>
+
+	<div style="padding-left:26%; padding-top:6%; padding-bottom:6%; padding-right: 26%;" >   <!-- "padding-left:30%; padding-top:6%; padding-bottom:6%" -->
+	<div class="well" style="background-color: white;">
+	<h4 style="font-family: ë‚˜ëˆ”ê³ ë”•; font-style: bold">
+<!-- 	<img alt="ë°œí’ˆë¡œê³ " src="/images/logo.png" width="70px" height="20px" /> -->
+	&nbsp;íšŒì› ì •ë³´ ìˆ˜ì •</h4>
+	<form action="/infochange" method="post" enctype="multipart/form-data">
 	<br/>
-	<table border="2px solid">
+	<table style="table-layout:fixed;  word-break:break-all; border: 2px solid #5ABEF5; "> 
 	<tr>
-		<td id="title">º»ÀÎ ¼º¸í</td>
+		<td id="title">ë³¸ì¸ ì„±ëª…2</td>
 		<td id="memo"><input type="text" class="form-control" value="${id }" name="id"></td>
+		<td id="memo1" rowspan="6"><img alt="í”„ë¡œí•„ì‚¬ì§„" src=" ${info.UIMG }" style="width: 80%; height : 200px; margin: 0; padding: 0; padding-left: 15%"  id="uimg" >
+			<input type="file" name="file" id="file" style="display: none;" /> 
+		</td>
+	</tr>
+	<tr>
+		<td id="title">ì´ë©”ì¼ ì£¼ì†Œ</td>
+		<td id="memo">${info.EMAIL }</td>
 	
 	</tr>
 	<tr>
-		<td id="title">ÀÌ¸ŞÀÏ ÁÖ¼Ò</td>
-		<td id="memo">${info.EMAIL }</td>
-		
-	</tr>
-	<tr>
-		<td id="title">ÈŞ´ëÆù ¹øÈ£</td>
-		<td id="memo">
-		<select class="form-control" style="float: left; width: 100px" name="telenum1">
+		<td id="title">íœ´ëŒ€í° ë²ˆí˜¸</td>
+		<td id="memo" >
+		<select class="form-control" style="float: left; width: 94px" name="telenum1" >
+				<option value="${tele1 }">${tele1 }</option>
 				<option value="010">010</option>
 				<option value="011">011</option>
 				<option value="016">016</option>
@@ -72,31 +86,124 @@
 				<option value="018">018</option>
 				<option value="019">019</option>
 		</select>
-		<input class="form-control" name="telenum2" type="text"
-			style="width: 100px; float: left;"> <input class="form-control"
-			name="telenum3" type="text" style="width: 100px; float: left;">
+		<input class="form-control"  value="${tele2 }" name="telenum2" type="text" style="width: 94px; float: left;" >
+		 <input class="form-control" value="${tele3 }"name="telenum3" type="text" style="width: 94px; float: left; ">
 		</td>
+	
 	</tr>
 	<tr>
-		<td id="title" rowspan="3">ºñ¹Ğ¹øÈ£ º¯°æ</td>
-		<td id="memo">
-			<input type="password" class="form-control" placeholder="ÇöÀç ºñ¹Ğ¹øÈ£">
+		<td id="title" rowspan="3">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</td>
+		<td id="memo"><label><span id="PpassResult" > </span></label>
+			<input type="password" class="form-control" placeholder="í˜„ì¬ ë¹„ë°€ë²ˆí˜¸"  id="Pass" >
 		</td>
+		
 	</tr>
 	<tr>
-<!-- 		<td id="title">¾Æ</td> -->
-		<td id="memo"><input type="password" class="form-control" placeholder="º¯°æµÉ ºñ¹Ğ¹øÈ£" name="pass1"></td>
+		<td id="memo"><label><span id="passResult"> </span></label><input type="password" class="form-control" placeholder="ë³€ê²½ë  ë¹„ë°€ë²ˆí˜¸" name="password" id="PASS1"></td>
+		
+	</tr>
+	
+	<tr>
+<!-- 		<td id="title">ì•„</td> -->
+		<td id="memo"><label><span></span></label><input type="password" class="form-control" placeholder="ë³€ê²½ë  ë¹„ë°€ë²ˆí˜¸ í™•ì¸"  id="RPASS1"  onkeyup="javascript:IPassCompare()" ></td>
+		
 	</tr>
 	<tr>
-<!-- 		<td id="title">¾Æ</td> -->
-		<td id="memo"><input type="password" class="form-control" placeholder="º¯°æµÉ ºñ¹Ğ¹øÈ£ È®ÀÎ" name="pass2" ></td>
-	</tr>
-	<tr>
-		<td colspan="2" id="btn"><input type="submit" class="btn btn-primary" value="È®ÀÎ" id="bt">
-				<a href="/"><button type="button" class="btn btn-white"  id="bt">Ãë¼Ò</button></a> 
+		<td colspan="3" id="btn"><input type="submit" class="btn btn-primary" value="í™•ì¸" id="Isbt" disabled >
+				<a href="/"><button type="button" class="btn"  id="btc" style="background-color: ;">ì·¨ì†Œ</button></a> 
+				
 		</td>
+		
 	</tr>
-	</form>
+</table>
+</form>
+</div>
 </div>
 	
-	</table>
+<script>
+
+	$("#uimg").click(function(){
+			$("#file").trigger("click")
+	})
+	
+// 	$(function(){ 
+//   		 $('#file').change(function(){ 
+//       			$('#uimg').attr('src', this.value); 
+//   		 }); 
+// 	}); 
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	            $('#uimg').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
+	$("#file").change(function(){
+	    readURL(this);
+	});
+
+
+
+
+	document.getElementById("Pass").onkeyup = function() {
+		var xhr = new XMLHttpRequest();
+		// this .. ì´ ìŠ¤í¬ë¦½íŠ¸ë¥¼ í˜¸ì¶œì‹œí‚¨ DOM ê°ì²´
+		// document.getElementById("id") 
+		xhr.open("get", "/passcheckAjax?Pass="+this.value, true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState==4 && xhr.status==200) {
+				var txt = xhr.responseText;
+				console.log(txt);
+				if(txt == 'YYYYY') {
+					document.getElementById("PpassResult").innerHTML = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤";
+					document.getElementById("PpassResult").style.color= "green";
+					Flag1=true;
+				}else {
+					document.getElementById("PpassResult").innerHTML = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ì•ŠìŠµë‹ˆë‹¤";
+					document.getElementById("PpassResult").style.color="red";
+				}
+			}
+			sbtChange();
+		};
+	};
+	
+	
+	
+	function IPassCompare( ) {
+		var p1 = document.getElementById("PASS1").value;
+		var p2 = document.getElementById("RPASS1").value;
+		console.log(p1)
+		console.log(p2)
+		var Flag = document.getElementById("PASS1").value == document.getElementById("RPASS1").value;
+		console.log(Flag)
+		if(Flag) {
+			Flag2 =true;
+			document.getElementById("passResult").innerHTML = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤.";
+			document.getElementById("passResult").style.color = "green";
+		}else {
+			Flag2 =false;
+			document.getElementById("passResult").style.color = "red";
+			document.getElementById("passResult").innerHTML = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+		}
+		sbtChange();
+	}
+	
+	
+	var Flag1 =false, Flag2 =false;
+	function sbtChange() {
+		if(Flag1 && Flag2 ) {
+			document.getElementById("Isbt").disabled = false;
+		}else {
+			document.getElementById("Isbt").disabled = true;
+		}
+	}
+	// string .. length ë¼ëŠ” property ê°€ ì¡´ì¬í•¨.. ë¬¸ìì—´ ê¸¸ì´.
+	
+
+ 	</script>
