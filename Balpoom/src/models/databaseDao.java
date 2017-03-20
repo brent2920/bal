@@ -184,6 +184,8 @@ public class databaseDao {
 				String bk_email = jo1.get("agent_email").toString();
 				String bk_password = jo1.get("user_no").toString();
 				String id = jo1.get("user_email").toString();
+				
+				
 				int sell_num = Integer.parseInt(jo1.get("id").toString());
 
 				map.put("bk_officename", bk_officename);

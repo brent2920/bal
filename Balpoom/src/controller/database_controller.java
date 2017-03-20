@@ -2,10 +2,12 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import models.databaseDao;
 import models.mongoDao;
 
@@ -18,6 +20,8 @@ public class database_controller {
 	
 	@Autowired
 	mongoDao mDao;
+	
+
 	
 	
 	
@@ -38,4 +42,6 @@ public class database_controller {
 	public void Mongo01() throws IOException{
 		int r = mDao.inserImg();
 	}
+	
+	
 }

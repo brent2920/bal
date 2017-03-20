@@ -67,7 +67,8 @@ td {
 			</ol>
 
 			<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox">
+			
+		<div class="carousel-inner " role="listbox">
 		
 
 				<c:forEach var="val" items="${pj }" varStatus="vs">
@@ -86,6 +87,7 @@ td {
 					</c:choose>
 				</c:forEach>
 			</div>
+			
 			<!-- Left and right controls -->
 			<a class="left carousel-control" href="#myCarousel" role="button"
 				data-slide="prev"> <span

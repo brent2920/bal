@@ -28,9 +28,11 @@ public class agentDao {
 
 		try {
 			r = session.insert("agent.insertOneAgent", rInfo);
+			if(r==1)
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}

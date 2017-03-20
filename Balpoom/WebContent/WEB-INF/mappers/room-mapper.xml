@@ -25,7 +25,7 @@
 		
 	</select>
 	<select id="room_deposit" resultType="java.util.HashMap">
-		select * from ROOM where B_DEPOSIT=1000 and B_RKIND='투룸' and B_MPAY=65 and B_GPAY='5만원'
+		select * from ROOM where B_DEPOSIT=1000 and B_RKIND='투룸' and B_MPAY=65
 	</select>
 	
 </mapper>

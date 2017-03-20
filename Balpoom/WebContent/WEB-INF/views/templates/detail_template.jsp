@@ -9,7 +9,7 @@
 	<tiles:insertAttribute name="navbar" />
 </div>
 <div class="row" style="min-height: 80%;">
-	<div style="margin-left: 4em; margin-right: 4em; margin-top: ">
+	<div style=" margin-top: " class="form-control">
 		<div class="col-sm-8">
 			<tiles:insertAttribute name="detail" />
 		</div>
