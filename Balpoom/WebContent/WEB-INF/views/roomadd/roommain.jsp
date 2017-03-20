@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- 지도 -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap1" async defer></script>
+
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -22,6 +25,10 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
 
 
 
@@ -115,7 +122,9 @@ td, th {
 			<td id="title" rowspan="5">주소</td>
 			<td id="memo4">도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</td>
 			<td id="memo1"></td>
-			<td id="map" rowspan="5"></td>
+			<td id="map" rowspan="5">
+				<div id="gmap" style="width: 250; height: 200"></div>	
+			</td>
 		</tr>
 
 
@@ -176,11 +185,11 @@ td, th {
 
 		<tr>
 			<td id="title" rowspan="2">거래 종류</td>
-			<td id="memo" colspan="4"><button type="button"
-					class="btn btn-primary">전세 추가</button>
-				<button type="button" class="btn btn-primary">월세 추가</button>
-				<button type="button" class="btn btn-primary">무보증 추가</button> <input
-				type="checkbox">단기 가능</td>
+			<td id="memo" colspan="4">
+				<button type="button" class="btn btn-primary" id="junseadd">전세 추가</button>
+				<button type="button" class="btn btn-primary" id="wolseadd">월세 추가</button>
+				<button type="button" class="btn btn-primary" id="mubojeungadd">무보증 추가</button>
+				 <input type="checkbox">단기 가능</td>
 			<!-- 				<td id="memo">아</td> -->
 			<!-- 				<td id="memo">아</td> -->
 			<!-- 				<td id="memo">아</td>	 -->
@@ -192,7 +201,28 @@ td, th {
 			<td id="memo" colspan="4"><font style="color: red">거래종류를
 					추가해 주세요. 다중 선택 가능하며, 첫 번째 선택한 거래종류가 우선 노출 됩니다.<br /> (예치금이 있는 경우
 					보증금 입력란에 필히 예치금을 입력 하세요. - 미 입력시 허위 매물로 적발됩니다.)
-			</font></td>
+			</font>
+			
+			
+			<div style="display: none; height: 50px" id="junse" >
+			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="전세" > 
+			<button type="button" id="btn1"  style="float: left;" class="btn" >취소</button>
+			</div>
+		
+
+			<div style="display: none; height: 50px; " id="wolse"  >
+			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="보증금" > 
+			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="월세" >
+			<button type="button" id="btn2"  style="float: left;" class="btn" >취소</button>
+			</div>
+			
+			<div style="display: none; height: 50px  " id="mubojeung" >
+			<input type="number"  style="width: 25%; float: left; text-align: right; "  class="form-control"  placeholder="예치금" > 
+			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="월세" >
+			<button type="button" id="btn3"  style="float: left;" class="btn" >취소</button>
+			</div>
+			
+			</td>
 		</tr>
 
 		<tr>
@@ -407,9 +437,56 @@ td, th {
 
 
 
+<script>
+	$("#junseadd").click(function(){
+			$("#junse").fadeIn(500);	
+	})
+	$("#btn1").click(function(){
+		$("#junse").fadeOut(500);
+		
+	})
+	
+	$("#wolseadd").click(function(){
+			$("#wolse").fadeIn(500);	
+	})
+	$("#btn2").click(function(){
+		$("#wolse").fadeOut(500);
+		
+	})
+	
+	$("#mubojeungadd").click(function(){
+			$("#mubojeung").fadeIn(500);	
+	})
+	$("#btn3").click(function(){
+		$("#mubojeung").fadeOut(500);
+		
+	})
+
+
+</script>
 
 
 
+
+<script>
+
+//지도
+	function initMap1() {
+	
+		var pos1 = {  lat: 37.5172363, lng: 127.0473248};
+		// Create a map object and specify the DOM element for display.
+		var map1 = new google.maps.Map(document.getElementById('gmap'), {
+			"center" : pos1,
+			"scrollwheel" : false,
+			"zoom" : 15
+		});
+		var marker = new google.maps.Marker({
+	          "map" : map1,
+	          "position" : pos1,
+	          "title" : ''
+	    });
+	}
+</script>
 
 
 
@@ -512,5 +589,7 @@ td, th {
 				}).open();
 	}
 </script>
+
+
 
 

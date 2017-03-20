@@ -41,7 +41,9 @@
 					<!-- 						<li><a href="#">Page 1-2</a></li> -->
 					<!-- 						<li><a href="#">Page 1-3</a></li> -->
 					<!-- 					</ul></li> -->
-					<li><a href="#">방 등록</a></li>
+					<li><a href="#" id="nulladd">방 등록</a>
+						
+					</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -83,7 +85,7 @@
 							<!-- 						<li><a href="#">Page 1-2</a></li> -->
 							<!-- 						<li><a href="#">Page 1-3</a></li> -->
 							<!-- 					</ul></li> -->
-							<li><a href="#">방 등록</a></li>
+							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
 						<ul class="nav navbar-nav navbar-right">
@@ -221,7 +223,13 @@
 		</ul>
 	</div>
 </nav>
+<script>
+	$("#nulladd").click(function(){
+		window.alert("로그인 후 사용가능합니다")
+		
+	})
 
+</script>
 
 <script>
 	var flag1 = true, flag2 = false;

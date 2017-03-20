@@ -11,7 +11,7 @@ public class roomadd_controller {
 	@RequestMapping("roomadd")
 	public ModelAndView mav(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("roomadd/roommain");
+		mav.setViewName("roomadd");
 		return mav;
 	}
 	
