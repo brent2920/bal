@@ -13,12 +13,14 @@
 		
 	<div class="col-md-6">
 	<h2>이용약관</h2>
+	<textarea rows="10" cols="50" id="b1" readonly="readonly"></textarea><br/>
 	아래의 약관에 동의합니다.<input type="checkbox" class="sub" id="a2"/>
 	</div>
 	
 	
 	<div class="col-md-6">
 		<h2>위치정보 이용약관</h2>
+		<textarea rows="10" cols="50" id="b2" readonly="readonly" ></textarea><br/>
 		아래의 약관에 동의합니다.<input type="checkbox" class="sub" id="a3"/>
 	</div>
 	
@@ -37,6 +39,7 @@
 		enableCheck();
 	});
 	$("#a2").click(function() {
+		
 		enableCheck();
 	});
 	$("#a3").click(enableCheck);
@@ -48,6 +51,7 @@
 		});
 		if(cnt==2) {
 			$("#a1").prop("checked", true);
+			
 			$("#next").prop("disabled", false);
 		}else {
 			$("#a1").prop("checked", false);
