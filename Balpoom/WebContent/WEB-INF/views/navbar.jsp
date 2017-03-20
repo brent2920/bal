@@ -129,7 +129,7 @@
 
 							<div class="form-group">
 								<label for="inputdefault">이메일</label> <input
-									class="form-control" id="inputdefault" type="text" name="email">
+									class="form-control" id="inputdefault" type="text" name="Eemail">
 							</div>
 
 							<div class="form-group">
@@ -218,25 +218,7 @@
 
 
 <script>
-	
-// 	document.getElementById("id").onblur = function() {
-// 		var xhr = new XMLHttpRequest();
-// 		xhr.open("get", "/checkAjax?id="+this.value, true);
-// 		xhr.send();
-// 		xhr.onreadystatechange = function() {
-// 			if(xhr.readyState==4 && xhr.status==200) {
-// 				var txt = xhr.responseText;
-// 				console.log(txt);
-// 				if(txt == 'YYYYY') {
-// 					document.getElementById("chkResult").innerHTML = '사용가능';
-// 					document.getElementById("chkResult").style.color='green';
-// 				}else {
-// 					document.getElementById("chkResult").innerHTML = '사용불가능';
-// 					document.getElementById("chkResult").style.color='red';
-// 				}
-// 			}
-// 		};
-// 	};
+
 	
 	var flag1 =true, flag2 =false;
 	function sbtChange() {

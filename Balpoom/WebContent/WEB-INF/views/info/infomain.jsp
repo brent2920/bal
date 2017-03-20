@@ -71,7 +71,7 @@
 	</tr>
 	<tr>
 		<td id="title">이메일 주소</td>
-		<td id="memo">${info.EMAIL }</td>
+		<td id="memo">${info.EEMAIL }</td>
 	
 	</tr>
 	<tr>
