@@ -23,10 +23,11 @@
 	<div class="container-fluid">
 		<ul class="nav navbar-nav">
 			<!-- 매물종류 Dropdown -->
-			<li class="dropdown" id="mkind"><a class="dropdown-toggle"
+			<li class="dropdown" id="mkind">
+				<a class="dropdown-toggle"
 				data-toggle="dropdown" style="font-family: 나눔고딕;"> 매물종류 <span
 					class="caret"></span>
-			</a>
+				</a>
 				<ul class="dropdown-menu" style="padding-left: 15px;" id="mkind-mn">
 					<li class="mKind" id="jPay" style="height: 35px;"><input
 						type="radio" name="mkind" id="jPay_Chk"> 전세</li>
@@ -35,7 +36,8 @@
 					<li class="mKind" id="allPay" style="height: 35px;"><input
 						type="radio" name="mkind" id="allPay_Chk" checked> 전세 + 월세
 					</li>
-				</ul></li>
+				</ul>
+			</li>
 
 			<!-- 방종류 Dropdown -->
 			<li class="dropdown"><a class="dropdown-toggle"
@@ -46,8 +48,8 @@
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
 						type="checkbox" checked><span class="rKind-all"> 전체</span>
 					</li>
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 원룸(오픈형)</span></li>
+					<li style="padding-top: 5px; padding-bottom: 5px;">
+						<input type="checkbox"><span class="rKind"> 원룸(오픈형)</span></li>
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
 						type="checkbox"><span class="rKind"> 원룸(분리형)</span></li>
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
@@ -174,7 +176,7 @@
 			</a>
 				<ul class="dropdown-menu" style="padding-left: 15px;">
 					<li>
-						<div>
+						<div class="additionalOpt">
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
 								<li style="padding-top: 5px; padding-bottom: 5px;"><input
 									type="checkbox"> 주차가능</li>
@@ -228,38 +230,35 @@
 </nav>
 
 <script>
-	// 클릭하면 토글부분 없어지는거 없애려고..
-	// $("#mkind").click(function(){
-	// 	console.log("!!");
-	// 	if($("#mkind-mn").css("display") == 'none') {
-	// 		$("#mkind-mn").css("display","block");
-	// 	}
-	// });
-
-	// $(".container-fluid").find(".dropdown").find("ul").click(function(){
-	// 	console.log("!!");
-	// 	if($(this).css("display") == "none") {
-	// 		$(this).css("display", "block");
-	// 	}
-
-	// });
+	$(".dropdown").mouseenter(function() {
+		$(this).children().eq(1).css("display","block");
+	});
+	
+	$(".dropdown").mouseleave(function() {
+		console.log($(this).children().eq(1));
+		$(this).children().eq(1).css("display","none");
+	});
 
 	// ===========================================================================
+	
 	// [ 매물종류 nav 기능 ]
 	$(".mKind").click(function() {
 		console.log(this);
 		$(this).find("input").prop("checked", true);
 	});
-	//===========================================================================
 
 	// ===========================================================================
+	
 	// [ 방종류 nav 기능 ]
 	$(".rKind-all").click(function() {
 		if ($(this).prev().prop("checked")) {
 			$(this).prev().prop("checked", false);
 		} else {
 			$(this).prev().prop("checked", true);
-			unCheckAll($(".rKind"));	// 전체체크 해제
+			
+			$(".rKind").each(function() {
+				$(this).prev().prop("checked", false);
+			});
 		}
 	});
 
@@ -272,22 +271,9 @@
 		}
 		$(".rKind-all").prev().prop("checked", false);
 	});
-
-	function unCheckAll(a) {
-		var obj = $(".rKind");
-		console.log(obj);
-// 		for ( var obj in iterable) {
-// 			obj.prev().prop("checked", false);
-// 		}
-// 		for (var i = 0; i < obj.length; i++) {
-// 			if (obj[i] != a)
-// 				obj[i].prev().prop("checked", false);
-// 		}
-	}
-	//===========================================================================
 	
+	// ===========================================================================
 		
-	//===========================================================================
 	// [ 보증금 nav 기능 ]
 	$(".deposit-from").click(function(){
 		$(".deposit-from").each(function(){
@@ -308,9 +294,9 @@
 		console.log($(this).val());
 		$(".dprice-to").val($(this).val() + " 만원");
 	});
-	//===========================================================================
 		
-	//===========================================================================
+	// ===========================================================================
+		
 	// [ 월세 nav 기능 ]
 	$(".mCost-from").click(function(){
 		$(".mCost-from").each(function(){
@@ -331,9 +317,11 @@
 		console.log($(this).val());
 		$(".mprice-to").val($(this).val() + " 만원");
 	});
-	//===========================================================================
 	
-	//===========================================================================
+	// ===========================================================================
+	
 	// [ 추가옵션 nav 기능 ]
-	
+	$(".additionalOpt > ul > li").click(function() {
+		$(this).find("input").prop("checked", true);
+	});
 </script>
