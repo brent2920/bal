@@ -83,6 +83,9 @@ var end = 3;
 var curr = 0;
 var njj = "empty";
 var dn = 7750005;
+var listajax  = "empty";
+var json = "empty";
+var jsonarr = [];
 
 
 
@@ -93,7 +96,7 @@ var PagingHelper = {
 		currentPage : 1 // 현재페이지
 		// ,startPage : 1 // 시작페이지
 		,
-		pageSize : 50 // 페이지 사이즈 (화면 출력 페이지 수)
+		pageSize : 3 // 페이지 사이즈 (화면 출력 페이지 수)
 		,
 		maxListCount : 5 // (보여질)최대 리스트 수 (한페이지 출력될 항목 갯수)
 		,
@@ -116,16 +119,16 @@ var PagingHelper = {
 		}
 	},
 	'nj' : function(arr){
-		console.log("njj addded")
+		//console.log("njj addded")
 		njj = arr;
 	},
 	'dn' : function(dnn){
-		console.log("njj addded")
+		//console.log("njj addded")
 		dn = dnn;
 	},
 
 	'arrlist' : function(arr) {
-		console.log("arrlist1");
+		//console.log("arrlist1");
 		arrl = arr;
 	},
 	'jpglist' : function(jpg){
@@ -135,12 +138,12 @@ var PagingHelper = {
 		//sb+= obj['B_RKIND'] 
 		for(var i = 0; i < 2; i++){
 			var obj = jpgs[i];
-			console.log(jpgs.length);
-			console.log(obj);
+			//console.log(jpgs.length);
+			//console.log(obj);
 		}
 	},
 	'linkajax' : function(num){
-		console.log("linkajax "+num  +" menu=" + njj[num]);
+		//console.log("linkajax "+num  +" menu=" + njj[num]);
 		location.href='/detail?num='+njj[num];
 			
 	
@@ -166,10 +169,13 @@ var PagingHelper = {
 
 		//console.log("curr=" + curr + " start=" + start + " end=" + end );
 		//console.log(arrl);
-
+		//console.log("obj2=>"+ jpgs);
+		//console.log("jsonarr=>"+jsonarr);
+		var count = 0;
 		for (var i = start; i <= end; i++) {
 			var obj = arrl[i];
-			var obj2 = jpgs[i];
+			//var obj2 = jpgs[count];
+			var obj2 = json[count];
 			sb+="<div style='min-height: 125px; background-color: white; margin: 2%'>";
 			sb+="<table>"
 			sb+="<tr>";
@@ -206,8 +212,10 @@ var PagingHelper = {
 			sb+="</div>";
 		
 			sb+="<hr style='margin: 30px;'/>";
+			count++;
 		}
 		// console.log(sb);
+		jsonarr= [];
 		return sb;
 
 	},
@@ -226,25 +234,29 @@ var PagingHelper = {
 
 	'pagingHtml' : function(pTotalCnt) {
 
-		console.log("pagingHtml" + pTotalCnt);
+		//console.log("pagingHtml=> total count =>" + pTotalCnt);
 
 		var _ = this;
 
 		_.data['totalCnt'] = pTotalCnt ? pTotalCnt : _.data['totalCnt'];
-
+		//console.log("totalCnt=>"+ _.data['totalCnt'] + " maxListCount=>"+ _.data.maxListCount);
 		if (_.data['totalCnt'] == 0) {
 			return "";
 		}
 		// 총페이지수 구하기 : 페이지 출력 범위 (1|2|3|4|5)
 		_.data.totalPageCnt = Math.ceil(_.data.totalCnt / _.data.maxListCount);
-
+		//console.log("total_page=>"+ _.data.totalPageCnt);
 		// 현재 블럭 구하기
 		var n_block = Math.ceil(_.data.currentPage / _.data.pageSize);
-		this.shHtml(this.data.currentPage);
+		console.log("n_block=>"+n_block + " currentPage=>"+ this.data.currentPage);
 		// 페이징의 시작페이지와 끝페이지 구하기
 		var s_page = (n_block - 1) * _.data.pageSize + 1; // 현재블럭의 시작 페이지
 		var e_page = n_block * _.data.pageSize; // 현재블럭의 끝 페이지
-		//console.log(s_page+"s_page"+ "e_page"+e_page);
+		console.log("s_page=>"+s_page + " e_page=>"+e_page);
+		if(e_page == _.data.currentPage){
+			s_page = s_page+2;
+			e_page = e_page+2;
+		}
 		var sb = '';
 		var sbTemp = '';
 
@@ -280,6 +292,7 @@ var PagingHelper = {
 					+ (_.data.totalPageCnt) + ");'>마지막</li >"
 		}
 		sb += "</ul>";
+		this.shHtml(this.data.currentPage);
 
 		return sb;
 	},
@@ -298,19 +311,37 @@ var PagingHelper = {
 	},
 	'gotoPage' : function(pageNum) {
 		console.log("gotoPage");
-
+		json = "empty";
 		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
 		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
-
+	   	//console.log("currentPg=>"+this.data.currentPage + " 입력밭은");
 		// 콘솔 출력 (삭제)
 		console.log(this.data.currentPage + "/" + this.data.startnum + "/"
 				+ this.data.lastnum);
-		// alert(this.data.currentPage+"/"+this.data.startnum
-		// +"/"+this.data.lastnum);
-		// this.shHtml(this.data.currentPage);
-		// 리스트 불러오는 ajax 호출
-		// ////////////////////////
-
+		var ends = (this.data.currentPage) * 4 -1;//3
+		var starts = ends-3;//
+		var njjTemp = [];
+		for(var i = starts ; i <= ends ; i++){
+			console.log("njj[i]="+ njj[i]);
+			njjTemp.push(njj[i]);
+		}
+		console.log("njjTemp=>"+ njjTemp);
+		console.log("curr page =>"+ this.data.currentPage + " list=>"+ njjTemp);
+	$.ajax({
+			
+			"type":"get",
+			"dataType":"json",
+			 "async": false,
+			 "url": "/testing?curr="+this.data.currentPage+"&list="+njjTemp
+			
+		}).done(function(listajax){
+			
+			json= JSON.parse( JSON.stringify(listajax));
+		
+		});
+	
+		
+		
 		$("#paging").html(this.pagingHtml());
 		$("#sh").html(this.shHtml());
 
