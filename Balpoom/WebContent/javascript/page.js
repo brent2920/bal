@@ -53,29 +53,261 @@
 //</table>
 //
 //</div>
+//<div style="min-height: 125px; background-color: white; margin: 2%">
+//<table>
+//	<tr>
+//		<td rowspan="3"><img src="/images/room.jpg"
+//			style="height: 120px; width: 120px;"></td>
+//		<td style="padding-left: 10px; vertical-align: bottom;"><span
+//			style="padding: 3px; background-color: #04B486; border-radius: 5px; color: white;">월세</span>
+//			<b
+//			style="color: #29B172; font-size: 20px; vertical-align: middle;">
+//				2000/30 </b></td>
+//	</tr>
+//	<tr>
+//		<td style="padding-left: 10px; font-size: 14px;">
+//										귀한 반전세 풀옵션 원룸입니다
+//
+//
+//
+//		</td>
+//	</tr>
+//	<tr>
+//		<td
+//			style="padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;">
+//			원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
+//		</td>
+//	</tr>
+//</table>
+//</div>
+//<hr style="margin: 5px;" />
+//
+//<div style="min-height: 125px; background-color: white; margin: 2%">
+//<table>
+//	<tr>
+//		<td rowspan="3"><img src="/images/room2.jpg"
+//			style="height: 120px; width: 120px;"></td>
+//		<td style="padding-left: 10px; vertical-align: bottom;"><span
+//			style="padding: 3px; background-color: #04B486; border-radius: 5px; color: white;">월세</span>
+//			<b
+//			style="color: #29B172; font-size: 20px; vertical-align: middle;">
+//				2000/30 </b></td>
+//	</tr>
+//	<tr>
+//		<td style="padding-left: 10px; font-size: 14px;">귀한 반전세 풀옵션
+//			원룸입니다</td>
+//	</tr>
+//	<tr>
+//		<td
+//			style="padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;">
+//			원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
+//		</td>
+//
+//	</tr>
+//</table>
+//
+//</div>
+
+//<div style="min-height: 125px; background-color: white; margin: 2%">
+//<table>
+//	<tr>
+//		<td rowspan="3"><img src="/images/room.jpg"
+//			style="height: 120px; width: 120px;"></td>
+//		<td style="padding-left: 10px; vertical-align: bottom;"><span
+//			style="padding: 3px; background-color: #04B486; border-radius: 5px; color: white;">월세</span>
+//			<b
+//			style="color: #29B172; font-size: 20px; vertical-align: middle;">
+//				2000/30 </b></td>
+//	</tr>
+//	<tr>
+//		<td style="padding-left: 10px; font-size: 14px;">
+//										귀한 반전세 풀옵션 원룸입니다
+//
+//
+//
+//		</td>
+//	</tr>
+//	<tr>
+//		<td
+//			style="padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;">
+//			원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
+//		</td>
+//	</tr>
+//</table>
+//</div>
+//<hr style="margin: 5px;" />
+//
+//<div style="min-height: 125px; background-color: white; margin: 2%">
+//<table>
+//	<tr>
+//		<td rowspan="3"><img src="/images/room2.jpg"
+//			style="height: 120px; width: 120px;"></td>
+//		<td style="padding-left: 10px; vertical-align: bottom;"><span
+//			style="padding: 3px; background-color: #04B486; border-radius: 5px; color: white;">월세</span>
+//			<b
+//			style="color: #29B172; font-size: 20px; vertical-align: middle;">
+//				2000/30 </b></td>
+//	</tr>
+//	<tr>
+//		<td style="padding-left: 10px; font-size: 14px;">귀한 반전세 풀옵션
+//			원룸입니다</td>
+//	</tr>
+//	<tr>
+//		<td
+//			style="padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;">
+//			원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
+//		</td>
+//
+//	</tr>
+//</table>
+//
+//</div>
+//var map;
+//var infoWindow;
+//var service;
+//function initMap() {
+//	// var pos = { lat : ${json.results[0].geometry.location.lat },lng :
+//	// ${json.results[0].geometry.location.lng } };
+//	var map = new google.maps.Map(document.getElementById('map'), {
+//		"center" : {
+//			lat : 37.5172363,
+//			lng : 127.0473248
+//		}, // 변수명으로 설정 가능
+//		"scrollwheel" : true, // false 로 할경우 마우스 휠 작동이 안된다
+//		"zoom" : 15,
+//		  styles: [{
+//		      stylers: [{ visibility: 'simplified' }]
+//		    }, {
+//		      elementType: 'labels',
+//		      stylers: [{ visibility: 'off' }]
+//		    }]
+//	});
+//	var marker = new google.maps.Marker({
+//		"map" : map, // 이 map 은 위에 var map
+//		"position" : {
+//			lat : 37.5172363,
+//			lng : 127.0473248
+//		}, // 변수명으로 설정 가능
+//		"title" : '${param.addr}'
+//	});
+//	infoWindow = new google.maps.InfoWindow();
+//	service = new google.maps.places.PlacesService(map);
+//	map.addListener('idle', performSearch);
+//}
+//
+//function performSearch() {
+//	  var request = {
+//	    bounds: map.getBounds(),
+//	    keyword: 'best view'
+//	  };
+//	  service.radarSearch(request, callback);
+//	}
+//
+//setTimeout(initMap, 1000);
+
+
+var map;
+var infoWindow;
+var service;
+var temp =
+{  
+	   "geometry":{  
+	      "location":{  
+	         "lat":-33.8615479,
+	         "lng":151.20760719999998
+	      }
+	   },
+	   "id":"2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
+	   "place_id":"ChIJZ934S0KuEmsR_0lxV3PTR4M",
+	   "reference":"CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
+	   "html_attributions":[  
+
+	   ]
+	}; 
+var temp2 =
+{  
+	   "geometry":{  
+	      "location":{  
+	         "lat":-32.8615479,
+	         "lng":152.20760719999998
+	      }
+	   },
+	   "id":"2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
+	   "place_id":"ChIJZ934S0KuEmsR_0lxV3PTR4M",
+	   "reference":"CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
+	   "html_attributions":[  
+
+	   ]
+	}; 
+
 
 function initMap() {
-	// var pos = { lat : ${json.results[0].geometry.location.lat },lng :
-	// ${json.results[0].geometry.location.lng } };
-	var map = new google.maps.Map(document.getElementById('map'), {
-		"center" : {
-			lat : 37.5172363,
-			lng : 127.0473248
-		}, // 변수명으로 설정 가능
-		"scrollwheel" : true, // false 로 할경우 마우스 휠 작동이 안된다
-		"zoom" : 15
-	});
-	var marker = new google.maps.Marker({
-		"map" : map, // 이 map 은 위에 var map
-		"position" : {
-			lat : 37.5172363,
-			lng : 127.0473248
-		}, // 변수명으로 설정 가능
-		"title" : '${param.addr}'
-	});
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -33.867, lng: 151.206},
+    zoom: 15,
+    styles: [{
+      stylers: [{ visibility: 'simplified' }]
+    }, {
+      elementType: 'labels',
+      stylers: [{ visibility: 'off' }]
+    }]
+  });
+
+  infoWindow = new google.maps.InfoWindow();
+  service = new google.maps.places.PlacesService(map);
+
+  // The idle event is a debounced event, so we can query & listen without
+  // throwing too many requests at the server.
+  map.addListener('idle', performSearch);
 }
 
-setTimeout(initMap, 1000);
+function performSearch() {
+  var request = {
+    bounds: map.getBounds(),
+    keyword: 'best view'
+  };
+  service.radarSearch(request, callback);
+}
+
+function callback(results, status) {
+  if (status !== google.maps.places.PlacesServiceStatus.OK) {
+    console.error(status);
+    return;
+  }
+  addMarker(temp);
+  addMarker(temp2);
+//  for (var i = 0, result; result = results[i]; i++) {
+//	  console.log("result=>"+ result.toString);
+//    addMarker(result);
+//  }
+}
+
+function addMarker(place) {
+	console.log("place=>"+JSON.stringify(place));
+
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location,
+    icon: {
+      url: 'http://maps.gstatic.com/mapfiles/circle.png',
+      anchor: new google.maps.Point(10, 10),
+      scaledSize: new google.maps.Size(10, 17)
+    }
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    service.getDetails(place, function(result, status) {
+      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+        console.error(status);
+        return;
+      }
+      infoWindow.setContent(result.name);
+      infoWindow.open(map, marker);
+    });
+  });
+}
+
+
 var arrl = "empty";
 var jpgs = "empty";
 var start = 0;
