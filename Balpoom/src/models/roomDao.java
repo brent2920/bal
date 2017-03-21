@@ -77,7 +77,6 @@ public class roomDao {
 		}
 		return rList;
 	}
-	
 	public List<HashMap<String,Object>> test_room(){  //테스트 용이니까 신경쓰지 말것 
 		SqlSession session = factory.openSession();
 		List<HashMap<String,Object>> rList = null;

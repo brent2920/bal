@@ -33,6 +33,7 @@ public class info_controller {
 	public ModelAndView infomain(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
+		System.out.println(id+"...................");
 		Map info = idao.info(id);
 		String tele = (String)info.get("TELENUM");
 		String tele1 =tele.split("-")[0];
@@ -51,8 +52,6 @@ public class info_controller {
 		Map img = iffc.execute(file);
 		String uimg = (String)img.get("filelink");
 		map.put("uimg", uimg);
-		
-		
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
 		String num1 = (String)map.get("telenum1");
@@ -81,7 +80,7 @@ public class info_controller {
 //		map.put("id", id);
 //		map.put("password", password);
 //		int r = idao.passcheckAjax(map);
-//		System.out.println("¼¼¼Ç¾ÆÀÌµð : "+id);
+//		System.out.println("ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ìµï¿½ : "+id);
 //		System.out.println(r+"???????????");
 //		String n = "NNNNN";
 //		String y ="YYYYY";
@@ -108,7 +107,7 @@ public class info_controller {
 		map.put("id", id);
 		map.put("password", password);
 		int r = idao.passcheckAjax(map);
-		System.out.println("¼¼¼Ç¾ÆÀÌµð : "+id);
+		System.out.println("ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ìµï¿½ : "+id);
 		System.out.println(r+"???????????");
 	
 		if(r==1){

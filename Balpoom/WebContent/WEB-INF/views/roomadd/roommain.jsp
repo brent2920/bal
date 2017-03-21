@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- 지도 -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap1" async defer></script>
+
+
+
+
+
+
+
+
+
+
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,7 +96,7 @@ td, th {
 
 #memo7 {
 	width: 920px;
-	height: 320px;
+	height: 500px;
 }
 
 .mCost>td {
@@ -123,7 +131,7 @@ td, th {
 			<td id="memo4">도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</td>
 			<td id="memo1"></td>
 			<td id="map" rowspan="5">
-				<div id="gmap" style="width: 250; height: 200"></div>	
+				<div id="gmap" style="width: 250; height: 200"></div>
 			</td>
 		</tr>
 
@@ -186,10 +194,13 @@ td, th {
 		<tr>
 			<td id="title" rowspan="2">거래 종류</td>
 			<td id="memo" colspan="4">
-				<button type="button" class="btn btn-primary" id="junseadd">전세 추가</button>
-				<button type="button" class="btn btn-primary" id="wolseadd">월세 추가</button>
-				<button type="button" class="btn btn-primary" id="mubojeungadd">무보증 추가</button>
-				 <input type="checkbox">단기 가능</td>
+				<button type="button" class="btn btn-primary" id="junseadd">전세
+					추가</button>
+				<button type="button" class="btn btn-primary" id="wolseadd">월세
+					추가</button>
+				<button type="button" class="btn btn-primary" id="mubojeungadd">무보증
+					추가</button> <input type="checkbox">단기 가능
+			</td>
 			<!-- 				<td id="memo">아</td> -->
 			<!-- 				<td id="memo">아</td> -->
 			<!-- 				<td id="memo">아</td>	 -->
@@ -202,27 +213,33 @@ td, th {
 					추가해 주세요. 다중 선택 가능하며, 첫 번째 선택한 거래종류가 우선 노출 됩니다.<br /> (예치금이 있는 경우
 					보증금 입력란에 필히 예치금을 입력 하세요. - 미 입력시 허위 매물로 적발됩니다.)
 			</font>
-			
-			
-			<div style="display: none; height: 50px" id="junse" >
-			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="전세" > 
-			<button type="button" id="btn1"  style="float: left;" class="btn" >취소</button>
-			</div>
-		
 
-			<div style="display: none; height: 50px; " id="wolse"  >
-			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="보증금" > 
-			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="월세" >
-			<button type="button" id="btn2"  style="float: left;" class="btn" >취소</button>
-			</div>
-			
-			<div style="display: none; height: 50px  " id="mubojeung" >
-			<input type="number"  style="width: 25%; float: left; text-align: right; "  class="form-control"  placeholder="예치금" > 
-			<input type="number"  style="width: 25%; float: left; text-align: right;"  class="form-control"  placeholder="월세" >
-			<button type="button" id="btn3"  style="float: left;" class="btn" >취소</button>
-			</div>
-			
-			</td>
+
+				<div style="display: none; height: 50px" id="junse">
+					<input type="number"
+						style="width: 25%; float: left; text-align: right;"
+						class="form-control" placeholder="전세">
+					<button type="button" id="btn1" style="float: left;" class="btn">취소</button>
+				</div>
+
+
+				<div style="display: none; height: 50px;" id="wolse">
+					<input type="number"
+						style="width: 25%; float: left; text-align: right;"
+						class="form-control" placeholder="보증금"> <input
+						type="number" style="width: 25%; float: left; text-align: right;"
+						class="form-control" placeholder="월세">
+					<button type="button" id="btn2" style="float: left;" class="btn">취소</button>
+				</div>
+
+				<div style="display: none; height: 50px" id="mubojeung">
+					<input type="number"
+						style="width: 25%; float: left; text-align: right;"
+						class="form-control" placeholder="예치금"> <input
+						type="number" style="width: 25%; float: left; text-align: right;"
+						class="form-control" placeholder="월세">
+					<button type="button" id="btn3" style="float: left;" class="btn">취소</button>
+				</div></td>
 		</tr>
 
 		<tr>
@@ -265,7 +282,7 @@ td, th {
 
 	<h3 style="font-family: 나눔고딕;">&nbsp;추가 정보</h3>
 
-	<table border="1px solid">
+	<table border="1">
 		<tr>
 			<td id="title" rowspan="2">관리비</td>
 			<td id="memo" colspan="3">
@@ -413,20 +430,33 @@ td, th {
 		</tr>
 	</table>
 	<div style="height: 15px"></div>
-	<table border="1px">
+
+
+	<table border="1">
 
 		<tr>
-			<td id="memo7" align="center" >
-			<div id="fid">
-			<button type="button" class="btn btn-primary"  style="margin-top: 20%; width: 300px; height: 70px " id="fbtn">사진 추가</button>
-				<input type="file" style="display: none" id="file">
-			</div>
-			<div id="ffid">
-				<img alt="" src="" id="fimg">
-			</div>
+			<td id="memo7" style="padding: 0%; margin: 0%;"><c:forEach
+					begin="1" end="15" var="i">
+					<div style="float: left; width: 170px; height: 200px; margin: 5px;"
+						align="left">
+						<img alt="" src="" style="width: 170px; height: 150px"
+							id="img${i }">
+						<input type="file" id="file${i }" style="display: none">
+						<div align="center" style="padding-top: 10px;">
+							<button type="button" id="bbt${i }" class="btn btn-primary">추가</button>
+							<button type="button" id="cbt${i }" class="btn btn-danger">취소</button>
+						</div>
+					</div>
+				</c:forEach> <!-- 			<div id="fid" style="display: """> --> <!-- 			<button type="button" class="btn btn-primary"  style="margin-top: 20%; width: 300px; height: 70px " id="fbtn">사진 추가</button> -->
+				<!-- 				<input type="file" style="display: none" id="file"> --> <!-- 			</div> -->
+				<!-- 			<div id="ffid" style="display: none; padding: 0%; margin: 0%" align="left"> -->
+				<!-- 				<img alt="" src="" id="fimg" style="width: 150px; height: 150px" align="left" > -->
+				<!-- 				<button type="button" id="cccbtn">취소</button> --> <!-- 			</div> -->
+
+
 			</td>
 	</table>
-	
+
 	<div style="height: 150px"></div>
 
 
@@ -437,31 +467,35 @@ td, th {
 
 
 
+
 <script>
-	$("#junseadd").click(function(){
-			$("#junse").fadeIn(500);	
+	$("#junseadd").click(function() {
+		$("#junse").fadeIn(500);
 	})
-	$("#btn1").click(function(){
+	$("#btn1").click(function() {
 		$("#junse").fadeOut(500);
-		
-	})
-	
-	$("#wolseadd").click(function(){
-			$("#wolse").fadeIn(500);	
-	})
-	$("#btn2").click(function(){
-		$("#wolse").fadeOut(500);
-		
-	})
-	
-	$("#mubojeungadd").click(function(){
-			$("#mubojeung").fadeIn(500);	
-	})
-	$("#btn3").click(function(){
-		$("#mubojeung").fadeOut(500);
-		
+
 	})
 
+	$("#wolseadd").click(function() {
+		$("#wolse").fadeIn(500);
+	})
+	$("#btn2").click(function() {
+		$("#wolse").fadeOut(500);
+
+	})
+
+	$("#mubojeungadd").click(function() {
+		$("#mubojeung").fadeIn(500);
+	})
+	$("#btn3").click(function() {
+		$("#mubojeung").fadeOut(500);
+
+	})
+</script>
+
+<script>
+	
 
 </script>
 
@@ -469,11 +503,13 @@ td, th {
 
 
 <script>
-
-//지도
+	//지도
 	function initMap1() {
-	
-		var pos1 = {  lat: 37.5172363, lng: 127.0473248};
+
+		var pos1 = {
+			lat : 37.5172363,
+			lng : 127.0473248
+		};
 		// Create a map object and specify the DOM element for display.
 		var map1 = new google.maps.Map(document.getElementById('gmap'), {
 			"center" : pos1,
@@ -481,10 +517,10 @@ td, th {
 			"zoom" : 15
 		});
 		var marker = new google.maps.Marker({
-	          "map" : map1,
-	          "position" : pos1,
-	          "title" : ''
-	    });
+			"map" : map1,
+			"position" : pos1,
+			"title" : ''
+		});
 	}
 </script>
 
@@ -497,28 +533,41 @@ td, th {
 
 
 <script>
-	$("#fbtn").click(function() {
-		$("#file").trigger("click")
-	})
-
+	<c:forEach begin="1" end="15" var="i">
+		$("#bbt${i}").click(function() {
+			$("#file${i}").trigger("click");
+	
+		});
+		$("#file${i}").change(function() {
+			console.log(this);
+			readURL(this);
+		});
+		
+		$("#cbt${i}").click(function(){
+			$("#img${i}").attr("src", "")
+			
+		})
+	
+	</c:forEach>
+	
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
-
 			reader.onload = function(e) {
-				$('#fimg').attr('src', e.target.result);
+				$(input).prev().attr("src", e.target.result); // prev 는 위에 있는.. next 는 아래에 있는..
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	
-
-	
-
-	$("#file").change(function() {
-		readURL(this);
-	});
 </script>
+
+
+
+
+
+
+
+
 
 
 
@@ -591,5 +640,8 @@ td, th {
 </script>
 
 
-
+<!-- 지도 // script 는 맵 아래 에 놓는다 -->
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap1"
+	async defer></script>
 

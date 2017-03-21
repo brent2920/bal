@@ -68,7 +68,7 @@
 
 
 	<!-- script -->
-	<script>
+<script>
 $(document).ready(function() {
 	//해당 영역에 페이징 문자열 출력 
     //class에대한 스타일 정의 필요.
@@ -77,4 +77,5 @@ $(document).ready(function() {
     $("#jpglist").append(PagingHelper.jpglist(${mpic }));
     $("#arrlist").append(PagingHelper.arrlist(${mlist }));//search 에 표시할 방 정보 리스트
     $("#paging").append(PagingHelper.pagingHtml(${msize }));// 방정보 리스트의 사이즈 
-    $("#gotopage").append(PagingHelper.gotoPage(1));});</script>
+    $("#gotopage").append(PagingHelper.gotoPage(1));});
+</script>

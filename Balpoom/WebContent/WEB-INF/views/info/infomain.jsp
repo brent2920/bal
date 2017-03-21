@@ -122,6 +122,7 @@
 	
 <script>
 
+	
 	$("#uimg").click(function(){
 			$("#file").trigger("click")
 	})
