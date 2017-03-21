@@ -11,16 +11,18 @@
 	
 	
 		
-	<div class="col-md-6">
+	<div >
 	<h2>이용약관</h2>
-	<textarea rows="10" cols="50" id="b1" readonly="readonly"></textarea><br/>
+	<textarea rows="10" cols="50" id="b1" readonly="readonly" style="right: none">
+	
+	</textarea><br/>
 	아래의 약관에 동의합니다.<input type="checkbox" class="sub" id="a2"/>
 	</div>
 	
 	
-	<div class="col-md-6">
+	<div >
 		<h2>위치정보 이용약관</h2>
-		<textarea rows="10" cols="50" id="b2" readonly="readonly" ></textarea><br/>
+	
 		아래의 약관에 동의합니다.<input type="checkbox" class="sub" id="a3"/>
 	</div>
 	
