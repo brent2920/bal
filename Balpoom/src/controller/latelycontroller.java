@@ -18,7 +18,6 @@ import utils.Urlpicture;
 
 
 @Controller
-@RequestMapping("/lately")
 public class latelycontroller {
 
 	@Autowired
@@ -56,4 +55,9 @@ public class latelycontroller {
 		return mav;
 	}
 	
+	@RequestMapping("/02")
+	public ModelAndView testHandler() {
+		ModelAndView mav = new ModelAndView("t_main_test");
+		return mav;
+	}
 }

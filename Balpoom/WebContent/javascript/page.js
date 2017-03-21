@@ -283,8 +283,8 @@ function callback(results, status) {
 }
 
 function addMarker(place) {
-	console.log("place=>"+JSON.stringify(place));
-
+	//console.log("place=>"+JSON.stringify(place));
+	  console.log("east===>"+google.maps.Map.getCenter);
   var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location,
@@ -296,6 +296,7 @@ function addMarker(place) {
   });
 
   google.maps.event.addListener(marker, 'click', function() {
+
     service.getDetails(place, function(result, status) {
       if (status !== google.maps.places.PlacesServiceStatus.OK) {
         console.error(status);
@@ -354,6 +355,7 @@ var PagingHelper = {
 		//console.log("njj addded")
 		njj = arr;
 	},
+	
 	'dn' : function(dnn){
 		//console.log("njj addded")
 		dn = dnn;
@@ -363,6 +365,7 @@ var PagingHelper = {
 		//console.log("arrlist1");
 		arrl = arr;
 	},
+	
 	'jpglist' : function(jpg){
 		console.log('jpg.list.entered');
 		jpgs = jpg;
@@ -374,6 +377,7 @@ var PagingHelper = {
 			//console.log(obj);
 		}
 	},
+	
 	'linkajax' : function(num){
 		//console.log("linkajax "+num  +" menu=" + njj[num]);
 		location.href='/detail?num='+njj[num];
