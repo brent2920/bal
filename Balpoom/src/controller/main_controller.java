@@ -42,9 +42,9 @@ public class main_controller {
 		ModelAndView mav = new ModelAndView("t_main");
 		return mav;
 	}
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
-=======
+//=======
 	
 	@RequestMapping("/searchlist")
 	public ModelAndView slHandler() {
@@ -52,7 +52,7 @@ public class main_controller {
 		return mav;
 	}
 	
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
+//>>>>>>> branch 'master' of https://github.com/brent2920/bal.git
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
 		ModelAndView mav = new ModelAndView("t_search");
@@ -181,8 +181,8 @@ public class main_controller {
 					+ "&key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap";
 			System.out.println(detail_request);
 			Document doc = Jsoup.connect(detail_request).get();
-//			Elements results = doc.select("results");
-//			System.out.println(results.toString());
+			String id = doc.select("PlaceSearchResponse").select("result").select("id").get(0).text();
+			System.out.println(id.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
