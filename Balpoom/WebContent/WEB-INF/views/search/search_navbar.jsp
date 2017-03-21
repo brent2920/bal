@@ -324,4 +324,17 @@
 	$(".additionalOpt > ul > li").click(function() {
 		$(this).find("input").prop("checked", true);
 	});
+	
+	
+	// ===========================================================================
+	
+	// [ Ajax 처리 ]
+	$("#id").keyup(function() {
+		$.ajax({
+			"url" : "/07ajax.jsp?q=" + $(this).val()
+		}).done(function(rst) {
+			// ajax로 날라온거를 rst로 쓰겠다는것 변수명은 맘대로 지정
+			$("#result").append(rst);
+		})
+	});
 </script>
