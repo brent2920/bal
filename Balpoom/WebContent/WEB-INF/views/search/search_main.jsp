@@ -20,9 +20,9 @@
 <!-- 	async defer> -->
 <!-- </script> -->
 
-<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script> -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&libraries=places">
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&libraries=places"> -->
 <!-- </script> -->
 <!--  hi -->
 <%-- msize : ${mlist } --%>

@@ -1,6 +1,6 @@
 package controller;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,22 +29,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.roomDao;
 import utils.Urlpicture;
 
-
 @Controller
 public class main_controller {
-	
+
 	@Autowired
 	roomDao rd;
 	@Autowired
 	Urlpicture urp;
 
-	
 	@RequestMapping("/")
 	public ModelAndView mainHandler() {
 		ModelAndView mav = new ModelAndView("t_main");
 		return mav;
 	}
-	
+
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
 		ModelAndView mav = new ModelAndView("t_search");
@@ -51,56 +53,58 @@ public class main_controller {
 		 * ------------------------------------------------*/
 		List<HashMap<String, Object>> mlist = rd.test_room();
 		/*
-		 *  search 처리 코드 
+		 * search 처리 코드
 		 */
-		List<Integer> numbers =new ArrayList<>();
-		int defnum = 7682481;//에러시 이번호도 처리가 안되는거라서 바꿔줘야함 
+		List<Integer> numbers = new ArrayList<>();
+		int defnum = 7682481;// 에러시 이번호도 처리가 안되는거라서 바꿔줘야함
 		List<String> urlcol = new ArrayList<>();
-		JSONArray urlcolj= null;
+		JSONArray urlcolj = null;
 		JSONArray numbersj = null;
-	
 
 		JSONArray json_arr = new JSONArray();// Json 객체 로 만들기
 		for (Map<String, Object> map : mlist) {
 			JSONObject json_obj = new JSONObject();
 			String url = null;
 			String input = null;
-			//System.out.println(map.get("SELL_NUM"));
+			// System.out.println(map.get("SELL_NUM"));
 			int num = defnum;
 			num = Integer.parseInt(map.get("SELL_NUM") + "");
 			input = "https://www.zigbang.com/items1/" + num;
-		
+
 			try {
-				//System.out.println("urp=" + urp.get_main_url(input));
-				//url = (urp.get_main_url(input));
-				numbers.add(num);} catch (Exception e) {
-			
-				//e.printStackTrace();
-				url = "http://z1.zigbang.com/items/"+defnum +"/538ec7a16033f0c32eac29ac50deb04a1e6bf3ba.jpg?h=800&q=60";
+				// System.out.println("urp=" + urp.get_main_url(input));
+				// url = (urp.get_main_url(input));
+				numbers.add(num);
+			} catch (Exception e) {
+
+				// e.printStackTrace();
+				url = "http://z1.zigbang.com/items/" + defnum
+						+ "/538ec7a16033f0c32eac29ac50deb04a1e6bf3ba.jpg?h=800&q=60";
 			}
-			
+
 			urlcol.add(url);
 			urlcolj = new JSONArray(urlcol);
 			numbersj = new JSONArray(numbers);
-			String temp=new ObjectMapper().writeValueAsString(urlcol);
-			
+			String temp = new ObjectMapper().writeValueAsString(urlcol);
+
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				String key = entry.getKey();
 				Object value = entry.getValue();
 
-				try {json_obj.put(key, value);} catch (Exception e) {
+				try {
+					json_obj.put(key, value);
+				} catch (Exception e) {
 					// TODO Auto-gen erated catch block
-					//e.printStackTrace();
+					// e.printStackTrace();
 				}
 			}
 			(json_arr).put(json_obj);
 
 		}
 
-	
-		//System.out.println("numbers= "+ numbersj.toString());
-		mav.addObject("dn", defnum );
-		mav.addObject("nj",numbersj);
+		// System.out.println("numbers= "+ numbersj.toString());
+		mav.addObject("dn", defnum);
+		mav.addObject("nj", numbersj);
 		mav.addObject("mpic", urlcolj);
 		mav.addObject("mlist", json_arr.toString());
 		mav.addObject("msize", mlist.size());
@@ -111,63 +115,70 @@ public class main_controller {
 	}
 
 	@RequestMapping("/detail")
-	public ModelAndView detailViewHandler(@RequestParam Map n, HttpServletRequest req
-			, HttpServletResponse resp) {
-		//사진처리 
-		
-		JSONArray picturesJ= null;
-		int num = Integer.parseInt(n.get("num")+"");
-		
-			
+	public ModelAndView detailViewHandler(@RequestParam Map n, HttpServletRequest req, HttpServletResponse resp) {
+		// 사진처리
+
+		JSONArray picturesJ = null;
+		int num = Integer.parseInt(n.get("num") + "");
+
 		Cookie c = new Cookie(String.valueOf(n.get("num")), String.valueOf(n.get("num")));
-		c.setMaxAge(60*60);
+		c.setMaxAge(60 * 60);
 		resp.addCookie(c);
-		
-		//System.out.println("num======================>"+num);
-		List<String> all=  urp.get_picture_urls("https://www.zigbang.com/items1/"+num);
+
+		// System.out.println("num======================>"+num);
+		List<String> all = urp.get_picture_urls("https://www.zigbang.com/items1/" + num);
 		picturesJ = new JSONArray(all);
 		ModelAndView mav = new ModelAndView("t_detail");
-		mav.addObject("pj", all);	
-	
+		mav.addObject("pj", all);
+
 		return mav;
 
 	}
 
-	//test 용 신경쓰지 말것
+	// search paging ajax 처리
 	@RequestMapping("/testing")
 	@ResponseBody
-	public HashMap testing(@RequestParam Map n){
+	public HashMap testing(@RequestParam Map n) {
 		ModelAndView mav = new ModelAndView();
-		int cur = Integer.parseInt( (String) n.get("curr"));
+		int cur = Integer.parseInt((String) n.get("curr"));
 		String list = (String) n.get("list");
 		String[] arr = list.split(",");
 		String input = null;
-	
+
 		List<String> ur = new ArrayList<>();
 		HashMap map = new HashMap();
-	
-		for(int i= 0 ; i <= 3 ; i++){
-			
-			input = "https://www.zigbang.com/items1/" + arr[i];
-			map.put(i,(urp.get_main_url(input)));
-			
-		}return map;}
 
-//	@RequestMapping("/chatajax")
-//	@ResponseBody
-//	public void chatAjax(@RequestParam Map n, HttpSession session, HttpServletRequest request) {
-//		System.out.println("=============chatAjax=============");
-//		ModelAndView mav = new ModelAndView();
-//		String msg = request.getParameter("msg");
-//		String id = (String) session.getAttribute("id");
-//		System.out.println("msg->" + msg + "id->" + id);
-//		HashMap map = new HashMap();
-//		
-//		map.put("id", id);
-//		map.put("msg", msg);
-//		chatlog.add(map);
-//		session.setAttribute("listc", chatlog);
-//		System.out.println("chatlogsize=" + chatlog.toString());
-//
-//	}
+		for (int i = 0; i <= 3; i++) {
+
+			input = "https://www.zigbang.com/items1/" + arr[i];
+			map.put(i, (urp.get_main_url(input)));
+
+		}
+		return map;
+	}
+
+	// search paging ajax 처리
+	@RequestMapping("/gglocations")
+	@ResponseBody
+	public HashMap google_map_geo() {
+		try {
+			HashMap map = new HashMap();
+			System.out.println("gglocation");
+			long lat = (long) 37.5326049;
+			long log = (long) 126.8646878;
+			String detail_request = "https://maps.googleapis.com/maps/api/place/nearbysearch/xml?"
+					+ "location=-33.8670522,151.1957362" + " &radius=500&types=food&name=cruise"
+					+ "&key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap";
+			System.out.println(detail_request);
+			Document doc = Jsoup.connect(detail_request).get();
+//			Elements results = doc.select("results");
+//			System.out.println(results.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
 }

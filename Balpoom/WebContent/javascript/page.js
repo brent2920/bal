@@ -213,8 +213,8 @@ var temp =
 {  
 	   "geometry":{  
 	      "location":{  
-	         "lat":-33.8615479,
-	         "lng":151.20760719999998
+	         "lat":37.5326049,
+	         "lng":126.8646878
 	      }
 	   },
 	   "id":"2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
@@ -228,7 +228,7 @@ var temp2 =
 {  
 	   "geometry":{  
 	      "location":{  
-	         "lat":-32.8615479,
+	         "lat":-33.8615479,
 	         "lng":152.20760719999998
 	      }
 	   },
@@ -243,7 +243,7 @@ var temp2 =
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -33.867, lng: 151.206},
+    center: {lat:37.5326049, lng: 126.8646878},
     zoom: 15,
     styles: [{
       stylers: [{ visibility: 'simplified' }]
@@ -275,7 +275,7 @@ function callback(results, status) {
     return;
   }
   addMarker(temp);
-  addMarker(temp2);
+
 //  for (var i = 0, result; result = results[i]; i++) {
 //	  console.log("result=>"+ result.toString);
 //    addMarker(result);
