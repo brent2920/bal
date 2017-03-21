@@ -28,7 +28,7 @@ public class latelycontroller {
 	
 	@RequestMapping("/01")
 	public ModelAndView latelyList(HttpServletRequest req){
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("t_main_sub");
 		Cookie remove = new Cookie("JSESSIONID", null);
 		remove.setMaxAge(0);
 		List<Map> list = new ArrayList<>();
@@ -50,7 +50,7 @@ public class latelycontroller {
 			}
 		}
 		mav.addObject("size",list.size());
-		mav.setViewName("/lately/lately");
+		mav.addObject("lately","/lately/lately");
 		mav.addObject("list",list);
 		
 		return mav;

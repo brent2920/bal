@@ -13,7 +13,7 @@
 
 
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -27,7 +27,7 @@
 
 <!-- 달력 -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -130,8 +130,8 @@ td, th {
 			<td id="title" rowspan="5">주소</td>
 			<td id="memo4">도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</td>
 			<td id="memo1"></td>
-			<td id="map" rowspan="5">
-				<div id="gmap" style="width: 250; height: 200"></div>
+			<td id="map" rowspan="5" style="width: 250; height: 200">
+				<!-- 				<div id="gmap"></div> -->
 			</td>
 		</tr>
 
@@ -440,8 +440,8 @@ td, th {
 					<div style="float: left; width: 170px; height: 200px; margin: 5px;"
 						align="left">
 						<img alt="" src="" style="width: 170px; height: 150px"
-							id="img${i }">
-						<input type="file" id="file${i }" style="display: none">
+							id="img${i }"> <input type="file" id="file${i }"
+							style="display: none">
 						<div align="center" style="padding-top: 10px;">
 							<button type="button" id="bbt${i }" class="btn btn-primary">추가</button>
 							<button type="button" id="cbt${i }" class="btn btn-danger">취소</button>
@@ -496,32 +496,34 @@ td, th {
 
 <script>
 	
-
 </script>
 
 
 
 
 <script>
-	//지도
-	function initMap1() {
 
-		var pos1 = {
-			lat : 37.5172363,
-			lng : 127.0473248
-		};
-		// Create a map object and specify the DOM element for display.
-		var map1 = new google.maps.Map(document.getElementById('gmap'), {
-			"center" : pos1,
-			"scrollwheel" : false,
-			"zoom" : 15
-		});
-		var marker = new google.maps.Marker({
-			"map" : map1,
-			"position" : pos1,
-			"title" : ''
-		});
-	}
+	
+	
+
+	// 	function initMap1() {
+
+	// 		var pos1 = {
+	// 			lat : 37.5172363,
+	// 			lng : 127.0473248
+	// 		};
+	// 		// Create a map object and specify the DOM element for display.
+	// 		var map1 = new google.maps.Map(document.getElementById('gmap'), {
+	// 			"center" : pos1,
+	// 			"scrollwheel" : false,
+	// 			"zoom" : 15
+	// 		});
+	// 		var marker = new google.maps.Marker({
+	// 			"map" : map1,
+	// 			"position" : pos1,
+	// 			"title" : ''
+	// 		});
+	// 	}
 </script>
 
 
@@ -534,22 +536,22 @@ td, th {
 
 <script>
 	<c:forEach begin="1" end="15" var="i">
-		$("#bbt${i}").click(function() {
-			$("#file${i}").trigger("click");
-	
-		});
-		$("#file${i}").change(function() {
-			console.log(this);
-			readURL(this);
-		});
-		
-		$("#cbt${i}").click(function(){
-			$("#img${i}").attr("src", "")
-			
-		})
-	
+	$("#bbt${i}").click(function() {
+		$("#file${i}").trigger("click");
+
+	});
+	$("#file${i}").change(function() {
+		console.log(this);
+		readURL(this);
+	});
+
+	$("#cbt${i}").click(function() {
+		$("#img${i}").attr("src", "")
+
+	})
+
 	</c:forEach>
-	
+
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -586,16 +588,10 @@ td, th {
 	function sample4_execDaumPostcode() {
 		new daum.Postcode(
 				{
+					autoClose : true,
 					oncomplete : function(data) {
-						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-						// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 						var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 						var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
 							extraRoadAddr += data.bname;
 						}
@@ -617,25 +613,42 @@ td, th {
 						document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
 						document.getElementById('sample4_roadAddress').value = fullRoadAddr;
 						document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-
-						// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-						if (data.autoRoadAddress) {
-							//예상되는 도로명 주소에 조합형 주소를 추가한다.
-							var expRoadAddr = data.autoRoadAddress
-									+ extraRoadAddr;
-							document.getElementById('guide').innerHTML = '(예상 도로명 주소 : '
-									+ expRoadAddr + ')';
-
-						} else if (data.autoJibunAddress) {
-							var expJibunAddr = data.autoJibunAddress;
-							document.getElementById('guide').innerHTML = '(예상 지번 주소 : '
-									+ expJibunAddr + ')';
-
-						} else {
-							document.getElementById('guide').innerHTML = '';
-						}
+						//===================================================================
+						resetMap();	
+						//=============================================================	
 					}
 				}).open();
+	}
+	function resetMap() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/roomMap?map=" + $("#sample4_roadAddress").val(), true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.status == 200 && xhr.readyState == 4) {
+				var obj = JSON.parse(xhr.responseText);
+				console.log(obj);
+					llat = obj.results[0].geometry.location.lat
+					llng = obj.results[0].geometry.location.lng
+				initMap1(llat, llng);
+			}
+		}
+	}
+	function initMap1(llat, llng) {
+		var pos1 = {
+			lat : llat == "" ? 37.5172363 : llat,
+			lng : llng == "" ? 127.0473248 : llng
+		};
+		// Create a map object and specify the DOM element for display.
+		var map1 = new google.maps.Map(document.getElementById('map'), {
+			"center" : pos1,
+			"scrollwheel" : true,
+			"zoom" : 16
+		});
+		var marker = new google.maps.Marker({
+			"map" : map1,
+			"position" : pos1,
+			"title" : ''
+		});
 	}
 </script>
 
