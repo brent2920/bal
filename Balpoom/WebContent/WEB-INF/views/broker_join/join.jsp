@@ -127,10 +127,9 @@
 						주소:</label>
 					<button class="btn" name="btn" type="button"
 						id="postcodify_search_button">검색</button>
-					<input type="text" class="form-control postcodify_address"
-						id="bk_address" name="bk_address" style="float: left; width: 250" />
-					<br /> <label for="bk_address" style="float: left; width: 115">상세
-						주소:</label> <input type="text" class="form-control postcodify_address"
+					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" style="float: left; width: 250" />
+					<br /> 
+					<label for="bk_address" style="float: left; width: 115">상세주소:</label> <input type="text" class="form-control postcodify_address"
 						id="bk_address" name="bk_address" style="float: left; width: 250" />
 
 				</div>
