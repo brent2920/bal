@@ -15,10 +15,15 @@
 <!-- JPG 처리 소스  -->
 
 <!-- 구글 지도 연동 -->
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap"
-	async defer>
-</script>
+<!-- <script -->
+<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap" -->
+<!-- 	async defer> -->
+<!-- </script> -->
+
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&libraries=places"> -->
+<!-- </script> -->
 <!--  hi -->
 <%-- msize : ${mlist } --%>
 <!-- 구글 지도 -->

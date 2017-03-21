@@ -86,7 +86,7 @@ td {
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-			</div>
+		</div>
 			
 			<!-- Left and right controls -->
 			<a class="left carousel-control" href="#myCarousel" role="button"
