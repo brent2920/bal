@@ -32,4 +32,10 @@ public class nav_controller {
 		mav.setViewName("/watch/watchmain");
 		return mav;
 	}
+	
+	@RequestMapping("/search_navbar")
+	public ModelAndView search() {
+		ModelAndView mav = new ModelAndView("/search/search_navbar");
+		return mav;
+	}
 }

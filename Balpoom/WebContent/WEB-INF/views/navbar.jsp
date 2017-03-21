@@ -34,13 +34,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="search">방 검색</a></li>
 					<li><a href="#">관심목록</a></li>
-					<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
-					<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
-					<!-- 					<ul class="dropdown-menu"> -->
-					<!-- 						<li><a href="#">Page 1-1</a></li> -->
-					<!-- 						<li><a href="#">Page 1-2</a></li> -->
-					<!-- 						<li><a href="#">Page 1-3</a></li> -->
-					<!-- 					</ul></li> -->
+					<li><a href="#">최근본방</a></li>
 					<li><a href="#" id="nulladd">방 등록</a>
 						
 					</li>
@@ -48,16 +42,27 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#"> <span
-							class="glyphicon glyphicon-user"></span> 회원가입
+						data-toggle="dropdown" href="#">
+						<span class="glyphicon glyphicon-user"></span> 회원가입
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="#"><span data-toggle="modal"
-									data-target="#myJoin">개인 회원가입</span></a></li>
-							<li><a href="#">공인중개사 회원가입</a></li>
-						</ul></li>
-					<li><a href="#"> <span class="glyphicon glyphicon-user"
-							data-toggle="modal" data-target="#myModal">로그인</span>
+							<li>
+								<a href="#"><span data-toggle="modal"
+									data-target="#myJoin">개인 회원가입</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">공인중개사 회원가입</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" id="login">
+							<span class="glyphicon glyphicon-user"
+								data-toggle="modal" data-target="#myModal">로그인</span>
+						</a>
+					</li>
+				</ul>
 			</c:when>
 
 
@@ -227,6 +232,7 @@
 	$("#nulladd").click(function(){
 		window.alert("로그인 후 사용가능합니다")
 		
+		$("#login > span").trigger("click");
 	})
 
 </script>

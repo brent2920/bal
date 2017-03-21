@@ -47,18 +47,15 @@
 						type="checkbox" checked><span class="rKind-all"> 전체</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 원룸</span></li>
+						type="checkbox"><span class="rKind"> 원룸(오픈형)</span></li>
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox" /><span class="rKind"> 1.5룸</span></li>
+						type="checkbox"><span class="rKind"> 원룸(분리형)</span></li>
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
 						type="checkbox"><span class="rKind"> 투룸</span></li>
 					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 쓰리룸</span></li>
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 오피스텔</span></li>
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 아파트</span></li>
-				</ul></li>
+						type="checkbox"><span class="rKind"> 쓰리룸+</span></li>
+				</ul>
+			</li>
 
 			<!-- 보증금 Dropdown -->
 			<li class="dropdown"><a class="dropdown-toggle"
@@ -72,17 +69,20 @@
 						<span style="color: gray; font-size: 13px;"> 보증금 (ex.
 							10,000만원 = 1억원) </span>
 						<div align="center">
-							<input class="price-from" type="text" style="width: 100px" value="0"> ~ <input
-								class="price-to" type="text" style="width: 100px" value="무제한">
+							<input class="dprice-from" type="text" style="width: 100px" value="0 만원"> ~ <input
+								class="dprice-to" type="text" style="width: 100px" value="999999 만원">
 						</div>
 						<hr style="margin-top: 12px; margin-bottom: 3px;" /> <c:set
 							var="deposit_prices"
-							value="0, 100, 500, 1000, 2000, 3000,
+							value="100, 500, 1000, 2000, 3000,
 								4000, 5000, 6000, 7000, 8000, 9000, 10000"
 							scope="page" />
 						<div class="row">
 							<div class="col-sm-6" id="price-list-from">
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
+									<li class="deposit-from" value="0" style="color: #04B486; font-weight: bold; 
+										padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
+										0 만원</li>
 									<c:forTokens var="price" items="${deposit_prices }" delims=",">
 										<li class="deposit-from" value="${price }"
 											style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
@@ -90,13 +90,16 @@
 												${price }</fmt:formatNumber> 만원
 										</li>
 									</c:forTokens>
-									<li class="from"
+									<li class="deposit-from" value="999999"
 										style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
 										무제한</li>
 								</ul>
 							</div>
 							<div class="col-sm-6" id="price-list-to">
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
+									<li class="deposit-to" value="0" style="padding-left: 0;
+										padding-top: 7px; padding-bottom: 7px; text-align: right;">
+										0 만원</li>
 									<c:forTokens var="price" items="${deposit_prices }" delims=",">
 										<li class="deposit-to" value="${price }"
 											style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: right;">
@@ -104,8 +107,9 @@
 												${price }</fmt:formatNumber> 만원
 										</li>
 									</c:forTokens>
-									<li class="to" style="color: #04B486; font-weight: bold; padding-left: 0; 
-										padding-top: 7px; padding-bottom: 7px; text-align: right;">
+									<li class="deposit-to" value="999999"
+										style="color: #04B486; font-weight: bold; padding-left: 0; 
+											padding-top: 7px; padding-bottom: 7px; text-align: right;">
 										무제한</li>
 								</ul>
 							</div>
@@ -120,25 +124,26 @@
 			</a>
 				<ul class="dropdown-menu"
 					style="padding-left: 15px; padding-right: 15px; width: 250px;">
-					<li><b style="font-size: 16px; font-family: 나눔고딕">보증금</b><br>
-						<span style="color: gray; font-size: 13px;"> 보증금 (ex.
-							10,000만원 = 1억원) </span>
+					<li><b style="font-size: 16px; font-family: 나눔고딕">월세</b><br>
 						<div align="center">
-							<input type="text" style="width: 100px"> ~ <input
-								type="text" style="width: 100px">
+							<input class="mprice-from" type="text" style="width: 100px" value="0 만원"> ~ <input
+								class="mprice-to" type="text" style="width: 100px" value="999999 만원">
 						</div>
 						<hr style="margin-top: 12px; margin-bottom: 3px;" />
 						<div class="row">
 							<div class="col-sm-6" id="price-list-from">
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
-									<c:forEach var="price" begin="0" end="100" step="10">
-										<li
+									<li class="mCost-from" value="0" style="color: #04B486; font-weight: bold; 
+										padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
+										0 만원</li>
+									<c:forEach var="price" begin="10" end="100" step="10">
+										<li class="mCost-from" value="${price }"
 											style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
 											<fmt:formatNumber groupingUsed="true">
 												${price }</fmt:formatNumber> 만원
 										</li>
 									</c:forEach>
-									<li
+									<li class="mCost-from" value="999999"
 										style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
 										무제한</li>
 								</ul>
@@ -146,14 +151,15 @@
 							<div class="col-sm-6" id="price-list-to">
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
 									<c:forEach var="price" begin="0" end="100" step="10">
-										<li
+										<li class="mCost-to" value="${price }"
 											style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: right;">
 											<fmt:formatNumber groupingUsed="true">
 												${price }</fmt:formatNumber> 만원
 										</li>
 									</c:forEach>
-									<li
-										style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: right;">
+									<li class="mCost-to" value="999999"
+										style="color: #04B486; font-weight: bold; padding-left: 0; 
+											padding-top: 7px; padding-bottom: 7px; text-align: right;">
 										무제한</li>
 								</ul>
 							</div>
@@ -284,44 +290,50 @@
 	//===========================================================================
 	// [ 보증금 nav 기능 ]
 	$(".deposit-from").click(function(){
-		$(".from").each(function(){
+		$(".deposit-from").each(function(){
 			$(this).css({"color":"black", "font-weight":"normal"});
 		});
 		$(this).css({"color":"#04B486", "font-weight":"bold"});
 		
 		console.log($(this).val());
-		$(".price-from").val($(this).val());
-	})
+		$(".dprice-from").val($(this).val() + " 만원");
+	});
 	
 	$(".deposit-to").click(function(){
-		$(".to").each(function(){
+		$(".deposit-to").each(function(){
 			$(this).css({"color":"black", "font-weight":"normal"});
 		});
 		$(this).css({"color":"#04B486", "font-weight":"bold"});
 		
 		console.log($(this).val());
-		$(".price-to").val($(this).val());
-	})
+		$(".dprice-to").val($(this).val() + " 만원");
+	});
 	//===========================================================================
 		
 	//===========================================================================
-	$(".from").click(function(){
-		$(".from").each(function(){
+	// [ 월세 nav 기능 ]
+	$(".mCost-from").click(function(){
+		$(".mCost-from").each(function(){
 			$(this).css({"color":"black", "font-weight":"normal"});
 		});
 		$(this).css({"color":"#04B486", "font-weight":"bold"});
 		
 		console.log($(this).val());
-		$(".price-from").val($(this).val());
-	})
+		$(".mprice-from").val($(this).val() + " 만원");
+	});
 	
-	$(".to").click(function(){
-		$(".to").each(function(){
+	$(".mCost-to").click(function(){
+		$(".mCost-to").each(function(){
 			$(this).css({"color":"black", "font-weight":"normal"});
 		});
 		$(this).css({"color":"#04B486", "font-weight":"bold"});
 		
 		console.log($(this).val());
-		$(".price-to").val($(this).val());
-	})
+		$(".mprice-to").val($(this).val() + " 만원");
+	});
+	//===========================================================================
+	
+	//===========================================================================
+	// [ 추가옵션 nav 기능 ]
+	
 </script>
