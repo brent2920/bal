@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.json.simple.JSONArray; 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class databaseDao {
 					br = new BufferedReader(new InputStreamReader(url.openStream()));
 				} catch (IOException e) {
 
-					e.printStackTrace();
+//					e.printStackTrace();
 					continue;
 				}
 				String result = "";
@@ -67,9 +67,26 @@ public class databaseDao {
 				int b_deposit = Integer.parseInt(jo1.get("deposit").toString());
 				int b_mpay = Integer.parseInt(jo1.get("rent").toString());
 				String b_rkind = jo1.get("room_type").toString();
-				String b_floor = jo1.get("floor").toString() + "/" + jo1.get("floor_all").toString();
-				String b_area = jo1.get("size_m2").toString() + "/" + jo1.get("size").toString();
+				String floor = jo1.get("floor").toString();
+				String[] ar = new String[]{}; 
+				int b_floor = 0;
+				
+				if(!(floor.isEmpty())){
+					System.out.println(floor.toString());
+					if(floor.contains("/")){
+						ar = floor.split("/");
+						b_floor = Integer.parseInt(ar[1].toString().substring(0,ar[1].indexOf("층")));
+					}else{
+						b_floor = Integer.parseInt(floor.toString().substring(0,floor.indexOf("층")));
+					}
+				}
 
+				String floor_all = jo1.get("floor_all").toString();
+				int b_floor_all = Integer.parseInt(floor_all.substring(0, floor_all.lastIndexOf("층")));
+				
+				double b_size_m2 = Double.parseDouble(jo1.get("size_m2").toString());
+				double b_size = Double.parseDouble( jo1.get("size").toString());
+				
 				String b_gpay = jo1.get("manage_cost").toString();
 				String b_glist = jo1.get("manage_cost_inc").toString();
 				String b_eleve = jo1.get("elevator").toString();
@@ -89,13 +106,16 @@ public class databaseDao {
 				String b_local2 = jo1.get("local2").toString();
 				String b_local3 = jo1.get("local3").toString();
 				
+				
+				map.put("b_size_m2",b_size_m2);
+				map.put("b_floor_all",b_floor_all);
 				map.put("sell_num", sell_num);
 				map.put("b_title", b_title);
 				map.put("b_deposit", b_deposit);
 				map.put("b_mpay", b_mpay);
 				map.put("b_rkind", b_rkind);
 				map.put("b_floor", b_floor);
-				map.put("b_area", b_area);
+				map.put("b_size", b_size);
 				map.put("b_gpay", b_gpay);
 				map.put("b_glist", b_glist);
 				map.put("b_eleve", b_eleve);
@@ -113,6 +133,7 @@ public class databaseDao {
 				map.put("b_local1", b_local1);
 				map.put("b_local2", b_local2);
 				map.put("b_local3", b_local3);
+				
 				
 				r = session.insert("room.insertList", map);
 				if (r == 1) {

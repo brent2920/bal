@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.latelyDao;
-import utils.Urlpicture;
 
 
 @Controller
+
 public class latelycontroller {
 
 	@Autowired
@@ -28,8 +28,6 @@ public class latelycontroller {
 	@RequestMapping("/01")
 	public ModelAndView latelyList(HttpServletRequest req){
 		ModelAndView mav = new ModelAndView("t_main_sub");
-		Cookie remove = new Cookie("JSESSIONID", null);
-		remove.setMaxAge(0);
 		List<Map> list = new ArrayList<>();
 		Map map = new HashMap<>();
 		
