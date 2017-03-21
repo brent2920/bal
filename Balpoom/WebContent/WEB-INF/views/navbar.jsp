@@ -269,7 +269,7 @@
 	document.getElementById("Eemail").onblur = function() {
 		var xhr1 = new XMLHttpRequest();
 		// this .. 이 스크립트를 호출시킨 DOM 객체
-		// document.getElementById("id") 
+		// document.getElementById("id")
 		xhr1.open("get", "/EmailcheckAjax?Eemail=" + this.value, true);
 		xhr1.send();
 		xhr1.onreadystatechange = function() {
