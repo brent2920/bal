@@ -15,7 +15,7 @@
 <body>
 <div class="container" style="padding-top: 2%">
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-6">
 			<table class="table">
 				<thead>
 					<tr>
@@ -34,26 +34,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-sm-4">
-			<table class="table">
-				<thead>
-					<tr>
-						<th><b style="font-size: 22px;">공지사항</b></th>
-						<th>
-							<div align="right">
-								<button type="button" class="btn btn-default btn-sm">더보기</button>
-							</div>
-						</th>					
-					</tr>
-				</thead>
-				<tbody>
-					<tr><td colspan="2">Test1</td></tr>
-					<tr><td colspan="2">Test2</td></tr>
-					<tr><td colspan="2">Test3</td></tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-6">
 			<table class="table">
 				<thead>
 					<tr>
