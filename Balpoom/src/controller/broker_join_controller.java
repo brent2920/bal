@@ -35,7 +35,7 @@ public class broker_join_controller {
 	@RequestMapping("/data")
 	public ModelAndView broker_join_data(HttpServletRequest req, @RequestParam Map map){
 		
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("t_brokerjoin");
 		String[] ar = req.getParameterValues("bk_agentnum");
 		String bk_agentnum = ar[0]+"-"+ar[1]+"-"+ar[2];
 		String[] arr = req.getParameterValues("bk_contact");
@@ -45,9 +45,11 @@ public class broker_join_controller {
 		int r = aDao.insertOneAgent(map);
 		System.out.println(ar[0]+"-"+ar[1]+"-"+ar[2]);
 		if(r==1){
+			
 			mav.setViewName("/broker_join/welcome");
 		}else{
-			mav.setViewName("/broker_join/fail");
+			
+			mav.addObject("fail","fail");
 		}
 		return mav;
 	}

@@ -16,7 +16,6 @@ public class infoDao {
 	public Map info(String id){
 		SqlSession session = factory.openSession();
 		Map map = new HashMap();
-		
 		try{
 			map = session.selectOne("info.find", id);
 		}catch(Exception e){

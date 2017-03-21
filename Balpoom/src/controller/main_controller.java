@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -115,13 +117,19 @@ public class main_controller {
 	}
 
 	@RequestMapping("/detail")
-	public ModelAndView detailViewHandler(@RequestParam Map n, HttpServletRequest req) {
+	public ModelAndView detailViewHandler(@RequestParam Map n, HttpServletRequest req
+			, HttpServletResponse resp) {
 		//사진처리 
+		
 		JSONArray picturesJ= null;
 		int num = Integer.parseInt(n.get("num")+"");
-	
 		
-		System.out.println("num======================>"+num);
+			
+		Cookie c = new Cookie(String.valueOf(n.get("num")), String.valueOf(n.get("num")));
+		c.setMaxAge(60*60);
+		resp.addCookie(c);
+		
+		//System.out.println("num======================>"+num);
 		List<String> all=  urp.get_picture_urls("https://www.zigbang.com/items1/"+num);
 		picturesJ = new JSONArray(all);
 		ModelAndView mav = new ModelAndView("t_detail");
