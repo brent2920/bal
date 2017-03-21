@@ -42,9 +42,6 @@ public class main_controller {
 		ModelAndView mav = new ModelAndView("t_main");
 		return mav;
 	}
-<<<<<<< HEAD
-
-=======
 	
 	@RequestMapping("/searchlist")
 	public ModelAndView slHandler() {
@@ -52,7 +49,6 @@ public class main_controller {
 		return mav;
 	}
 	
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
 		ModelAndView mav = new ModelAndView("t_search");
