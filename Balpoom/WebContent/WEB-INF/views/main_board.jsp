@@ -32,7 +32,7 @@
 					<tr><td colspan="2">Test2</td></tr>
 					<tr><td colspan="2">Test3</td></tr>
 				</tbody>
-			</table>
+			</table> 
 		</div>
 		<div class="col-sm-6">
 			<table class="table">
