@@ -21,7 +21,7 @@
 	select * from room where SELL_NUM = #{regNum}
 	</select>
 	
-	<select id="getRoomList_all" resultType="java.util.List" parameterMap="java.util.HashMap">
+	<select id="getRoomList_all" resultType="java.util.List" parameterType="java.util.HashMap">
 		select * from room where 
 			<choose>
 				<when test="매물종류 == '전세'">

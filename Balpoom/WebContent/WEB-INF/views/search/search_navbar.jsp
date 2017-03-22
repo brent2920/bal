@@ -24,61 +24,78 @@
 		<ul class="nav navbar-nav">
 			<!-- 매물종류 Dropdown -->
 			<li class="dropdown" id="mkind">
-				<a class="dropdown-toggle"
-				data-toggle="dropdown" style="font-family: 나눔고딕;"> 매물종류 <span
-					class="caret"></span>
+				<a class="dropdown-toggle" data-toggle="dropdown" style="font-family: 나눔고딕;">
+					매물종류 <span class="caret"></span>
 				</a>
-				<ul class="dropdown-menu" style="padding-left: 15px;" id="mkind-mn">
-					<li class="mKind" id="jPay" style="height: 35px;"><input
-						type="radio" name="mkind" id="jPay_Chk"> 전세</li>
-					<li class="mKind" id="mPay" style="height: 35px;"><input
-						type="radio" name="mkind" id="mPay_Chk"> 월세</li>
-					<li class="mKind" id="allPay" style="height: 35px;"><input
-						type="radio" name="mkind" id="allPay_Chk" checked> 전세 + 월세
+				<ul class="dropdown-menu" style="padding-left: 15px;">
+					<li class="mKind" id="jPay" style="height: 35px;">
+						<input type="radio" name="mkind" id="jPay_Chk"> 전세
+					</li>
+					<li class="mKind" id="mPay" style="height: 35px;">
+						<input type="radio" name="mkind" id="mPay_Chk"> 월세
+					</li>
+					<li class="mKind" id="allPay" style="height: 35px;">
+						<input type="radio" name="mkind" id="allPay_Chk" checked> 전세 + 월세
 					</li>
 				</ul>
 			</li>
 
 			<!-- 방종류 Dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" style="font-family: 나눔고딕;"> 방종류 <span
-					class="caret"></span>
-			</a>
+			<li class="dropdown">
+				<a class="dropdown-toggle"
+					data-toggle="dropdown" style="font-family: 나눔고딕;">
+					 방종류 <span class="caret"></span>
+				</a>
 				<ul class="dropdown-menu" style="padding-left: 15px;">
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox" checked><span class="rKind-all"> 전체</span>
+					<li style="padding-top: 5px; padding-bottom: 5px;">
+						<input type="checkbox" checked name="rKind" value="all_room">
+						<span class="rKind-all"> 전체</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;">
-						<input type="checkbox"><span class="rKind"> 원룸(오픈형)</span></li>
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 원룸(분리형)</span></li>
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 투룸</span></li>
-					<li style="padding-top: 5px; padding-bottom: 5px;"><input
-						type="checkbox"><span class="rKind"> 쓰리룸+</span></li>
+						<input type="checkbox" name="rKind" value="one_open">
+						<span class="rKind"> 원룸(오픈형)</span>
+					</li>
+					<li style="padding-top: 5px; padding-bottom: 5px;">
+						<input type="checkbox" name="rKind" value="one_sep">
+						<span class="rKind"> 원룸(분리형)</span>
+					</li>
+					<li style="padding-top: 5px; padding-bottom: 5px;">
+						<input type="checkbox" name="rKind" value="two_room">
+						<span class="rKind"> 투룸</span>
+					</li>
+					<li style="padding-top: 5px; padding-bottom: 5px;">
+						<input type="checkbox" name="rKind" value="gt_three">
+						<span class="rKind"> 쓰리룸+</span>
+					</li>
 				</ul>
 			</li>
 
 			<!-- 보증금 Dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" style="font-family: 나눔고딕;"> <span
-					style="padding: 3px; background-color: #04B486; border-radius: 5px; color: white;">보</span>
+			<li class="dropdown">
+				<a class="dropdown-toggle"
+					data-toggle="dropdown" style="font-family: 나눔고딕;">
+					<span style="padding: 3px; background-color: #04B486; 
+						border-radius: 5px; color: white;">보</span>
 					0만원 ~ 무제한 <span class="caret"></span>
-			</a>
+				</a>
 				<ul class="dropdown-menu"
 					style="padding-left: 15px; padding-right: 15px; width: 250px;">
-					<li><b style="font-size: 16px; font-family: 나눔고딕">보증금</b><br>
-						<span style="color: gray; font-size: 13px;"> 보증금 (ex.
-							10,000만원 = 1억원) </span>
+					<li>
+						<b style="font-size: 16px; font-family: 나눔고딕">보증금</b><br>
+						<span style="color: gray; font-size: 13px;">
+							 보증금 (ex.10,000만원 = 1억원) </span>
 						<div align="center">
-							<input class="dprice-from" type="text" style="width: 100px" value="0 만원"> ~ <input
-								class="dprice-to" type="text" style="width: 100px" value="999999 만원">
+							<input class="dprice-from" type="text" 
+								style="width: 100px" value="0 만원" name="dprice_from">
+							 ~ <input class="dprice-to" type="text" 
+							 	style="width: 100px" value="999999 만원"  name="dprice_to">
 						</div>
-						<hr style="margin-top: 12px; margin-bottom: 3px;" /> <c:set
-							var="deposit_prices"
-							value="100, 500, 1000, 2000, 3000,
-								4000, 5000, 6000, 7000, 8000, 9000, 10000"
-							scope="page" />
+						<hr style="margin-top: 12px; margin-bottom: 3px;" />
+							<c:set
+								var="deposit_prices"
+								value="100, 500, 1000, 2000, 3000,
+									4000, 5000, 6000, 7000, 8000, 9000, 10000"
+								scope="page" />
 						<div class="row">
 							<div class="col-sm-6" id="price-list-from">
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
@@ -94,14 +111,16 @@
 									</c:forTokens>
 									<li class="deposit-from" value="999999"
 										style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
-										무제한</li>
+										무제한
+									</li>
 								</ul>
 							</div>
 							<div class="col-sm-6" id="price-list-to">
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
 									<li class="deposit-to" value="0" style="padding-left: 0;
 										padding-top: 7px; padding-bottom: 7px; text-align: right;">
-										0 만원</li>
+										0 만원
+									</li>
 									<c:forTokens var="price" items="${deposit_prices }" delims=",">
 										<li class="deposit-to" value="${price }"
 											style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: right;">
@@ -112,24 +131,33 @@
 									<li class="deposit-to" value="999999"
 										style="color: #04B486; font-weight: bold; padding-left: 0; 
 											padding-top: 7px; padding-bottom: 7px; text-align: right;">
-										무제한</li>
+										무제한
+									</li>
 								</ul>
 							</div>
-						</div></li>
-				</ul></li>
+						</div>
+					</li>
+				</ul>
+			</li>
 
 			<!-- 월세 Dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" style="font-family: 나눔고딕;"> <span
-					style="padding: 3px; background-color: #04B486; border-radius: 5px; color: white;">월</span>
-					0만원 ~ 무제한 <span class="caret"></span>
-			</a>
+			<li class="dropdown">
+				<a class="dropdown-toggle"
+					data-toggle="dropdown" style="font-family: 나눔고딕;">
+					<span style="padding: 3px; background-color: #04B486;
+						 border-radius: 5px; color: white;">월</span>
+						<span id="mPrice-from">0만원</span> ~ <span id="mPrice-to">무제한</span>
+						 <span class="caret"></span>
+				</a>
 				<ul class="dropdown-menu"
 					style="padding-left: 15px; padding-right: 15px; width: 250px;">
-					<li><b style="font-size: 16px; font-family: 나눔고딕">월세</b><br>
+					<li>
+						<b style="font-size: 16px; font-family: 나눔고딕">월세</b><br>
 						<div align="center">
-							<input class="mprice-from" type="text" style="width: 100px" value="0 만원"> ~ <input
-								class="mprice-to" type="text" style="width: 100px" value="999999 만원">
+							<input class="mprice-from" type="text" 
+								style="width: 100px" value="0 만원" name="mprice_from">
+							 ~ <input class="mprice-to" type="text" 
+							 	style="width: 100px" value="999999 만원" name="mprice_to">
 						</div>
 						<hr style="margin-top: 12px; margin-bottom: 3px;" />
 						<div class="row">
@@ -137,7 +165,8 @@
 								<ul style="list-style: none; -webkit-padding-start: 0px;">
 									<li class="mCost-from" value="0" style="color: #04B486; font-weight: bold; 
 										padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
-										0 만원</li>
+										0 만원
+									</li>
 									<c:forEach var="price" begin="10" end="100" step="10">
 										<li class="mCost-from" value="${price }"
 											style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
@@ -147,7 +176,8 @@
 									</c:forEach>
 									<li class="mCost-from" value="999999"
 										style="padding-left: 0; padding-top: 7px; padding-bottom: 7px; text-align: left;">
-										무제한</li>
+										무제한
+									</li>
 								</ul>
 							</div>
 							<div class="col-sm-6" id="price-list-to">
@@ -162,11 +192,14 @@
 									<li class="mCost-to" value="999999"
 										style="color: #04B486; font-weight: bold; padding-left: 0; 
 											padding-top: 7px; padding-bottom: 7px; text-align: right;">
-										무제한</li>
+										무제한
+									</li>
 								</ul>
 							</div>
-						</div></li>
-				</ul></li>
+						</div>
+					</li>
+				</ul>
+			</li>
 
 
 			<!-- 추가옵션 Dropdown -->
@@ -178,38 +211,50 @@
 					<li>
 						<div class="additionalOpt">
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 주차가능</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 반려동물</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> LH가능</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 주차가능
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 반려동물
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> LH가능
+								</li>
 							</ul>
 							<hr style="margin-top: 8px; margin-bottom: 8px;" />
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 5평 이하</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 5평 ~ 10평 이하</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 10평 이상</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 5평 이하
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 5평 ~ 10평 이하
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 10평 이상
+								</li>
 							</ul>
 							<hr style="margin-top: 8px; margin-bottom: 8px;" />
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 반지층</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 저층 1층 ~ 3층</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 중층 4층 ~ 6층</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 고층 7층 이상</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;"><input
-									type="checkbox"> 옥탑</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+								<input type="checkbox"> 반지층
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 저층 1층 ~ 3층
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 중층 4층 ~ 6층
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 고층 7층 이상
+								</li>
+								<li style="padding-top: 5px; padding-bottom: 5px;">
+									<input type="checkbox"> 옥탑
+								</li>
 							</ul>
 						</div>
 					</li>
-				</ul></li>
+				</ul>
+			</li>
 		</ul>
 
 		<!-- 검색창 -->
