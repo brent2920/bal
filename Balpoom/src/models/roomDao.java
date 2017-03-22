@@ -77,6 +77,7 @@ public class roomDao {
 		}
 		return rList;
 	}
+	
 	public List<HashMap<String,Object>> test_room(){  //테스트 용이니까 신경쓰지 말것 
 		SqlSession session = factory.openSession();
 		List<HashMap<String,Object>> rList = null;
@@ -84,25 +85,6 @@ public class roomDao {
 		try {
 			rList = new ArrayList<>();
 			rList = session.selectList("room.room_deposit");
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		
-		return rList;
-		
-	}
-	
-	public List<HashMap<String,Object>> getRoomsInfo(){  //테스트용 - 덕찬 
-		SqlSession session = factory.openSession();
-		List<HashMap<String,Object>> rList = null;
-		
-		try {
-			rList = new ArrayList<>();
-			rList = session.selectList("room.getRoomList");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -49,8 +49,7 @@
 					<label for="bk_password" style="float: left; width: 115">비밀번호:</label>
 					<input type="password" class="form-control" id="bk_password"
 						placeholder="비밀번호를 입력하세요" style="float: left; width: 250"
-						name="bk_password" /> <b style="color: gray">&emsp;비밀번호를
-						입력하세요.</b>
+						name="bk_password" /> <b style="color: gray">&emsp;비밀번호를 입력하세요.</b>
 				</div>
 
 
@@ -58,7 +57,7 @@
 					<label for="bk_password1" style="float: left; width: 115">비밀번호
 						확인:</label> <input type="password" style="float: left; width: 250"
 						class="form-control" id="bk_password1" placeholder="비밀번호를 입력하세요" />
-					<b style="color: gray">&emsp;비밀번호를 입력하세요.</b>
+					<span id ="rst">&emsp;</span>
 				</div>
 
 				<div class="form-group">
@@ -127,10 +126,9 @@
 						주소:</label>
 					<button class="btn" name="btn" type="button"
 						id="postcodify_search_button">검색</button>
-					<input type="text" class="form-control postcodify_address"
-						id="bk_address" name="bk_address" style="float: left; width: 250" />
-					<br /> <label for="bk_address" style="float: left; width: 115">상세
-						주소:</label> <input type="text" class="form-control postcodify_address"
+					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" style="float: left; width: 250" />
+					<br /> 
+					<label for="bk_address" style="float: left; width: 115">상세주소:</label> <input type="text" class="form-control postcodify_address"
 						id="bk_address" name="bk_address" style="float: left; width: 250" />
 
 				</div>
@@ -263,6 +261,18 @@
 			$("#postcodify_search_button").postcodifyPopUp();
 			
 		});
+		
+		
+		$("#password1").keyup(function(){
+			if($("#bk_password").val()!=$("#bk_password1").val()){
+				$("#rst").html = "비밀번호가 일치하지 않습니다."
+			}
+			consol.log($("#bk_password").val());
+			consol.log($("#bk_password1").val());
+		});
+		
+		
+		
 		$("#a1").on("click", function() {
 			$(".sub").each(function() {
 				$(this).prop("checked", $("#a1").prop("checked"));

@@ -6,4 +6,8 @@
 	<select id="find" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select * from join where Eemail=#{Eemail} and password=#{password}
 	</select>
+	
+	<select id="broker" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from agent where id =#{id} and password =#{password}
+	</select>
 </mapper>

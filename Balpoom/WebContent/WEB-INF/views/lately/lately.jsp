@@ -7,29 +7,57 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-/*   .container { */
-/*       padding: 80px 120px; */
-/*   } */
-/*   .person { */
-/*       border: 10px solid transparent; */
-/*       margin-bottom: 25px; */
-/*       width: 30%; */
-/*       height: 30%; */
-/*       opacity: 0.7; */
-/*   } */
-/*   .person:hover { */
-/*       border-color: #f1f1f1; */
-/*   } */
+ <style>
+  .container {
+      padding: 80px 120px;
+  }
+  .person {
+      border: 10px solid transparent;
+      margin-bottom: 25px;
+      width: 80%;
+      height: 80%;
+      opacity: 0.7;
+  }
+  .person:hover {
+      border-color: #f1f1f1;
+      
+  }
+  .carousel-inner img {
+      -webkit-filter: grayscale(90%);
+      filter: grayscale(90%); /* make all photos black and white */ 
+      width: 30%; /* Set width to 100% */
+      margin: auto;
+  }
+  .carousel-caption h3 {
+      color: #fff !important;
+  }
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+  }  
+  
+  
+ 
+  .carousel-control.left,  .carousel-control.right {
+ 
+    background-image: linear-gradient(to right,rgba(0,0,0,.0) 0,rgba(0,0,0,.0001) 100%);
+  
+}
+  
+  
+  
+  
+  
   </style>
-</head>
-<body>
 
+
+<div style="padding-left: 5%; padding-right: 5%;">
 <div class="col-sm-4 carousel slide" id="myCarousel" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
 	    <c:forEach var="i" begin="1" end="${size }" >
-	      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	      <li data-target="#myCarousel" data-slide-to="${i }" class="active"></li>
 	    </c:forEach>
     </ol>
     
@@ -40,9 +68,9 @@
 		<c:choose>
 			<c:when test="${vs.first}">
 		      <div class="item active">   
-		        <img src="${list.url }" alt="${list.SELL_NUM }" width="400" height="400">
+		        <img src="${list.url }" alt="${list.SELL_NUM }" width="100" height="300">
 		        <div class="carousel-caption">
-		          <h3>${list.B_TITLE }</h3>
+		          <h4>${list.B_TITLE }</h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
@@ -50,9 +78,9 @@
 		      
 			<c:otherwise>
 		      <div class="item">   
-		        <img src="${list.url }" alt="${list.SELL_NUM }" width="400" height="400">
+		        <img src="${list.url }" alt="${list.SELL_NUM }" width="100" height="300">
 		        <div class="carousel-caption">
-		          <h3>${list.B_TITLE }</h3>
+		          <h4>${list.B_TITLE }</h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
@@ -94,3 +122,4 @@
 		</table>
 	</div>
 </c:forEach>
+</div>

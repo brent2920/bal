@@ -5,11 +5,11 @@
 <!-- Parameter Type / Result Type은 필요에 따라 추가 -->
 	<insert id="insertList" parameterType="java.util.HashMap">
 		insert into room values(#{sell_num},#{b_title},#{b_deposit},
-		#{b_mpay},#{b_rkind},#{b_floor},#{b_area},#{b_gpay},#{b_glist},
+		#{b_mpay},#{b_rkind},#{b_floor},#{b_size},#{b_gpay},#{b_glist},
 		#{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},'불가능',
 		#{b_option},#{b_detail},#{b_location},#{b_nstation},
 		#{b_latitude},#{b_longitude},#{b_petpossible},#{id},0,0,
-		#{b_local1},#{b_local2},#{b_local3})
+		#{b_local1},#{b_local2},#{b_local3},#{b_size_m2},#{b_floor_all})
 		
 	</insert>
 	<insert id="insertOne">
@@ -21,7 +21,11 @@
 		select * from room where SELL_NUM = #{regNum}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="getRoomList_all" resultType="java.util.List" parameterType="java.util.HashMap">
+=======
+	<select id="getRoomList" resultType="java.util.List" parameterType="java.util.HashMap">
+>>>>>>> branch 'master' of https://github.com/brent2920/bal.git
 		select * from room where 
 			<choose>
 				<when test="매물종류 == '전세'">
@@ -67,7 +71,11 @@
 			</choose>
 	</select>
 	
+<<<<<<< HEAD
 	<select id="room_deposit"  resultType="java.util.HashMap">
+=======
+	<select id="room_deposit" resultType="java.util.HashMap">
+>>>>>>> branch 'master' of https://github.com/brent2920/bal.git
 		select * from ROOM where B_DEPOSIT=1000
 	</select>
 	

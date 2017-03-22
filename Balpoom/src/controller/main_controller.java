@@ -18,6 +18,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.HashBiMap;
 
 import models.roomDao;
 import utils.Urlpicture;
@@ -162,7 +164,26 @@ public class main_controller {
 		}
 		return map;
 	}
-
 	
-
+	@RequestMapping("/searchTest")
+	@ResponseBody
+	public HashMap<String, Object> roomListHandler(
+			@RequestParam(name="mKind", required=false) String mKind, 
+			@RequestParam(name="rKind[]", required=false) List<String> rKind, 
+			@RequestParam(name="deposit[]", required=false) List<String> deposit, 
+			@RequestParam(name="mpay", required=false) List<String> mpay, 
+			@RequestParam(name="parking", required=false) String parking, 
+			@RequestParam(name="pet", required=false) String pet, 
+			@RequestParam(name="lhok", required=false) String lhok, 
+			@RequestParam(name="area[]" , required=false, defaultValue="all") List<String> area, 
+			@RequestParam(name="floor", required=false, defaultValue="all") List<String> floor
+			) {
+		 
+		HashMap<String, Object> searchConditions = new HashMap<>();
+		System.out.println(mKind);
+		System.out.println(rKind);
+		
+		
+		return searchConditions;
+	}
 }
