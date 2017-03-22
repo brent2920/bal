@@ -63,6 +63,10 @@
 						<span class="rKind"> 원룸(분리형)</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;">
+						<input class="rKind" type="checkbox" name="rKind" value="one_dfloor">
+						<span class="rKind"> 원룸(복층형)</span>
+					</li>
+					<li style="padding-top: 5px; padding-bottom: 5px;">
 						<input class="rKind" type="checkbox" name="rKind" value="two_room">
 						<span class="rKind"> 투룸</span>
 					</li>
@@ -89,9 +93,9 @@
 							 보증금 (ex.10,000만원 = 1억원) </span>
 						<div align="center">
 							<input class="dprice-from" type="text" 
-								style="width: 100px" value="0 만원" name="dprice_from">
+								style="width: 100px" value="0" name="dprice_from">
 							 ~ <input class="dprice-to" type="text" 
-							 	style="width: 100px" value="999999 만원"  name="dprice_to">
+							 	style="width: 100px" value="999999"  name="dprice_to">
 						</div>
 						<hr style="margin-top: 12px; margin-bottom: 3px;" />
 							<c:set
@@ -402,12 +406,10 @@
 		// 보증금 값 읽어오기
 		var deposit_from = $("input[name='dprice_from']").val();
 		var deposit_to = $("input[name='dprice_to']").val();
-		var deposit = [deposit_from, deposit_to];
 		
 		// 월세 값 읽어오기
 		var mpay_from = $("input[name='mprice_from']").val();
 		var mpay_to = $("input[name='mprice_to']").val();
-		var mpay = [mpay_from, mpay_to];
 		
 		var parking = null;									// 주차가능여부
 		if($("input[name='parking']").prop("checked"))
@@ -433,17 +435,31 @@
 			floor.push($(this).val());
 	    });
 		
+		var mapBound = map.getBounds().toJSON();
+		console.log(JSON.stringify(mapBound));
+		console.log(mapBound.east);
+		console.log(mapBound.west);
+		console.log(mapBound.south);
+		console.log(mapBound.north);
 		// 전체데이터
 		var allData = { 
-				"mKind": mKind,			// 매물종류
-				"rKind": rKind,			// 방종류
-				"deposit": deposit,		// 보증금
-				"mpay": mpay,			// 월세
-				"parking": parking,		// 주자가능
-				"pet": pet,				// 애완동물가능
-				"lhok": lhok,			// LH가능
-				"area": area,			// 평수(면적)
-				"floor": floor			// 층수
+				"mKind": mKind,					// 매물종류
+				"rKind": rKind,					// 방종류
+				"deposit_from": deposit_from,	// 보증금
+				"deposit_to": deposit_to,
+				"mpay_from": mpay_from,			// 월세
+				"mpay_to": mpay_to,	
+				"parking": parking,				// 주자가능
+				"pet": pet,						// 애완동물가능
+				"lhok": lhok,					// LH가능
+				"area": area,					// 평수(면적)
+				"floor": floor,					// 층수
+				
+				// 구글맵 범위좌표
+				"east" : mapBound.east,
+				"west" : mapBound.west, 
+				"south" : mapBound.south,
+				"north" : mapBound.north
 		};
 		
 		console.log(JSON.stringify(allData));

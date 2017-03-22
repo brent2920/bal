@@ -62,14 +62,13 @@ public class roomDao {
 		return rInfo;
 	}
 
-	public List<HashMap<String, Object>> getRoomList(List<HashMap<String, Double>> viewport) {
+	public List<HashMap<String, Object>> getRoomList(HashMap<String, Object> conditions) {
 		SqlSession session = factory.openSession();
-		System.out.println("Viewport Values : " + viewport.toString());
 		List<HashMap<String, Object>> rList = null;
 		
 		try {
 			rList = new ArrayList<>();
-			rList = session.selectList("room.getRoomList", viewport);
+			rList = session.selectList("room.getRoomList", conditions);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

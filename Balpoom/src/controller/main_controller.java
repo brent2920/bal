@@ -167,23 +167,63 @@ public class main_controller {
 	
 	@RequestMapping("/searchTest")
 	@ResponseBody
-	public HashMap<String, Object> roomListHandler(
-			@RequestParam(name="mKind", required=false) String mKind, 
-			@RequestParam(name="rKind[]", required=false) List<String> rKind, 
-			@RequestParam(name="deposit[]", required=false) List<String> deposit, 
-			@RequestParam(name="mpay", required=false) List<String> mpay, 
-			@RequestParam(name="parking", required=false) String parking, 
-			@RequestParam(name="pet", required=false) String pet, 
-			@RequestParam(name="lhok", required=false) String lhok, 
+	public List<HashMap<String, Object>> roomListHandler(
+			@RequestParam(name="mKind") String mKind, 
+			@RequestParam(name="rKind[]") List<String> rKind, 
+			@RequestParam(name="deposit_from") String deposit_from, 
+			@RequestParam(name="deposit_to") String deposit_to, 
+			@RequestParam(name="mpay_from") String mpay_from, 
+			@RequestParam(name="mpay_to") String mpay_to, 
+			@RequestParam(name="parking", required=false, defaultValue="all") String parking, 
+			@RequestParam(name="pet", required=false, defaultValue="all") String pet, 
+			@RequestParam(name="lhok", required=false, defaultValue="all") String lhok, 
 			@RequestParam(name="area[]" , required=false, defaultValue="all") List<String> area, 
-			@RequestParam(name="floor", required=false, defaultValue="all") List<String> floor
+			@RequestParam(name="floor[]", required=false, defaultValue="all") List<String> floor,
+			@RequestParam(name="east") String east,
+			@RequestParam(name="west") String west,
+			@RequestParam(name="south") String south,
+			@RequestParam(name="north") String north
 			) {
-		 
+		
+		// 보증금 세팅 - 문자제거
+		String[] d_from = deposit_from.split("\\s");
+		String[] d_to = deposit_to.split("\\s");
+		
+		// 월세 세팅 - 문자제거
+		String[] m_from = mpay_from.split("\\s");
+		String[] m_to = mpay_from.split("\\s");
+		
+		// 평수 세팅
+		// 0 : 전체 / 1 : 5평 이하 / 2 : 5~10평 / 3 : 10평 이상 
+		int areaFlag = 0;
+		for(String m : area) {
+			if(m.equals("lt_5"))
+				areaFlag = 1;
+			else if(m.equals("bt_5_10"))
+				areaFlag = 2;
+			else if(m.equals("gt_10"))
+				areaFlag = 3;
+		}
+		
 		HashMap<String, Object> searchConditions = new HashMap<>();
-		System.out.println(mKind);
-		System.out.println(rKind);
+			searchConditions.put("mKind", mKind);
+			searchConditions.put("rKind", rKind);
+			searchConditions.put("deposit_from", d_from[0]);
+			searchConditions.put("deposit_to", d_to[0]);
+			searchConditions.put("mpay_from", m_from[0]);
+			searchConditions.put("mpay_to", m_to[0]);
+			searchConditions.put("parking", parking);
+			searchConditions.put("pet", pet);
+			searchConditions.put("lhok", lhok);
+			searchConditions.put("area", areaFlag);
+			searchConditions.put("floor", floor);
+			searchConditions.put("east", east);
+			searchConditions.put("west", west);
+			searchConditions.put("south", south);
+			searchConditions.put("north", north);
 		
-		
-		return searchConditions;
+		List<HashMap<String, Object>> rList = rd.getRoomList(searchConditions);
+		System.out.println("Room List Size : " + rList.size());
+		return rList;
 	}
 }
