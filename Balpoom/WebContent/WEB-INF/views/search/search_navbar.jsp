@@ -29,13 +29,16 @@
 				</a>
 				<ul class="dropdown-menu" style="padding-left: 15px;">
 					<li class="mKind" id="jPay" style="height: 35px;">
-						<input type="radio" name="mkind" id="jPay_Chk"> 전세
+						<input class="mKind" type="radio" name="mKind"
+								id="jPay_Chk" value="jPay"> 전세
 					</li>
 					<li class="mKind" id="mPay" style="height: 35px;">
-						<input type="radio" name="mkind" id="mPay_Chk"> 월세
+						<input class="mKind" type="radio" name="mKind"
+								id="mPay_Chk" value="mPay"> 월세
 					</li>
 					<li class="mKind" id="allPay" style="height: 35px;">
-						<input type="radio" name="mkind" id="allPay_Chk" checked> 전세 + 월세
+						<input class="mKind" type="radio" name="mKind"
+							id="allPay_Chk" checked value="allPay"> 전세 + 월세
 					</li>
 				</ul>
 			</li>
@@ -48,23 +51,23 @@
 				</a>
 				<ul class="dropdown-menu" style="padding-left: 15px;">
 					<li style="padding-top: 5px; padding-bottom: 5px;">
-						<input type="checkbox" checked name="rKind" value="all_room">
+						<input class="rKind-all" type="checkbox" checked name="rKind" value="all_room">
 						<span class="rKind-all"> 전체</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;">
-						<input type="checkbox" name="rKind" value="one_open">
+						<input class="rKind" type="checkbox" name="rKind" value="one_open">
 						<span class="rKind"> 원룸(오픈형)</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;">
-						<input type="checkbox" name="rKind" value="one_sep">
+						<input class="rKind" type="checkbox" name="rKind" value="one_seperate">
 						<span class="rKind"> 원룸(분리형)</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;">
-						<input type="checkbox" name="rKind" value="two_room">
+						<input class="rKind" type="checkbox" name="rKind" value="two_room">
 						<span class="rKind"> 투룸</span>
 					</li>
 					<li style="padding-top: 5px; padding-bottom: 5px;">
-						<input type="checkbox" name="rKind" value="gt_three">
+						<input class="rKind" type="checkbox" name="rKind" value="gt_three">
 						<span class="rKind"> 쓰리룸+</span>
 					</li>
 				</ul>
@@ -209,46 +212,43 @@
 			</a>
 				<ul class="dropdown-menu" style="padding-left: 15px;">
 					<li>
-						<div class="additionalOpt">
+						<div>
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 주차가능
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="parking" value="가능"> 주차가능
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 반려동물
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="pet" value="가능"> 반려동물
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> LH가능
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="lh" value="가능"> LH가능
 								</li>
 							</ul>
 							<hr style="margin-top: 8px; margin-bottom: 8px;" />
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 5평 이하
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="area" value="lt_5"> 5평 이하
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 5평 ~ 10평 이하
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="area" value="bt_5_10"> 5평 ~ 10평 이하
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 10평 이상
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="area" value="gt_10"> 10평 이상
 								</li>
 							</ul>
 							<hr style="margin-top: 8px; margin-bottom: 8px;" />
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-								<input type="checkbox"> 반지층
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="floor" value="underground"> 반지층
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 저층 1층 ~ 3층
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="floor" value="low_floor"> 저층 1층 ~ 3층
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 중층 4층 ~ 6층
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="floor" value="mid_floor"> 중층 4층 ~ 6층
 								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 고층 7층 이상
-								</li>
-								<li style="padding-top: 5px; padding-bottom: 5px;">
-									<input type="checkbox"> 옥탑
+								<li class="additionalOpt_li" style="padding-top: 5px; padding-bottom: 5px;">
+									<input class="additionalOpt" type="checkbox" name="floor" value="high_floor"> 고층 7층 이상
 								</li>
 							</ul>
 						</div>
@@ -258,12 +258,11 @@
 		</ul>
 
 		<!-- 검색창 -->
-		<form class="navbar-form navbar-right"
-			style="margin-top: 5px; margin-bottom: 5px;">
+		<form class="navbar-form navbar-right" style="margin-top: 5px; margin-bottom: 5px;">
 			<div class="input-group">
-				<input type="text" class="form-control"
+				<input type="text" class="form-control" 
 					placeholder="원하시는 지역명, 지하철역을 입력해주세요"
-					style="width: 300px; height: 40px;">
+						style="width: 300px; height: 40px;">
 				<div class="input-group-btn">
 					<button class="btn btn-default" type="submit" style="height: 40px;">
 						<i class="glyphicon glyphicon-search"></i>
@@ -290,6 +289,7 @@
 	$(".mKind").click(function() {
 		console.log(this);
 		$(this).find("input").prop("checked", true);
+		Ajax();
 	});
 
 	// ===========================================================================
@@ -305,6 +305,7 @@
 				$(this).prev().prop("checked", false);
 			});
 		}
+		Ajax();
 	});
 
 	$(".rKind").click(function() {
@@ -315,6 +316,7 @@
 			$(this).prev().prop("checked", true);
 		}
 		$(".rKind-all").prev().prop("checked", false);
+		Ajax();
 	});
 	
 	// ===========================================================================
@@ -328,6 +330,7 @@
 		
 		console.log($(this).val());
 		$(".dprice-from").val($(this).val() + " 만원");
+		Ajax();
 	});
 	
 	$(".deposit-to").click(function(){
@@ -338,6 +341,7 @@
 		
 		console.log($(this).val());
 		$(".dprice-to").val($(this).val() + " 만원");
+		Ajax();
 	});
 		
 	// ===========================================================================
@@ -351,6 +355,7 @@
 		
 		console.log($(this).val());
 		$(".mprice-from").val($(this).val() + " 만원");
+		Ajax();
 	});
 	
 	$(".mCost-to").click(function(){
@@ -361,25 +366,95 @@
 		
 		console.log($(this).val());
 		$(".mprice-to").val($(this).val() + " 만원");
+		Ajax();
 	});
 	
 	// ===========================================================================
 	
 	// [ 추가옵션 nav 기능 ]
-	$(".additionalOpt > ul > li").click(function() {
-		$(this).find("input").prop("checked", true);
-	});
+	$(".additionalOpt_li").click(function() {
+		if($(this).find("input").prop("checked"))
+			$(this).find("input").prop("checked", false);
+		else
+			$(this).find("input").prop("checked", true);
+		Ajax();
+	}); 
 	
+	$(".additionalOpt").click(function() {
+		if($(this).prop("checked"))
+			$(this).prop("checked", false);
+		else
+			$(this).prop("checked", true);
+	}); 
 	
 	// ===========================================================================
 	
-	// [ Ajax 처리 ]
-	$("#id").keyup(function() {
+	// [ 방리스트 Ajax 처리 ]
+	// : 검색조건이 변경될 때마다 실행하고 방리스트가 변경되도록 구현
+	function Ajax() {
+		
+		var mKind = $("input[name='mKind']:checked").val();	// 매물종류
+		var rKind = [];										// 방종류
+		$("input[name='rKind']:checked").each(function(i) {
+			rKind.push($(this).val());
+	    });
+		
+		// 보증금 값 읽어오기
+		var deposit_from = $("input[name='dprice_from']").val();
+		var deposit_to = $("input[name='dprice_to']").val();
+		var deposit = [deposit_from, deposit_to];
+		
+		// 월세 값 읽어오기
+		var mpay_from = $("input[name='mprice_from']").val();
+		var mpay_to = $("input[name='mprice_to']").val();
+		var mpay = [mpay_from, mpay_to];
+		
+		var parking = null;									// 주차가능여부
+		if($("input[name='parking']").prop("checked"))
+			parking = $("input[name='parking']").val();
+		
+		var pet = null; 									// 애완동물 가능여부
+		if($("input[name='pet']").prop("checked"))
+			pet = $("input[name='pet']").val();
+		
+		var lhok = null; 									// LH 가능여부
+		if($("input[name='lh']").prop("checked"))
+			lhok = $("input[name='lh']").val();
+		
+		// 평수 읽어오기
+		var area = [];
+		$("input[name='area']:checked").each(function(i) {
+			area.push($(this).val());
+	    });
+		
+		// 층수 읽어오기
+		var floor = [];
+		$("input[name='floor']:checked").each(function(i) {
+			floor.push($(this).val());
+	    });
+		
+		// 전체데이터
+		var allData = { 
+				"mKind": mKind,			// 매물종류
+				"rKind": rKind,			// 방종류
+				"deposit": deposit,		// 보증금
+				"mpay": mpay,			// 월세
+				"parking": parking,		// 주자가능
+				"pet": pet,				// 애완동물가능
+				"lhok": lhok,			// LH가능
+				"area": area,			// 평수(면적)
+				"floor": floor			// 층수
+		};
+		
+		console.log(JSON.stringify(allData));
+		
 		$.ajax({
-			"url" : "/07ajax.jsp?q=" + $(this).val()
+			"url" : "/searchTest",
+			"type" : "POST",
+			"data" : allData
 		}).done(function(rst) {
 			// ajax로 날라온거를 rst로 쓰겠다는것 변수명은 맘대로 지정
-			$("#result").append(rst);
-		})
-	});
+// 			$("#result").append(rst);
+		});
+	}
 </script>
