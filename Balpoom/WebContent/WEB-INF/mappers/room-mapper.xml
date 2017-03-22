@@ -12,6 +12,7 @@
 		#{b_local1},#{b_local2},#{b_local3},#{b_size_m2},#{b_floor_all})
 		
 	</insert>
+	
 	<insert id="insertOne">
 	
 	</insert>
@@ -21,10 +22,6 @@
 		select * from room where SELL_NUM = #{regNum}
 	</select>
 
-	<select id="getRoomList_all" resultType="java.util.List" parameterType="java.util.HashMap">
-	
-	
-	</select>
 	<select id="getRoomList" resultType="java.util.List" parameterType="java.util.HashMap">
 		SELECT * FROM ROOM WHERE
 			<choose>
@@ -101,8 +98,6 @@
 	</select>
 
 	<select id="room_deposit"  resultType="java.util.HashMap">
-
-
 		select * from ROOM where B_DEPOSIT=1000
 	</select>
 
