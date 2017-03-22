@@ -18,10 +18,10 @@
 	
 	
 	<select id="getRoomInfo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-	select * from room where SELL_NUM = #{regNum}
+		select * from room where SELL_NUM = #{regNum}
 	</select>
 	
-	<select id="getRoomList_all" resultType="java.util.List" parameterMap="java.util.HashMap">
+	<select id="getRoomList_all" resultType="java.util.List" parameterType="java.util.HashMap">
 		select * from room where 
 			<choose>
 				<when test="매물종류 == '전세'">
@@ -67,12 +67,9 @@
 			</choose>
 	</select>
 	
-	<select id="room_deposit" resultType="java.util.HashMap">
-		select * from ROOM where B_DEPOSIT=1000 and B_RKIND='투룸' and B_MPAY=65
+	<select id="room_deposit"  resultType="java.util.HashMap">
+		select * from ROOM where B_DEPOSIT=1000
 	</select>
 	
-	<select id="room-gomap" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-		select * from ROOM WHERE column_name BETWEEN value1 AND value2;
-	</select>
 	
 </mapper>
