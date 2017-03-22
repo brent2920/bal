@@ -22,7 +22,7 @@
 		select * from room where SELL_NUM = #{regNum}
 	</select>
 
-	<select id="getRoomList" resultType="java.util.List" parameterType="java.util.HashMap">
+	<select id="getRoomList" resultType="java.lang.String" parameterType="java.util.HashMap">
 		SELECT * FROM ROOM WHERE
 			<choose>
 				<when test="#{mKind} == 'jPay'">
