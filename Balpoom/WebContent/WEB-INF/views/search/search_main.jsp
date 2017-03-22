@@ -24,7 +24,6 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&libraries=places"> -->
 <!-- </script> -->
 
-<!-- 구글 지도 -->
 <div class="well row" style="margin: 0; padding: 0;">
 	<div class="col-md-9"
 		style="height: 86.5%; background-color: white; width: 75%" id="map">

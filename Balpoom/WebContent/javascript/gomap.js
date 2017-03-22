@@ -1,7 +1,6 @@
 /**
- * go map !
+ * go map!
  */
-
 
 var map;
 var infoWindow;
@@ -82,8 +81,21 @@ function callback(results, status) {
 
 function addMarker(place) {
 	//console.log("place=>"+JSON.stringify(place));
-	  console.log("center===>"+map.getCenter());
-	  console.log("getBounds==>"+map.getBounds());
+	 //console.log("center===>"+map.getCenter());
+	 //console.log("getBounds==>"+map.getBounds());
+	$.ajax({
+			
+			 "type":"post",
+			 "dataType":"json",
+			 "async": false,
+			 "url": "/gomapin?info="+map.getBounds()
+			
+		}).done(function(listajax){
+			
+			json= JSON.parse( JSON.stringify(listajax));
+		
+		});
+	
   var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location,
@@ -106,3 +118,5 @@ function addMarker(place) {
     });
   });
 }
+
+
