@@ -42,13 +42,12 @@ public class main_controller {
 		ModelAndView mav = new ModelAndView("t_main");
 		return mav;
 	}
-
+	
 	@RequestMapping("/searchlist")
 	public ModelAndView slHandler() {
-		ModelAndView mav = new ModelAndView("/search/searchlist");
+		ModelAndView mav = new ModelAndView("searchlist");
 		return mav;
 	}
-	
 
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
