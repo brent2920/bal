@@ -45,6 +45,7 @@ public class gomap_controller {
 				String lngf = strr[3].substring(1, strr[3].length());
 			    System.out.println("lat=> "+lat +" lng=>"+ lng );
 			    System.out.println("latf=>"+ latf + " lngf=>"+ lngf);
+			    
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
