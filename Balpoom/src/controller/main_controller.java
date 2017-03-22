@@ -43,12 +43,12 @@ public class main_controller {
 		return mav;
 	}
 	
-	@RequestMapping("/searchtest")
+	@RequestMapping("/searchlist")
 	public ModelAndView slHandler() {
 		ModelAndView mav = new ModelAndView("searchlist");
 		return mav;
 	}
-	
+
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
 		ModelAndView mav = new ModelAndView("t_search");
@@ -131,7 +131,7 @@ public class main_controller {
 		c.setMaxAge(60 * 60);
 		resp.addCookie(c);
 
-		// System.out.println("num======================>"+num);
+		
 		List<String> all = urp.get_picture_urls("https://www.zigbang.com/items1/" + num);
 		picturesJ = new JSONArray(all);
 		ModelAndView mav = new ModelAndView("t_detail");
@@ -163,28 +163,6 @@ public class main_controller {
 		return map;
 	}
 
-	// search paging ajax 처리
-	@RequestMapping("/gglocations")
-	@ResponseBody
-	public HashMap google_map_geo() {
-		try {
-			HashMap map = new HashMap();
-			System.out.println("gglocation");
-			long lat = (long) 37.5326049;
-			long log = (long) 126.8646878;
-			String detail_request = "https://maps.googleapis.com/maps/api/place/nearbysearch/xml?"
-					+ "location=-33.8670522,151.1957362" + " &radius=500&types=food&name=cruise"
-					+ "&key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap";
-			System.out.println(detail_request);
-			Document doc = Jsoup.connect(detail_request).get();
-//			Elements results = doc.select("results");
-//			System.out.println(results.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return null;
-
-	}
+	
 
 }

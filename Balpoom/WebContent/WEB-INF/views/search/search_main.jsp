@@ -11,7 +11,9 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/javascript/page.js"></script>
+<script type="text/javascript" src="/javascript/gomap.js"></script>
 <link rel="stylesheet" href="/css/page.css">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
 <!-- JPG 처리 소스  -->
 
 <!-- 구글 지도 연동 -->
@@ -19,14 +21,9 @@
 <!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap" -->
 <!-- 	async defer> -->
 <!-- </script> -->
-
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
-
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&libraries=places"> -->
 <!-- </script> -->
-<!--  hi -->
-<%-- msize : ${mlist } --%>
-<!-- 구글 지도 -->
+
 <div class="well row" style="margin: 0; padding: 0;">
 	<div class="col-md-9"
 		style="height: 86.5%; background-color: white; width: 75%" id="map">
@@ -70,12 +67,11 @@
 	<!-- script -->
 <script>
 $(document).ready(function() {
-	//해당 영역에 페이징 문자열 출력 
-    //class에대한 스타일 정의 필요.
+	
     $("#dn").append(PagingHelper.dn(${dn }));
     $("#nj").append(PagingHelper.nj(${nj }));
     $("#jpglist").append(PagingHelper.jpglist(${mpic }));
-    $("#arrlist").append(PagingHelper.arrlist(${mlist }));//search 에 표시할 방 정보 리스트
-    $("#paging").append(PagingHelper.pagingHtml(${msize }));// 방정보 리스트의 사이즈 
+    $("#arrlist").append(PagingHelper.arrlist(${mlist }));
+    $("#paging").append(PagingHelper.pagingHtml(${msize }));
     $("#gotopage").append(PagingHelper.gotoPage(1));});
 </script>

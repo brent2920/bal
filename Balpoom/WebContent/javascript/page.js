@@ -204,119 +204,24 @@
 //	}
 //
 //setTimeout(initMap, 1000);
+/**
+ * paging 처리 !
+ */
 
 
-var map;
-var infoWindow;
-var service;
-var temp =
-{  
-	   "geometry":{  
-	      "location":{  
-	         "lat":37.5326049,
-	         "lng":126.8646878
-	      }
-	   },
-	   "id":"2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
-	   "place_id":"ChIJZ934S0KuEmsR_0lxV3PTR4M",
-	   "reference":"CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
-	   "html_attributions":[  
-
-	   ]
-	}; 
-var temp2 =
-{  
-	   "geometry":{  
-	      "location":{  
-	         "lat":-33.8615479,
-	         "lng":152.20760719999998
-	      }
-	   },
-	   "id":"2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
-	   "place_id":"ChIJZ934S0KuEmsR_0lxV3PTR4M",
-	   "reference":"CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
-	   "html_attributions":[  
-
-	   ]
-	}; 
 
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat:37.5326049, lng: 126.8646878},
-    zoom: 15,
-    styles: [{
-      stylers: [{ visibility: 'simplified' }]
-    }, {
-      elementType: 'labels',
-      stylers: [{ visibility: 'off' }]
-    }]
-  });
-
-  infoWindow = new google.maps.InfoWindow();
-  service = new google.maps.places.PlacesService(map);
-
-  // The idle event is a debounced event, so we can query & listen without
-  // throwing too many requests at the server.
-  map.addListener('idle', performSearch);
-}
-
-function performSearch() {
-  var request = {
-    bounds: map.getBounds(),
-    keyword: 'best view'
-  };
-  service.radarSearch(request, callback);
-}
-
-function callback(results, status) {
-  if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    console.error(status);
-    return;
-  }
-  addMarker(temp);
-
-//  for (var i = 0, result; result = results[i]; i++) {
-//	  console.log("result=>"+ result.toString);
-//    addMarker(result);
-//  }
-}
-
-function addMarker(place) {
-	console.log("place=>"+JSON.stringify(place));
-
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-    icon: {
-      url: 'http://maps.gstatic.com/mapfiles/circle.png',
-      anchor: new google.maps.Point(10, 10),
-      scaledSize: new google.maps.Size(10, 17)
-    }
-  });
-
-  google.maps.event.addListener(marker, 'click', function() {
-    service.getDetails(place, function(result, status) {
-      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-        console.error(status);
-        return;
-      }
-      infoWindow.setContent(result.name);
-      infoWindow.open(map, marker);
-    });
-  });
-}
 
 
 var arrl = "empty";
 var jpgs = "empty";
+var njj = "empty";
+var listajax  = "empty";
+var json = "empty";
+var dn = 7750005;
 var start = 0;
 var end = 3;
 var curr = 0;
-var njj = "empty";
-var dn = 7750005;
-var listajax  = "empty";
-var json = "empty";
 var jsonarr = [];
 
 
@@ -351,34 +256,31 @@ var PagingHelper = {
 		}
 	},
 	'nj' : function(arr){
-		//console.log("njj addded")
+		
 		njj = arr;
 	},
 	
 	'dn' : function(dnn){
-		//console.log("njj addded")
+	
 		dn = dnn;
 	},
 
 	'arrlist' : function(arr) {
-		//console.log("arrlist1");
+	
 		arrl = arr;
 	},
 	
 	'jpglist' : function(jpg){
-		console.log('jpg.list.entered');
 		jpgs = jpg;
 		//var obj = arrl[i];
 		//sb+= obj['B_RKIND'] 
 		for(var i = 0; i < 2; i++){
 			var obj = jpgs[i];
-			//console.log(jpgs.length);
-			//console.log(obj);
+		
 		}
 	},
 	
 	'linkajax' : function(num){
-		//console.log("linkajax "+num  +" menu=" + njj[num]);
 		location.href='/detail?num='+njj[num];
 			
 	
@@ -387,7 +289,7 @@ var PagingHelper = {
 	'shHtml' : function(n_block) {
 		var _ = this;
 		if (typeof n_block == 'undefined')n_block = curr;
-		console.log("shHtml");
+	
 
 		var sb = '';
 		var sbTemp = '';
@@ -399,13 +301,9 @@ var PagingHelper = {
 		}
 		end = (curr * 4) - 1;
 		start = end - 3;
-		console.log("total_count="+_.data.totalCnt + " end="+ end);
 		if(end >= _.data.totalCnt) {end = _.data.totalCnt -1; }
 
-		//console.log("curr=" + curr + " start=" + start + " end=" + end );
-		//console.log(arrl);
-		//console.log("obj2=>"+ jpgs);
-		//console.log("jsonarr=>"+jsonarr);
+		
 		var count = 0;
 		for (var i = start; i <= end; i++) {
 			var obj = arrl[i];
@@ -449,7 +347,6 @@ var PagingHelper = {
 			sb+="<hr style='margin: 30px;'/>";
 			count++;
 		}
-		// console.log(sb);
 		jsonarr= [];
 		return sb;
 
@@ -458,9 +355,7 @@ var PagingHelper = {
 
 	'button' : function(){
 		if($('#btt').data('clicked')){
-			console.log("if");
 		}else{
-			console.log("else");
 		}
 		
 		
@@ -469,25 +364,21 @@ var PagingHelper = {
 
 	'pagingHtml' : function(pTotalCnt) {
 
-		//console.log("pagingHtml=> total count =>" + pTotalCnt);
+		
 
 		var _ = this;
 
 		_.data['totalCnt'] = pTotalCnt ? pTotalCnt : _.data['totalCnt'];
-		//console.log("totalCnt=>"+ _.data['totalCnt'] + " maxListCount=>"+ _.data.maxListCount);
 		if (_.data['totalCnt'] == 0) {
 			return "";
 		}
 		// 총페이지수 구하기 : 페이지 출력 범위 (1|2|3|4|5)
 		_.data.totalPageCnt = Math.ceil(_.data.totalCnt / _.data.maxListCount);
-		//console.log("total_page=>"+ _.data.totalPageCnt);
 		// 현재 블럭 구하기
 		var n_block = Math.ceil(_.data.currentPage / _.data.pageSize);
-		console.log("n_block=>"+n_block + " currentPage=>"+ this.data.currentPage);
 		// 페이징의 시작페이지와 끝페이지 구하기
 		var s_page = (n_block - 1) * _.data.pageSize + 1; // 현재블럭의 시작 페이지
 		var e_page = n_block * _.data.pageSize; // 현재블럭의 끝 페이지
-		console.log("s_page=>"+s_page + " e_page=>"+e_page);
 		if(e_page == _.data.currentPage){
 			s_page = s_page+2;
 			e_page = e_page+2;
@@ -545,23 +436,18 @@ var PagingHelper = {
 				: tmp);
 	},
 	'gotoPage' : function(pageNum) {
-		console.log("gotoPage");
+	
 		json = "empty";
 		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
 		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
-	   	//console.log("currentPg=>"+this.data.currentPage + " 입력밭은");
 		// 콘솔 출력 (삭제)
-		console.log(this.data.currentPage + "/" + this.data.startnum + "/"
-				+ this.data.lastnum);
+		
 		var ends = (this.data.currentPage) * 4 -1;//3
 		var starts = ends-3;//
 		var njjTemp = [];
 		for(var i = starts ; i <= ends ; i++){
-			console.log("njj[i]="+ njj[i]);
 			njjTemp.push(njj[i]);
 		}
-		console.log("njjTemp=>"+ njjTemp);
-		console.log("curr page =>"+ this.data.currentPage + " list=>"+ njjTemp);
 	$.ajax({
 			
 			"type":"get",
@@ -582,5 +468,4 @@ var PagingHelper = {
 
 	}
 }
-
 
