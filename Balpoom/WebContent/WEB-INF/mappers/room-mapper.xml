@@ -20,12 +20,13 @@
 	<select id="getRoomInfo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
 		select * from room where SELL_NUM = #{regNum}
 	</select>
-	
-<<<<<<< HEAD
+
 	<select id="getRoomList_all" resultType="java.util.List" parameterType="java.util.HashMap">
-=======
+	
+	
+	</select>
 	<select id="getRoomList" resultType="java.util.List" parameterType="java.util.HashMap">
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
+
 		select * from room where 
 			<choose>
 				<when test="매물종류 == '전세'">
@@ -70,14 +71,12 @@
 				</otherwise>
 			</choose>
 	</select>
-	
-<<<<<<< HEAD
+
 	<select id="room_deposit"  resultType="java.util.HashMap">
-=======
-	<select id="room_deposit" resultType="java.util.HashMap">
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
+
+
 		select * from ROOM where B_DEPOSIT=1000
 	</select>
-	
-	
+
+
 </mapper>
