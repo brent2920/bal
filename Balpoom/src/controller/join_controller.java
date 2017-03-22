@@ -73,7 +73,7 @@ public class join_controller {
 			// boolean rst = mdao.useAvailableCheck(id);
 			boolean rst = jdao.emailajax(Eemail);
 			
-			// 'YYYYY' or 'NNNNN'  ÀÌ·± ¹®ÀÚ¸¸ Ãâ·ÂÇØÁÖ¸é µÈ´Ù.
+			// 'YYYYY' or 'NNNNN'  ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½È´ï¿½.
 			if(rst) 
 				return "YYYYY";
 			else

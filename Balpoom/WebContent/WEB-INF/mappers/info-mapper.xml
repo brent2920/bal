@@ -14,4 +14,7 @@
 <update id="change" parameterType="java.util.HashMap">
 	update join set id = #{id} , telenum = #{telenum}, password=#{password}, uimg=#{uimg} where id=#{sid}
 </update>
+
+
+	
 </mapper>

@@ -89,7 +89,7 @@ public class main_controller {
 				url = "http://z1.zigbang.com/items/" + defnum
 						+ "/538ec7a16033f0c32eac29ac50deb04a1e6bf3ba.jpg?h=800&q=60";
 			}
-
+			//System.out.println("numbers=>"+ numbers);
 			urlcol.add(url);
 			urlcolj = new JSONArray(urlcol);
 			numbersj = new JSONArray(numbers);
@@ -110,7 +110,7 @@ public class main_controller {
 
 		}
 
-		// System.out.println("numbers= "+ numbersj.toString());
+		//System.out.println("numbersj= "+ numbersj.toString());
 		mav.addObject("dn", defnum);
 		mav.addObject("nj", numbersj);
 		mav.addObject("mpic", urlcolj);

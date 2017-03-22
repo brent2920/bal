@@ -5,11 +5,11 @@
 <!-- Parameter Type / Result Type은 필요에 따라 추가 -->
 	<insert id="insertList" parameterType="java.util.HashMap">
 		insert into room values(#{sell_num},#{b_title},#{b_deposit},
-		#{b_mpay},#{b_rkind},#{b_floor},#{b_area},#{b_gpay},#{b_glist},
+		#{b_mpay},#{b_rkind},#{b_floor},#{b_size},#{b_gpay},#{b_glist},
 		#{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},'불가능',
 		#{b_option},#{b_detail},#{b_location},#{b_nstation},
 		#{b_latitude},#{b_longitude},#{b_petpossible},#{id},0,0,
-		#{b_local1},#{b_local2},#{b_local3})
+		#{b_local1},#{b_local2},#{b_local3},#{b_size_m2},#{b_floor_all})
 		
 	</insert>
 	<insert id="insertOne">
@@ -18,9 +18,13 @@
 	
 	
 	<select id="getRoomInfo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-	select * from room where SELL_NUM = #{regNum}
+		select * from room where SELL_NUM = #{regNum}
 	</select>
+
+	<select id="getRoomList_all" resultType="java.util.List" parameterType="java.util.HashMap">
 	
+	
+	</select>
 	<select id="getRoomList" resultType="java.util.List" parameterType="java.util.HashMap">
 		SELECT * FROM ROOM WHERE
 			<choose>
@@ -95,9 +99,12 @@
 			AND B_LATITUDE BETWEEN #{south} AND #{north}
 			AND B_LONGITUDE BETWEEN #{east} AND #{west}
 	</select>
-	
-	<select id="room_deposit" resultType="java.util.HashMap">
+
+	<select id="room_deposit"  resultType="java.util.HashMap">
+
+
 		select * from ROOM where B_DEPOSIT=1000
 	</select>
-	
+
+
 </mapper>

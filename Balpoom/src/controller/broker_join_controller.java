@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.agentDao;
+import models.joinDao;
 
 @Controller
 @RequestMapping("/broker_join")
 public class broker_join_controller {
 	@Autowired
 	agentDao aDao;
+	
+	@Autowired
+	joinDao jDao;
 
-	@RequestMapping("/click_wrap")
-	public ModelAndView wrap_join(){
-		ModelAndView mav = new ModelAndView("t_clickwrapjoin");
-		return mav;
-	}
+	
 	
 	@RequestMapping("/join")
 	public ModelAndView broker_join(){
@@ -37,21 +37,34 @@ public class broker_join_controller {
 		
 		ModelAndView mav = new ModelAndView("t_brokerjoin");
 		String[] ar = req.getParameterValues("bk_agentnum");
+		
 		String bk_agentnum = ar[0]+"-"+ar[1]+"-"+ar[2];
 		String[] arr = req.getParameterValues("bk_contact");
 		String bk_contact = arr[0]+"-"+arr[1]+"-"+arr[2];
+		String[] ar1 = req.getParameterValues("bk_address");
+		String bk_address = ar1[0]+""+ar1[1];
+		
+		map.put("bk_address", bk_address);
 		map.put("bk_contact", bk_contact);
 		map.put("bk_agentnum", bk_agentnum);
 		int r = aDao.insertOneAgent(map);
-		System.out.println(ar[0]+"-"+ar[1]+"-"+ar[2]);
+		
 		if(r==1){
-			
 			mav.setViewName("/broker_join/welcome");
 		}else{
 			
 			mav.addObject("fail","fail");
 		}
 		return mav;
+	}
+	@RequestMapping("/brokercheckAjax")
+	public String brokerCheckAjax(HttpServletRequest req){
+		String id = (String)req.getAttribute("id");
+		boolean rst = jDao.brokerajax(id);
+		if(rst)
+		return "YYYYY";
+		else
+			return "NNNNN";
 	}
 	
 }
