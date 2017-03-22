@@ -47,15 +47,34 @@ public class latelycontroller {
 			}
 		}
 		mav.addObject("size",list.size());
-		mav.addObject("lately","/lately/lately");
 		mav.addObject("list",list);
 		
 		return mav;
 	}
 	
 	@RequestMapping("/02")
-	public ModelAndView testHandler() {
-		ModelAndView mav = new ModelAndView("t_main_test");
+	public ModelAndView testHandler(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("t_latelyList");
+		List<Map> list = new ArrayList<>();
+		Map map = new HashMap<>();
+		
+		Cookie[] c = req.getCookies();
+		System.out.println("==============");
+		for(Cookie cc : c){
+			if(!(cc.getName().equals("JSESSIONID"))){
+			int regNum = Integer.parseInt(cc.getValue());
+			map = lDao.getLatelyList(regNum);
+			System.out.println(cc.getValue());
+			
+			String str = "http://z1.zigbang.com/items/"+regNum+"/68da20790318c36a1a3dafe0bcf0f8c98d363be3.JPG?w=560&h=420&q=60";
+			map.put("url",str);
+			
+			System.out.println(str.toString());
+			list.add(map);
+			}
+		}
+		mav.addObject("size",list.size());
+		mav.addObject("list",list);
 		return mav;
 	}
 }

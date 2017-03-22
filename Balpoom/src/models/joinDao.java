@@ -13,7 +13,7 @@ public class joinDao {
 	SqlSessionFactory factory;
 	
 	
-	// È¸¿ø °¡ÀÔ
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		public int join(Map map){
 			SqlSession session = factory.openSession();
 			int r = 0;
@@ -61,6 +61,22 @@ public class joinDao {
 			}
 			return r;
 		}
+		
+		//=============ì¤‘ê°œì‚¬ajax===============================================
+		public boolean brokerajax(String id){
+			SqlSession session = factory.openSession();
+			boolean r = false;
+			try{
+				r = session.selectOne("join.brokerjoinajax",id);
+			
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				session.close();
+			}
+			return r;
+		}
+		
 	
 }
 

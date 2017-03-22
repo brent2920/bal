@@ -15,11 +15,19 @@
 	font-size: 15px;
 }
 </style>
+
 <c:if test="${msg ne null }">
 	<script>
-	window.alert("${msg }");
+		window.alert("${msg }");
 	</script>
 </c:if>
+
+<c:if test="${addroom ne null }">
+	<script>
+		window.alert("${addroom }");
+	</script>
+</c:if>
+
 
 <nav class="navbar navbar-inverse"
 	style="border-radius: 0px; margin-bottom: 0px;">
@@ -35,33 +43,37 @@
 					<li class="active"><a href="search">방 검색</a></li>
 					<li><a href="#">관심목록</a></li>
 					<li><a href="#">최근본방</a></li>
-					<li><a href="#" id="nulladd">방 등록</a>
-						
-					</li>
+					<li><a href="#" id="nulladd">방 등록</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+				
+				
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">
-						<span class="glyphicon glyphicon-user"></span> 회원가입
+						data-toggle="dropdown" href="#"> <span
+							class="glyphicon glyphicon-user"></span> 회원가입
 					</a>
 						<ul class="dropdown-menu">
-							<li>
-								<a href="#"><span data-toggle="modal"
-									data-target="#myJoin">개인 회원가입</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">공인중개사 회원가입</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="#" id="login">
-							<span class="glyphicon glyphicon-user"
-								data-toggle="modal" data-target="#myModal">로그인</span>
-						</a>
-					</li>
+							<li><a href="#"><span data-toggle="modal"
+									data-target="#myJoin">개인 회원가입</span> </a></li>
+							<li><a href="/broker_join/join">공인중개사 회원가입</a></li>
+						</ul></li>
+						
+					
+					<li class="dropdown"><a href="#" id="login" class="dropdown-toggle"
+						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>로그인
+					</a>
+
+						<ul class="dropdown-menu">
+						
+							<li><a href="#"><span data-toggle="modal"
+									data-target="#myLogin">개인 로그인</span> </a></li>
+									
+									
+							<li><a href="#"><span data-toggle="modal"
+									data-target="#brokerLogin">공인중개사 로그인</span></a></li>
+						
+						</ul></li>
 				</ul>
 			</c:when>
 
@@ -109,8 +121,8 @@
 					</c:when>
 					<c:otherwise>
 						<script>
-						 	window.alert("${msg }");
-						 </script>
+							window.alert("${msg }");
+						</script>
 					</c:otherwise>
 				</c:choose>
 
@@ -124,8 +136,8 @@
 
 
 
-		</a>
-		<div class="modal fade" id="myModal" role="dialog">
+
+		<div class="modal fade" id="myLogin" role="dialog">
 			<form action="/login" method="post">
 				<div class="modal-dialog">
 
@@ -159,7 +171,45 @@
 				</div>
 			</form>
 		</div>
+		
+		
+		<!-- 공인중개사 로그인 -->
+	
+		<div class="modal fade" id="brokerLogin" role="dialog">
+			<form action="/broker/login" method="post">
+				<div class="modal-dialog">
 
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">로그인</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="inputdefault">이메일</label> <input
+									class="form-control" id="inputdefault" type="text"
+									name="Eemail">
+							</div>
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호</label> <input
+									class="form-control" id="inputdefault" type="password"
+									name="password">
+							</div>
+							<button type="submit" class="btn btn-success"
+								style="background-color: #04B486;">로그인</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
 
 
 		<!-- 회원가입 -->
@@ -229,12 +279,11 @@
 	</div>
 </nav>
 <script>
-	$("#nulladd").click(function(){
+	$("#nulladd").click(function() {
 		window.alert("로그인 후 사용가능합니다")
-		
+
 		$("#login > span").trigger("click");
 	})
-
 </script>
 
 <script>
