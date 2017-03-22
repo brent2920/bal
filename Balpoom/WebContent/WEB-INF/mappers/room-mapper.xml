@@ -21,8 +21,50 @@
 	select * from room where SELL_NUM = #{regNum}
 	</select>
 	
-	<select id="getRoomList">
-		
+	<select id="getRoomList_all" resultType="java.util.List" parameterMap="java.util.HashMap">
+		select * from room where 
+			<choose>
+				<when test="매물종류 == '전세'">
+					B_MPAY = 0 AND
+				</when>
+				<when test="">
+					B_MPAY > 0 AND
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+			B_RKIND=#{} 
+			AND B_DEPOSIT BETWEEN #{} AND #{} 
+			AND B_MPAY BETWEEN #{} AND #{}
+			<if test="주차가능 != null">
+			
+			</if>
+			<if test="반려동물 != null">
+			
+			</if>
+			<if test="LH가능 != null">
+			
+			</if>
+			<choose>
+				<when test="area == 'lt_5'">
+					B_AREA
+				</when>
+				<when test="">
+					B_MPAY > 0 AND
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="XX == '전세'">
+					B_MPAY = 0 AND
+				</when>
+				<when test="">
+					B_MPAY > 0 AND
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
 	</select>
 	
 	<select id="room_deposit" resultType="java.util.HashMap">

@@ -43,9 +43,9 @@ public class main_controller {
 		return mav;
 	}
 	
-	@RequestMapping("/searchlist")
+	@RequestMapping("/searchtest")
 	public ModelAndView slHandler() {
-		ModelAndView mav = new ModelAndView("/search/searchlist");
+		ModelAndView mav = new ModelAndView("searchlist");
 		return mav;
 	}
 	
