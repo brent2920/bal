@@ -334,7 +334,7 @@ function callback(results, status) {
 
 		// ==============================================
 		for (var i = 0; i <= list.length; i++) {
-			addMarker(list[i]);
+			//addMarker(list[i]);
 		
 			if (i == list.length - 1) {
 				
