@@ -230,7 +230,7 @@
 							<div class="form-group">
 								<label for="inputdefault">이메일</label> <input
 									class="form-control" id="inputdefault" type="text"
-									name="Eemail">
+									name="brokerid">
 							</div>
 
 							<div class="form-group">
