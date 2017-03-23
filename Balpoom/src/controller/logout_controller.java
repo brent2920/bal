@@ -14,7 +14,14 @@ public class logout_controller {
 			ModelAndView mav = new ModelAndView();
 			
 			session.removeAttribute("id");
+			session.removeAttribute("id1");
+			session.removeAttribute("brokerid");
+			
 			mav.setViewName("t_main");
 			return mav;
 		}
+		
+		
+		
+		
 }

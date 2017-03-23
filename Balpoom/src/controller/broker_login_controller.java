@@ -1,9 +1,10 @@
 package controller;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,23 @@ public class broker_login_controller {
 	@RequestMapping("/login")
 	public ModelAndView brokerlogin(HttpSession session, @RequestParam Map map){
 		ModelAndView mav = new ModelAndView();
-		map = lDao.brokerLogin(map);
+		Map map1 = new HashMap<>();
+		map1 = lDao.brokerLogin(map);
 		
 		
-		if(map !=null){
-			session.setAttribute("id1", map.get("BK_REGNAME"));
+		if(map1 !=null){
+			session.setAttribute("id1", map1.get("BK_REGNAME"));
+			session.setAttribute("brokerid", map.get("ID"));
 			System.out.println(session.getAttribute("id1").toString());
-			mav.setViewName("t_main");
 			
+			mav.setViewName("redirect:/");
+			
+
 			}else{
-				mav.addObject("msg","이메일 이나 패스워드가 잘못되었습니다");
-				mav.setViewName("t_main");
+				
+				mav.addObject("msg1","1");
+				mav.setViewName("redirect:/");
+				
 			}
 		return mav;
 		}

@@ -17,6 +17,12 @@
 	font-size: 15px;
 }
 </style>
+<c:if test="${param.msg1 ne null }">
+	<script>
+		window.alert("이메일이나 패스워드가 잘못되었습니다.");
+	</script>
+</c:if>
+
 
 <c:if test="${msg ne null }">
 	<script>
@@ -27,6 +33,11 @@
 <c:if test="${addroom ne null }">
 	<script>
 		window.alert("${addroom }");
+	</script>
+</c:if>
+<c:if test="${dmsg ne null }">
+	<script>
+		window.alert("${dmsg }");
 	</script>
 </c:if>
 
@@ -256,6 +267,45 @@
 		<!-- 회원 탈퇴! -->
 		<div class="modal fade" id="myDelete" role="dialog">
 			<form action="/mydelete" method="post">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">회원탈퇴</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 입력</label> <input
+									class="form-control" id="delpass1" type="text"
+									name="delpass">
+							</div>
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 재입력</label> <input
+									class="form-control" id="delpass2" type="password">
+							</div>
+							<button type="submit" class="btn btn-success"
+								style="background-color: #04B486;">회원탈퇴</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		
+		
+		
+		
+			<!-- 공인 중개사 회원 탈퇴! -->
+		<div class="modal fade" id="myDelete" role="dialog">
+			<form action="/brokerdelete" method="post">
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
