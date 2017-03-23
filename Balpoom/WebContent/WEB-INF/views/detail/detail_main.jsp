@@ -102,7 +102,7 @@ td {
 	<table style="width: 100%">
 		<tr>
 			<th><b>보증금/월세</b></th>
-			<td style="color: orange; font-size: 25px;"><b>3000/20</b></td>
+			<td style="color: #04B486; font-size: 25px;"><b>3000/20</b></td>
 			<th><b>방종류</b></th>
 			<td>원룸</td>
 		</tr>
