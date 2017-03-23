@@ -39,9 +39,9 @@
 				<div class="form-group">
 					<label for="id" style="float: left; width: 115">아이디(Email):</label>
 					<input type="email" class="form-control"
-						style="float: left; width: 250" id="id"
+						style="float: left; width: 250" id="id123"
 						placeholder="ID(Email)를 입력하세요" name="id" />
-						<b style="color: gray">&emsp; 가입 후 아이디로 사용됩니다.</b>
+					<b style="color: gray" id="resultid">&emsp; 가입 후 아이디로 사용됩니다.</b>
 				</div>
 
 
@@ -321,7 +321,7 @@
 	
 
 	
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script>
  $(function(){
   $('#bk_password').keyup(function(){
@@ -342,12 +342,29 @@
  });
 </script>
 <script>
-	$(function(){
-		$("#id").change(function(){});
+	
+		$("#id123").blur(function(){
+			$.ajax({
+				"url" : "/broker_join/brokercheckAjax",
+				"method" : "post",
+				"data" : {
+					"id123" : $("#id123").val()
+				}
+			}).done(function(rst){
+				if(rst=="y"){
+					$("#resultid").html("&emsp; 이미 가입된 아이디 입니다.");
+					$("#resultid").css("color","red");
+					
+				}else{
+					$("#resultid").html("&emsp; 사용 가능한 아이디 입니다.");
+					$("#resultid").css("color","green");
+				}
+				
+				
+			})
+		});
 		
-	});
+
 
 </script>
-
-
 

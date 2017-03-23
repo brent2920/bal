@@ -63,9 +63,9 @@ public class joinDao {
 		}
 		
 		//=============중개사ajax===============================================
-		public boolean brokerajax(String id){
+		public int brokerajax(String id){
 			SqlSession session = factory.openSession();
-			boolean r = false;
+			int r = 0;
 			try{
 				r = session.selectOne("join.brokerjoinajax",id);
 			

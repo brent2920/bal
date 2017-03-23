@@ -10,6 +10,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+
 <style type="text/css">
 .container-fluid {
 	font-size: 15px;
@@ -33,7 +35,7 @@
 	style="border-radius: 0px; margin-bottom: 0px;">
 	<div class="container-fluid">
 		<c:choose>
-			<c:when test="${sessionScope.id == null }">
+			<c:when test="${sessionScope.id == null && sessionScope.id1 ==null}">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/"> <img alt="발품로고"
 						src="/images/logo.png" width="70px" height="20px" />
