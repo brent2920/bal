@@ -93,9 +93,9 @@
 							 보증금 (ex.10,000만원 = 1억원) </span>
 						<div align="center">
 							<input class="dprice-from" type="text" 
-								style="width: 100px" value="0" name="dprice_from">
+								style="width: 100px" value="0 만원" name="dprice_from">
 							 ~ <input class="dprice-to" type="text" 
-							 	style="width: 100px" value="999999"  name="dprice_to">
+							 	style="width: 100px" value="9999999 만원"  name="dprice_to">
 						</div>
 						<hr style="margin-top: 12px; margin-bottom: 3px;" />
 							<c:set
@@ -164,7 +164,7 @@
 							<input class="mprice-from" type="text" 
 								style="width: 100px" value="0 만원" name="mprice_from">
 							 ~ <input class="mprice-to" type="text" 
-							 	style="width: 100px" value="999999 만원" name="mprice_to">
+							 	style="width: 100px" value="9999999 만원" name="mprice_to">
 						</div>
 						<hr style="margin-top: 12px; margin-bottom: 3px;" />
 						<div class="row">

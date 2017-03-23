@@ -1,8 +1,8 @@
 package controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.HashBiMap;
 
 import models.roomDao;
 import utils.Urlpicture;
@@ -165,9 +159,10 @@ public class main_controller {
 		return map;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/searchTest")
 	@ResponseBody
-	public List<HashMap<String, Object>> roomListHandler(
+	public List<Map> roomListHandler(
 			@RequestParam(name="mKind") String mKind, 
 			@RequestParam(name="rKind[]") List<String> rKind, 
 			@RequestParam(name="deposit_from") String deposit_from, 
@@ -185,13 +180,16 @@ public class main_controller {
 			@RequestParam(name="north") String north
 			) {
 		
+		System.out.println("MPAY_TO ============> " + mpay_to);
 		// 보증금 세팅 - 문자제거
 		String[] d_from = deposit_from.split("\\s");
 		String[] d_to = deposit_to.split("\\s");
 		
 		// 월세 세팅 - 문자제거
 		String[] m_from = mpay_from.split("\\s");
-		String[] m_to = mpay_from.split("\\s");
+		String[] m_to = mpay_to.split("\\s");
+		System.out.println("M_TO ============> " + m_to[0]);
+		
 		
 		// 평수 세팅
 		// 0 : 전체 / 1 : 5평 이하 / 2 : 5~10평 / 3 : 10평 이상 
@@ -205,9 +203,58 @@ public class main_controller {
 				areaFlag = 3;
 		}
 		
-		HashMap<String, Object> searchConditions = new HashMap<>();
+		// 방종류 처리
+		String one_open="";
+		String one_seperate="";
+		String one_dfloor="";
+		String two_room="";
+		String gt_three="";
+		
+		for(String m : rKind) {
+			if(m.equals("one_open"))
+				one_open = m;
+			
+			else if(m.equals("one_seperate"))
+				one_seperate = m;
+			
+			else if(m.equals("one_dfloor"))
+				one_dfloor = m;
+			
+			else if(m.equals("two_room"))
+				two_room = m;			
+			
+			else if(m.equals("gt_three"))
+				gt_three = m;
+		}
+			
+		// 층수 처리
+		String underground="";
+		String low_floor="";
+		String mid_floor="";
+		String high_floor="";
+		
+		for(String m : floor) {
+			if(m.equals("underground"))
+				underground = m;
+			
+			else if(m.equals("low_floor"))
+				low_floor = m;
+			
+			else if(m.equals("mid_floor"))
+				mid_floor = m;
+			
+			else if(m.equals("high_floor"))
+				high_floor = m;
+		}
+		
+		@SuppressWarnings("rawtypes")
+		Map searchConditions = new HashMap<>();
 			searchConditions.put("mKind", mKind);
-			searchConditions.put("rKind", rKind);
+			searchConditions.put("one_open", one_open);
+			searchConditions.put("one_seperate", one_seperate);
+			searchConditions.put("one_dfloor", one_dfloor);
+			searchConditions.put("two_room", two_room);
+			searchConditions.put("gt_three", gt_three);
 			searchConditions.put("deposit_from", d_from[0]);
 			searchConditions.put("deposit_to", d_to[0]);
 			searchConditions.put("mpay_from", m_from[0]);
@@ -216,13 +263,22 @@ public class main_controller {
 			searchConditions.put("pet", pet);
 			searchConditions.put("lhok", lhok);
 			searchConditions.put("area", areaFlag);
-			searchConditions.put("floor", floor);
+			searchConditions.put("underground", underground);
+			searchConditions.put("low_floor", low_floor);
+			searchConditions.put("mid_floor", mid_floor);
+			searchConditions.put("high_floor", high_floor);
 			searchConditions.put("east", east);
 			searchConditions.put("west", west);
 			searchConditions.put("south", south);
 			searchConditions.put("north", north);
 		
-		List<HashMap<String, Object>> rList = rd.getRoomList(searchConditions);
+		Iterator<String> keys = searchConditions.keySet().iterator();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			System.out.printf("%s = %s \n", key, searchConditions.get(key));
+		}
+			
+		List<Map> rList = rd.getRoomList(searchConditions);
 		System.out.println("Room List Size : " + rList.size());
 		return rList;
 	}

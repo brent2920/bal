@@ -62,9 +62,9 @@ public class roomDao {
 		return rInfo;
 	}
 
-	public List<HashMap<String, Object>> getRoomList(HashMap<String, Object> conditions) {
+	public List<Map> getRoomList(Map conditions) {
 		SqlSession session = factory.openSession();
-		List<HashMap<String, Object>> rList = null;
+		List<Map> rList = null;
 		
 		try {
 			rList = new ArrayList<>();
