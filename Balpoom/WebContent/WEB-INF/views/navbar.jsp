@@ -114,17 +114,15 @@
 									<li><a href="t_info"><span data-toggle="modal"
 											data-target="">내 정보 수정</span></a></li>
 									<li><a href="#"><span data-toggle="modal"
-									data-target="#myDelete">회원탈퇴</span> </a></li>
+											data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>
 							<li><a href="/logout"> <span
 									class="glyphicon glyphicon-user" data-toggle="modal"
 									data-target="">로그아웃</span>
-									</a>
-									</li>
-									</ul>
+							</a></li>
+						</ul>
 					</c:when>
-					
-					<c:otherwise>
+						<c:when test="${sessionScope.id1 != null}">
 							<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
 								src="/images/logo.png" width="70px" height="20px" />
@@ -160,6 +158,10 @@
 									</a>
 									</li>
 									</ul>
+						
+						
+						</c:when>
+					<c:otherwise>
 						
 					</c:otherwise>
 				</c:choose>
