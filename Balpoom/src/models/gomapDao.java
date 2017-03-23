@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +29,21 @@ public class gomapDao {
 		return hmap;
 
 	}
+	
+	public  List<Map> get_new_list(Map map) {
+		SqlSession session = factory.openSession();
+		 List<Map>  hmap = new ArrayList();
+		try {
+			hmap =  session.selectList("new_arr_list",map);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return hmap;
+
+	}
 }
+
+

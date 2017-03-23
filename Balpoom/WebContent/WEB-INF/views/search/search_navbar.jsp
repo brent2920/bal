@@ -465,7 +465,7 @@
 		console.log(JSON.stringify(allData));
 		
 		$.ajax({
-			"url" : "/searchTest",
+			"url" : "/gsearchTest",
 			"type" : "POST",
 			"data" : allData
 		}).done(function(rst) {

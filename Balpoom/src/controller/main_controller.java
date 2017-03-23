@@ -54,6 +54,7 @@ public class main_controller {
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
 		ModelAndView mav = new ModelAndView("t_search");
+		
 		/*-------------------------------------------------
 		 * List<HashMap<String, Object>> mlist = database result 값 
 		 * 
@@ -107,10 +108,12 @@ public class main_controller {
 				}
 			}
 			(json_arr).put(json_obj);
+			
 
 		}
 
 		//System.out.println("numbersj= "+ numbersj.toString());
+		System.out.println("mlist json ====> "+ json_arr.toString());
 		mav.addObject("dn", defnum);
 		mav.addObject("nj", numbersj);
 		mav.addObject("mpic", urlcolj);
@@ -165,65 +168,5 @@ public class main_controller {
 		return map;
 	}
 	
-	@RequestMapping("/searchTest")
-	@ResponseBody
-	public List<HashMap<String, Object>> roomListHandler(
-			@RequestParam(name="mKind") String mKind, 
-			@RequestParam(name="rKind[]") List<String> rKind, 
-			@RequestParam(name="deposit_from") String deposit_from, 
-			@RequestParam(name="deposit_to") String deposit_to, 
-			@RequestParam(name="mpay_from") String mpay_from, 
-			@RequestParam(name="mpay_to") String mpay_to, 
-			@RequestParam(name="parking", required=false, defaultValue="all") String parking, 
-			@RequestParam(name="pet", required=false, defaultValue="all") String pet, 
-			@RequestParam(name="lhok", required=false, defaultValue="all") String lhok, 
-			@RequestParam(name="area[]" , required=false, defaultValue="all") List<String> area, 
-			@RequestParam(name="floor[]", required=false, defaultValue="all") List<String> floor,
-			@RequestParam(name="east") String east,
-			@RequestParam(name="west") String west,
-			@RequestParam(name="south") String south,
-			@RequestParam(name="north") String north
-			) {
-		
-		// 보증금 세팅 - 문자제거
-		String[] d_from = deposit_from.split("\\s");
-		String[] d_to = deposit_to.split("\\s");
-		
-		// 월세 세팅 - 문자제거
-		String[] m_from = mpay_from.split("\\s");
-		String[] m_to = mpay_from.split("\\s");
-		
-		// 평수 세팅
-		// 0 : 전체 / 1 : 5평 이하 / 2 : 5~10평 / 3 : 10평 이상 
-		int areaFlag = 0;
-		for(String m : area) {
-			if(m.equals("lt_5"))
-				areaFlag = 1;
-			else if(m.equals("bt_5_10"))
-				areaFlag = 2;
-			else if(m.equals("gt_10"))
-				areaFlag = 3;
-		}
-		
-		HashMap<String, Object> searchConditions = new HashMap<>();
-			searchConditions.put("mKind", mKind);
-			searchConditions.put("rKind", rKind);
-			searchConditions.put("deposit_from", d_from[0]);
-			searchConditions.put("deposit_to", d_to[0]);
-			searchConditions.put("mpay_from", m_from[0]);
-			searchConditions.put("mpay_to", m_to[0]);
-			searchConditions.put("parking", parking);
-			searchConditions.put("pet", pet);
-			searchConditions.put("lhok", lhok);
-			searchConditions.put("area", areaFlag);
-			searchConditions.put("floor", floor);
-			searchConditions.put("east", east);
-			searchConditions.put("west", west);
-			searchConditions.put("south", south);
-			searchConditions.put("north", north);
-		
-		List<HashMap<String, Object>> rList = rd.getRoomList(searchConditions);
-		System.out.println("Room List Size : " + rList.size());
-		return rList;
-	}
+
 }
