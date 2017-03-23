@@ -118,6 +118,9 @@
 							<li><a href="/logout"> <span
 									class="glyphicon glyphicon-user" data-toggle="modal"
 									data-target="">로그아웃</span>
+									</a>
+									</li>
+									</ul>
 					</c:when>
 					<c:otherwise>
 						<script>

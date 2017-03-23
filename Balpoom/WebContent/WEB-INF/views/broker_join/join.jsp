@@ -33,15 +33,15 @@
 					<label for="bk_address" style="float: left; width: 115">등록인
 						이름:</label> <input type="text" class="form-control" id="bk_regname"
 						name="bk_regname" style="float: left; width: 250" /> <b
-						style="color: gray; width: 300">&emsp;등록인 이름을 입력하세요.</b>
+						style="color: gray; width: 300">&emsp; 등록인 이름을 입력하세요.</b>
 				</div>
 
 				<div class="form-group">
 					<label for="id" style="float: left; width: 115">아이디(Email):</label>
 					<input type="email" class="form-control"
 						style="float: left; width: 250" id="id"
-						placeholder="ID(Email)를 입력하세요" name="id" /> <b
-						style="color: gray">&emsp;가입 후 아이디로 사용됩니다.</b>
+						placeholder="ID(Email)를 입력하세요" name="id" />
+						<b style="color: gray">&emsp; 가입 후 아이디로 사용됩니다.</b>
 				</div>
 
 
@@ -49,15 +49,14 @@
 					<label for="bk_password" style="float: left; width: 115">비밀번호:</label>
 					<input type="password" class="form-control" id="bk_password"
 						placeholder="비밀번호를 입력하세요" style="float: left; width: 250"
-						name="bk_password" /> <b style="color: gray">&emsp;비밀번호를 입력하세요.</b>
+						name="bk_password" /> <b style="color: gray">&emsp; 비밀번호를 입력하세요.</b>
 				</div>
 
 
 				<div class="form-group">
 					<label for="bk_password1" style="float: left; width: 115">비밀번호
 						확인:</label> <input type="password" style="float: left; width: 250"
-						class="form-control" id="bk_password1" placeholder="비밀번호를 입력하세요" />
-					<span id ="rst">&emsp;</span>
+						class="form-control" id="bk_password1" placeholder="비밀번호를 입력하세요" />&emsp;<b id ="rst"></b><br/>
 				</div>
 
 				<div class="form-group">
@@ -317,3 +316,38 @@
 			window.alert("다시 입력하세요!!");
 		</script>
 	</c:if>
+	
+	
+	
+
+	
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+ $(function(){
+  $('#bk_password').keyup(function(){
+   $('span[id=rst]').text('');
+  }); //#user_pass.keyup
+
+  $('#bk_password1').keyup(function(){
+   if($('#bk_password').val()!=$('#bk_password1').val()){
+    $('b[id=rst]').text('');
+    $('b[id=rst]').html(" 비밀번호가 일치하지 않습니다.");
+    $('b[id=rst]').css("color","red");
+   }else{
+    $('b[id=rst]').text('');
+    $('b[id=rst]').html("비밀번호가 일치합니다.");
+    $('b[id=rst]').css("color","green");
+   }
+  }); //#chpass.keyup
+ });
+</script>
+<script>
+	$(function(){
+		$("#id").change(function(){});
+		
+	});
+
+</script>
+
+
+
