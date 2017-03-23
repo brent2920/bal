@@ -22,84 +22,89 @@
 		select * from room where SELL_NUM = #{regNum}
 	</select>
 
-	<select id="getRoomList"  resultType="java.util.HashMap" parameterType="java.util.HashMap">
+
+	
+
+	<select id="getRoomList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+
 		SELECT * FROM ROOM WHERE
 			<choose>
-				<when test="#{mKind} == 'jPay'">
+				<when test="mKind == 'jPay'">
 					B_MPAY = 0 AND
 				</when>
-				<when test="#{mKind} == 'mPay'">
+				<when test="mKind == 'mPay'">
 					B_MPAY <![CDATA[>]]> 0 AND
+					B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} AND 
+				</when>
+				<when test="mKind == 'allPay'">
+					B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} AND 
 				</when>
 			</choose>
 			
 			<choose>
-				<when test="#{rKind} == 'one_open'">
+				<when test="one_open == 'one_open'">
 					B_RKIND='원룸(오픈형)' AND
 				</when>
-				<when test="#{rKind} == 'one_seperate'">
+				<when test="one_seperate == 'one_seperate'">
 					B_RKIND='원룸(분리형)' AND
 				</when>
-				<when test="#{rKind} == 'one_dfloor'">
+				<when test="one_dfloor == 'one_dfloor'">
 					B_RKIND='원룸(복층형)' AND
 				</when>
-				<when test="#{rKind} == 'two_room'">
+				<when test="two_room == 'two_room'">
 					B_RKIND='투룸' AND
 				</when>
-				<when test="#{rKind} == 'gt_three'">
+				<when test="gt_three == 'gt_three'">
 					B_RKIND='쓰리룸+' AND
 				</when>
 			</choose>
-			 
-			B_DEPOSIT BETWEEN #{deposit_from} AND #{deposit_to} AND
-			B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} 
 			
-			<if test="#{parking} != 'all'">
+			B_DEPOSIT BETWEEN #{deposit_from} AND #{deposit_to} 
+			
+			<if test="parking == '가능'">
 				AND B_PARKING='가능'
 			</if>
 			
-			<if test="#{pet} != 'all'">
+			<if test="pet == '가능'">
 				AND B_PETPOSSIBLE='가능'
 			</if>
 			
-			<if test="#{lhok} != 'all'">
+			<if test="lhok == '가능'">
 				AND B_LHOK='가능'
 			</if>
 			
 			<choose>
-				<when test="#{area} == 1">
+				<when test="area == 1">
 					AND B_SIZE <![CDATA[<]]> 5
 				</when>
-				<when test="#{area} == 2">
-					AND B_AREA BETWEEN 5 AND 10
+				<when test="area == 2">
+					AND B_SIZE BETWEEN 5 AND 10
 				</when>
-				<when test="#{area} == 3">
-					AND B_AREA <![CDATA[>]]> 10
+				<when test="area == 3">
+					AND B_SIZE <![CDATA[>]]> 10
 				</when>
 			</choose>
 			
 			<choose>
-				<when test="#{floor} == 'underground'">
+				<when test="underground == 'underground'">
 					AND B_FLOOR = '반지하'
 				</when>
-				<when test="#{floor} == 'low_floor'">
-					AND B_FLOOR in('1층', '2층', '3층');
+				<when test="low_floor == 'low_floor'">
+					AND B_FLOOR in('1층', '2층', '3층')
 				</when>
-				<when test="#{floor} == 'mid_floor'">
-					AND B_FLOOR in('4층', '5층', '6층');
+				<when test="mid_floor == 'mid_floor'">
+					AND B_FLOOR in('4층', '5층', '6층')
 				</when>
-				<when test="#{floor} == 'high_floor'">
+				<when test="high_floor == 'high_floor'">
 					AND B_FLOOR not in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
 				</when>
 			</choose>
 			
 			AND B_LATITUDE BETWEEN #{south} AND #{north}
-			AND B_LONGITUDE BETWEEN #{east} AND #{west}
+			AND B_LONGITUDE BETWEEN #{west} AND #{east}
 	</select>
 
 	<select id="room_deposit"  resultType="java.util.HashMap">
 		select * from ROOM where B_DEPOSIT=1000
 	</select>
-
-
 </mapper>

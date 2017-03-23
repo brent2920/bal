@@ -17,7 +17,7 @@
 		select count(*) from join where Eemail=#{Eemail}
 	</select>
 
-<select id="brokerjoinajax" parameterType="java.lang.String" resultType="java.lang.Boolean">
+<select id="brokerjoinajax" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from join where id=#{id}
 	</select>
 </mapper>

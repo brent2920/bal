@@ -10,11 +10,19 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+
 <style type="text/css">
 .container-fluid {
 	font-size: 15px;
 }
 </style>
+<c:if test="${param.msg1 ne null }">
+	<script>
+		window.alert("이메일이나 패스워드가 잘못되었습니다.");
+	</script>
+</c:if>
+
 
 <c:if test="${msg ne null }">
 	<script>
@@ -27,13 +35,24 @@
 		window.alert("${addroom }");
 	</script>
 </c:if>
+<c:if test="${dmsg ne null }">
+	<script>
+		window.alert("${dmsg }");
+	</script>
+</c:if>
+
+<c:if test="${passerror ne null }">
+	<script>
+		window.alert("${passerror }");
+	</script>
+</c:if>
 
 
 <nav class="navbar navbar-inverse"
 	style="border-radius: 0px; margin-bottom: 0px;">
 	<div class="container-fluid">
 		<c:choose>
-			<c:when test="${sessionScope.id == null }">
+			<c:when test="${sessionScope.id == null && sessionScope.id1 ==null}">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/"> <img alt="발품로고"
 						src="/images/logo.png" width="70px" height="20px" />
@@ -112,8 +131,45 @@
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="t_info"><span data-toggle="modal"
+											data-target="">내 정보 수정</span></a></li>
+									<li><a href="#"><span data-toggle="modal"
+											data-target="#myDelete">회원탈퇴</span> </a></li>
+								</ul></li>
+							<li><a href="/logout"> <span
+									class="glyphicon glyphicon-user" data-toggle="modal"
+									data-target="">로그아웃</span>
+							</a></li>
+						</ul>
+					</c:when>
+						<c:when test="${sessionScope.id1 != null}">
+							<div class="navbar-header">
+							<a class="navbar-brand" href="/"> <img alt="발품로고"
+								src="/images/logo.png" width="70px" height="20px" />
+							</a>
+						</div>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="search">방 검색</a></li>
+							<li><a href="#">관심목록</a></li>
+							<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
+							<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
+							<!-- 					<ul class="dropdown-menu"> -->
+							<!-- 						<li><a href="#">Page 1-1</a></li> -->
+							<!-- 						<li><a href="#">Page 1-2</a></li> -->
+							<!-- 						<li><a href="#">Page 1-3</a></li> -->
+							<!-- 					</ul></li> -->
+							<li><a href="roomadd">방 등록</a></li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#"> <span
+									class="glyphicon glyphicon-user"></span> ${sessionScope.id }
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="t_info"><span data-toggle="modal"
 											data-target="#myInfo">내 정보 수정</span></a></li>
-									<li><a href="#">회원 탈퇴</a></li>
+									<li><a href="#"><span data-toggle="modal"
+									data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>
 							<li><a href="/logout"> <span
 									class="glyphicon glyphicon-user" data-toggle="modal"
@@ -121,11 +177,11 @@
 									</a>
 									</li>
 									</ul>
-					</c:when>
+						
+						
+						</c:when>
 					<c:otherwise>
-						<script>
-							window.alert("${msg }");
-						</script>
+						
 					</c:otherwise>
 				</c:choose>
 
@@ -193,7 +249,7 @@
 							<div class="form-group">
 								<label for="inputdefault">이메일</label> <input
 									class="form-control" id="inputdefault" type="text"
-									name="Eemail">
+									name="brokerid">
 							</div>
 
 							<div class="form-group">
@@ -203,6 +259,82 @@
 							</div>
 							<button type="submit" class="btn btn-success"
 								style="background-color: #04B486;">로그인</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		
+		<!-- 회원 탈퇴! -->
+		<div class="modal fade" id="myDelete" role="dialog">
+			<form action="/mydelete" method="post">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">회원탈퇴</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 입력</label> <input
+									class="form-control" id="delpass1" type="text"
+									name="delpass">
+							</div>
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 재입력</label> <input
+									class="form-control" id="delpass2" type="password" onkeyup="javascript:DelpassCompare()">
+									<label><span id="cmpResult1"></span></label>
+							</div>
+							<button type="button" class="btn btn-success"
+								style="background-color: #04B486;" id="Dsbt" disabled>회원탈퇴</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		
+		
+		
+		
+			<!-- 공인 중개사 회원 탈퇴! -->
+		<div class="modal fade" id="myDelete" role="dialog">
+			<form action="/brokerdelete" method="post">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">회원탈퇴</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 입력</label> <input
+									class="form-control" id="delpass1" type="text"
+									name="delpass">
+							</div>
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 재입력</label> <input
+									class="form-control" id="delpass2" type="password">
+							</div>
+							<button type="submit" class="btn btn-success"
+								style="background-color: #04B486;">회원탈퇴</button>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
@@ -315,6 +447,64 @@
 		}
 		sbtChange();
 	}
+	
+	
+	
+	
+	// 회원 탈퇴시 비밀번호와 비밀번호 재입력 확인
+	var flag3 = true, flag4 = false;
+	function DsbtChange() {
+		if (flag3 && flag4) {
+			document.getElementById("Dsbt").disabled = false;
+		} else {
+			document.getElementById("Dsbt").disabled = true;
+		}
+	}
+
+	function DelpassCompare() {
+
+		var flag5 = document.getElementById("delpass1").value == document.getElementById("delpass2").value;
+		if (flag5) {
+			flag4 = true;
+			document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치합니다.";
+			document.getElementById("cmpResult1").style.color = "green";
+		} else {
+			flag4 = false;
+			document.getElementById("cmpResult1").style.color = "red";
+			document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치하지 않습니다.";
+		}
+		DsbtChange();
+	}
+	
+	
+	
+	document.getElementById("Dsbt").onclick = function(){
+		var flag6 = document.getElementById("delpass1").value;
+		var xhr2 = new XMLHttpRequest();
+		xhr2.open("get" , "/mydelete?delpass="+flag6, true);
+		xhr2.send();
+		xhr2.onreadystatechange = function(){
+			if(xhr2.readyState==4 && xhr2.status==200) {
+				var txt2 = xhr2.responseText;
+				console.log(txt2);
+				if(txt2 == 'NN') {
+					 window.alert("패스워드를 잘못 입력하셨습니다");
+				}else {
+					 window.alert("회원탈퇴가 정상적으로 처리 되었습니다");
+					 location.href="/";
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 이메일 중복 여부 확인
 

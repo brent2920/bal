@@ -1,10 +1,12 @@
 package controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,13 +60,20 @@ public class broker_join_controller {
 		return mav;
 	}
 	@RequestMapping("/brokercheckAjax")
-	public String brokerCheckAjax(HttpServletRequest req){
-		String id = (String)req.getAttribute("id");
-		boolean rst = jDao.brokerajax(id);
-		if(rst)
-		return "YYYYY";
+	public void brokerCheckAjax(HttpServletRequest req, HttpServletResponse response) throws IOException{
+		
+		String id = req.getParameter("id123");
+		PrintWriter writer = response.getWriter();
+
+				
+		int rst = jDao.brokerajax(id);
+		if(rst==1)
+			 writer.write("y");
 		else
-			return "NNNNN";
+			writer.write("n");
+		
+		writer.flush();
+		writer.close();
 	}
 	
 }
