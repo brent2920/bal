@@ -104,6 +104,7 @@
 
 
 				<c:choose>
+					
 					<c:when test="${sessionScope.id != null }">
 						<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
@@ -162,11 +163,12 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a class="dropdown-toggle"
 								data-toggle="dropdown" href="#"> <span
-									class="glyphicon glyphicon-user"></span> ${sessionScope.id }
+									class="glyphicon glyphicon-user"></span> ${sessionScope.id1 }
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="t_info"><span data-toggle="modal"
+									<li><a href="/broker/change"><span data-toggle="modal"
 											data-target="#myInfo">내 정보 수정</span></a></li>
+											
 									<li><a href="#"><span data-toggle="modal"
 									data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>

@@ -34,6 +34,8 @@ public class brokerDeletecontroller {
 		if(r==1){
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");
 			mav.setViewName("redirect:/");
+			session.removeAttribute("brokerid");
+			session.removeAttribute("id1");
 		}
 			else{
 			mav.addObject("dmsg","비밀번호가 틀렸습니다.");
