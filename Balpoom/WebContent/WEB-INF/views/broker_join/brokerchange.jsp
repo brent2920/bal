@@ -17,10 +17,10 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	
-</head>
-<body>
 
-	<form action="/broker_join/data" method="post">
+
+
+	<form action="/broker/ChangeResult" method="post">
 
 		<div class="container" style="padding-left: 10%; padding-right: 10%;">
 			<h2>중개사 회원가입</h2>
@@ -38,10 +38,10 @@
 
 				<div class="form-group">
 					<label for="id" style="float: left; width: 115">아이디(Email):</label>
-					<input type="email" class="form-control"
-						style="float: left; width: 250" id="id123"
-						placeholder="ID(Email)를 입력하세요" name="id" />
-					<b style="color: gray" id="resultid">&emsp; 가입 후 아이디로 사용됩니다.</b>
+					<input type="text" disabled="disabled" class="form-control"
+						style="float: left; width: 250" id="id123" 
+						placeholder="ID(Email)를 입력하세요" name="id" value="${list.ID }"/><br/>
+					
 				</div>
 
 
@@ -81,10 +81,9 @@
 				<div class="form-group">
 					<label for="bk_address" style="float: left; width: 115">부동산
 						이름:</label> <input type="text" class="form-control" id="bk_officename"
-						name="bk_officename" style="float: left; width: 250" /> <b
-						style="color: gray">&emsp;등록관청에 등록된 사무소 이름을 입력해주세요.</b>
+						name="bk_officename" style="float: left; width: 250" value="${list.BK_OFFICENAME }"  disabled="disabled"/>
 				</div>
-
+<br/>	
 
 				<div class="form-group">
 					<label for="bk_email" style="float: left; width: 115">부동산
@@ -127,7 +126,8 @@
 						id="postcodify_search_button">검색</button>
 					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" style="float: left; width: 250" />
 					<br /> 
-					<label for="bk_address" style="float: left; width: 115">상세주소:</label> <input type="text" class="form-control "
+					<label for="bk_address" style="float: left; width: 115">상세주소:</label>
+					 <input type="text" class="form-control "
 						id="bk_address" name="bk_address" style="float: left; width: 250" />
 
 				</div>
@@ -136,175 +136,27 @@
 				<div class="form-group">
 					<label for="bk_num" style="float: left; width: 115">중개등록번호:</label>
 					<input type="text" class="form-control" id="bk_num" name="bk_num"
-						style="float: left; width: 250" /> <b style="color: gray">&emsp;중개사무소
-						사업자 등록번호를 입력해주세요.</b>
+						style="float: left; width: 250" disabled="disabled" value="${list.BK_NUM }"/><br/>
 				</div>
 
 			</div>
 			
 		<hr/>
-			&emsp;전체약관에 동의합니다. <input type="checkbox" id="a1" />
-		<hr />
-			<div class="container">
-				<div>
-				<input type="checkbox" class="sub" id="a2" />이용약관에 동의합니다.
-		
-				<a type="button" data-toggle="modal"
-						data-target="#aa3">보기</a>
-							</div>
-				</div>	
+		<button type="submit" class="btn btn-default" id="next" disabled="disabled">Submit</button>
 
-				<div class="modal fade" id="aa3" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-								<h4 class="modal-title">부동산 중개사무소 매물등록 서비스 약관</h4>
-							</div>
-							<div class="modal-body">
-								<p>
-								
-								</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">닫기</button>
-
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-		<div class="container">
-				<div>
-
-				<input type="checkbox" class="sub" id="a3" /> 부동산 중개사무소 매물 등록 서비스
-				약관에 동의합니다.
-			<a type="button" data-toggle="modal"
-						data-target="#aa2">보기</a>
-			</div>
-				</div>
-
-				<div class="modal fade" id="aa2" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-								<h4 class="modal-title">부동산 중개사무소 매물등록 서비스 약관</h4>
-							</div>
-							<div class="modal-body">
-								<p>
-								
-								</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">닫기</button>
-
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-	<div class="container">
-				<div>
-			<input type="checkbox" class="sub" id="a4" /> 개인정보 수집 및 이용에 대한 동의에
-					동의합니다. <a type="button" data-toggle="modal"
-						data-target="#aa1">보기</a>
-				</div>
-
-
-
-			
-				<div class="modal fade" id="aa1" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-								<h4 class="modal-title">개인정보처리방침</h4>
-							</div>
-							<div class="modal-body">
-								<p>
-								
-								</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">닫기</button>
-
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-				<hr />
-				<button type="submit" class="btn btn-default" id="next" disabled="disabled">Submit</button>
-			</div>
-			</div>
+		</div>
+	
 	</form>
 	
 	
 	<script>
-	var cnt = 0;
+	
 		$(function() {
 			$("#postcodify_search_button").postcodifyPopUp();
 			
 		});
-		
-		
-
-		
-		
-		
-		$("#a1").on("click", function() {
-			$(".sub").each(function() {
-				$(this).prop("checked", $("#a1").prop("checked"));
-				if($(this).prop("checked")){
-					$("#next").prop("disabled",false);
-				}else{
-					$("#next").prop("disabled",true);
-				}
-			})
-			enableCheck();
-		});
-		$("#a2").click(function() {
-			enableCheck();
-		});
-
-		$("#a3").click(function() {
-			enableCheck();
-		});
-
-			$("#a4").click(enableCheck);
-			function enableCheck() {
-				var cnt = 0;
-				$(".sub").each(function() {
-					if ($(this).prop("checked"))
-						cnt++;
-				});
-
-				if (cnt == 3) {
-					$("#a1").prop("checked", true);
-
-					$("#next").prop("disabled", false);
-				} else {
-					$("#a1").prop("checked", false);
-					$("#next").prop("disabled", true);
-				}
-			}
-		
-		console.log(cnt)
 	</script>
+	
 	<c:if test="${fail ne null }">
 		<script>
 			window.alert("다시 입력하세요!!");
@@ -331,34 +183,10 @@
     $('b[id=rst]').text('');
     $('b[id=rst]').html("비밀번호가 일치합니다.");
     $('b[id=rst]').css("color","green");
+   	 $("#next").attr("disabled",false);
    }
   }); //#chpass.keyup
  });
 </script>
-<script>
-	
-		$("#id123").blur(function(){
-			$.ajax({
-				"url" : "/broker_join/brokercheckAjax",
-				"method" : "post",
-				"data" : {
-					"id123" : $("#id123").val()
-				}
-			}).done(function(rst){
-				if(rst=="y"){
-					$("#resultid").html("&emsp; 이미 가입된 아이디 입니다.");
-					$("#resultid").css("color","red");
-					
-				}else{
-					$("#resultid").html("&emsp; 사용 가능한 아이디 입니다.");
-					$("#resultid").css("color","green");
-				}
-				
-				
-			})
-		});
-		
 
-
-</script>
 

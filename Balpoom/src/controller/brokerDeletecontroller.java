@@ -20,7 +20,7 @@ public class brokerDeletecontroller {
 
 	@Autowired
 	brokerdeleteDao bDao;
-	@RequestMapping("//brokerdelete")
+	@RequestMapping("/brokerdelete")
 	public ModelAndView BrokerDelete( HttpServletRequest req
 			,HttpSession session){
 		ModelAndView mav = new ModelAndView();
@@ -31,15 +31,16 @@ public class brokerDeletecontroller {
 		map.put("password", password);
 		
 		int r = bDao.brokerDelete(map);
-		if(r==1){
+		System.out.println(r);
+		if(r>1){
+			int a =bDao.roomDelete(map);
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");
-			mav.setViewName("redirect:/");
+			mav.setViewName("t_main");
 			session.removeAttribute("brokerid");
 			session.removeAttribute("id1");
-		}
-			else{
-			mav.addObject("dmsg","비밀번호가 틀렸습니다.");
-			mav.setViewName("redirect:/");
+		}else{
+			mav.addObject("dmsg","회원탈퇴가 실패했습니다.");
+			mav.setViewName("t_main");
 			}
 		
 		return mav;

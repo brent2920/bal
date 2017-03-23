@@ -1,5 +1,9 @@
 package models;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,20 +12,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class brokerdeleteDao {
+public class brokerchangeDao {
+	
 	@Autowired
 	SqlSessionFactory factory;
 	
-	public int brokerDelete(Map map){
-		int r = 0;
+	public Map brokerList(String brokerid){
 		
+		
+		Map map = new HashMap<>();
+		map.put("brokerid", brokerid);
 		SqlSession session = factory.openSession();
 		try{
-			r = session.delete("broker.delete",map);
-			if(r==1)
-			session.commit();
+			map = session.selectOne("agent.list", map);
+			
 		}catch(Exception e){
 			e.printStackTrace();
+			
+		}finally{
+			session.close();
+		}
+		return map;
+	}
+	
+	
+	public int brokerchange(Map map){
+		int r = 0;
+		SqlSession session = factory.openSession();
+		System.out.println(map.toString());
+		try{
+		r= session.update("agent.update",map);
+			if(r==1)
+				session.commit();
+		}catch(Exception e){
 			session.rollback();
 		}finally{
 			session.close();
@@ -30,23 +53,4 @@ public class brokerdeleteDao {
 		return r;
 	}
 	
-	
-	public int roomDelete(Map map){
-		int r = 0;
-		System.out.println(map.toString()+"!!!!");
-		SqlSession session = factory.openSession();
-		try{
-			r = session.delete("broker.deleteroom",map);
-			if(r==1)
-			session.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-			session.rollback();
-		}finally{
-			session.close();
-		}
-		
-		return r;
-	}
-
 }

@@ -4,4 +4,9 @@
 	<delete id="delete" parameterType="java.util.HashMap">
 		delete from agent where ID = #{brokerid} and BK_PASSWORD = #{password}
 	</delete>
+<delete id="deleteroom" parameterType="java.util.HashMap">
+		delete from room where ID = #{brokerid}
+	</delete>
+	
+	
 </mapper>

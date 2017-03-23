@@ -46,6 +46,8 @@ public class broker_join_controller {
 		String[] ar1 = req.getParameterValues("bk_address");
 		String bk_address = ar1[0]+""+ar1[1];
 		
+		
+		
 		map.put("bk_address", bk_address);
 		map.put("bk_contact", bk_contact);
 		map.put("bk_agentnum", bk_agentnum);
