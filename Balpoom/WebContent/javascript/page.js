@@ -1,4 +1,3 @@
-
 //<div style="min-height: 125px; background-color: white; margin: 2%">
 //<table>
 //	<tr>
@@ -207,16 +206,23 @@
 /**
  * paging 처리 !
  */
+/**
+ * go map!
+ */
 
-
-
-
-
-
+/**
+ * g-map variables!
+ */
+/**
+ * g-map values!
+ */
+/**
+ * paging values!
+ */
 var arrl = "empty";
 var jpgs = "empty";
-var njj = "empty";
-var listajax  = "empty";
+var njj = "empty"; //사진 url 정보 얻어올 값
+var listajax = "empty";
 var json = "empty";
 var dn = 7750005;
 var start = 0;
@@ -225,18 +231,241 @@ var curr = 0;
 var jsonarr = [];
 
 
+/**
+ * go map!
+ */
+
+var map;
+var infoWindow;
+var service;
+var list = [];
+var temp = {
+	"geometry" : {
+		"location" : {
+			"lat" : 37.5326049,
+			"lng" : 126.8646878
+		// getBounds==>((37.512404078607844, 126.83898150880123),
+		// (37.549976293684466, 126.87949359376216))
+		}
+	},
+	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
+	"place_id" : "ChIJZ934S0KuEmsR_0lxV3PTR4M",
+	"reference" : "CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
+	"html_attributions" : [
+
+	]
+};
+var temp2 = {
+	"geometry" : {
+		"location" : {
+			"lat" : -33.8615479,
+			"lng" : 152.20760719999998
+		}
+	},
+	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
+	"place_id" : "ChIJZ934S0KuEmsR_0lxV3PTR4M",
+	"reference" : "CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
+	"html_attributions" : [
+
+	]
+};
+
+var temp3 = {
+	"reference" : "CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
+	"html_attributions" : [
+
+	],
+	"geometry" : {
+		"location" : {
+			"lng" : 126.7348962,
+			"lat" : 37.5386459
+		}
+	},
+	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
+	"place_id" : "ChIJZ934S0KuEmsR_0lxV3PTR4M"
+};
+
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center : {
+			lat : 37.5326049,
+			lng : 126.8646878
+		},
+		zoom : 15,
+		styles : [ {
+			stylers : [ {
+				visibility : 'simplified'
+			} ]
+		}, {
+			elementType : 'labels',
+			stylers : [ {
+				visibility : 'off'
+			} ]
+		} ]
+	});
+
+	infoWindow = new google.maps.InfoWindow();
+	service = new google.maps.places.PlacesService(map);
 
 
+	map.addListener('idle', performSearch);
+
+}
+
+function performSearch() {
+
+	var request = {
+		bounds : map.getBounds(),
+		keyword : 'best view'
+	};
+	service.radarSearch(request, callback);
+}
+
+function callback(results, status) {
+
+	if (status !== google.maps.places.PlacesServiceStatus.OK) {
+		console.error(status);
+		return;
+	}
+
+	addMarker(temp);
+	addMarker(temp3);
+	if (list.length != 0) {
+
+		// ==============================================
+		for (var i = 0; i <= list.length; i++) {
+			//addMarker(list[i]);
+		
+			if (i == list.length - 1) {
+				
+				
+				
+				$.ajax({
+
+					"type" : "post",
+					"dataType" : "json",
+					"async" : false,
+					"url" : "/getnewarrlist?info=" + map.getBounds()
+
+				}).done(function(listajax) {
+						//listajax 끝나고 새로운 데이터 가져 오기 
+
+							arrl = []; // 지도 표시 정보 reset
+							arrl = listajax; // 지도 표시 정보 바꿔주기;
+							
+							njj = [] // njj 다시 리셋 
+							for(var i =0; i < arrl.length; i++){
+								
+								var obj = arrl[i];
+								njj.push(obj["SELL_NUM"]);
+								
+							}
+						
+
+						});
+				
+
+
+				
+				list = [];
+				
+				PagingHelper.gotoPage(1);
+			}
+		}
+		// ===========================================================================================================
+
+	} else {
+		clearMarkers();
+
+	}
+
+}
+function clearMarkers() {
+	// setMapOnAll(null); // 맵클리어 작동안하고있음
+}
+
+function addMarker(place) {
+
+	//console.log("list_size=" + list.length)
+	if (list.length == 0) {
+		/**
+		 * ****************
+		 *                *
+		 * marker data가져고기     
+		 *                *
+		 *                *
+		 * ****************
+		 */
+		$.ajax({
+
+			"type" : "post",
+			"dataType" : "json",
+			"async" : false,
+			"url" : "/gomapin?info=" + map.getBounds()
+
+		}).done(function(listajax) {
+					
+					//console.log("New list!=" + "listajax.length="
+							//+ listajax.length + " list.length:" + list.length);
+					if (listajax.length != list.length){
+
+						list = [];
+						list = listajax;
+					}
+					
+
+				});
+		
+//======================================================================get_new_list_after_map_changed		
+	
+//======================================================================get_new_list_after_map_changed		
+	
+
+	} else {
+	}
+
+	var marker = new google.maps.Marker({
+		map : map,
+		position : place.geometry.location,
+		icon : {
+			url : 'http://maps.gstatic.com/mapfiles/circle.png',
+			anchor : new google.maps.Point(10, 10),
+			scaledSize : new google.maps.Size(10, 17)
+		}
+	});
+	google.maps.event.addListener(marker, 'click', function() {
+
+		service.getDetails(place, function(result, status) {
+
+			if (status !== google.maps.places.PlacesServiceStatus.OK) {
+				console.error(status);
+				return;
+			}
+
+			infoWindow.setContent(result.name);
+			infoWindow.open(map, marker);
+		});
+	});
+}
+
+// =============================================================================================
+
+/**
+ * ****************
+ *                *
+ * paging!        *
+ *                *
+ *                *
+ * ****************
+ */
 var PagingHelper = {
 
 	'data' : {
-		currentPage : 1 // 현재페이지
-		// ,startPage : 1 // 시작페이지
+		currentPage : 1
+
 		,
-		pageSize : 3 // 페이지 사이즈 (화면 출력 페이지 수)
-		,
-		maxListCount : 5 // (보여질)최대 리스트 수 (한페이지 출력될 항목 갯수)
-		,
+		pageSize : 3,
+		maxListCount : 5,
 		startnum : 1 // 시작 글번호
 		,
 		lastnum : 50 // 마지막 글번호
@@ -255,45 +484,47 @@ var PagingHelper = {
 			}
 		}
 	},
-	'nj' : function(arr){
-		
+	'nj' : function(arr) {
+
 		njj = arr;
 	},
-	
-	'dn' : function(dnn){
-	
+
+	'dn' : function(dnn) {
+
 		dn = dnn;
 	},
 
 	'arrlist' : function(arr) {
-	
+
 		arrl = arr;
 	},
-	
-	'jpglist' : function(jpg){
+
+	'jpglist' : function(jpg) {
 		jpgs = jpg;
-		//var obj = arrl[i];
-		//sb+= obj['B_RKIND'] 
-		for(var i = 0; i < 2; i++){
+
+		for (var i = 0; i < 2; i++) {
 			var obj = jpgs[i];
-		
+
 		}
 	},
-	
-	'linkajax' : function(num){
-		location.href='/detail?num='+njj[num];
-			
-	
+
+	'linkajax' : function(num) {
+		location.href = '/detail?num=' + njj[num];
+
+	},
+	'shHtml_google' : function(list) {
+		var _ = this;
+
 	},
 
 	'shHtml' : function(n_block) {
 		var _ = this;
-		if (typeof n_block == 'undefined')n_block = curr;
-	
+		if (typeof n_block == 'undefined')
+			n_block = curr;
 
 		var sb = '';
 		var sbTemp = '';
-	
+
 		if (arrl == 'empty') {
 			curr = 1;
 		} else {
@@ -301,70 +532,67 @@ var PagingHelper = {
 		}
 		end = (curr * 4) - 1;
 		start = end - 3;
-		if(end >= _.data.totalCnt) {end = _.data.totalCnt -1; }
+		if (end >= _.data.totalCnt) {
+			end = _.data.totalCnt - 1;
+		}
 
-		
 		var count = 0;
 		for (var i = start; i <= end; i++) {
 			var obj = arrl[i];
-			//var obj2 = jpgs[count];
+			// var obj2 = jpgs[count];
 			var obj2 = json[count];
-			sb+="<div style='min-height: 125px; background-color: white; margin: 2%'>";
-			sb+="<table>"
-			sb+="<tr>";
-			sb+="<td rowspan='3'>";
-					//sb+="<img src="+'/images/room.jpg'+" style='height: 120px; width: 120px;'>";
-			sb+= "<li class='first' onclick='PagingHelper.linkajax("+ i +");'>";		
-			sb+="<img src="+obj2+" style='height: 120px; width: 120px;'>";
-			sb+= "</li>";
-			
-			
-			sb+="</td>";
-			sb+="<td style='padding-left: 10px; vertical-align: bottom;'>";
-			sb+="<span style='padding: 3px; background-color: #04B486;border-radius: 5px; color: white;'>" + obj['B_MPAY'] +"</span>";
-			sb+="<b style='color: #29B172; font-size: 20px; vertical-align: middle;'>"+ "2000/30" + "</b>";
-			sb+="</td>";
-			sb+="</tr>";
-			
+			sb += "<div style='min-height: 125px; background-color: white; margin: 2%'>";
+			sb += "<table>"
+			sb += "<tr>";
+			sb += "<td rowspan='3'>";
+			// sb+="<img src="+'/images/room.jpg'+" style='height: 120px; width:
+			// 120px;'>";
+			sb += "<li class='first' onclick='PagingHelper.linkajax(" + i
+					+ ");'>";
+			sb += "<img src=" + obj2 + " style='height: 120px; width: 120px;'>";
+			sb += "</li>";
 
-			sb+="<tr>";
-			
-				sb+="<td style='padding-left: 10px; font-size: 14px;'>";
-						sb+="귀한 반전세 풀옵션 원룹입니다<br/>";
-						sb+= obj['B_TITLE'];
-				sb+="</td>";
-			sb+="</tr>";
-			
-			
-			sb+="<tr>";
-				sb+="<td style='padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;'>";
-				sb+= obj['B_RKIND'] + "|" + "3층  관리비 5만원";
-				sb+= "</td>";
-			sb+="</tr>";
-			sb+="</table>";
-			sb+="</div>";
-		
-			sb+="<hr style='margin: 30px;'/>";
+			sb += "</td>";
+			sb += "<td style='padding-left: 10px; vertical-align: bottom;'>";
+			sb += "<span style='padding: 3px; background-color: #04B486;border-radius: 5px; color: white;'>"
+					+ obj['B_MPAY'] + "</span>";
+			sb += "<b style='color: #29B172; font-size: 20px; vertical-align: middle;'>"
+					+ "2000/30" + "</b>";
+			sb += "</td>";
+			sb += "</tr>";
+
+			sb += "<tr>";
+
+			sb += "<td style='padding-left: 10px; font-size: 14px;'>";
+			sb += "귀한 반전세 풀옵션 원룹입니다<br/>";
+			sb += obj['B_TITLE'];
+			sb += "</td>";
+			sb += "</tr>";
+
+			sb += "<tr>";
+			sb += "<td style='padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;'>";
+			sb += obj['B_RKIND'] + "|" + "3층  관리비 5만원";
+			sb += "</td>";
+			sb += "</tr>";
+			sb += "</table>";
+			sb += "</div>";
+
+			sb += "<hr style='margin: 30px;'/>";
 			count++;
 		}
-		jsonarr= [];
+		jsonarr = [];
 		return sb;
 
 	},
-	
 
-	'button' : function(){
-		if($('#btt').data('clicked')){
-		}else{
+	'button' : function() {
+		if ($('#btt').data('clicked')) {
+		} else {
 		}
-		
-		
+
 	},
-	
 
 	'pagingHtml' : function(pTotalCnt) {
-
-		
 
 		var _ = this;
 
@@ -379,9 +607,9 @@ var PagingHelper = {
 		// 페이징의 시작페이지와 끝페이지 구하기
 		var s_page = (n_block - 1) * _.data.pageSize + 1; // 현재블럭의 시작 페이지
 		var e_page = n_block * _.data.pageSize; // 현재블럭의 끝 페이지
-		if(e_page == _.data.currentPage){
-			s_page = s_page+2;
-			e_page = e_page+2;
+		if (e_page == _.data.currentPage) {
+			s_page = s_page + 2;
+			e_page = e_page + 2;
 		}
 		var sb = '';
 		var sbTemp = '';
@@ -391,7 +619,8 @@ var PagingHelper = {
 			if (j > _.data.totalPageCnt)
 				break;
 			if (j == _.data.currentPage) {
-				sbTemp += "<li class='selected'>[<font color='red'>" + j + "</font>]</li>";
+				sbTemp += "<li class='selected'>[<font color='red'>" + j
+						+ "</font>]</li>";
 			} else {
 				sbTemp += "<li onclick='PagingHelper.gotoPage(" + j + ");'>["
 						+ j + "]</li>";
@@ -436,36 +665,37 @@ var PagingHelper = {
 				: tmp);
 	},
 	'gotoPage' : function(pageNum) {
-	
+
 		json = "empty";
 		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
 		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
 		// 콘솔 출력 (삭제)
-		
-		var ends = (this.data.currentPage) * 4 -1;//3
-		var starts = ends-3;//
+
+		var ends = (this.data.currentPage) * 4 - 1;// 3
+		var starts = ends - 3;//
 		var njjTemp = [];
-		for(var i = starts ; i <= ends ; i++){
+		//console.log("njj=>"+ njj);
+		for (var i = starts; i <= ends; i++) {
+			
 			njjTemp.push(njj[i]);
 		}
-	$.ajax({
-			
-			"type":"get",
-			"dataType":"json",
-			 "async": false,
-			 "url": "/testing?curr="+this.data.currentPage+"&list="+njjTemp
-			
-		}).done(function(listajax){
-			
-			json= JSON.parse( JSON.stringify(listajax));
-		
+		$.ajax(
+				{
+
+					"type" : "get",
+					"dataType" : "json",
+					"async" : false,
+					"url" : "/testing?curr=" + this.data.currentPage + "&list="
+							+ njjTemp
+
+				}).done(function(listajax) {
+
+			json = JSON.parse(JSON.stringify(listajax));
+
 		});
-	
-		
-		
+
 		$("#paging").html(this.pagingHtml());
 		$("#sh").html(this.shHtml());
 
 	}
 }
-

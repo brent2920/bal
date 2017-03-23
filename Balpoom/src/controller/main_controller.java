@@ -48,6 +48,7 @@ public class main_controller {
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
 		ModelAndView mav = new ModelAndView("t_search");
+		
 		/*-------------------------------------------------
 		 * List<HashMap<String, Object>> mlist = database result 값 
 		 * 
@@ -101,10 +102,12 @@ public class main_controller {
 				}
 			}
 			(json_arr).put(json_obj);
+			
 
 		}
 
 		//System.out.println("numbersj= "+ numbersj.toString());
+		System.out.println("mlist json ====> "+ json_arr.toString());
 		mav.addObject("dn", defnum);
 		mav.addObject("nj", numbersj);
 		mav.addObject("mpic", urlcolj);
@@ -159,6 +162,7 @@ public class main_controller {
 		return map;
 	}
 	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/searchTest")
 	@ResponseBody
@@ -282,4 +286,5 @@ public class main_controller {
 		System.out.println("Room List Size : " + rList.size());
 		return rList;
 	}
+
 }

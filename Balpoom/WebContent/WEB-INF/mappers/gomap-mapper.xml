@@ -8,4 +8,8 @@
 		select SELL_NUM,B_LATITUDE,B_LONGITUDE from ROOM WHERE (b_latitude BETWEEN #{lagb} AND #{lagf}) and (b_longitude BETWEEN #{logb} and #{logf})
 	</select>
 	
+	<select id="new_arr_list" parameterType="java.util.HashMap"  resultType="java.util.HashMap">
+		select  SELL_NUM,B_MPAY,B_TITLE,B_RKIND  from ROOM  WHERE (b_latitude BETWEEN #{lagb} AND #{lagf}) and (b_longitude BETWEEN #{logb} and #{logf})
+	</select>
+	
 </mapper>

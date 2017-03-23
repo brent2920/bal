@@ -69,7 +69,7 @@ public class roomDao {
 		try {
 			rList = new ArrayList<>();
 			rList = session.selectList("room.getRoomList", conditions);
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();
