@@ -1,10 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 <style type="text/css">
- td {font-family: 나눔고딕;}
- h1 {font-family: 나눔고딕;}
+td {
+	font-family: 나눔고딕;
+}
+
+h1 {
+	font-family: 나눔고딕;
+}
 </style>
 
 <html>
@@ -20,7 +24,7 @@
 		<tiles:insertAttribute name="main" />
 	</div>
 	<div>
-		<tiles:insertAttribute name="board"/>
+		<tiles:insertAttribute name="board" />
 	</div>
 	<div style="min-height: 10%;">
 		<tiles:insertAttribute name="footer" />
