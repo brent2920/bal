@@ -8,6 +8,6 @@
 	</select>
 	
 	<select id="broker" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		select * from agent where id =#{id} and bk_password =#{bk_password}
+		select * from agent where id =#{brokerid} and bk_password =#{password}
 	</select>
 </mapper>
