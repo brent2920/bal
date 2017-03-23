@@ -46,6 +46,12 @@
 	</script>
 </c:if>
 
+<c:if test="${passerror ne null }">
+	<script>
+		window.alert("${passerror }");
+	</script>
+</c:if>
+
 
 <nav class="navbar navbar-inverse"
 	style="border-radius: 0px; margin-bottom: 0px;">
@@ -297,10 +303,11 @@
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호 재입력</label> <input
-									class="form-control" id="delpass2" type="password">
+									class="form-control" id="delpass2" type="password" onkeyup="javascript:DelpassCompare()">
+									<label><span id="cmpResult1"></span></label>
 							</div>
-							<button type="submit" class="btn btn-success"
-								style="background-color: #04B486;">회원탈퇴</button>
+							<button type="button" class="btn btn-success"
+								style="background-color: #04B486;" id="Dsbt" disabled>회원탈퇴</button>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
@@ -452,6 +459,64 @@
 		}
 		sbtChange();
 	}
+	
+	
+	
+	
+	// 회원 탈퇴시 비밀번호와 비밀번호 재입력 확인
+	var flag3 = true, flag4 = false;
+	function DsbtChange() {
+		if (flag3 && flag4) {
+			document.getElementById("Dsbt").disabled = false;
+		} else {
+			document.getElementById("Dsbt").disabled = true;
+		}
+	}
+
+	function DelpassCompare() {
+
+		var flag5 = document.getElementById("delpass1").value == document.getElementById("delpass2").value;
+		if (flag5) {
+			flag4 = true;
+			document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치합니다.";
+			document.getElementById("cmpResult1").style.color = "green";
+		} else {
+			flag4 = false;
+			document.getElementById("cmpResult1").style.color = "red";
+			document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치하지 않습니다.";
+		}
+		DsbtChange();
+	}
+	
+	
+	
+	document.getElementById("Dsbt").onclick = function(){
+		var flag6 = document.getElementById("delpass1").value;
+		var xhr2 = new XMLHttpRequest();
+		xhr2.open("get" , "/mydelete?delpass="+flag6, true);
+		xhr2.send();
+		xhr2.onreadystatechange = function(){
+			if(xhr2.readyState==4 && xhr2.status==200) {
+				var txt2 = xhr2.responseText;
+				console.log(txt2);
+				if(txt2 == 'NN') {
+					 window.alert("패스워드를 잘못 입력하셨습니다");
+				}else {
+					 window.alert("회원탈퇴가 정상적으로 처리 되었습니다");
+					 location.href="/";
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 이메일 중복 여부 확인
 

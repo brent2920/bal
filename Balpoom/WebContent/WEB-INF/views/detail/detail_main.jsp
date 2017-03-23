@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 	
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/table.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900'
@@ -13,13 +11,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
+.container {
+	width: 100%;
+}
+
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
 	width: 100%;
-/* 	margin: auto; */
+	overflow: hidden;
 }
 
 .carousel {
-	width: 75%;
+	width: 100%;
 }
 
 h1, h2, h3, h4 {
@@ -67,36 +69,29 @@ td {
 			</ol>
 
 			<!-- Wrapper for slides -->
-			
-		<div class="carousel-inner " role="listbox">
-		
-
+			<div class="carousel-inner " role="listbox">
 				<c:forEach var="val" items="${pj }" varStatus="vs">
 					<c:choose>
-
 						<c:when test="${vs.first}">
 							<div class="item active">
-								<img src=${val } width="260" height="145">
+								<img src=${val } width="400px;" height="300px;">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="item">
-								<img src=${val } width="260" height="145">
+								<img src=${val } width="400px;" height="300px;">
 							</div>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-		</div>
+			</div>
 			
 			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" role="button"
-				data-slide="prev"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">이전</span>
-			</a> <a class="right carousel-control" href="#myCarousel" role="button"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">다음</span>
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> 
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			</a> 
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			</a>
 		</div>
 	</div>
@@ -107,7 +102,7 @@ td {
 	<table style="width: 100%">
 		<tr>
 			<th><b>보증금/월세</b></th>
-			<td style="color: orange; font-size: 25px;"><b>3000/20</b></td>
+			<td style="color: #04B486; font-size: 25px;"><b>3000/20</b></td>
 			<th><b>방종류</b></th>
 			<td>원룸</td>
 		</tr>
@@ -120,7 +115,7 @@ td {
 		<tr>
 			<th><b>관리비</b></th>
 			<td>7만원</td>
-			<th><b>관리비 포함항목</b></th>
+			<th><b>관리비<br/>포함항목</b></th>
 			<td>전기, 수도, 가스</td>
 		</tr>
 		<tr>
@@ -152,3 +147,4 @@ td {
 	<br>
 	<br>
 </div>
+
