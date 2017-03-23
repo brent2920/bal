@@ -307,8 +307,7 @@ function initMap() {
 	infoWindow = new google.maps.InfoWindow();
 	service = new google.maps.places.PlacesService(map);
 
-	// The idle event is a debounced event, so we can query & listen without
-	// throwing too many requests at the server.
+
 	map.addListener('idle', performSearch);
 
 }
@@ -335,11 +334,10 @@ function callback(results, status) {
 
 		// ==============================================
 		for (var i = 0; i <= list.length; i++) {
-			//addMarker(list[i]);
-			// console.log("adding=" + i);
+			addMarker(list[i]);
+		
 			if (i == list.length - 1) {
-				//console.log("get_bound" + map.getBounds());
-				//console.log("arrlist=" + arrl);
+				
 				
 				
 				$.ajax({
@@ -350,30 +348,25 @@ function callback(results, status) {
 					"url" : "/getnewarrlist?info=" + map.getBounds()
 
 				}).done(function(listajax) {
-//listajax 끝나고 새로운 데이터 가져 오기 
+						//listajax 끝나고 새로운 데이터 가져 오기 
 
-							//console.log("2222222=" + "listajax.length="
-									//+ listajax.length + " list.length:" + listajax.length);
-							//console.log("222listajax::"+ listajax);
 							arrl = []; // 지도 표시 정보 reset
 							arrl = listajax; // 지도 표시 정보 바꿔주기;
-							//console.log("arrl.tostngify" + arrl);
-							//console.log("njj pre=>"+ njj);
+							
 							njj = [] // njj 다시 리셋 
 							for(var i =0; i < arrl.length; i++){
-								//console.log("printing");
+								
 								var obj = arrl[i];
-								//console.log(obj["B_TITLE"]);
 								njj.push(obj["SELL_NUM"]);
 								
 							}
-							//console.log("njj POST=>"+ njj);
+						
 
 						});
 				
 
 
-				//console.log("list clearing");
+				
 				list = [];
 				
 				PagingHelper.gotoPage(1);
@@ -395,7 +388,14 @@ function addMarker(place) {
 
 	//console.log("list_size=" + list.length)
 	if (list.length == 0) {
-//====================================================marker data 가져오기 
+		/**
+		 * ****************
+		 *                *
+		 * marker data가져고기     
+		 *                *
+		 *                *
+		 * ****************
+		 */
 		$.ajax({
 
 			"type" : "post",
@@ -451,7 +451,12 @@ function addMarker(place) {
 // =============================================================================================
 
 /**
- * paging!
+ * ****************
+ *                *
+ * paging!        *
+ *                *
+ *                *
+ * ****************
  */
 var PagingHelper = {
 

@@ -27,7 +27,7 @@
 
 	<select id="getRoomList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 
-		SELECT * FROM ROOM WHERE
+		SELECT SELL_NUM,B_LATITUDE,B_LONGITUDE  FROM ROOM WHERE
 			<choose>
 				<when test="mKind == 'jPay'">
 					B_MPAY = 0 AND

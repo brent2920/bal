@@ -463,8 +463,7 @@
 		};
 		
 		console.log(JSON.stringify(allData));
-		var location = navigator.geolocation.getCurrentPosition(successCallback,errorCallback);
-		console.log(location);
+		
 		
 		$.ajax({
 			"url" : "/gsearchTest",
