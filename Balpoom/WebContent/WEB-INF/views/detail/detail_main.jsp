@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/table.css">
-<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900'
-			rel='stylesheet' type='text/css'></link>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/javascript/table.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <style>
-/* Remove the navbar's default margin-bottom and rounded borders */
 .container {
 	width: 100%;
 }
@@ -30,7 +22,7 @@ h1, h2, h3, h4 {
 
 tr {
 	border-top: 1px solid;
-	border-bottom: 1px solid; 
+	border-bottom: 1px solid;
 	border-top-color: silver;
 	border-bottom-color: silver;
 	height: 50px;
@@ -53,6 +45,13 @@ td {
 	padding-top: 5px;
 	padding-left: 15px;
 	font-size: 15px;
+}
+
+#map {
+	width: 100%;
+	height: 60%;
+	margin-top: 2em;
+	margin-bottom: 2em;
 }
 </style>
 
@@ -137,14 +136,31 @@ td {
 		내용
 	</span>
 </div>
-<hr/>
+<hr style="margin: 2em;"/>
 
 <div style="margin: 2em;">
-	<h3>위치 및 주변 편의시설</h3>
-	<span>
-		지도 표시
-	</span>
-	<br>
-	<br>
+	<h3>위치</h3>
+	<div id="map" align="center"></div>
 </div>
 
+<script>
+
+	function initMap() {
+		var roomLocation = {lat : 37.481215, lng : 126.952744};		// 여기에 좌표값 받아와서 EL태그로 표시!
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 17,
+			center : roomLocation,
+			streetViewControl : false,
+		});
+		
+		var marker = new google.maps.Marker({
+		    position: roomLocation,
+		    map: map,
+		  });
+	}
+</script>
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?
+      key=2e3dec069aed3a50278a0f8556d7520d84d3c4e6&callback=initMap"></script>
+ 
