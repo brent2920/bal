@@ -25,6 +25,38 @@ public class mydeleteDao {
 			}
 			return r;
 		}
+		
+		public int mydelete(Map map){
+			int r = 0;
+			SqlSession session = factory.openSession();
+			try{
+				r = session.delete("delete.mydelete", map);
+				if(r == 1){
+					session.commit();
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				session.close();
+			}
+			return r;
+		}
+		
+		public int mydeleteRoom(String Eemail){
+			int r = 0;
+			SqlSession session = factory.openSession();
+			try{
+				r = session.delete("delete.roomdelete", Eemail);
+				if(r==1){
+					session.commit();
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				session.close();
+			}
+			return r;
+		}
 }
 
 
