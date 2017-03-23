@@ -24,14 +24,14 @@ public class login_controller {
 		@RequestMapping("/login")
 		public ModelAndView mav(@RequestParam Map map, HttpSession session  ) throws IOException {
 			ModelAndView mav = new ModelAndView();
-			
-		
 			Map id = ldao.login(map);		
-
 			
 			if(id != null){
-				String uid = (String)id.get("ID");	
+				String uid = (String)id.get("ID");
+				String eemail =(String)id.get("EEMAIL");
+				System.out.println(eemail);
 				session.setAttribute("id", uid);
+				session.setAttribute("email", eemail);
 				mav.setViewName("t_main");
 			}else{
 				mav.addObject("msg","이메일 이나 패스워드가 잘못되었습니다");

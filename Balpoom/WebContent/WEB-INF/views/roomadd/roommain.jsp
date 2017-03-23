@@ -5,14 +5,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -106,6 +98,7 @@ td, th {
 
 
 <div style="padding-left: 19%; padding-right: 19%; padding-top: 5%">
+<form action="/roominsert" method="post">
 	<div style="padding: 0; margin: 0; width: 1000px; height: 50px">
 		<h2 style="font-family: 나눔고딕;">&nbsp;방등록 하기</h2>
 	</div>
@@ -124,8 +117,10 @@ td, th {
 
 
 	<h3 style="font-family: 나눔고딕;">&nbsp;위치 정보</h3>
+	<input type="hidden" name="b_latitude" id="b_lat"/>
+	<input type="hidden" name="b_longitude" id="b_lng"/>
 	<table border="1" rules="none">
-
+	
 		<tr>
 			<td id="title" rowspan="5">주소</td>
 			<td id="memo4">도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</td>
@@ -158,7 +153,7 @@ td, th {
 		<tr>
 			<td id="memo" colspan="2"><input type="text"
 				id="sample4_jibunAddress" placeholder="지번주소" class="form-control"
-				style="width: 100%"></td>
+				style="width: 100%" name="b_title"></td>
 
 		</tr>
 
@@ -178,7 +173,7 @@ td, th {
 		<tr>
 
 			<td id="title">방 종류</td>
-			<td id="memo"><select class="form-control" style="width: 85%">
+			<td id="memo"><select class="form-control" style="width: 85%" name="b_rkind">
 					<option selected="방종류선택">방종류선택</option>
 					<option value="원룸">원룸</option>
 					<option value="1.5룸">1.5룸</option>
@@ -187,19 +182,19 @@ td, th {
 					<option value="오피스텔">오피스텔</option>
 					<option value="아파트">아파트</option>
 			</select></td>
-			<td id="momo" colspan="3">다방에서는 고시원(텔)등의 고시원업 매물 등록을 제한합니다(차단조치)
+			<td id="momo" colspan="3">발품에서는 고시원(텔)등의 고시원업 매물 등록을 제한합니다(차단조치)
 			</td>
 		</tr>
 
 		<tr>
 			<td id="title" rowspan="2">거래 종류</td>
 			<td id="memo" colspan="4">
-				<button type="button" class="btn btn-primary" id="junseadd">전세
+<!-- 				<button type="button" class="btn btn-primary" id="junseadd">전세 -->
+<!-- 					추가</button> -->
+				<button type="button" class="btn btn-primary" id="wolseadd">가격
 					추가</button>
-				<button type="button" class="btn btn-primary" id="wolseadd">월세
-					추가</button>
-				<button type="button" class="btn btn-primary" id="mubojeungadd">무보증
-					추가</button> <input type="checkbox">단기 가능
+<!-- 				<button type="button" class="btn btn-primary" id="mubojeungadd">무보증 -->
+<!-- 					추가</button> <input type="checkbox">단기 가능 -->
 			</td>
 			<!-- 				<td id="memo">아</td> -->
 			<!-- 				<td id="memo">아</td> -->
@@ -209,10 +204,7 @@ td, th {
 
 		<tr>
 
-			<td id="memo" colspan="4"><font style="color: red">거래종류를
-					추가해 주세요. 다중 선택 가능하며, 첫 번째 선택한 거래종류가 우선 노출 됩니다.<br /> (예치금이 있는 경우
-					보증금 입력란에 필히 예치금을 입력 하세요. - 미 입력시 허위 매물로 적발됩니다.)
-			</font>
+			<td id="memo" colspan="4"><font style="color: red">금액을 입력해주세요</font>
 
 
 				<div style="display: none; height: 50px" id="junse">
@@ -226,9 +218,9 @@ td, th {
 				<div style="display: none; height: 50px;" id="wolse">
 					<input type="number"
 						style="width: 25%; float: left; text-align: right;"
-						class="form-control" placeholder="보증금"> <input
+						class="form-control" placeholder="보증금" name="b_deposit"> <input
 						type="number" style="width: 25%; float: left; text-align: right;"
-						class="form-control" placeholder="월세">
+						class="form-control" placeholder="월세" name="b_mpay">
 					<button type="button" id="btn2" style="float: left;" class="btn">취소</button>
 				</div>
 
@@ -245,33 +237,33 @@ td, th {
 		<tr>
 			<td id="title" rowspan="2">건물 층수</td>
 			<td id="memo" colspan="2"><select class="form-control"
-				style="width: 85%">
+				style="width: 85%" name="b_floor_all">
 					<option selected="건물 층수 선택">건물 층수 선택</option>
 					<c:forEach begin="1" end="50" var="i">
-						<option value="${i }">${i }층</option>
+						<option value="${i }층">${i }층</option>
 					</c:forEach>
 			</select></td>
 			<td id="title" rowspan="2">건물크기<br /> (1P = 3.3058㎡)
 			</td>
 			<td id="memo"><input type="number" class="form-control"
-				style="width: 50%"></td>
+				style="width: 50%" placeholder="평수" name="b_size" id="b_size"></td>
 		</tr>
 
 
 		<tr>
 
 			<td id="memo" colspan="2"><select class="form-control"
-				style="width: 85%">
+				style="width: 85%" name="b_floor">
 					<option selected="건물 층수 선택">해당 층수 선택</option>
 					<option value="반지층">반지층</option>
 					<option value="옥탑">옥탑</option>
 					<c:forEach begin="1" end="50" var="i">
-						<option value="${i }">${i }층</option>
+						<option value="${i }층">${i }층</option>
 					</c:forEach>
 			</select></td>
 
-			<td id="memo"><input type="number" class="form-control"
-				style="width: 50%"></td>
+			<td id="memo"><input type="text" class="form-control"
+				style="width: 50%" placeholder="면적" name="b_size_m2" readonly value="" id="bsm2"></td>
 		</tr>
 	</table>
 
@@ -297,11 +289,11 @@ td, th {
 					<tr class="mCost">
 
 						<td><input type="text" class="form-control"
-							style="width: 100%; margin-right: 12px; text-align: right;"></td>
+							style="width: 100%; margin-right: 12px; text-align: right;" disabled id="b_gpay3" name="b_gpay"></td>
 						<td><font size="2px" style="padding-right: 10px">만원</font></td>
-						<td><input type="checkbox" style="padding-right: 10px">있음</td>
+						<td><input type="checkbox" style="padding-right: 10px" id="b_gpay1">있음</td>
 						<td><input type="checkbox" checked="checked"
-							style="margin-left: 10px">없음</td>
+							style="margin-left: 10px" id="b_gpay2" name="b_gpay" value="없음">없음</td>
 					</tr>
 				</table>
 			</td>
@@ -310,12 +302,12 @@ td, th {
 
 		<tr>
 			<td id="memo" colspan="3">관련 항목 선택 : <input type="checkbox"
-				style="margin-left: 10px">인터넷 <input type="checkbox"
-				style="margin-left: 10px">유선 TV <input type="checkbox"
-				style="margin-left: 10px">청소비 <input type="checkbox"
-				style="margin-left: 10px">수도세 <input type="checkbox"
-				style="margin-left: 10px">도시가스 <input type="checkbox"
-				style="margin-left: 10px">전기세
+				style="margin-left: 10px" name="b_glist" value="인터넷">인터넷 <input type="checkbox"
+				style="margin-left: 10px"  name="b_glist" value="유선 TV">유선 TV <input type="checkbox"
+				style="margin-left: 10px"  name="b_glist" value="청소비">청소비 <input type="checkbox"
+				style="margin-left: 10px"  name="b_glist" value="수도세">수도세 <input type="checkbox"
+				style="margin-left: 10px"  name="b_glist" value="도시가스">도시가스 <input type="checkbox"
+				style="margin-left: 10px"  name="b_glist" value="전기세">전기세
 			</td>
 
 		</tr>
@@ -326,12 +318,12 @@ td, th {
 				<table>
 					<tr class="mCost">
 
-						<td><input type="text" class="form-control"
-							style="width: 100%; margin-right: 12px; text-align: right;"></td>
-						<td><font size="2px" style="padding-right: 10px">만원</font></td>
-						<td><input type="checkbox" style="padding-right: 10px">있음</td>
+<!-- 						<td><input type="text" class="form-control" -->
+<!-- 							style="width: 100%; margin-right: 12px; text-align: right;"></td> -->
+<!-- 						<td><font size="2px" style="padding-right: 10px">만원</font></td> -->
+						<td><input type="checkbox" style="padding-right: 10px" id="b_parking1" name="b_parking" value="가능">있음</td>
 						<td><input type="checkbox" checked="checked"
-							style="margin-left: 10px">없음</td>
+							style="margin-left: 10px" id="b_parking2" name="b_parking" value="불가능">없음</td>
 					</tr>
 				</table>
 
@@ -342,13 +334,13 @@ td, th {
 
 		<tr>
 			<td id="title">엘리베이터</td>
-			<td id="memo"><input type="checkbox">있음 <input
-				type="checkbox" checked="checked" style="margin-left: 10px">없음
+			<td id="memo"><input type="checkbox" id="b_eleve1" name="b_eleve" value="있음">있음 <input
+				type="checkbox" checked="checked" style="margin-left: 10px" id="b_eleve2" name="b_eleve" value="없음">없음
 
 			</td>
 			<td id="title">반려동물</td>
-			<td id="memo"><input type="checkbox">가능 <input
-				type="checkbox" checked="checked" style="margin-left: 10px">불가능
+			<td id="memo"><input type="checkbox" name="b_petpossible" id="b_petpossible1" value="가능">가능 <input
+				type="checkbox" checked="checked" style="margin-left: 10px" name="b_petpossible" id="b_petpossible2" value="불가능">불가능
 			</td>
 		</tr>
 
@@ -359,11 +351,11 @@ td, th {
 				<table>
 					<tr class="mCost">
 
-						<td><input type="text" id="datepicker" class="form-control"></td>
-						<td><input type="checkbox" style="margin-left: 10px">즉시
-							입주</td>
-						<td><input type="checkbox" style="margin-left: 10px">
-							날짜 협의</td>
+						<td><input type="text" id="datepicker" class="form-control" name="b_enterdate"></td>
+<!-- 						<td><input type="checkbox" style="margin-left: 10px">즉시 -->
+<!-- 							입주</td> -->
+<!-- 						<td><input type="checkbox" style="margin-left: 10px"> -->
+<!-- 							날짜 협의</td> -->
 
 					</tr>
 				</table>
@@ -372,29 +364,40 @@ td, th {
 		</tr>
 
 		<tr>
+			<td id="title">근처역</td>
+			<td colspan="3">
+				<input type="text" name="b_nstation" class="form-control" placeholder="근처에 있는 역을 입력해주세요">
+			</td>
+			
+		</tr>
+		<tr>
 			<td id="title" rowspan="2">옵션항목</td>
 			<td id="memo" colspan="3"><input type="checkbox"
-				style="margin-left: 10px">에어컨 <input type="checkbox"
-				style="margin-left: 10px">세탁기 <input type="checkbox"
-				style="margin-left: 10px">침대 <input type="checkbox"
-				style="margin-left: 10px">책상 <input type="checkbox"
-				style="margin-left: 10px">옷장 <input type="checkbox"
-				style="margin-left: 10px">TV <input type="checkbox"
-				style="margin-left: 10px">신발장 <input type="checkbox"
-				style="margin-left: 10px">냉장고 <input type="checkbox"
-				style="margin-left: 10px">가스레인지 <input type="checkbox"
-				style="margin-left: 10px">인덕션</td>
+				style="margin-left: 10px" name="b_option" value="에어컨">에어컨 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="세탁기">세탁기 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="침대">침대 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="책상">책상 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="옷장">옷장 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="TV">TV <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="신발장">신발장 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="냉장고">냉장고 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="가스레인지">가스레인지 <input type="checkbox"
+				style="margin-left: 10px" name="b_option" value="인덕션">인덕션</td>
 		</tr>
 
 		<tr>
 
 			<td id="memo" colspan="3"><input type="checkbox"
-				style="margin-left: 10px">전자레인지 <input type="checkbox"
-				style="margin-left: 10px">전자도어락 <input type="checkbox"
-				style="margin-left: 10px">비데</td>
+				style="margin-left: 10px" value="전자레인지" name="b_option">전자레인지 <input type="checkbox"
+				style="margin-left: 10px" value="전자도어락" name="b_option">전자도어락 <input type="checkbox"
+				style="margin-left: 10px" value="비데" name="b_option">비데</td>
 
 		</tr>
 	</table>
+	<div align="right" style="padding-right: 7%; padding-top: 1%" ><font color="red">※ LH 가능 여부</font>
+			<input type="checkbox" name="b_lhok" id="b_lhok1" value="가능">가능
+			<input type="checkbox" name="b_lhok" checked id="b_lhok2" value="불가능">불가능
+	</div>
 
 	<div style="height: 50px"></div>
 
@@ -404,14 +407,14 @@ td, th {
 		<tr>
 			<td id="title">방 제목</td>
 			<td id="memo6"><input type="text" class="form-control"
-				placeholder="예 ) 신논현역 도보 5분거리, 혼자 살기 좋은 방 입니다."></td>
+				placeholder="예 ) 신논현역 도보 5분거리, 혼자 살기 좋은 방 입니다." name="b_rinfo"></td>
 
 		</tr>
 
 		<tr>
 			<td id="title1">방 정보</td>
 			<td><textarea rows="15px" cols="90px"
-					placeholder="방에 대한 추가 설명을 적어주세요. " class="form-control"></textarea>
+					placeholder="방에 대한 추가 설명을 적어주세요. " class="form-control" name="b_detail"></textarea>
 			</td>
 		</tr>
 	</table>
@@ -455,14 +458,37 @@ td, th {
 
 
 			</td>
+			
+			
 	</table>
+	
 
-	<div style="height: 150px"></div>
+	<div style="height: 50px"></div>
+	
+	
+	<table>
+		<tr>
+				<td width="925px" align="center">
+					<div >
+						<button type="submit" class="btn btn-primary" style="font-size:25; padding: 14px 40px;">등록</button>
+						
+						<a href="/">
+						<button type="submit" class="btn btn-danger" style="font-size:25; padding: 14px 40px;">취소</button>
+						</a>
+					</div>
+				</td>
+			</tr>
+	
+	</table>
+	
+	<div style="height: 100px"></div>
+	
+	
 
 
 
 
-
+</form>
 </div>
 
 
@@ -495,44 +521,138 @@ td, th {
 </script>
 
 <script>
-	
-</script>
 
+// 관리비
+$("#b_gpay1").click(function() {
+		console.log($(this).prop("checked"));
+	if ($(this).prop("checked")) {
+		console.log($(this).prop("checked"));
+		$("#b_gpay2").prop("checked", false);
+		$("#b_gpay3").prop("disabled",false)
+	} else {
+		$("#b_gpay2").prop("checked", true);
+		
+	}
+});
+
+$("#b_gpay2").click(function() {
+		console.log($(this).prop("checked"));
+	if ($(this).prop("checked")) {
+		console.log($(this).prop("checked"));
+		$("#b_gpay1").prop("checked", false);
+		$("#b_gpay3").prop("disabled",true);
+	} else {
+		$("#b_gpay1").prop("checked", true);
+	}
+});
+
+// 주차여부
+
+
+$("#b_parking1").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_parking2").prop("checked", false);
+} else {
+	$("#b_parking2").prop("checked", true);
+}
+});
+
+$("#b_parking2").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_parking1").prop("checked", false);
+} else {
+	$("#b_parking1").prop("checked", true);
+}
+});
+
+// 엘리베이터
+
+
+$("#b_eleve1").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_eleve2").prop("checked", false);
+} else {
+	$("#b_eleve2").prop("checked", true);
+}
+});
+
+$("#b_eleve2").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_eleve1").prop("checked", false);
+} else {
+	$("#b_eleve1").prop("checked", true);
+}
+});
+
+
+// 반려동물
+$("#b_petpossible1").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_petpossible2").prop("checked", false);
+} else {
+	$("#b_petpossible2").prop("checked", true);
+}
+});
+
+$("#b_petpossible2").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_petpossible1").prop("checked", false);
+} else {
+	$("#b_petpossible1").prop("checked", true);
+}
+});
+
+
+//LH 가능 여부
+
+$("#b_lhok1").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_lhok2").prop("checked", false);
+} else {
+	$("#b_lhok2").prop("checked", true);
+}
+});
+
+$("#b_lhok2").click(function() {
+	console.log($(this).prop("checked"));
+if ($(this).prop("checked")) {
+	console.log($(this).prop("checked"));
+	$("#b_lhok1").prop("checked", false);
+} else {
+	$("#b_lhok1").prop("checked", true);
+}
+});
+</script>
 
 
 
 <script>
-
+// 면적 / 평수 계산
+$("#b_size").click(function() {
+	var  area = 3.3058 * $(this).val();
 	
+	$("input[name='b_size_m2']").val(area);
+});
+$("#b_size").keyup(function() {
+	var  area = 3.3058 * $(this).val();
 	
-
-	// 	function initMap1() {
-
-	// 		var pos1 = {
-	// 			lat : 37.5172363,
-	// 			lng : 127.0473248
-	// 		};
-	// 		// Create a map object and specify the DOM element for display.
-	// 		var map1 = new google.maps.Map(document.getElementById('gmap'), {
-	// 			"center" : pos1,
-	// 			"scrollwheel" : false,
-	// 			"zoom" : 15
-	// 		});
-	// 		var marker = new google.maps.Marker({
-	// 			"map" : map1,
-	// 			"position" : pos1,
-	// 			"title" : ''
-	// 		});
-	// 	}
+	$("input[name='b_size_m2']").val(area);
+});
 </script>
-
-
-
-
-
-
-
-
 
 <script>
 	<c:forEach begin="1" end="15" var="i">
@@ -629,6 +749,8 @@ td, th {
 				console.log(obj);
 					llat = obj.results[0].geometry.location.lat
 					llng = obj.results[0].geometry.location.lng
+					$("#b_lat").val(llat);
+					$("#b_lng").val(llng);
 				initMap1(llat, llng);
 			}
 		}

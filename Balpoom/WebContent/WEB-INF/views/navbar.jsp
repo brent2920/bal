@@ -112,8 +112,9 @@
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="t_info"><span data-toggle="modal"
-											data-target="#myInfo">내 정보 수정</span></a></li>
-									<li><a href="#">회원 탈퇴</a></li>
+											data-target="">내 정보 수정</span></a></li>
+									<li><a href="#"><span data-toggle="modal"
+									data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>
 							<li><a href="/logout"> <span
 									class="glyphicon glyphicon-user" data-toggle="modal"
@@ -122,10 +123,44 @@
 									</li>
 									</ul>
 					</c:when>
+					
 					<c:otherwise>
-						<script>
-							window.alert("${msg }");
-						</script>
+							<div class="navbar-header">
+							<a class="navbar-brand" href="/"> <img alt="발품로고"
+								src="/images/logo.png" width="70px" height="20px" />
+							</a>
+						</div>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="search">방 검색</a></li>
+							<li><a href="#">관심목록</a></li>
+							<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
+							<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
+							<!-- 					<ul class="dropdown-menu"> -->
+							<!-- 						<li><a href="#">Page 1-1</a></li> -->
+							<!-- 						<li><a href="#">Page 1-2</a></li> -->
+							<!-- 						<li><a href="#">Page 1-3</a></li> -->
+							<!-- 					</ul></li> -->
+							<li><a href="roomadd">방 등록</a></li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#"> <span
+									class="glyphicon glyphicon-user"></span> ${sessionScope.id }
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="t_info"><span data-toggle="modal"
+											data-target="#myInfo">내 정보 수정</span></a></li>
+									<li><a href="#"><span data-toggle="modal"
+									data-target="#myDelete">회원탈퇴</span> </a></li>
+								</ul></li>
+							<li><a href="/logout"> <span
+									class="glyphicon glyphicon-user" data-toggle="modal"
+									data-target="">로그아웃</span>
+									</a>
+									</li>
+									</ul>
+						
 					</c:otherwise>
 				</c:choose>
 
@@ -203,6 +238,42 @@
 							</div>
 							<button type="submit" class="btn btn-success"
 								style="background-color: #04B486;">로그인</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		
+		<!-- 회원 탈퇴! -->
+		<div class="modal fade" id="myDelete" role="dialog">
+			<form action="/mydelete" method="post">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">회원탈퇴</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 입력</label> <input
+									class="form-control" id="delpass1" type="text"
+									name="delpass">
+							</div>
+
+							<div class="form-group">
+								<label for="inputdefault">비밀번호 재입력</label> <input
+									class="form-control" id="delpass2" type="password">
+							</div>
+							<button type="submit" class="btn btn-success"
+								style="background-color: #04B486;">회원탈퇴</button>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"

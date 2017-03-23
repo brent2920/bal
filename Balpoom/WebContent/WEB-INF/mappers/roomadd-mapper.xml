@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="roomadd">
+
+<!-- Parameter Type / Result Type은 필요에 따라 추가 -->
+	<insert id="insertList" parameterType="java.util.HashMap" >
+		   insert into room values(#{sell_num},#{b_title},#{b_deposit},
+      #{b_mpay},#{b_rkind},#{b_floor},#{b_size},#{b_gpay},#{b_glist},
+      #{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},#{b_lhok},
+      #{b_option},#{b_detail},#{b_location},#{b_nstation},
+      #{b_latitude},#{b_longitude},#{b_petpossible},#{id},0,0,
+      #{b_local1},#{b_local2},#{b_local3},#{b_size_m2},#{b_floor_all})
+
+	</insert>
+	
+	</mapper>
