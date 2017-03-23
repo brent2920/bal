@@ -32,8 +32,9 @@ public class broker_login_controller {
 		
 		if(map1 !=null){
 			session.setAttribute("id1", map1.get("BK_REGNAME"));
-			session.setAttribute("brokerid", map.get("ID"));
-			System.out.println(session.getAttribute("id1").toString());
+			session.setAttribute("brokerid", map1.get("ID"));
+			System.out.println(map1.get("ID"));
+			
 			
 			mav.setViewName("redirect:/");
 			

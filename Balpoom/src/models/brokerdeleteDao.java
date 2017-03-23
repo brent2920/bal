@@ -14,9 +14,10 @@ public class brokerdeleteDao {
 	
 	public int brokerDelete(Map map){
 		int r = 0;
+		System.out.println(map.toString()+"!!!!");
 		SqlSession session = factory.openSession();
 		try{
-			session.delete("broker.delete",map);
+			r = session.delete("broker.delete",map);
 			if(r==1)
 			session.commit();
 		}catch(Exception e){

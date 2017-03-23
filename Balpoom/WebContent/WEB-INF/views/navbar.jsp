@@ -23,6 +23,11 @@
 	</script>
 </c:if>
 
+<c:if test="${param.dmsg ne null }">
+	<script>
+		window.alert("${param.dmsg}");
+	</script>
+</c:if>
 
 <c:if test="${msg ne null }">
 	<script>
@@ -264,6 +269,11 @@
 		</div>
 		
 		
+		
+		<c:choose>
+		<c:when test="${id ne null }">
+		
+		
 		<!-- 회원 탈퇴! -->
 		<div class="modal fade" id="myDelete" role="dialog">
 			<form action="/mydelete" method="post">
@@ -279,7 +289,7 @@
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호 입력</label> <input
-									class="form-control" id="delpass1" type="text"
+									class="form-control" id="delpass1" type="password"
 									name="delpass">
 							</div>
 
@@ -299,9 +309,9 @@
 			</form>
 		</div>
 		
+		</c:when>
 		
-		
-		
+		<c:otherwise>
 		
 			<!-- 공인 중개사 회원 탈퇴! -->
 		<div class="modal fade" id="myDelete" role="dialog">
@@ -318,7 +328,7 @@
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호 입력</label> <input
-									class="form-control" id="delpass1" type="text"
+									class="form-control" id="delpass1" type="password"
 									name="delpass">
 							</div>
 
@@ -338,8 +348,8 @@
 			</form>
 		</div>
 		
-
-
+</c:otherwise>
+</c:choose>
 		<!-- 회원가입 -->
 
 		<div class="modal fade" id="myJoin" role="dialog">
