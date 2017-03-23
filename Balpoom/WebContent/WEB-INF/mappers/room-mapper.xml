@@ -99,16 +99,8 @@
 			AND B_LATITUDE BETWEEN #{south} AND #{north}
 			AND B_LONGITUDE BETWEEN #{west} AND #{east}
 	</select>
-	
-	<select id="getSubRoomList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		select * from room where  
-			B_LATITUDE BETWEEN #{south} AND #{north}
-			AND B_LONGITUDE BETWEEN #{west} AND #{east}
-	</select>
 
 	<select id="room_deposit"  resultType="java.util.HashMap">
 		select * from ROOM where B_DEPOSIT=1000
 	</select>
-
-
 </mapper>
