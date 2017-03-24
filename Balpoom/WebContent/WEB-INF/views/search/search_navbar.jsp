@@ -399,7 +399,7 @@
 		
 		var mKind = $("input[name='mKind']:checked").val();	// 매물종류
 		var rKind = [];										// 방종류
-		$("input[name='rKind']:checked").each(function(i) {
+		$("input[name='rKind']:checked").each(function() {
 			rKind.push($(this).val());
 	    });
 		
