@@ -95,7 +95,7 @@ div {
 	<div class="info">
 		<span class="mKind">${list1.B_RKIND }</span>&nbsp;
 		<c:choose>
-		<c:when test="${list1.MPAY eq 0 }">
+		<c:when test="${list1.B_MPAY eq 0 }">
 		<span class="mKind">전세</span>&nbsp;
 		</c:when>
 		<c:otherwise>
@@ -103,15 +103,15 @@ div {
 		
 		</c:otherwise>
 		</c:choose>
-		<span class="price">1000/65 만원</span> 
+		<span class="price">${list1.B_DEPOSIT }/${list1.B_MPAY } 만원</span> 
 	</div>
 	
 	<div class="title">
-		안양역 1.5룸 오피스텔 인기최고 풀옵션	
+		${list1.B_RINFO}	
 	</div>
 	
 	<div class="room_address">
-		경기도 안양시 만안구 안양동
+		${list1.B_LOCATION }
 	</div>
 	<hr/>
 	<button id="jjim" class="btn btn-default btn-lg btn-block">

@@ -16,6 +16,7 @@ public class alterDao {
 	public Map agentInfo(Map map){
 		Map agentmap = new HashMap<>();
 		SqlSession session = factory.openSession();
+		
 		try{
 		agentmap = session.selectOne("alter.agent",map);
 			
@@ -29,6 +30,7 @@ public class alterDao {
 	public Map personInfo(Map map){
 		SqlSession session = factory.openSession();
 		Map personmap = new HashMap<>();
+		
 		try{
 			personmap = session.selectOne("alter.person",map);
 		}catch(Exception e){

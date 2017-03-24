@@ -101,31 +101,32 @@ td {
 	<table style="width: 100%">
 		<tr>
 			<th><b>보증금/월세</b></th>
-			<td style="color: #04B486; font-size: 25px;"><b>3000/20</b></td>
+			<td style="color: #04B486; font-size: 25px;">
+			<b>${list1.B_DEPOSIT }/${list1.B_MPAY }</b></td>
 			<th><b>방종류</b></th>
-			<td>원룸</td>
+			<td>${list1.RKIND }</td>
 		</tr>
 		<tr>
 			<th><b>해당층/건물층</b></th>
-			<td>2층/7층</td>
+			<td>${list1.B_FLOOR}/${list1.B_FLOOR_ALL }</td>
 			<th><b>크기</b></th>
-			<td>26.3m<sup>2</sup> (8P)</td>
+			<td>{$list1.B_SIZE_M2}m<sup>2</sup> (${list1.B_SIZE} }P)</td>
 		</tr>
 		<tr>
 			<th><b>관리비</b></th>
-			<td>7만원</td>
+			<td>${list1.B_GPAY }</td>
 			<th><b>관리비<br/>포함항목</b></th>
-			<td>전기, 수도, 가스</td>
+			<td>${list1.B_GLIST }</td>
 		</tr>
 		<tr>
 			<th><b>주차</b></th>
-			<td>가능</td>
+			<td>${list1.B_PARKING }</td>
 			<th><b>엘리베이터</b></th>
-			<td>없음</td>
+			<td>${list1.B_ELEVE }</td>
 		</tr>
 		<tr>
 			<th><b>옵션</b></th>
-			<td colspan="3">세탁기, 냉장고, 책상, 옷장, 침대</td>
+			<td colspan="3">${list1.B_OPTION }</td>
 		</tr>
 	</table>
 </div>
@@ -133,7 +134,7 @@ td {
 <div style="margin: 2em;">
 	<h3>상세설명</h3>
 	<span>
-		내용
+		${list1.B_DETAIL }
 	</span>
 </div>
 <hr style="margin: 2em;"/>

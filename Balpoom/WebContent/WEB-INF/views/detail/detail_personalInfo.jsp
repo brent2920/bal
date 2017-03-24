@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
 div {
 	font-family: 'Jeju Gothic';
@@ -93,16 +93,25 @@ div {
 
 <div class="well">
 	<div class="info">
-		<span class="mKind">원룸</span>&nbsp;<span class="mKind">월세</span>&nbsp;
-		<span class="price">1000/65 만원</span> 
+			<span class="mKind">${list1.B_RKIND }</span>&nbsp;
+		<c:choose>
+		<c:when test="${list1.B_MPAY eq 0 }">
+		<span class="mKind">전세</span>&nbsp;
+		</c:when>
+		<c:otherwise>
+		<span class="mKind">월세</span>&nbsp;
+		
+		</c:otherwise>
+		</c:choose>
+		<span class="price">${list1.B_DEPOSIT }/${list1.B_MPAY } 만원</span> 
 	</div>
 	
 	<div class="title">
-		안양역 1.5룸 오피스텔 인기최고 풀옵션	
+		${list1.B_RINFO}	
 	</div>
 	
 	<div class="room_address">
-		경기도 안양시 만안구 안양동
+		${list1.B_LOCATION }
 	</div>
 	<hr/>
 	<button id="jjim" class="btn btn-default btn-lg btn-block">
@@ -165,10 +174,10 @@ div {
 					</table>
 				</div>
 				<div align="center" style="margin-bottom: 15px;">
-					<h4>등록인 : 정덕찬</h4>
+					<h4>등록인 : ${list.ID }</h4>
 				</div>
 				<div class="modal-contact" align="center">
-					연락처 : 010-1234-2920
+					연락처 : ${list.TELENUM }
 				</div>
 				<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
 					<button type="button" class="btn btn-default" data-dismiss="modal">

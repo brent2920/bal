@@ -148,6 +148,7 @@ public class main_controller {
 		String aterid= map.get("ID").toString();
 		Map map1 = new HashMap<>();
 		map1.put("alterid",aterid);
+		
 		map1.put("sell_num", num);
 		Map agentmap = new HashMap<>();
 		Map personmap = new HashMap<>();
@@ -155,9 +156,9 @@ public class main_controller {
 		personmap = aDao.personInfo(map1);
 		
 		
-		if(agentmap.isEmpty() || personmap.isEmpty()){
-		if(agentmap.size()>1){
-			
+		
+		if(agentmap != null){
+		
 			if(agentmap.get("BK_REGNAME").toString().length()>5){
 			String BK_REGNAME =	map.get("BK_REGNAME").toString().substring( 
 					agentmap.get("BK_REGNAME").toString().indexOf("("),
@@ -171,16 +172,20 @@ public class main_controller {
 					agentmap.get("BK_OFFICENAME").toString().indexOf(")")
 					);
 			agentmap.put("reg", BK_OFFICENAME);
-			mav.addObject("list1",map);
+			
 			mav.addObject("list",agentmap);
 			mav.setViewName("t_detail");
+		
 		}else{
-			mav.addObject("list1",map);
+			
 			mav.addObject("list",personmap);
 			mav.setViewName("t_detail1");
-		}
+			
+			
 		}
 		
+		
+		mav.addObject("list1",map);
 		mav.addObject("pj", all);
 
 		return mav;
