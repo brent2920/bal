@@ -41,23 +41,21 @@
 				</when>
 			</choose>
 			
-			<choose>
-				<when test="one_open == 'one_open'">
-					B_RKIND='원룸(오픈형)' AND
-				</when>
-				<when test="one_seperate == 'one_seperate'">
-					B_RKIND='원룸(분리형)' AND
-				</when>
-				<when test="one_dfloor == 'one_dfloor'">
-					B_RKIND='원룸(복층형)' AND
-				</when>
-				<when test="two_room == 'two_room'">
-					B_RKIND='투룸' AND
-				</when>
-				<when test="gt_three == 'gt_three'">
-					B_RKIND='쓰리룸+' AND
-				</when>
-			</choose>
+			<if test="one_open == 'one_open'">
+				B_RKIND='원룸(오픈형)' AND
+			</if>
+			<if test="one_seperate == 'one_seperate'">
+				B_RKIND='원룸(분리형)' AND
+			</if>
+			<if test="one_dfloor == 'one_dfloor'">
+				B_RKIND='원룸(복층형)' AND
+			</if>
+			<if test="two_room == 'two_room'">
+				B_RKIND='투룸' AND
+			</if>
+			<if test="gt_three == 'gt_three'">
+				B_RKIND='쓰리룸+' AND
+			</if>
 			
 			B_DEPOSIT BETWEEN #{deposit_from} AND #{deposit_to} 
 			
@@ -85,20 +83,18 @@
 				</when>
 			</choose>
 			
-			<choose>
-				<when test="underground == 'underground'">
-					AND B_FLOOR = '반지하'
-				</when>
-				<when test="low_floor == 'low_floor'">
-					AND B_FLOOR in('1층', '2층', '3층')
-				</when>
-				<when test="mid_floor == 'mid_floor'">
-					AND B_FLOOR in('4층', '5층', '6층')
-				</when>
-				<when test="high_floor == 'high_floor'">
-					AND B_FLOOR not in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
-				</when>
-			</choose>
+			<if test="underground == 'underground'">
+				AND B_FLOOR = '반지하'
+			</if>
+			<if test="low_floor == 'low_floor'">
+				AND B_FLOOR in('1층', '2층', '3층')
+			</if>
+			<if test="mid_floor == 'mid_floor'">
+				AND B_FLOOR in('4층', '5층', '6층')
+			</if>
+			<if test="high_floor == 'high_floor'">
+				AND B_FLOOR not in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+			</if>
 			
 			AND B_LATITUDE BETWEEN #{south} AND #{north}
 			AND B_LONGITUDE BETWEEN #{west} AND #{east}
