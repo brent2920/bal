@@ -66,6 +66,9 @@
 	<!-- script -->
 <script>
 $(document).ready(function() {
+	$("log").append(PagingHelper.log(${location.lat }));
+	$("lag").append(PagingHelper.lag(${location.lng }));
+	
 	
     $("#dn").append(PagingHelper.dn(${dn }));
     $("#nj").append(PagingHelper.nj(${nj }));

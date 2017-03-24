@@ -226,6 +226,7 @@ var map;
 var infoWindow;
 var service;
 var list = [];
+
 var temp = {
 	"geometry" : {
 		"location" : {
@@ -273,10 +274,15 @@ var temp3 = {
 };
 
 function initMap() {
+	//console.log("initmap");
 	map = new google.maps.Map(document.getElementById('map'), {
 		center : {
 			lat : 37.5326049,
 			lng : 126.8646878
+			//lat : ${location.lat},
+			//lng : ${location.lng}
+			//lat : log,
+			//lng : lag
 		},
 		zoom : 15,
 		styles : [ {
@@ -300,7 +306,8 @@ function initMap() {
 }
 
 function performSearch() {
-
+	//console.log("performSearch()");
+	
 	var request = {
 		bounds : map.getBounds(),
 		keyword : 'best view'
@@ -309,20 +316,20 @@ function performSearch() {
 }
 
 function callback(results, status) {
-
-	if (status !== google.maps.places.PlacesServiceStatus.OK) {
-		console.error(status);
-		return;
-	}
+	console.log("callback" + results);
+//	if (status !== google.maps.places.PlacesServiceStatus.OK) {
+//		console.error(status);
+//		return;
+//	}
 
 	addMarker(temp);
 	addMarker(temp3);
-	if (list.length != 0) {
+	//if (list.length != 0) {
 
 		// ==============================================reset
 		for (var i = 0; i <= list.length; i++) {
 			addMarker(list[i]);
-		
+			//console.log("i 값:"+ i + " and list.length= "+ list.length-1 );
 			if (i == list.length - 1) {
 				
 				
@@ -338,7 +345,7 @@ function callback(results, status) {
 						//listajax 끝나고 새로운 데이터 가져 오기 
 					if(listajax.length != 0){
 							arrl = []; // 지도 표시 정보 reset
-							console.log("페이지이동 리스트 사이즈:"+listajax.length);
+							//console.log("페이지이동 리스트 사이즈:"+listajax.length);
 							arrl = listajax; // 지도 표시 정보 바꿔주기;
 							
 							njj = [] // njj 다시 리셋 
@@ -348,6 +355,8 @@ function callback(results, status) {
 								njj.push(obj["SELL_NUM"]);
 								
 							}
+					}else{
+						//console.log("callback 사이즈 0입니다");
 					}
 						
 
@@ -376,10 +385,10 @@ function callback(results, status) {
 		}
 		// ===========================================================================================================
 
-	} else {
-		clearMarkers();
-
-	}
+//	} else {
+//		//clearMarkers();
+//
+//	}
 
 }
 function clearMarkers() {
@@ -387,8 +396,9 @@ function clearMarkers() {
 }
 
 function addMarker(place) {
-	console.log("addMarker");
+	//console.log("addMarker");
 	//console.log("list_size=" + list.length)
+	//console.log("list의 사이즈는:"+ list.length);
 	if (list.length == 0) {
 		/**
 		 * ****************
@@ -406,16 +416,23 @@ function addMarker(place) {
 			"url" : "/gomapin?info=" + map.getBounds()
 
 		}).done(function(listajax) {
-					
+					//console.log("현재 박스 사이즈는 : "+ listajax.length);
 					//console.log("New list!=" + "listajax.length="
 							//+ listajax.length + " list.length:" + list.length);
-					if (listajax.length != list.length){
+//					if (listajax.length != list.length){
 
 						list = [];
 						list = listajax;
-					}
+						//console.log("결과의 리스트값은:"+  JSON.stringify(listajax));
+//					}else{
+//						console.log("다릅니다");
+//						list= [];
+//						list = listajax;
+//						console.log("다릅니다의 결과 리스트 : "+ JSON.stringify(list));
+//						
+//					}
 					
-
+ 
 				});
 		
 //======================================================================get_new_list_after_map_changed		
@@ -424,9 +441,12 @@ function addMarker(place) {
 	
 
 	} else {
+		//console.log("값이 있었다가 없어진다"+ list.length);
 	}
 
 	var marker = new google.maps.Marker({
+		
+		
 		map : map,
 		position : place.geometry.location,
 		icon : {
@@ -439,10 +459,10 @@ function addMarker(place) {
 
 		service.getDetails(place, function(result, status) {
 
-			if (status !== google.maps.places.PlacesServiceStatus.OK) {
-				console.error(status);
-				return;
-			}
+//			if (status !== google.maps.places.PlacesServiceStatus.OK) {
+//				console.error(status);
+//				return;
+//			}
 
 			infoWindow.setContent(result.name);
 			infoWindow.open(map, marker);
@@ -473,6 +493,8 @@ var start = 0;
 var end = 3;
 var curr = 0;
 var jsonarr = [];
+var log;
+var lag;
 
 var PagingHelper = {
 
@@ -501,7 +523,7 @@ var PagingHelper = {
 		}
 	},
 	'nj' : function(arr) {
-		console.log("arr="+ arr);
+		//console.log("arr="+ arr);
 		
 		njj = arr;
 	},
@@ -509,6 +531,12 @@ var PagingHelper = {
 	'dn' : function(dnn) {
 
 		dn = dnn;
+	},
+	'log': function(a){
+		log = a;
+	},
+	'lag': function(a){
+		lag = a;
 	},
 
 	'arrlist' : function(arr) {
@@ -532,7 +560,9 @@ var PagingHelper = {
 	},
 
 	'shHtml' : function(n_block) {
-		console.log("shHtml");
+		
+		
+		//console.log("shHtml");
 		var _ = this;
 		if (typeof n_block == 'undefined')
 			n_block = curr;
@@ -608,7 +638,7 @@ var PagingHelper = {
 	},
 
 	'pagingHtml' : function(pTotalCnt) {
-		console.log("pagingHtml"+ " arrl="+arrl.length);
+		//console.log("pagingHtml"+ " arrl="+arrl.length);
 		this.data.totalPageCnt =arrl.length;
 		var _ = this;
 
@@ -681,7 +711,7 @@ var PagingHelper = {
 				: tmp);
 	},//hiㅇ
 	'gotoPage' : function(pageNum) {
-		console.log("gotoPage");
+		//console.log("gotoPage");
 		json = "empty";
 		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
 		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
@@ -690,8 +720,8 @@ var PagingHelper = {
 		var ends = (this.data.currentPage) * 4 - 1;// 3
 		var starts = ends - 3;//
 		var njjTemp = [];
-		console.log("njj=>"+ JSON.stringify(njj));	
-		console.log("njj size = "+ njj.length);
+		//console.log("njj=>"+ JSON.stringify(njj));	
+		//console.log("njj size = "+ njj.length);
 		PagingHelper.data.totalPageCnt = njj.length;
 		
 		for (var i = starts; i < ends; i++) {
@@ -709,13 +739,19 @@ var PagingHelper = {
 							+ njjTemp
 
 				}).done(function(listajax) {
-
+					
+		
 			json = JSON.parse(JSON.stringify(listajax));
+			//console.log("덕찬 사이즈"+listajax.length);
+			//PagingHelper.data.totalPageCnt = listajax.length;
 
 		});
 		console.log("this.data.toalPageCnt Before enter paging="+ this.data.totalPageCnt);
 		$("#paging").html(this.pagingHtml(this.data.totalPageCnt));
 		$("#sh").html(this.shHtml());
+	}else{
+		//console.log("njjlist size는 0입니다");
 	}
+	
 	}
 }
