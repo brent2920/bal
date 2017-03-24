@@ -43,7 +43,7 @@ public class roomadd_controller {
 		ModelAndView mav = new ModelAndView();
 		addMap = addMap.replaceAll("\\s", "");
 		String target = "https://maps.googleapis.com/maps/api/geocode/json?address=" + addMap
-				+ "&key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&language=ko";
+				+ "&key=AIzaSyCjJDAVTrB1J5P1OllkHC07cmjfJbb52vg&language=ko";
 		URL url = new URL(target);
 		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 		String outstr = "";
