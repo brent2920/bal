@@ -277,12 +277,12 @@ function initMap() {
 	//console.log("initmap");
 	map = new google.maps.Map(document.getElementById('map'), {
 		center : {
-			lat : 37.5326049,
-			lng : 126.8646878
+			//lat : 37.5326049,
+			//lng : 126.8646878
 			//lat : ${location.lat},
 			//lng : ${location.lng}
-			//lat : log,
-			//lng : lag
+			lat : log,
+			lng : lag
 		},
 		zoom : 15,
 		styles : [ {
@@ -713,15 +713,15 @@ var PagingHelper = {
 	'gotoPage' : function(pageNum) {
 		//console.log("gotoPage");
 		json = "empty";
-		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
-		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
-		// 콘솔 출력 (삭제)ㅇ
+		this.data.currentPage = pageNum; 
+		this.setStartnumEndnum();
+		
 
 		var ends = (this.data.currentPage) * 4 - 1;// 3
 		var starts = ends - 3;//
 		var njjTemp = [];
 		//console.log("njj=>"+ JSON.stringify(njj));	
-		//console.log("njj size = "+ njj.length);
+		console.log("njj size = "+ njj.length);
 		PagingHelper.data.totalPageCnt = njj.length;
 		
 		for (var i = starts; i < ends; i++) {
