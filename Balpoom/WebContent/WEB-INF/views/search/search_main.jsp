@@ -13,7 +13,6 @@
 <script type="text/javascript" src="/javascript/page.js"></script>
 
 <link rel="stylesheet" href="/css/page.css">
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
 <!-- JPG 처리 소스  -->
 
 <!-- 구글 지도 연동 -->
@@ -75,3 +74,4 @@ $(document).ready(function() {
     $("#paging").append(PagingHelper.pagingHtml(${msize }));
     $("#gotopage").append(PagingHelper.gotoPage(1));});
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
