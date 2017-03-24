@@ -679,13 +679,13 @@ var PagingHelper = {
 		var tmp = this.data.currentPage * this.data.maxListCount;
 		this.data.lastnum = (tmp > this.data.totalCnt ? this.data.totalCnt
 				: tmp);
-	},//hi
+	},//hiㅇ
 	'gotoPage' : function(pageNum) {
 		console.log("gotoPage");
 		json = "empty";
 		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
 		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
-		// 콘솔 출력 (삭제)
+		// 콘솔 출력 (삭제)ㅇ
 
 		var ends = (this.data.currentPage) * 4 - 1;// 3
 		var starts = ends - 3;//
