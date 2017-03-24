@@ -23,7 +23,7 @@
 <div class="main_visual" style="width: 100%; height: 80%; overflow: hidden;
 	background-image: url(&quot;images/mainImg.jpg&quot;)">
 	<div class="main_search_area" style="margin: auto;" align="center">
-		<form action="/search">
+		<form action="/searchtst">
 			<div class="input-group" style="width: 45%;">
 				<input type="text" id="keyword" name="keyword" class="form-control" style="height: 55px; font-size: 18px; 
 					border: 4px solid; border-color: #04B486;" placeholder="원하시는 지역명, 지하철역을 입력해주세요">
