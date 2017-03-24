@@ -93,7 +93,7 @@ div {
 
 <div class="well">
 	<div class="info">
-		<span class="mKind">원룸</span>&nbsp;<span class="mKind">월세</span>&nbsp;
+		<span class="mKind">원룸</span>&nbsp<span class="mKind">월세</span>&nbsp
 		<span class="price">1000/65 만원</span> 
 	</div>
 	

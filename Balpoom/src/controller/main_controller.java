@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import models.alterDao;
 import models.roomDao;
 import utils.Urlpicture;
 
@@ -32,6 +33,8 @@ public class main_controller {
 	roomDao rd;
 	@Autowired
 	Urlpicture urp;
+	@Autowired
+	alterDao aDao;
 
 	@RequestMapping("/")
 	public ModelAndView mainHandler() {
@@ -133,11 +136,38 @@ public class main_controller {
 		
 		List<String> all = urp.get_picture_urls("https://www.zigbang.com/items1/" + num);
 		picturesJ = new JSONArray(all);
-		ModelAndView mav = new ModelAndView("t_detail");
+		
+		ModelAndView mav = new ModelAndView();
+		Map map = new HashMap<>();
+		map=rd.getSelectedRoomInfo(num);
+		String aterid= map.get("ID").toString();
+		Map map1 = new HashMap<>();
+		map1.put("alterid",aterid);
+		map1.put("sell_num", num);
+		Map agentmap = new HashMap<>();
+		Map personmap = new HashMap<>();
+		agentmap = aDao.agentInfo(map1);
+		personmap = aDao.personInfo(map1);
+		
+		System.out.println(agentmap.toString()+"!!!!!!!!!!");
+		if(agentmap.size()>1){
+		
+			mav.setViewName("t_detail");
+		}
+		if(personmap.size()>1){
+			mav.setViewName("t_detail1");
+		}
+		
+		
 		mav.addObject("pj", all);
 
 		return mav;
 
+	}
+
+	private void setViewName(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// search paging ajax 처리
