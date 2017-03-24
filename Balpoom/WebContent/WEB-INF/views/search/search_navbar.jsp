@@ -264,11 +264,11 @@
 		<!-- 검색창 -->
 		<form class="navbar-form navbar-right" style="margin-top: 5px; margin-bottom: 5px;">
 			<div class="input-group">
-				<input type="text" class="form-control" 
+				<input type="text" class="form-control" id="keyword"
 					placeholder="원하시는 지역명, 지하철역을 입력해주세요"
 						style="width: 300px; height: 40px;">
 				<div class="input-group-btn">
-					<button class="btn btn-default" type="submit" style="height: 40px;">
+					<button class="btn btn-default search" type="button" style="height: 40px;">
 						<i class="glyphicon glyphicon-search"></i>
 					</button>
 				</div>
@@ -278,6 +278,31 @@
 </nav>
 
 <script>
+	function keywordChk() {
+		var chk = true;
+		console.log("키워드! " + $("#keyword").val());
+		
+		$.ajax({
+			"url" : "/search_chk",
+			"dataType" : "json",
+			"async" : false,
+			"data" : {
+				"keyword" : $("#keyword").val()
+			}
+		}).done(function(rst) {
+			console.log(rst);
+			if(rst == false) {
+				window.alert("지역명 또는 지하철역명을 입력해주세요");
+				chk = false;
+			}
+		});
+		return chk;
+	}
+	
+	$(".search").click(function() {
+		keywordChk();
+	});
+
 	$(".dropdown").mouseenter(function() {
 		$(this).children().eq(1).css("display","block");
 	});

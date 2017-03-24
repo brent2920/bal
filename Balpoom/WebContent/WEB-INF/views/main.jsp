@@ -23,7 +23,7 @@
 <div class="main_visual" style="width: 100%; height: 80%; overflow: hidden;
 	background-image: url(&quot;images/mainImg.jpg&quot;)">
 	<div class="main_search_area" style="margin: auto;" align="center">
-		<form action="/search">
+		<form action="/search" onsubmit="return keywordChk()">
 			<div class="input-group" style="width: 45%;">
 				<input type="text" id="keyword" name="keyword" class="form-control" style="height: 55px; font-size: 18px; 
 					border: 4px solid; border-color: #04B486;" placeholder="원하시는 지역명, 지하철역을 입력해주세요">
@@ -39,6 +39,27 @@
 </div>
 
 <script>
+	function keywordChk() {
+		var chk = true;
+		console.log("키워드! " + $("#keyword").val());
+		
+		$.ajax({
+			"url" : "/search_chk",
+			"dataType" : "json",
+			"async" : false,
+			"data" : {
+				"keyword" : $("#keyword").val()
+			}
+		}).done(function(rst) {
+			console.log(rst);
+			if(rst == false) {
+				window.alert("지역명 또는 지하철역명을 입력해주세요");
+				chk = false;
+			}
+		});
+		return chk;
+	}
+
 // 나중에 자동완성기능 처리하기!
 // 	var autoComplete = new google.maps.places.Autocomplete(
 // 		$("#keyword"), {
