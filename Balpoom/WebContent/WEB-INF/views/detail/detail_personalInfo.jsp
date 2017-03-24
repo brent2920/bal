@@ -93,7 +93,7 @@ div {
 
 <div class="well">
 	<div class="info">
-		<span class="mKind">원룸</span>&nbsp<span class="mKind">월세</span>&nbsp
+		<span class="mKind">원룸</span>&nbsp;<span class="mKind">월세</span>&nbsp;
 		<span class="price">1000/65 만원</span> 
 	</div>
 	
@@ -112,22 +112,23 @@ div {
 
 <div class="well">
 	<div class="agent_office">
-		희망공인중개사무소	
+			<span style="padding: 3px; background-color: #04B486; 
+						border-radius: 5px; color: white;">개인</span>	
 	</div>
 	<div class="boss">
-		대표 : 이현원
+		개인 직거래
 	</div>
 	<div class="office_address">
-		경기도 안양시 안양로 344번길 18
+		${list1.B_TITLE }
 	</div>
 	<div class="agent_name">
-		[등록인] 정덕찬
+		[등록인] ${list.ID }
 	</div>
 	<div class="agency_number">
-		중개등록번호: 92430000-1481
+		이메일 : ${list.EEMAIL }
 	</div>
 	<div class="msg">
-		※ 중개사와의 거래시 수수료가 발생하기 참조하세요
+		※ 개인 직거래시 사기에 주의 하세요!!!
 	</div>
 
 	<button class="btn btn-default btn-info btn-lg btn-block contact"
@@ -142,23 +143,23 @@ div {
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<div align="center">
 					<h3 style="color: #82E0AA; margin-bottom: 20px;">
-						[ 매물번호 1756298 ]
+						[ 매물번호 ${list1.SELL_NUM } ]
 					</h3>
 				</div>
 				<div align="center">
 					<table class="table">
 						<tbody>
 							<tr>
-								<th>중개사무소명</th>
-								<td>희망공인중개사무소</td>
+								<th>개인 직거래</th>
+								<td></td>
 							</tr>
 							<tr>
-								<th>대표명</th>
-								<td>이현원</td>
+								<th>이름</th>
+								<td>${list.ID }</td>
 							</tr>
 							<tr>
-								<th>대표번호</th>
-								<td>070-4806-8847</td>
+								<th>연락처</th>
+								<td>${list.TELENUM }</td>
 							</tr>
 						</tbody>
 					</table>
