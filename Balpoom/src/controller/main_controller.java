@@ -47,6 +47,7 @@ public class main_controller {
 
 	@RequestMapping("/search")
 	public ModelAndView searchHandler() throws JsonProcessingException {
+		System.out.println("==================search=======================");
 		ModelAndView mav = new ModelAndView("t_search");
 		
 		/*-------------------------------------------------
@@ -55,11 +56,12 @@ public class main_controller {
 		 * 
 		 * ------------------------------------------------*/
 		List<HashMap<String, Object>> mlist = rd.test_room();
+		System.out.println("mlist.size="+mlist.size());
 		/*
 		 * search 처리 코드
 		 */
 		List<Integer> numbers = new ArrayList<>();
-		int defnum = 7682481;// 에러시 이번호도 처리가 안되는거라서 바꿔줘야함
+		int defnum = 7612035;// 에러시 이번호도 처리가 안되는거라서 바꿔줘야함
 		List<String> urlcol = new ArrayList<>();
 		JSONArray urlcolj = null;
 		JSONArray numbersj = null;
@@ -76,7 +78,7 @@ public class main_controller {
 
 			try {
 				// System.out.println("urp=" + urp.get_main_url(input));
-				// url = (urp.get_main_url(input));
+				 url = (urp.get_main_url(input));
 				numbers.add(num);
 			} catch (Exception e) {
 
@@ -107,14 +109,17 @@ public class main_controller {
 		}
 
 		//System.out.println("numbersj= "+ numbersj.toString());
-		System.out.println("mlist json ====> "+ json_arr.toString());
+		//System.out.println("mlist json ====> "+ json_arr.toString());
 		mav.addObject("dn", defnum);
 		mav.addObject("nj", numbersj);
 		mav.addObject("mpic", urlcolj);
 		mav.addObject("mlist", json_arr.toString());
 		mav.addObject("msize", mlist.size());
 		mav.setViewName("t_search");
-
+		System.out.println("mlist size=>"+ json_arr.length() + " msize = "+ mlist.size());
+		System.out.println("dn="+ defnum + "nj="+numbersj);
+		System.out.println("urlcolj= "+ urlcolj);
+		System.out.println("==================search end====================");
 		return mav;
 
 	}
@@ -141,24 +146,30 @@ public class main_controller {
 	}
 
 	// search paging ajax 처리
-	@RequestMapping("/testing")
+	@RequestMapping(path ="/testing", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap testing(@RequestParam Map n) {
+		System.out.println("============HashMao=============");
 		ModelAndView mav = new ModelAndView();
 		int cur = Integer.parseInt((String) n.get("curr"));
 		String list = (String) n.get("list");
+		System.out.println("list = "+ list.toString());
+		
 		String[] arr = list.split(",");
+		System.out.println("arr_string="+ arr.toString());
+		System.out.println("arr.size = "+ arr.length);
 		String input = null;
 
 		List<String> ur = new ArrayList<>();
 		HashMap map = new HashMap();
 
-		for (int i = 0; i <= 3; i++) {
+		for (int i = 0; i < arr.length; i++) {
 
 			input = "https://www.zigbang.com/items1/" + arr[i];
 			map.put(i, (urp.get_main_url(input)));
 
 		}
+		System.out.println("==========end Hashmap");
 		return map;
 	}
 	
@@ -279,7 +290,7 @@ public class main_controller {
 		Iterator<String> keys = searchConditions.keySet().iterator();
 		while (keys.hasNext()) {
 			String key = keys.next();
-			System.out.printf("%s = %s \n", key, searchConditions.get(key));
+			//System.out.printf("%s = %s \n", key, searchConditions.get(key));
 		}
 			
 		List<Map> rList = rd.getRoomList(searchConditions);

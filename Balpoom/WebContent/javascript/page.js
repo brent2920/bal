@@ -216,19 +216,6 @@
 /**
  * g-map values!
  */
-/**
- * paging values!
- */
-var arrl = "empty";
-var jpgs = "empty";
-var njj = "empty"; //사진 url 정보 얻어올 값
-var listajax = "empty";
-var json = "empty";
-var dn = 7750005;
-var start = 0;
-var end = 3;
-var curr = 0;
-var jsonarr = [];
 
 
 /**
@@ -332,9 +319,9 @@ function callback(results, status) {
 	addMarker(temp3);
 	if (list.length != 0) {
 
-		// ==============================================
+		// ==============================================reset
 		for (var i = 0; i <= list.length; i++) {
-			//addMarker(list[i]);
+			addMarker(list[i]);
 		
 			if (i == list.length - 1) {
 				
@@ -349,8 +336,9 @@ function callback(results, status) {
 
 				}).done(function(listajax) {
 						//listajax 끝나고 새로운 데이터 가져 오기 
-
+					if(listajax.length != 0){
 							arrl = []; // 지도 표시 정보 reset
+							console.log("페이지이동 리스트 사이즈:"+listajax.length);
 							arrl = listajax; // 지도 표시 정보 바꿔주기;
 							
 							njj = [] // njj 다시 리셋 
@@ -360,15 +348,29 @@ function callback(results, status) {
 								njj.push(obj["SELL_NUM"]);
 								
 							}
+					}
 						
 
-						});
+				});
 				
-
+				//============navbar
+				
+//				$.ajax({
+//					"url" : "/gsearchTest",
+//					"type" : "POST",
+//					"async" : false,
+//					"data" : allData
+//				}).done(function(rst) {
+//					console.log("rst=>"+rst);
+//					
+//				});
+//				
+				
+				
+				//=============navbar
 
 				
 				list = [];
-				
 				PagingHelper.gotoPage(1);
 			}
 		}
@@ -385,7 +387,7 @@ function clearMarkers() {
 }
 
 function addMarker(place) {
-
+	console.log("addMarker");
 	//console.log("list_size=" + list.length)
 	if (list.length == 0) {
 		/**
@@ -458,6 +460,20 @@ function addMarker(place) {
  *                *
  * ****************
  */
+/**
+ * paging values!
+ */
+var arrl = "empty";
+var jpgs = "empty";
+var njj = "empty"; //사진 url 정보 얻어올 값
+var listajax = "empty";
+var json = "empty";
+var dn = 7750005;
+var start = 0;
+var end = 3;
+var curr = 0;
+var jsonarr = [];
+
 var PagingHelper = {
 
 	'data' : {
@@ -468,7 +484,7 @@ var PagingHelper = {
 		maxListCount : 5,
 		startnum : 1 // 시작 글번호
 		,
-		lastnum : 50 // 마지막 글번호
+		lastnum : 700 // 마지막 글번호
 		,
 		totalCnt : 0 // 전체 글의 갯수.
 		,
@@ -485,7 +501,8 @@ var PagingHelper = {
 		}
 	},
 	'nj' : function(arr) {
-
+		console.log("arr="+ arr);
+		
 		njj = arr;
 	},
 
@@ -502,10 +519,7 @@ var PagingHelper = {
 	'jpglist' : function(jpg) {
 		jpgs = jpg;
 
-		for (var i = 0; i < 2; i++) {
-			var obj = jpgs[i];
-
-		}
+		
 	},
 
 	'linkajax' : function(num) {
@@ -518,6 +532,7 @@ var PagingHelper = {
 	},
 
 	'shHtml' : function(n_block) {
+		console.log("shHtml");
 		var _ = this;
 		if (typeof n_block == 'undefined')
 			n_block = curr;
@@ -593,7 +608,8 @@ var PagingHelper = {
 	},
 
 	'pagingHtml' : function(pTotalCnt) {
-
+		console.log("pagingHtml"+ " arrl="+arrl.length);
+		this.data.totalPageCnt =arrl.length;
 		var _ = this;
 
 		_.data['totalCnt'] = pTotalCnt ? pTotalCnt : _.data['totalCnt'];
@@ -665,7 +681,7 @@ var PagingHelper = {
 				: tmp);
 	},
 	'gotoPage' : function(pageNum) {
-
+		console.log("gotoPage");
 		json = "empty";
 		this.data.currentPage = pageNum; // 입력받은 페이지번호를 현재페이지로 설정
 		this.setStartnumEndnum(); // 입력받은 페이지의 startnum과 endnum구하기
@@ -674,11 +690,15 @@ var PagingHelper = {
 		var ends = (this.data.currentPage) * 4 - 1;// 3
 		var starts = ends - 3;//
 		var njjTemp = [];
-		//console.log("njj=>"+ njj);
-		for (var i = starts; i <= ends; i++) {
+		console.log("njj=>"+ JSON.stringify(njj));	
+		console.log("njj size = "+ njj.length);
+		PagingHelper.data.totalPageCnt = njj.length;
+		
+		for (var i = starts; i < ends; i++) {
 			
 			njjTemp.push(njj[i]);
 		}
+	if(njjTemp.length != 0){
 		$.ajax(
 				{
 
@@ -693,9 +713,9 @@ var PagingHelper = {
 			json = JSON.parse(JSON.stringify(listajax));
 
 		});
-
-		$("#paging").html(this.pagingHtml());
+		console.log("this.data.toalPageCnt Before enter paging="+ this.data.totalPageCnt);
+		$("#paging").html(this.pagingHtml(this.data.totalPageCnt));
 		$("#sh").html(this.shHtml());
-
+	}
 	}
 }

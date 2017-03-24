@@ -27,7 +27,7 @@
 
 	<select id="getRoomList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 
-		SELECT SELL_NUM,B_LATITUDE,B_LONGITUDE  FROM ROOM WHERE
+		select  SELL_NUM,B_MPAY,B_TITLE,B_RKIND  FROM ROOM WHERE
 			<choose>
 				<when test="mKind == 'jPay'">
 					B_MPAY = 0 AND
@@ -105,6 +105,6 @@
 	</select>
 
 	<select id="room_deposit"  resultType="java.util.HashMap">
-		select * from ROOM where B_DEPOSIT=1000
+		select * from ROOM where 	SELL_NUM=7676969
 	</select>
 </mapper>

@@ -11,7 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="/javascript/page.js"></script>
 <style type="text/css">
 /* .dropdown-menu > div { */
 /* 	padding: 20px; */
@@ -389,7 +389,7 @@
 			$(this).prop("checked", false);
 		else
 			$(this).prop("checked", true);
-	});
+	}); 
 	
 	// ===========================================================================
 	
@@ -464,14 +464,33 @@
 		
 		console.log(JSON.stringify(allData));
 		
-		
 		$.ajax({
 			"url" : "/gsearchTest",
 			"type" : "POST",
+			"dataType" : "json",
+			"async" : false,
 			"data" : allData
 		}).done(function(rst) {
 			// ajax로 날라온거를 rst로 쓰겠다는것 변수명은 맘대로 지정
 // 			$("#result").append(rst);
+			console.log("rst=>"+rst);
+			console.log("rst.size"+rst.length)
+			if(rst.length != 0){
+				//console.log("search_arrl->"+JSON.stringify(arrl));
+				arrl = [];
+				arrl = rst;
+				//console.log("arrl="+arrl);
+				njj = [];
+				for(var i =0; i < arrl.length; i++){
+					
+					var obj = arrl[i];
+					njj.push(obj["SELL_NUM"]);
+					//console.log("njj->"+njj);
+				}
+				
+			}
 		});
+		list = [];
+		PagingHelper.gotoPage(1);
 	}
 </script>

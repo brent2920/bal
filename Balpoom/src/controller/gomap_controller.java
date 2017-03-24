@@ -130,7 +130,7 @@ public class gomap_controller {
 
 	@RequestMapping("/gsearchTest")
 	@ResponseBody
-	public java.lang.String roomListHandler(@RequestParam(name = "mKind") String mKind,
+	public String roomListHandler(@RequestParam(name = "mKind") String mKind,
 			@RequestParam(name = "rKind[]") List<String> rKind,
 			@RequestParam(name = "deposit_from") String deposit_from,
 			@RequestParam(name = "deposit_to") String deposit_to, @RequestParam(name = "mpay_from") String mpay_from,
@@ -188,6 +188,7 @@ public class gomap_controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("m_return:"+m_return);
 		return m_return;
 	}
 
@@ -205,7 +206,7 @@ public class gomap_controller {
 			System.out.println(detail_request);
 			Document doc = Jsoup.connect(detail_request).get();
 			String id = doc.select("PlaceSearchResponse").select("result").select("id").get(0).text();
-			System.out.println(id.toString());
+			//System.out.println(id.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
