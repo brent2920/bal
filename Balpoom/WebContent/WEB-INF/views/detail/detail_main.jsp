@@ -134,7 +134,7 @@ td {
 <div style="margin: 2em;">
 	<h3>상세설명</h3>
 	<span>
-		${list1.B_DETAIL }
+		${list2.ROOM }
 	</span>
 </div>
 <hr style="margin: 2em;"/>

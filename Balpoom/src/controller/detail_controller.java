@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import models.alterDao;
 import models.roomDao;
+import models.CLOBDao;
 import utils.Urlpicture;
 
 @Controller
@@ -28,6 +29,8 @@ public class detail_controller {
 	Urlpicture urp;
 	@Autowired
 	alterDao aDao;
+	@Autowired
+	CLOBDao tDao;
 
 	@RequestMapping("/detail")
 	public ModelAndView detailViewHandler(@RequestParam Map n, 
@@ -53,22 +56,24 @@ public class detail_controller {
 		map1.put("alterid",aterid);
 		
 		map1.put("sell_num", num);
+		Map map2 = new HashMap<>();
+		map2 = tDao.test(map1);
 		Map agentmap = new HashMap<>();
 		Map personmap = new HashMap<>();
 		agentmap = aDao.agentInfo(map1);
 		personmap = aDao.personInfo(map1);
 		
-		
-		
+	
 		if(agentmap != null){
 		
-			if(agentmap.get("BK_REGNAME").toString().length()>5){
-			String BK_REGNAME =	map.get("BK_REGNAME").toString().substring( 
-					agentmap.get("BK_REGNAME").toString().indexOf("("),
+			if(agentmap.get("BK_REGNAME").toString().length()>3){
+				String REGNAME = agentmap.get("BK_REGNAME").toString();
+			String BK_REGNAME =	REGNAME.substring( 
+					agentmap.get("BK_REGNAME").toString().indexOf("(")+1,
 					agentmap.get("BK_REGNAME").toString().indexOf(")"));
+			
 				agentmap.put("BK_REGNAME", BK_REGNAME);
 			}
-			
 			
 			String BK_OFFICENAME = agentmap.get("BK_OFFICENAME").toString().substring(
 				agentmap.get("BK_OFFICENAME").toString().indexOf("(")+1,
@@ -83,6 +88,7 @@ public class detail_controller {
 			mav.addObject("list",personmap);
 			mav.setViewName("t_detail1");
 		}
+		mav.addObject("list2",map2);
 		mav.addObject("list1",map);
 		mav.addObject("pj", all);
 
