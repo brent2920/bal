@@ -66,7 +66,7 @@ public class detail_controller {
 			String BK_REGNAME =	map.get("BK_REGNAME").toString().substring( 
 					agentmap.get("BK_REGNAME").toString().indexOf("("),
 					agentmap.get("BK_REGNAME").toString().indexOf(")"));
-			agentmap.put("BK_REGNAME", BK_REGNAME);
+				agentmap.put("BK_REGNAME", BK_REGNAME);
 			}
 			
 			
