@@ -23,9 +23,9 @@
 <div class="main_visual" style="width: 100%; height: 80%; overflow: hidden;
 	background-image: url(&quot;images/mainImg.jpg&quot;)">
 	<div class="main_search_area" style="margin: auto;" align="center">
-		<form>
+		<form action="/search">
 			<div class="input-group" style="width: 45%;">
-				<input type="text" class="form-control" style="height: 55px; font-size: 18px; 
+				<input type="text" id="keyword" name="keyword" class="form-control" style="height: 55px; font-size: 18px; 
 					border: 4px solid; border-color: #04B486;" placeholder="원하시는 지역명, 지하철역을 입력해주세요">
 				<div class="input-group-btn">
 					<button class="btn btn-default" type="submit" style="height: 55px; width: 120px; font-size: 18px; 
@@ -38,3 +38,10 @@
 	</div>
 </div>
 
+<script>
+// 나중에 자동완성기능 처리하기!
+// 	var autoComplete = new google.maps.places.Autocomplete(
+// 		$("#keyword"), {
+// 		types: ['(regions)'];
+// 	});
+</script>
