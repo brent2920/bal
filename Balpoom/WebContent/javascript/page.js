@@ -679,7 +679,7 @@ var PagingHelper = {
 		var tmp = this.data.currentPage * this.data.maxListCount;
 		this.data.lastnum = (tmp > this.data.totalCnt ? this.data.totalCnt
 				: tmp);
-	},
+	},//hi
 	'gotoPage' : function(pageNum) {
 		console.log("gotoPage");
 		json = "empty";
