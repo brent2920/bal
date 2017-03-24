@@ -110,7 +110,7 @@ td {
 			<th><b>해당층/건물층</b></th>
 			<td>${list1.B_FLOOR}/${list1.B_FLOOR_ALL }</td>
 			<th><b>크기</b></th>
-			<td>{$list1.B_SIZE_M2}m<sup>2</sup> (${list1.B_SIZE} }P)</td>
+			<td>${list1.B_SIZE_M2}m<sup>2</sup> (${list1.B_SIZE} P)</td>
 		</tr>
 		<tr>
 			<th><b>관리비</b></th>
@@ -147,7 +147,7 @@ td {
 <script>
 
 	function initMap() {
-		var roomLocation = {lat : 37.481215, lng : 126.952744};		// 여기에 좌표값 받아와서 EL태그로 표시!
+		var roomLocation = {lat : ${list1.B_LATITUDE}, lng : ${list1.B_LONGITUDE}};		// 여기에 좌표값 받아와서 EL태그로 표시!
 		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom : 17,
