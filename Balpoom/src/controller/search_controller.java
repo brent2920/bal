@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,7 +38,15 @@ public class search_controller {
 
 		ModelAndView mav = new ModelAndView("t_search");
 		System.out.println("Search Keyword : " + keyword);
-		HashMap<String, Double> location = sDao.getLatLng(keyword);
+		HashMap<String, Double> location = new HashMap<>();
+		
+		if(sDao.getLatLng(keyword) == null) {
+			location.put("lat", 37.5662952);
+			location.put("lng", 126.9779451);
+		} else {
+			location = sDao.getLatLng(keyword);
+		}
+			
 		System.out.println("Location : " + location);
 		
 		// 검색키워드에 해당하는 값의 좌표값 addObject
@@ -101,4 +110,19 @@ public class search_controller {
 
 		return mav;
 	}
+	
+	@RequestMapping("/search_chk")
+	@ResponseBody
+	public boolean searchCheckHandler(
+			@RequestParam(name = "keyword", defaultValue = "서울시청") 
+				String keyword) {
+		try {
+			return sDao.keywordCheck(keyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
 }
