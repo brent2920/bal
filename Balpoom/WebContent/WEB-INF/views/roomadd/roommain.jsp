@@ -2,38 +2,14 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-
-
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
-
-
 <!-- 달력 -->
-<meta charset="utf-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-
-
-
-
-
-
 <style>
+
 td, th {
 	height: 40px;
 	font-size: 12px;
@@ -103,10 +79,11 @@ td, th {
 		<h2 style="font-family: 나눔고딕;">&nbsp;방등록 하기</h2>
 	</div>
 	<div class="well" style="boder: 1px solid; background-color: black;">
-		<font color="white"> - 등록한 방 정보는 직거래 매물로 등록되며, 최대 30일까지 노출 후
-			거래완료 상태로 전환됩니다.<br /> - 방 등록이 완료된 매물은 방 정보와 회원정보(연락처, 메일 등)와 함께
-			노출됩니다.<br /> - 거래완료된 매물을 완료처리하지 않은 경우 허위매물 등록으로 이용이 제한될 수 있습니다<br />
-			- 매물 관리규정에 위배 되거나 신고된 매물은 비공개 또는 삭제처리되며 경고 및 제재조치를 받을 수 있습니다.<br />
+		<font color="white">
+			 - 등록한 방 정보는 직거래 매물로 등록되며, 최대 30일까지 노출 후 거래완료 상태로 전환됩니다.<br />
+			 - 방 등록이 완료된 매물은 방 정보와 회원정보(연락처, 메일 등)와 함께 노출됩니다.<br />
+			 - 거래완료된 매물을 완료처리하지 않은 경우 허위매물 등록으로 이용이 제한될 수 있습니다<br />
+			 - 매물 관리규정에 위배 되거나 신고된 매물은 비공개 또는 삭제처리되며 경고 및 제재조치를 받을 수 있습니다.<br />
 		</font> <b style="color: #00BFFF">- 부동산 중개사는 직거래 매물을 등록할 수 없으며, 공인중개사회원
 			가입 후 이용하시기 바랍니다.</b><br />
 	</div>
