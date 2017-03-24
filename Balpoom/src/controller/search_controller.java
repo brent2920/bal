@@ -15,7 +15,9 @@ public class search_controller {
 	searchDao sDao;
 	
 	@RequestMapping("/searchtst")
-	public ModelAndView searchHandler(@RequestParam String keyword) throws Exception {
+	public ModelAndView searchHandler(
+				@RequestParam(name="keyword", defaultValue="서울시청") 
+					String keyword) throws Exception {
 		ModelAndView mav = new ModelAndView("t_search");
 		System.out.println("Search Keyword : " + keyword);
 		mav.addObject("location", sDao.getLatLng(keyword));
