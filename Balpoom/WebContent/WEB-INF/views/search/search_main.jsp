@@ -33,7 +33,7 @@
 		style="height: 100%; margin: 0; padding: 0; background-color: white">
 		<div
 			style="height: 6%; background-color: #222222; color: #919191; line-height: 38px; padding-left: 3%">
-			&gt 검색 결과 (방 개수)</div>
+			&gt 검색 결과 (방 개수 )</div>
 
 		<!-- 방리스트 -->
 		<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
