@@ -151,7 +151,7 @@ td {
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom : 17,
 			center : roomLocation,
-			streetViewControl : false,
+			streetViewControl : true,
 		});
 		
 		var marker = new google.maps.Marker({
