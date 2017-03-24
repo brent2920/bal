@@ -724,8 +724,8 @@ $("#b_size").keyup(function() {
 			if (xhr.status == 200 && xhr.readyState == 4) {
 				var obj = JSON.parse(xhr.responseText);
 				console.log(obj);
-					llat = obj.results[0].geometry.location.lat
-					llng = obj.results[0].geometry.location.lng
+					llat = obj.results[0].geometry.location.lat;
+					llng = obj.results[0].geometry.location.lng;
 					$("#b_lat").val(llat);
 					$("#b_lng").val(llng);
 				initMap1(llat, llng);

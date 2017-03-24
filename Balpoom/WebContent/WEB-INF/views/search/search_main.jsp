@@ -11,7 +11,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/javascript/page.js"></script>
-<script type="text/javascript" src="/javascript/gomap.js"></script>
+
 <link rel="stylesheet" href="/css/page.css">
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
 <!-- JPG 처리 소스  -->
