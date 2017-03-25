@@ -13,7 +13,7 @@ var mapBound;
 
 var allData = {
 	"mKind" : "allPay", // 매물종류
-	"rKind" : [ "one_open" ], // 방종류
+	"rKind" : ["all_room"], // 방종류
 	"deposit_from" : "0 만원", // 보증금
 	"deposit_to" : "9999999 만원",
 	"mpay_from" : "0 만원", // 월세
