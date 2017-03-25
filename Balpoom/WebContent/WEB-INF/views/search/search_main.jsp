@@ -57,7 +57,7 @@
 $(document).ready(function() {
 	$("#log").append(PagingHelper.log(${location.lat }));
 	$("#lag").append(PagingHelper.lag(${location.lng }));
-    $("#dn").append(PagingHelper.dn(${dn }));
+     $("#dn").append(PagingHelper.dn(${dn }));
     $("#nj").append(PagingHelper.nj(${nj }));
     $("#jpglist").append(PagingHelper.jpglist(${mpic }));
     $("#arrlist").append(PagingHelper.arrlist(${mlist }));

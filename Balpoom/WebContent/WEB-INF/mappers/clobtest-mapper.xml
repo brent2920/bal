@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clob">
+<resultMap id="test" type="java.util.HashMap" >
+	
+	<result property="ROOM" column="B_DETAIL"
+	jdbcType="CLOB" javaType="java.lang.String"/>
+
+</resultMap>
+<select id="test01" parameterType="java.util.HashMap" resultMap="test">
+	select * FROM ROOM WHERE sell_num = #{sell_num}
+</select>
+
+</mapper>
