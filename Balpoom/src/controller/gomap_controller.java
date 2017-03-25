@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -128,45 +129,102 @@ public class gomap_controller {
 
 	}
 
-	@RequestMapping("/gsearchTest")
+	@RequestMapping(path="/gsearchTest", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String roomListHandler(@RequestParam(name = "mKind") String mKind,
-			@RequestParam(name = "rKind[]") List<String> rKind,
-			@RequestParam(name = "deposit_from") String deposit_from,
-			@RequestParam(name = "deposit_to") String deposit_to, @RequestParam(name = "mpay_from") String mpay_from,
-			@RequestParam(name = "mpay_to") String mpay_to,
-			@RequestParam(name = "parking", required = false, defaultValue = "all") String parking,
-			@RequestParam(name = "pet", required = false, defaultValue = "all") String pet,
-			@RequestParam(name = "lhok", required = false, defaultValue = "all") String lhok,
-			@RequestParam(name = "area[]", required = false, defaultValue = "all") List<String> area,
-			@RequestParam(name = "floor[]", required = false, defaultValue = "all") List<String> floor,
-			@RequestParam(name = "east") String east, @RequestParam(name = "west") String west,
-			@RequestParam(name = "south") String south, @RequestParam(name = "north") String north) {
-
+	public String roomListHandler(
+			@RequestParam(name="mKind") String mKind, 
+			@RequestParam(name="rKind[]") List<String> rKind, 
+			@RequestParam(name="deposit_from") String deposit_from, 
+			@RequestParam(name="deposit_to") String deposit_to, 
+			@RequestParam(name="mpay_from") String mpay_from, 
+			@RequestParam(name="mpay_to") String mpay_to, 
+			@RequestParam(name="parking", required=false, defaultValue="all") String parking, 
+			@RequestParam(name="pet", required=false, defaultValue="all") String pet, 
+			@RequestParam(name="lhok", required=false, defaultValue="all") String lhok, 
+			@RequestParam(name="area[]" , required=false, defaultValue="all") List<String> area, 
+			@RequestParam(name="floor[]", required=false, defaultValue="all") List<String> floor,
+			@RequestParam(name="east") String east,
+			@RequestParam(name="west") String west,
+			@RequestParam(name="south") String south,
+			@RequestParam(name="north") String north
+			) throws JsonProcessingException {
+		
+		System.out.println("MPAY_TO ============> " + mpay_to);
 		// 보증금 세팅 - 문자제거
 		String[] d_from = deposit_from.split("\\s");
 		String[] d_to = deposit_to.split("\\s");
-
+		
 		// 월세 세팅 - 문자제거
 		String[] m_from = mpay_from.split("\\s");
-		String[] m_to = mpay_from.split("\\s");
-		String m_return = null;
+		String[] m_to = mpay_to.split("\\s");
+		System.out.println("M_TO ============> " + m_to[0]);
+		
+		
 		// 평수 세팅
-		// 0 : 전체 / 1 : 5평 이하 / 2 : 5~10평 / 3 : 10평 이상
+		// 0 : 전체 / 1 : 5평 이하 / 2 : 5~10평 / 3 : 10평 이상 
 		int areaFlag = 0;
-		try {
-			for (String m : area) {
-				if (m.equals("lt_5"))
-					areaFlag = 1;
-				else if (m.equals("bt_5_10"))
-					areaFlag = 2;
-				else if (m.equals("gt_10"))
-					areaFlag = 3;
-			}
-
-			Map searchConditions = new HashMap<>();
+		for(String m : area) {
+			if(m.equals("lt_5"))
+				areaFlag = 1;
+			else if(m.equals("bt_5_10"))
+				areaFlag = 2;
+			else if(m.equals("gt_10"))
+				areaFlag = 3;
+		}
+		
+		// 방종류 처리
+		String one_open="";
+		String one_seperate="";
+		String one_dfloor="";
+		String two_room="";
+		String gt_three="";
+		String m_return="";
+		
+		for(String m : rKind) {
+			if(m.equals("one_open"))
+				one_open = m;
+			
+			else if(m.equals("one_seperate"))
+				one_seperate = m;
+			
+			else if(m.equals("one_dfloor"))
+				one_dfloor = m;
+			
+			else if(m.equals("two_room"))
+				two_room = m;			
+			
+			else if(m.equals("gt_three"))
+				gt_three = m;
+		}
+			
+		// 층수 처리
+		String underground="";
+		String low_floor="";
+		String mid_floor="";
+		String high_floor="";
+		
+		for(String m : floor) {
+			if(m.equals("underground"))
+				underground = m;
+			
+			else if(m.equals("low_floor"))
+				low_floor = m;
+			
+			else if(m.equals("mid_floor"))
+				mid_floor = m;
+			
+			else if(m.equals("high_floor"))
+				high_floor = m;
+		}
+		
+		@SuppressWarnings("rawtypes")
+		Map searchConditions = new HashMap<>();
 			searchConditions.put("mKind", mKind);
-			searchConditions.put("rKind", rKind);
+			searchConditions.put("one_open", one_open);
+			searchConditions.put("one_seperate", one_seperate);
+			searchConditions.put("one_dfloor", one_dfloor);
+			searchConditions.put("two_room", two_room);
+			searchConditions.put("gt_three", gt_three);
 			searchConditions.put("deposit_from", d_from[0]);
 			searchConditions.put("deposit_to", d_to[0]);
 			searchConditions.put("mpay_from", m_from[0]);
@@ -175,20 +233,29 @@ public class gomap_controller {
 			searchConditions.put("pet", pet);
 			searchConditions.put("lhok", lhok);
 			searchConditions.put("area", areaFlag);
-			searchConditions.put("floor", floor);
+			searchConditions.put("underground", underground);
+			searchConditions.put("low_floor", low_floor);
+			searchConditions.put("mid_floor", mid_floor);
+			searchConditions.put("high_floor", high_floor);
 			searchConditions.put("east", east);
 			searchConditions.put("west", west);
 			searchConditions.put("south", south);
 			searchConditions.put("north", north);
-
+		System.out.println(searchConditions);
+		Iterator<String> keys = searchConditions.keySet().iterator();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			//System.out.printf("%s = %s \n", key, searchConditions.get(key));
+		}
+			
 			List<Map> rList = rd.getRoomList(searchConditions);
+			System.out.println("rList ="+ rList.toString());
 			System.out.println("Room List Size : " + rList.size());
 			m_return = new ObjectMapper().writeValueAsString(rList);
 			System.out.println("M_return=" + m_return);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		System.out.println("m_return:"+m_return);
+		System.out.println("==================/gsearchTest End==========");
 		return m_return;
 	}
 

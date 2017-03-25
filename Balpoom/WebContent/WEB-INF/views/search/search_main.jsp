@@ -11,17 +11,8 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/javascript/page.js"></script>
-
 <link rel="stylesheet" href="/css/page.css">
-<!-- JPG 처리 소스  -->
 
-<!-- 구글 지도 연동 -->
-<!-- <script -->
-<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap" -->
-<!-- 	async defer> -->
-<!-- </script> -->
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&libraries=places"> -->
-<!-- </script> -->
 
 <div class="well row" style="margin: 0; padding: 0;">
 	<div class="col-md-9"
@@ -33,16 +24,14 @@
 		style="height: 100%; margin: 0; padding: 0; background-color: white">
 		<div
 			style="height: 6%; background-color: #222222; color: #919191; line-height: 38px; padding-left: 3%">
-			&gt 검색 결과 (방 개수 )</div>
+			&gt [검색 결과] 방 개수 <span id="ln" /> )
+		</div>
 
 		<!-- 방리스트 -->
 		<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
 
 			<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
-
-
 				<div id="sh"></div>
-
 			</div>
 			<!-- 전/후 -->
 			<nav class="navbar navbar-inverse" style="padding: 0%; margin: 0%">
@@ -57,19 +46,17 @@
 			</nav>
 		</div>
 	</div>
-	<!-- css -->
+
 </div>
-	<script>
+<script>
 </script>
 
 
-	<!-- script -->
+<!-- script -->
 <script>
 $(document).ready(function() {
-	$("log").append(PagingHelper.log(${location.lat }));
-	$("lag").append(PagingHelper.lag(${location.lng }));
-	
-	
+	$("#log").append(PagingHelper.log(${location.lat }));
+	$("#lag").append(PagingHelper.lag(${location.lng }));
     $("#dn").append(PagingHelper.dn(${dn }));
     $("#nj").append(PagingHelper.nj(${nj }));
     $("#jpglist").append(PagingHelper.jpglist(${mpic }));
@@ -77,4 +64,6 @@ $(document).ready(function() {
     $("#paging").append(PagingHelper.pagingHtml(${msize }));
     $("#gotopage").append(PagingHelper.gotoPage(1));});
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization" async defer></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization"
+	async defer></script>
