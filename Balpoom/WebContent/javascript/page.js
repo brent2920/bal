@@ -16,6 +16,8 @@ var locationtemp;
 var markers = [];
 var listtemp = [];
 var moreadd = []; // 지도에 값이 더 나타나면 그값을 저장할 리스트 
+var loca = "default";
+var locatemp = "default";
 
 var allData = {
 	"mKind" : "allPay", // 매물종류
@@ -89,6 +91,8 @@ function performSearch() {
 	// allDataTemp = allData;
 	jd = JSON.parse(JSON.stringify(allData));
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
+	
+
 
 	if (// 만약 네브바 가 감지 된다면 지도는 고정
 	(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
@@ -109,7 +113,7 @@ function performSearch() {
 
 		}).done(function(listajax) { // 위치 정도 geometry.locaiton
 			console.log("클릭후 새로운 정보 : " + listajax.length);
-
+			
 			list = [];
 			list = listajax;
 			locationtemp = listajax;
@@ -119,6 +123,7 @@ function performSearch() {
 
 	} else {// 네브바는 고정 지도가 움직인다면
 		console.log("지도 경로 변경 탐지");
+	
 		mapBound = map.getBounds().toJSON();
 		allData.east = mapBound.east;
 		allData.west = mapBound.west;
@@ -366,6 +371,19 @@ var PagingHelper = {
 		jpgs = jpg;
 
 	},
+	'loca' : function(val){
+		loca = val;
+	
+		
+		console.log("정보 검색창이 center값이 바뀌었습니다");
+		var location = JSON.parse(JSON.stringify(loca));
+		console.log("로카 : "+ location.lat +" lng:"+ location.lng);//===========================
+		lat = location.lat;
+		lng = location.lng;
+		initMap();
+			
+		
+	},
 	'allData' : function(all) {
 		allData = all;
 	},
@@ -377,6 +395,7 @@ var PagingHelper = {
 		var _ = this;
 
 	},
+	
 	'shHtml' : function(n_block) {
 
 		// console.log("shHtml");

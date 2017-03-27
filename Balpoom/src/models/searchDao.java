@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class searchDao {
-
+	String key = "AIzaSyClAhnlG-YinEeTYUnmV1TzrPITQy7aq8o";
 	// 검색 키워드가 검색조건(지역명, 지하철역명)에 해당하는지 체크
 	public boolean keywordCheck(String keyword) {
 		
@@ -25,7 +25,7 @@ public class searchDao {
 		URL url;
 		try {
 			url = new URL(
-"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyCoX7eyswqqgKnZf7Vmt4Tg3XYrQQwSE3c"
+	"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key="+ key
 			);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
@@ -86,7 +86,7 @@ public class searchDao {
 		String kwd = keyword.replaceAll("\\s", "");
 		
 		URL url = new URL(
-			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyCoX7eyswqqgKnZf7Vmt4Tg3XYrQQwSE3c"
+"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key="+ key
 		);
 
 		
