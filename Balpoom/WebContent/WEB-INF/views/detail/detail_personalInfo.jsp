@@ -96,10 +96,10 @@ div {
 			<span class="mKind">${list1.B_RKIND }</span>&nbsp;
 		<c:choose>
 		<c:when test="${list1.B_MPAY eq 0 }">
-		<span class="mKind">전세</span>&nbsp;
+		<span class="mKind">전세</span><br/>
 		</c:when>
 		<c:otherwise>
-		<span class="mKind">월세</span>&nbsp;
+		<span class="mKind">월세</span><br/>
 		
 		</c:otherwise>
 		</c:choose>
