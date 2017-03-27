@@ -10,10 +10,16 @@ import java.util.HashMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import utils.APIKeys;
 
 @Service
 public class searchDao {
+	
+	@Autowired
+	APIKeys apiKey;
 
 	// 검색 키워드가 검색조건(지역명, 지하철역명)에 해당하는지 체크
 	public boolean keywordCheck(String keyword) {
@@ -25,7 +31,8 @@ public class searchDao {
 		URL url;
 		try {
 			url = new URL(
-"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyCoX7eyswqqgKnZf7Vmt4Tg3XYrQQwSE3c"
+				"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" 
+						+ kwd + "&key=" + apiKey.getGOOGLE_MAP_KEY()
 			);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
@@ -86,7 +93,8 @@ public class searchDao {
 		String kwd = keyword.replaceAll("\\s", "");
 		
 		URL url = new URL(
-			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyCoX7eyswqqgKnZf7Vmt4Tg3XYrQQwSE3c"
+			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" 
+					+ kwd + "&key=" + apiKey.getGOOGLE_MAP_KEY()
 		);
 
 		
@@ -105,7 +113,10 @@ public class searchDao {
 			
 			
 			JSONParser jp = new JSONParser();
+			System.out.println("JSONParser : " + jp.toString());
+			System.out.println("is Null? " + (jp.toString().isEmpty()));
 			JSONObject json1 = (JSONObject) jp.parse(result);
+			System.out.println("result : " + result.toString());
 			JSONArray json2 = (JSONArray) json1.get("results");
 			JSONObject json3 = (JSONObject) json2.get(0);
 			JSONObject geometry = (JSONObject) json3.get("geometry");

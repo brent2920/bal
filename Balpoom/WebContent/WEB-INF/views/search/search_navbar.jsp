@@ -257,33 +257,19 @@
 </nav>
 
 <script>
-// 	function keywordChk() {
-// 		var chk = true;
-// 		console.log("키워드! " + $("#keyword").val());
-		
-// 		$.ajax({
-// 			"url" : "/search_chk",
-// 			"dataType" : "json",
-// 			"async" : false,
-// 			"data" : {
-// 				"keyword" : $("#keyword").val()
-// 			}
-// 		}).done(function(rst) {
-// 			console.log(rst);
-// 			if(rst == false) {
-// 				window.alert("지역명 또는 지하철역명을 입력해주세요");
-// 				chk = false;
-// 			} else {
-// 				initMap();				
-// 			}
-// 		});
-// 		return chk;
-// 	}
-	
+
+	// 상세검색 navbar 상의 검색창 이벤트 처리부분
+	// 검색버튼 클릭시 이벤트 처리
 	$(".search").click(function() {
 		kwdCheck();
 	});
 
+	$("#keyword").keydown(function(key) {
+		if(key.keyCode == 13) {	// Enter(key code = 13)
+			$(".search").trigger("click");
+		}
+	});
+	
 	function kwdCheck() {
 		var chk = true;
 		var keyword = $("#keyword").val();
