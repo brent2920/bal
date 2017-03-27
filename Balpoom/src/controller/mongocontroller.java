@@ -1,0 +1,23 @@
+package controller;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import models.mongoDao;
+
+@Controller
+@RequestMapping("/mongo")
+public class mongocontroller {
+	
+	@Autowired
+	mongoDao mDao;
+	
+	@RequestMapping("/database")
+	public void MongoData() throws IOException{
+		mDao.insert();
+	}
+
+}

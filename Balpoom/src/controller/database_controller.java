@@ -40,7 +40,7 @@ public class database_controller {
 	//몽고에 방 매물번호에 따른 이미지를 등록합니다.
 	@RequestMapping("/mongo_imginsert")
 	public void Mongo01() throws IOException{
-		int r = mDao.inserImg();
+	
 	}
 	
 	
