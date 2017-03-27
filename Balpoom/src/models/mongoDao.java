@@ -1,6 +1,7 @@
 package models;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 //이미지 경로를 몽고에 넣는 모델
@@ -20,6 +24,7 @@ public class mongoDao {
 	MongoTemplate template;
 	
 	public void insert(){
+
 		Map map = new HashMap<>();
 		List list = new ArrayList<>();
 		
@@ -28,22 +33,50 @@ public class mongoDao {
 		File[] files = file.listFiles();
 		for(File f : files){
 			if(f.isDirectory()){
+				
+				
 			
 				File file2 = new File("d:/이현원/사진/"+f.getName()+"/");
 				File[] files2 = file2.listFiles();
 				for(File ff : files2){
-					map.put(f.getName(), ff.getAbsolutePath());
-					template.insert(map,"room");
+					list.add(ff);
+				
 			
 				}
+				map.put("num", f.getName());
+				
+				map.put("pictures", list);
+				template.insert(map,"room");
+				map.remove(f.getName());
+				list.removeAll(list);
 				
 			}
 		}
 		
 		
+	
+		
+		
+		
 		
 	}
+
 	
+	public List OneImage(String num){
+		
+		System.out.println(num);
+		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num).and("pictures"));
+		Aggregation aggr = Aggregation.newAggregation(a1);
+		
+		System.out.println(aggr.toString());
+		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
+		List<Map> list = result.getMappedResults();
+		System.out.println(list.toString());
+		
+		return list;
+		
+	}
+
 	
 	
 	

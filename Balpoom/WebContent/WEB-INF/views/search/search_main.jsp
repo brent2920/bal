@@ -66,7 +66,7 @@ $(document).ready(function() {
     $("#gotopage").append(PagingHelper.gotoPage(1));});
 </script>
 <script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization"
+	src="https://maps.googleapis.com/maps/api/js?key=${apiKey }&callback=initMap&libraries=places,visualization"
 	async defer>
 </script>
 	

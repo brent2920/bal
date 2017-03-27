@@ -1,3 +1,4 @@
+
 package models;
 
 import java.io.BufferedReader;
@@ -136,3 +137,4 @@ public class searchDao {
 		return latLng;
 	}
 }
+

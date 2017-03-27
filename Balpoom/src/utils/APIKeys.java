@@ -1,5 +1,8 @@
 package utils;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class APIKeys {
 	static String GOOGLE_MAP_KEY = "AIzaSyBgNeKcqCZgxXpAgv62ZsFg1VKPNFkJsGA";
 

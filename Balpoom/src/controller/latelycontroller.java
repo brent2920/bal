@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.latelyDao;
+import models.mongoDao;
 import models.pagingDao;
 
 @Controller
@@ -24,6 +25,8 @@ public class latelycontroller {
 	latelyDao lDao;
 	@Autowired
 	pagingDao pDao;
+	@Autowired
+	mongoDao mDao;
 
 	@RequestMapping("/01")
 	public ModelAndView latelyList(HttpServletRequest req) {
@@ -86,9 +89,9 @@ public class latelycontroller {
 			if (!(c[i].getName().equals("JSESSIONID"))) {
 				int regNum = Integer.parseInt(c[i].getValue());
 				map = lDao.getLatelyList(regNum);
-
-				String str = "http://z1.zigbang.com/items/7676969/af2d4be65c803cf7ac380737cdfb14cddf9ba75b.jpg?h=100&q=100";
-				map.put("url", str);
+				
+				
+				//map.put("url", str);
 
 				list.add(map);
 
