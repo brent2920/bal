@@ -698,6 +698,6 @@ $("#b_size").keyup(function() {
 
 <!-- 지도 // script 는 맵 아래 에 놓는다 -->
 <script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap1"
+	src="https://maps.googleapis.com/maps/api/js?key=${apiKey }&callback=initMap1"
 	async defer></script>
 
