@@ -34,10 +34,11 @@ public class roomadd_controller {
 	APIKeys apiKey;
 	
 	
-	@RequestMapping("roomadd")
+	@RequestMapping("/roomadd")
 	public ModelAndView mav() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomadd");
+		mav.addObject(apiKey);
 		return mav;
 	}
 
