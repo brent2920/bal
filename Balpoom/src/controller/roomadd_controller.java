@@ -38,7 +38,7 @@ public class roomadd_controller {
 	public ModelAndView mav() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomadd");
-		mav.addObject(apiKey);
+		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
 		return mav;
 	}
 
