@@ -62,7 +62,7 @@
         data.addColumn('string', '매물번호');
         data.addRows([
         	
-        	   <c:forEach var="list" items="${list1 }" varStatus="vs" >
+        	   <c:forEach var="list" items="${list }" varStatus="vs" >
               	['${list.B_TITLE }', "<img src='${list.url }'/>", '${list.B_MPAY } / ${list.B_DEPOSIT }', '${list.B_RKIND }'
               		,'${list.B_RINFO}','<a href="/detail?num=${list.SELL_NUM}">${list.SELL_NUM}</a>']
               	<c:if test="${!vs.last }">,</c:if>
@@ -72,7 +72,25 @@
 
         var table = new google.visualization.Table(document.getElementById('table_div'));
 
-        table.draw(data, {allowHtml : true, showRowNumber: true, width: '80%', height: '100%'});
-      }
+        table.draw(data, {allowHtml : true, showRowNumber: true, width: '80%', height: 
+        	
+        	
+        
+        <c:choose>
+        <c:when test="${map.a ne null }">]
+        	'${map.a *20 }%'
+        </c:when>
+        <c:otherwise>
+        	'100%'
+        </c:otherwise>
+           </c:choose>
+        
+        
+        });
+        
+        }
+      
     </script>
+  
+	
    
