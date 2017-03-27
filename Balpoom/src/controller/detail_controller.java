@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.alterDao;
+import models.commentDao;
 import models.roomDao;
 import models.CLOBDao;
 import utils.APIKeys;
@@ -34,6 +35,10 @@ public class detail_controller {
 	CLOBDao tDao;
 	@Autowired
 	APIKeys apiKey;
+	
+	// 댓글
+	@Autowired
+	commentDao cdao;
 
 	@RequestMapping("/detail")
 	public ModelAndView detailViewHandler(@RequestParam Map n, 
@@ -95,7 +100,48 @@ public class detail_controller {
 		mav.addObject("list1",map);
 		mav.addObject("pj", all);
 		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
+		
+		
+	//=========================================
+		
 
+		int cnt = cdao.commentcount(num);
+		System.out.println("cnt : "+cnt);
+		int size = cnt % 4 == 0 ? cnt/4 : cnt/4+1;
+		String pStr=	req.getParameter("page") == null ? "1" :req.getParameter("page");
+		int start = (Integer.parseInt(pStr) -1 ) *4 +1; 
+		int end = Integer.parseInt(pStr) *4;
+		//System.out.println("num==============> "+num);
+		
+		System.out.println("pStr : "+pStr);
+		mav.addObject("size",size);
+	
+		mav.addObject("page",pStr);
+		mav.addObject("num",num);
+		//mav.addObject("num",num);
+		
+	      
+	    List Clist = cdao.paging(start, end, num);
+		System.out.println("리스트 사이즈 : "+Clist.size());
+		mav.addObject("Clist",Clist);
 		return mav;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

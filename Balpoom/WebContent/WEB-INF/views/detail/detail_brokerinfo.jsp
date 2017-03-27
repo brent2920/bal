@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style type="text/css">
 div {
 	font-family: 'Jeju Gothic';
@@ -96,10 +97,10 @@ div {
 		<span class="mKind">${list1.B_RKIND }</span>&nbsp;
 		<c:choose>
 		<c:when test="${list1.B_MPAY eq 0 }">
-		<span class="mKind">전세</span>&nbsp;
+		<span class="mKind">전세</span><br/>
 		</c:when>
 		<c:otherwise>
-		<span class="mKind">월세</span>&nbsp;
+		<span class="mKind">월세</span><br/>
 		
 		</c:otherwise>
 		</c:choose>
@@ -117,6 +118,7 @@ div {
 	<button id="jjim" class="btn btn-default btn-lg btn-block">
 		♥ 찜
 	</button>
+<button class="btn btn-default btn-info btn-lg btn-block contact" id="write">★ 댓글</button>
 </div>
 
 <div class="well">
@@ -191,6 +193,156 @@ div {
 		</div>
 	</div>
 </div>
+
+<!-- ==================== 댓글 ======================= -->
+<div class="modal fade" id="myWrite" role="dialog">
+	<!-- 	<form action="/comment" method="post"> -->
+	<div class="modal-dialog modal-la">
+		<div class="modal-content" style="padding: 10px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-contact" align="center">댓글을 입력해주세요</div>
+			<div style="height: 20px"></div>
+			<div>
+				<input type="text" placeholder="댓글을 입력해주세요" class="form-control"
+					name="comment" id="comment">
+			</div>
+			<div style="display: none;">
+				<input type="text" value="${num }" name="roomnumber" id="roomnumber">
+			</div>
+			<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+				<button type="submit" class="btn btn-primary" id="rwrite" >
+					등록</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					id="rclose">닫기</button>
+			</div>
+		</div>
+	</div>
+	<!-- 	</form> -->
+</div>
+
+
+
+
+<div style="display: none;" id="input">
+	<table class="table1" style="height: 100px" >
+	
+		<c:forEach items="${Clist  }" var="i" >
+			<tr>
+				<td id="com" style="width: 5%">${i.ID}</td>
+				<td id="com" style="width: 75%">${i.RCOMMENT }</td>
+				<td align="right"><button class="btn commentdel"  type="button" style="background-color: white; "   value="${i.NUM }">
+						<img alt="" src="/images/cancel.png" style="background-color: white; width: 20px; height: 20px">
+						</button></td>
+			</tr>
+			<tr>
+				<td colspan="3" id="com" align="center">등록 일자 : <fmt:formatDate value="${i.RSYSDATE }" pattern="yyyy MM dd hh mm ss"/></td>
+			</tr>
+		</c:forEach>
+	
+
+	</table>
+	<div id="table_div" style="padding-left: 20%"></div>
+	<div align="center" >
+	<c:if test="${size eq 0 }">
+	<div style="height: 35px"></div>
+	<div class="modal-contact" align="center">입력된 댓글이 없습니다</div>
+	</c:if>
+	<c:if test="${page ne 1 }">
+		<a href ="/detail?num=${num }&page=${page -1}">이전</a> 
+	</c:if>
+	<c:forEach var="p" begin="1" end="${size }" varStatus="vs">
+		<c:choose>
+			<c:when test="${p eq page }">
+				<b style="color: red;">${p }</b>
+			</c:when>
+			<c:otherwise>
+				<a href ="/detail?num=${num }&page=${p}">${p }</a> 
+			</c:otherwise>
+		</c:choose>
+		<c:if test="${vs.last eq false }">|</c:if>
+	</c:forEach>
+	<c:if test="${page lt size }">
+		<a href ="/detail?num=${num }&page=${page +1}">다음</a> 
+	</c:if>
+</div>
+	<div style="height: 25px"></div>
+
+	<div align="center">
+		<button type="submit" class="btn btn-primary" data-toggle="modal"
+			data-target="#myWrite" id="commentadd">등록</button>
+		<button type="button" class="btn btn-danger" id="ccansle">취소</button>
+	</div>
+
+</div>
+
+<div style="height: 50px"></div>
+
+<script>
+
+	//댓글 -> 로그인이 안되어있으면 window.alert 창..
+	
+	
+	// 댓글 삭제
+	$(".commentdel").click( function(){
+		//alert($(this).val());
+		var delC = new XMLHttpRequest();
+		delC.open("get", "/commentdel?num="+$(this).val(), true);
+		delC.send();
+		delC.onreadystatechange = function(){
+			if(delC.readyState == 4 && delC.status == 200){
+				var delCC = delC.responseText;
+				console.log(delCC);
+				if(delCC == 'YY'){
+					window.alert("댓글을 삭제 했습니다");
+					history.go(0); // location.reload() 랑 같은 효과(?)
+				}else{
+					window.alert("등록자만 삭제할수 있습니다")
+				}
+			}
+		}
+	});
+
+	
+	
+	//댓글 기능
+	$("#write").click(function() {
+		<c:choose>
+		<c:when test="${sessionScope.id == null }">
+		window.alert("로그인 후 사용 가능합니다");
+		</c:when>
+		<c:otherwise>		
+		
+		$("#input").fadeToggle();
+	
+		</c:otherwise>
+	</c:choose>
+
+	})
+	$("#ccansle").click(function() {
+		$("#input").fadeOut();
+	})
+	
+	
+	$("#rwrite").click(function() {
+		var com = new XMLHttpRequest();
+		com.open("get", "/comment?rcomment=" + $("#comment").val()+"&roomnumber="+$("#roomnumber").val(), true);
+		com.send();
+		com.onreadystatechange = function() {
+			if (com.status == 200 && com.readyState == 4) {
+				var ccom = com.responseText;
+				console.log(ccom);
+				if (ccom == 'YYY') {
+					window.alert("댓글 등록이 성공적으로 처리 되었습니다");
+					location.reload();
+				} else {
+					window.alert("댓글 등록중 오류가 발생 하였습니다");
+				}
+			}
+		}
+
+	})
+
+
 <script>
 
 	$("#jjim").click(function() {

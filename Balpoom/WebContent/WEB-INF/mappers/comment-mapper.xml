@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rcomment">
+
+	<insert id="comment" parameterType="java.util.HashMap">
+		insert into rcomment
+		values(#{id}, #{email}, #{rcomment}, sysdate, #{roomnumber}, RCOMMENT_seq.nextval)
+	</insert>
+
+
+
+	<!-- 댓글 총 갯수를 int로 -->
+	<select id="commentcount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select count(*) as cnt from rcomment where roomnumber = #{roomnumber}
+	</select>
+	
+	
+	<delete id="delcomment" parameterType="java.util.HashMap">
+		delete from rcomment where num = #{num} and email = #{email}
+	</delete>
+
+</mapper>
+
