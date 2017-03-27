@@ -163,5 +163,5 @@ td {
 </script>
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?
-      key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap"></script>
+      key=${apiKey }&callback=initMap"></script>
  

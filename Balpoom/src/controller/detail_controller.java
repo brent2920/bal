@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import models.alterDao;
 import models.roomDao;
 import models.CLOBDao;
+import utils.APIKeys;
 import utils.Urlpicture;
 
 @Controller
@@ -31,6 +32,8 @@ public class detail_controller {
 	alterDao aDao;
 	@Autowired
 	CLOBDao tDao;
+	@Autowired
+	APIKeys apiKey;
 
 	@RequestMapping("/detail")
 	public ModelAndView detailViewHandler(@RequestParam Map n, 
@@ -91,6 +94,7 @@ public class detail_controller {
 		mav.addObject("list2",map2);
 		mav.addObject("list1",map);
 		mav.addObject("pj", all);
+		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
 
 		return mav;
 	}
