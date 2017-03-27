@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.roomDao;
 import models.searchDao;
+import utils.APIKeys;
 import utils.Urlpicture;
 
 @Controller
@@ -31,6 +32,9 @@ public class search_controller {
 
 	@Autowired
 	Urlpicture urp;
+	
+	@Autowired
+	APIKeys apiKey;
 
 	@RequestMapping("/search")
 	public ModelAndView searchHandler(@RequestParam(name = "keyword", defaultValue = "서울시청") String keyword)
@@ -102,6 +106,7 @@ public class search_controller {
 		mav.addObject("mpic", urlcolj);
 		mav.addObject("mlist", json_arr.toString());
 		mav.addObject("msize", mlist.size());
+		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
 		mav.setViewName("t_search");
 		System.out.println("mlist size=>" + json_arr.length() + " msize = " + mlist.size());
 		System.out.println("dn=" + defnum + "nj=" + numbersj);
