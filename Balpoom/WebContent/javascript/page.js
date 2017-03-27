@@ -454,7 +454,7 @@ var PagingHelper = {
 				sb += obj['B_TITLE'];
 				sb += "</td>";
 				sb += "</tr>";
-
+ 
 				sb += "<tr>";
 				sb += "<td style='padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;'>";
 				sb += obj['B_RKIND'] + " | 3층 | 관리비 5만원";
