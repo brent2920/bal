@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zzim">
+<select id="find" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+	select * from room where SELL_NUM = #{num}
+</select>
+
+<insert id="add" parameterType="java.util.HashMap" >
+	insert into zzimlist values(#{SELL_NUM},#{B_TITLE},#{B_DEPOSIT},
+		#{B_MPAY},#{B_RKIND},#{B_FLOOR},#{B_SIZE},#{B_GPAY},#{B_GLIST},
+		#{B_ELEVE},#{B_PARKING},#{B_RINFO},#{B_ENTERDATE},'불가능',
+		#{B_OPTION},#{B_DETAIL},#{B_LOCATION},#{B_NSTATION},
+		#{B_LATITUDE},#{B_LONGITUDE},#{B_PETPOSSIBLE},#{ID},0,0,
+		#{B_LOCAL1},#{B_LOCAL2},#{B_LOCAL3},#{B_SIZE_M2},#{B_FLOOR_ALL}, #{sessionid})
+</insert>
+
+<delete id="del" parameterType="java.util.HashMap" >
+	delete from zzimlist where SELL_NUM = #{num} and  SESSIONID = #{sessionid}
+</delete>
+</mapper>

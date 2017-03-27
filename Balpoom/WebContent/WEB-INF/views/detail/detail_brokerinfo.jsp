@@ -115,7 +115,7 @@ div {
 		${list1.B_LOCATION }
 	</div>
 	<hr/>
-	<button id="jjim" class="btn btn-default btn-lg btn-block">
+	<button  class="btn btn-default btn-lg btn-block" id = "zzim">
 		♥ 찜
 	</button>
 <button class="btn btn-default btn-info btn-lg btn-block contact" id="write">★ 댓글</button>
@@ -343,13 +343,73 @@ div {
 	})
 
 
-<script>
 
-	$("#jjim").click(function() {
-// 		if ($(this).attr("color : black"))
-			$("#jjim").css("background-color","#FCF3CF");
-			$("#jjim").css("color", "red");
-// 		else
-// 			$(this).attr("color", "black");
-	});
+
+	
+	// 찜 추가
+	function zzimadd(){
+		var zzim = new XMLHttpRequest();
+		zzim.open("get", "/zzimadd?roomnumber="+$("#roomnumber").val(), true);
+		zzim.send();
+		zzim.onreadystatechange = function(){
+			if(zzim.status == 200 && zzim.readyState == 4){
+			var zzim1 = zzim.responseText;
+			console.log(zzim1);
+			if (zzim1 == 'ZY') {
+				window.alert("찜 목록의 추가 되었습니다");
+				}
+			}
+		}
+	}
+	
+	// 찜 삭제
+	function zzimdel(){
+		var zzim = new XMLHttpRequest();
+		zzim.open("get", "/zzimdel?roomnumber="+$("#roomnumber").val(), true);
+		zzim.send();
+		zzim.onreadystatechange = function(){
+			if(zzim.status == 200 && zzim.readyState == 4){
+			var zzim1 = zzim.responseText;
+			console.log(zzim1);
+			if (zzim1 == 'ZN') {
+				window.alert("찜 목록에서 삭제 되었습니다");
+				}
+			}
+		}
+	}
+	
+
+
+	   $("#zzim").on("click",function(){
+	      if(!($(this).hasClass("active"))){     
+	       $(this).addClass("active");
+	       $(this).css("color","red");
+	       zzimadd();
+	            
+	      }else{
+	         $(this).removeClass("active");
+	       	 $(this).css("color","black");
+	      	zzimdel();
+	      }
+	   });
+
+	
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
