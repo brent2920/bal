@@ -82,8 +82,8 @@
 								class="dprice-to" type="text" style="width: 100px"
 								value="9999999 만원" name="dprice_to">
 						</div>
-						<hr style="margin-top: 12px; margin-bottom: 3px;" /> <c:set
-							var="deposit_prices"
+						<hr style="margin-top: 12px; margin-bottom: 3px;" /> 
+						<c:set var="deposit_prices"
 							value="100, 500, 1000, 2000, 3000,
 									4000, 5000, 6000, 7000, 8000, 9000, 10000"
 							scope="page" />
@@ -243,7 +243,7 @@
 		<form class="navbar-form navbar-right"
 			style="margin-top: 5px; margin-bottom: 5px;">
 			<div class="input-group">
-				<input type="text" class="form-control"
+				<input type="text" class="form-control" name="keyword"
 					placeholder="원하시는 지역명, 지하철역을 입력해주세요"
 					style="width: 300px; height: 40px;">
 				<div class="input-group-btn">
@@ -273,6 +273,8 @@
 			if(rst == false) {
 				window.alert("지역명 또는 지하철역명을 입력해주세요");
 				chk = false;
+			} else {
+				initMap();				
 			}
 		});
 		return chk;
