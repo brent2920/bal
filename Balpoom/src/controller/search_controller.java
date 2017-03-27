@@ -124,5 +124,16 @@ public class search_controller {
 		}
 	}
 	
-	
+	@RequestMapping("/detail_search_chk")
+	@ResponseBody
+	public HashMap detailSearchCheckHandler(
+			@RequestParam(name = "keyword", defaultValue = "서울시청") 
+				String keyword) {
+		try {
+			return sDao.getLatLng(keyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

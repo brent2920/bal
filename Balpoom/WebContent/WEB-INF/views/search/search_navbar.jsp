@@ -257,32 +257,54 @@
 </nav>
 
 <script>
-	function keywordChk() {
+// 	function keywordChk() {
+// 		var chk = true;
+// 		console.log("키워드! " + $("#keyword").val());
+		
+// 		$.ajax({
+// 			"url" : "/search_chk",
+// 			"dataType" : "json",
+// 			"async" : false,
+// 			"data" : {
+// 				"keyword" : $("#keyword").val()
+// 			}
+// 		}).done(function(rst) {
+// 			console.log(rst);
+// 			if(rst == false) {
+// 				window.alert("지역명 또는 지하철역명을 입력해주세요");
+// 				chk = false;
+// 			} else {
+// 				initMap();				
+// 			}
+// 		});
+// 		return chk;
+// 	}
+	
+	$(".search").click(function() {
+		kwdCheck();
+	});
+
+	function kwdCheck() {
 		var chk = true;
-		console.log("키워드! " + $("#keyword").val());
+		var keyword = $("#keyword").val();
+		console.log("KEYWORD : " + keyword);
 		
 		$.ajax({
-			"url" : "/search_chk",
+			"url" : "/detail_search_chk",
 			"dataType" : "json",
 			"async" : false,
 			"data" : {
-				"keyword" : $("#keyword").val()
-			}
-		}).done(function(rst) {
-			console.log(rst);
-			if(rst == false) {
-				window.alert("지역명 또는 지하철역명을 입력해주세요");
-				chk = false;
-			} else {
-				initMap();				
-			}
+				"keyword" : keyword
+			}.done(function(result) {
+				if(result != null) {
+// 					initMap();
+					console.log(result);
+				} else {
+					window.alert("지역명 또는 지하철역명을 입력해주세요");
+				}
+			})
 		});
-		return chk;
 	}
-	
-	$(".search").click(function() {
-		keywordChk();
-	});
 
 	$(".dropdown").mouseenter(function() {
 		$(this).children().eq(1).css("display", "block");
