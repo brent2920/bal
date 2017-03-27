@@ -22,12 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.roomaddDao;
+import utils.APIKeys;
 
 @Controller
 @RequestMapping("/")
 public class roomadd_controller {
 	@Autowired
 	roomaddDao rdao;
+	
+	@Autowired
+	APIKeys apiKey;
 	
 	
 	@RequestMapping("roomadd")
@@ -43,7 +47,7 @@ public class roomadd_controller {
 		ModelAndView mav = new ModelAndView();
 		addMap = addMap.replaceAll("\\s", "");
 		String target = "https://maps.googleapis.com/maps/api/geocode/json?address=" + addMap
-				+ "&key=AIzaSyCjJDAVTrB1J5P1OllkHC07cmjfJbb52vg&language=ko";
+				+ "&key=" + apiKey.getGOOGLE_MAP_KEY();
 		URL url = new URL(target);
 		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 		String outstr = "";
