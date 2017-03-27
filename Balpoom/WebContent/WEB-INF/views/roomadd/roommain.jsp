@@ -14,11 +14,13 @@ td, th {
 	height: 40px;
 	font-size: 12px;
 	font-family: 나눔고딕;
+	padding: 10px;
 }
 
 #title {
 	width: 160px;
-	background-color: #57ABDB;
+	background-color: #E6FFF7;
+	font-size: 15px;
 }
 
 #memo {
@@ -27,7 +29,7 @@ td, th {
 }
 
 #memo4 {
-	width: 220px;
+/* 	width: 220px; */
 }
 
 #memo3 {
@@ -38,28 +40,25 @@ td, th {
 	width: 60px;
 }
 
-#map {
-	width: 250px;
-	background-color: #EEF2EA;
-}
-
 #memo6 {
 	width: 760px;
 }
 
 #title1 {
 	height: 250px;
-	background-color: #57ABDB
+	background-color: #E6FFF7;
+	font-size: 15px;
 }
 
 #title2 {
 	height: 100px;
-	background-color: #57ABDB
+	background-color: #E6FFF7;
 }
 
 #title3 {
 	height: 100px;
 	width: 920px;
+	font-size: 13px;
 }
 
 #memo7 {
@@ -76,82 +75,71 @@ td, th {
 <div style="padding-left: 19%; padding-right: 19%; padding-top: 5%">
 <form action="/roominsert" method="post">
 	<div style="padding: 0; margin: 0; width: 1000px; height: 50px">
-		<h2 style="font-family: 나눔고딕;">&nbsp;방등록 하기</h2>
+		<h2>방등록</h2>
 	</div>
-	<div class="well" style="boder: 1px solid; background-color: black;">
-		<font color="white">
+	<div class="well" style="margin-bottom: 50px;">
+		<font>
 			 - 등록한 방 정보는 직거래 매물로 등록되며, 최대 30일까지 노출 후 거래완료 상태로 전환됩니다.<br />
 			 - 방 등록이 완료된 매물은 방 정보와 회원정보(연락처, 메일 등)와 함께 노출됩니다.<br />
 			 - 거래완료된 매물을 완료처리하지 않은 경우 허위매물 등록으로 이용이 제한될 수 있습니다<br />
 			 - 매물 관리규정에 위배 되거나 신고된 매물은 비공개 또는 삭제처리되며 경고 및 제재조치를 받을 수 있습니다.<br />
-		</font> <b style="color: #00BFFF">- 부동산 중개사는 직거래 매물을 등록할 수 없으며, 공인중개사회원
-			가입 후 이용하시기 바랍니다.</b><br />
+		</font>
+		<b style="color: #FA5858">
+			- 부동산 중개사는 직거래 매물을 등록할 수 없으며, 공인중개사회원 가입 후 이용하시기 바랍니다.
+		</b>
 	</div>
 
-	<div style="height: 50px"></div>
 
-
-
-
-	<h3 style="font-family: 나눔고딕;">&nbsp;위치 정보</h3>
+	<h3>위치 정보</h3>
+	<hr style="margin: 0px;"/>
 	<input type="hidden" name="b_latitude" id="b_lat"/>
 	<input type="hidden" name="b_longitude" id="b_lng"/>
-	<table border="1" rules="none">
-	
+	<table>
 		<tr>
 			<td id="title" rowspan="5">주소</td>
-			<td id="memo4">도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</td>
+			<td id="memo4">
+				<span class="glyphicons glyphicons-exclamation-sign"></span>
+				도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</td>
 			<td id="memo1"></td>
-			<td id="map" rowspan="5" style="width: 250; height: 200">
-				<!-- 				<div id="gmap"></div> -->
+			<td id="map" rowspan="5" style="width: 400px; height: 250px; padding: 10px;">
 			</td>
 		</tr>
-
-
 		<tr>
-
 			<td id="memo"><input type="text" id="sample4_postcode"
 				placeholder="우편번호" class="form-control" style="width: 70%;">
 			</td>
-			<td id="memo4"><input type="button"
-				onclick="sample4_execDaumPostcode()" value="주소검색"
-				class="btn btn-primary"></td>
-
+			<td id="memo4">
+				<input type="button" onclick="sample4_execDaumPostcode()"
+				value="주소검색" class="btn btn-default" style="
+					color: #54B594; border-color: 54B594;">
+			</td>
 		</tr>
-
 		<tr>
 			<td id="memo" colspan="2"><input type="text"
 				id="sample4_roadAddress" placeholder="도로명주소" class="form-control"
 				style="width: 100%;"></td>
-
 		</tr>
-
-
 		<tr>
 			<td id="memo" colspan="2"><input type="text"
 				id="sample4_jibunAddress" placeholder="지번주소" class="form-control"
 				style="width: 100%" name="b_title"></td>
-
 		</tr>
-
-
 		<tr>
 			<td id="memo" colspan="2"><input type="text" id=""
 				placeholder="상세주소" class="form-control" style="width: 100%"></td>
 		</tr>
-
 	</table>
+	<hr style="margin-top: 0px; margin-bottom: 100px;"/>
 
 
-	<div style="height: 50px"></div>
-
-	<h3 style="font-family: 나눔고딕;">&nbsp;기본 정보</h3>
-	<table border="1" rules="none">
+	<h3>기본 정보</h3>
+	<hr style="margin: 0px;"/>
+	<table>
 		<tr>
 
 			<td id="title">방 종류</td>
 			<td id="memo"><select class="form-control" style="width: 85%" name="b_rkind">
-					<option selected="방종류선택">방종류선택</option>
+					<option selected>방종류선택</option>
 					<option value="원룸">원룸</option>
 					<option value="1.5룸">1.5룸</option>
 					<option value="투룸">투룸</option>
@@ -159,23 +147,18 @@ td, th {
 					<option value="오피스텔">오피스텔</option>
 					<option value="아파트">아파트</option>
 			</select></td>
-			<td id="momo" colspan="3">발품에서는 고시원(텔)등의 고시원업 매물 등록을 제한합니다(차단조치)
+			<td id="momo" colspan="3">
+				발품에서는 고시원(텔)등의 고시원업 매물 등록을 제한합니다(차단조치)
 			</td>
 		</tr>
 
 		<tr>
 			<td id="title" rowspan="2">거래 종류</td>
 			<td id="memo" colspan="4">
-<!-- 				<button type="button" class="btn btn-primary" id="junseadd">전세 -->
-<!-- 					추가</button> -->
-				<button type="button" class="btn btn-primary" id="wolseadd">가격
-					추가</button>
-<!-- 				<button type="button" class="btn btn-primary" id="mubojeungadd">무보증 -->
-<!-- 					추가</button> <input type="checkbox">단기 가능 -->
+				<button type="button" class="btn btn-primary" id="wolseadd">
+					가격 추가
+				</button>
 			</td>
-			<!-- 				<td id="memo">아</td> -->
-			<!-- 				<td id="memo">아</td> -->
-			<!-- 				<td id="memo">아</td>	 -->
 		</tr>
 
 
@@ -243,28 +226,17 @@ td, th {
 				style="width: 50%" placeholder="면적" name="b_size_m2" readonly value="" id="bsm2"></td>
 		</tr>
 	</table>
+	<hr style="margin-top: 0px; margin-bottom: 100px;"/>
+	
 
-	<div style="height: 50px"></div>
-
-
-
-
-	<h3 style="font-family: 나눔고딕;">&nbsp;추가 정보</h3>
-
-	<table border="1">
+	<h3>추가 정보</h3>
+	<hr style="margin: 0px;"/>
+	<table>
 		<tr>
 			<td id="title" rowspan="2">관리비</td>
 			<td id="memo" colspan="3">
-				<!-- 					<div align="center" style="vertical-align: middle;"> --> <!-- 					<div style="float: left; padding-right: 2%;"> -->
-				<!-- 						<input type="checkbox">있음 --> <!-- 					</div> --> <!-- 					<div style="float: left; padding-right: 2%"> -->
-				<!-- 						<input type="text" class="form-control" style="width: 100%"> -->
-				<!-- 					</div> --> <!-- 					<div style="float: left; padding-right: 2%;"> -->
-				<!-- 						<font size="2px">만원</font> --> <!-- 					</div> --> <!-- 					<div style="float: left; padding-right: 2%"> -->
-				<!-- 						<input type="checkbox" checked="checked">없음 --> <!-- 					</div> -->
-				<!-- 				</div> -->
 				<table>
 					<tr class="mCost">
-
 						<td><input type="text" class="form-control"
 							style="width: 100%; margin-right: 12px; text-align: right;" disabled id="b_gpay3" name="b_gpay"></td>
 						<td><font size="2px" style="padding-right: 10px">만원</font></td>
@@ -294,10 +266,6 @@ td, th {
 			<td id="memo" colspan="3">
 				<table>
 					<tr class="mCost">
-
-<!-- 						<td><input type="text" class="form-control" -->
-<!-- 							style="width: 100%; margin-right: 12px; text-align: right;"></td> -->
-<!-- 						<td><font size="2px" style="padding-right: 10px">만원</font></td> -->
 						<td><input type="checkbox" style="padding-right: 10px" id="b_parking1" name="b_parking" value="가능">있음</td>
 						<td><input type="checkbox" checked="checked"
 							style="margin-left: 10px" id="b_parking2" name="b_parking" value="불가능">없음</td>
@@ -305,8 +273,6 @@ td, th {
 				</table>
 
 			</td>
-
-
 		</tr>
 
 		<tr>
@@ -324,16 +290,12 @@ td, th {
 		<tr>
 			<td id="title">입주 가능일</td>
 			<td id="memo" colspan="3">
-
 				<table>
 					<tr class="mCost">
-
-						<td><input type="text" id="datepicker" class="form-control" name="b_enterdate"></td>
-<!-- 						<td><input type="checkbox" style="margin-left: 10px">즉시 -->
-<!-- 							입주</td> -->
-<!-- 						<td><input type="checkbox" style="margin-left: 10px"> -->
-<!-- 							날짜 협의</td> -->
-
+						<td>
+							<input type="text" id="datepicker"
+								placeholder="날짜를 선택해주세요" class="form-control" name="b_enterdate">
+						</td>
 					</tr>
 				</table>
 			</td>
@@ -363,24 +325,28 @@ td, th {
 		</tr>
 
 		<tr>
-
-			<td id="memo" colspan="3"><input type="checkbox"
-				style="margin-left: 10px" value="전자레인지" name="b_option">전자레인지 <input type="checkbox"
-				style="margin-left: 10px" value="전자도어락" name="b_option">전자도어락 <input type="checkbox"
-				style="margin-left: 10px" value="비데" name="b_option">비데</td>
-
+			<td id="memo" colspan="3">
+				<input type="checkbox" style="margin-left: 10px"
+					value="전자레인지" name="b_option">전자레인지
+				<input type="checkbox" style="margin-left: 10px" 
+					value="전자도어락" name="b_option">전자도어락 
+				<input type="checkbox" style="margin-left: 10px" 
+					value="비데" name="b_option">비데
+			</td>
 		</tr>
 	</table>
-	<div align="right" style="padding-right: 7%; padding-top: 1%" ><font color="red">※ LH 가능 여부</font>
-			<input type="checkbox" name="b_lhok" id="b_lhok1" value="가능">가능
-			<input type="checkbox" name="b_lhok" checked id="b_lhok2" value="불가능">불가능
+	<hr style="margin: 0px;"/>
+	<div align="right" style="margin-bottom: 100px; padding-right: 7%; padding-top: 1%">
+		<font color="red">※ LH 가능 여부</font>
+		<input type="checkbox" name="b_lhok" id="b_lhok1" value="가능">가능
+		<input type="checkbox" name="b_lhok" checked id="b_lhok2" value="불가능">불가능
 	</div>
+	
 
-	<div style="height: 50px"></div>
 
-	<h3 style="font-family: 나눔고딕;">&nbsp;상세 설명</h3>
-
-	<table border="1">
+	<h3>상세 설명</h3>
+	<hr style="margin: 0px;"/>
+	<table>
 		<tr>
 			<td id="title">방 제목</td>
 			<td id="memo6"><input type="text" class="form-control"
@@ -390,81 +356,59 @@ td, th {
 
 		<tr>
 			<td id="title1">방 정보</td>
-			<td><textarea rows="15px" cols="90px"
+			<td>
+				<textarea rows="15px" cols="90px"
 					placeholder="방에 대한 추가 설명을 적어주세요. " class="form-control" name="b_detail"></textarea>
 			</td>
 		</tr>
 	</table>
+	<hr style="margin: 0px; margin-bottom: 100px;"/>
 
-
-	<div style="height: 50px"></div>
-	<h3 style="font-family: 나눔고딕;">&nbsp;사진 업로드</h3>
-
-
-	<table border="1px solid #FF0000">
+	<h3>사진 업로드</h3>
+	<table>
 		<tr>
-			<td id="title3">- 사진은 가로로 찍은 사진을 권장합니다. (가로 사이즈 최소 800픽셀)<br />
-				- 사진 용량은 사진 1장당 10MB까지 등록이 가능합니다.<br /> - 사진은 최소 3장 이상 등록해야하며, 최대
+			<td id="title3">
+				- 사진은 가로로 찍은 사진을 권장합니다. (가로 사이즈 최소 800픽셀)<br />
+				- 사진 용량은 사진 1장당 10MB까지 등록이 가능합니다.<br />
+				- 사진은 최소 3장 이상 등록해야하며, 최대
 				15장까지 권장합니다. 그 이상 등록할 경우 업로드 시간이 다소 지연될 수 있습니다.
 			</td>
 		</tr>
 	</table>
-	<div style="height: 15px"></div>
-
-
-	<table border="1">
-
-		<tr>
-			<td id="memo7" style="padding: 0%; margin: 0%;"><c:forEach
-					begin="1" end="15" var="i">
-					<div style="float: left; width: 170px; height: 200px; margin: 5px;"
-						align="left">
-						<img alt="" src="" style="width: 170px; height: 150px"
-							id="img${i }"> <input type="file" id="file${i }"
-							style="display: none">
-						<div align="center" style="padding-top: 10px;">
-							<button type="button" id="bbt${i }" class="btn btn-primary">추가</button>
-							<button type="button" id="cbt${i }" class="btn btn-danger">취소</button>
-						</div>
-					</div>
-				</c:forEach> <!-- 			<div id="fid" style="display: """> --> <!-- 			<button type="button" class="btn btn-primary"  style="margin-top: 20%; width: 300px; height: 70px " id="fbtn">사진 추가</button> -->
-				<!-- 				<input type="file" style="display: none" id="file"> --> <!-- 			</div> -->
-				<!-- 			<div id="ffid" style="display: none; padding: 0%; margin: 0%" align="left"> -->
-				<!-- 				<img alt="" src="" id="fimg" style="width: 150px; height: 150px" align="left" > -->
-				<!-- 				<button type="button" id="cccbtn">취소</button> --> <!-- 			</div> -->
-
-
-			</td>
-			
-			
-	</table>
-	
-
-	<div style="height: 50px"></div>
-	
 	
 	<table>
 		<tr>
-				<td width="925px" align="center">
-					<div >
-						<button type="submit" class="btn btn-primary" style="font-size:25; padding: 14px 40px;">등록</button>
-						
-						<a href="/">
-						<button type="submit" class="btn btn-danger" style="font-size:25; padding: 14px 40px;">취소</button>
-						</a>
+			<td id="memo7" style="padding: 0%; margin: 0%; text-align: center;">
+				<c:forEach begin="1" end="15" var="i">
+					<div style="float: left; width: 170px; height: 200px; margin: 5px;"
+						align="left">
+						<img alt="" src="" style="width: 170px; height: 150px; background-color: #EEEEEE;"
+							id="img${i }"> <input type="file" id="file${i }"
+							style="display: none">
+						<div align="center" style="padding-top: 10px;">
+							<button type="button" id="bbt${i }" 
+								class="btn btn-default" style="color: #646464;
+								border-color: #646464">추가</button>
+							<button type="button" id="cbt${i }" 
+								class="btn btn-default"  style="color: #646464;
+								border-color: #646464">취소</button>
+						</div>
 					</div>
-				</td>
-			</tr>
-	
+				</c:forEach>
+			</td>
+		</tr>
 	</table>
 	
-	<div style="height: 100px"></div>
-	
-	
-
-
-
-
+	<div align="center" style="margin-top: 40px;">
+		<button type="submit" class="btn btn-primary" 
+			style="font-size: 20px; padding-left: 20px; padding-right: 20px;
+			padding-top: 10px; padding-bottom: 10px;">등록</button>
+		<a href="/">
+			<button type="submit" class="btn btn-danger" 
+				style="font-size: 20px; padding-left: 20px; padding-right: 20px;
+				padding-top: 10px; padding-bottom: 10px;">취소</button>
+		</a>
+	</div>
 </form>
 </div>
 
