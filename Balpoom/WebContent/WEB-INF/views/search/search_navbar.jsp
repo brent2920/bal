@@ -240,7 +240,7 @@
 		</ul>
 
 		<!-- 검색창 -->
-		<form class="navbar-form navbar-right"
+		<div class="navbar-form navbar-right"
 			style="margin-top: 5px; margin-bottom: 5px;">
 			<div class="input-group">
 				<input type="text" class="form-control" id="keyword"
@@ -252,7 +252,7 @@
 					</button>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 </nav>
 
