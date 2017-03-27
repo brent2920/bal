@@ -285,7 +285,9 @@
 		}).done(function(result) {
 			if(result != null) {
 				// 여기수정하시면 되요!!!!!!!!!!
-				console.log(result);
+			console.log(result);
+			$("#loca").append(PagingHelper.loca(result));
+
 			} else {
 				window.alert("지역명 또는 지하철역명을 입력해주세요");
 			}
