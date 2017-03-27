@@ -24,11 +24,4 @@
 		<put-attribute name="main" value="/WEB-INF/views/search/search_main.jsp" />
 	</definition>
 	
-	<definition name="t_search_test" template="/WEB-INF/views/templates/search_test_template.jsp">
-		<put-attribute name="title" value="발품 | 더이상 허위매물에 속지말자" />
-		<put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp" />
-		<put-attribute name="search_navbar" value="/WEB-INF/views/search/search_navbar.jsp" />
-		<put-attribute name="main" value="/WEB-INF/views/search/test_search_main.jsp" />
-	</definition>
-	
 </tiles-definitions>
