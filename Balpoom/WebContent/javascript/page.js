@@ -56,7 +56,7 @@ var allDataTemp = {
 	"north" : 37.614135362297105
 };
 function initMap() {
-	// console.log("initmap");
+	console.log("initmap"+ "위도 :"+ log + "경도 : "+ lag);
 	console.log(log);
 	map = new google.maps.Map(document.getElementById('map'), {
 		
@@ -378,8 +378,8 @@ var PagingHelper = {
 		console.log("정보 검색창이 center값이 바뀌었습니다");
 		var location = JSON.parse(JSON.stringify(loca));
 		console.log("로카 : "+ location.lat +" lng:"+ location.lng);//===========================
-		lat = location.lat;
-		lng = location.lng;
+		log = location.lat;
+		lag = location.lng;
 		initMap();
 			
 		
