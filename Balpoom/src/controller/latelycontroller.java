@@ -61,21 +61,6 @@ public class latelycontroller {
 		List<Map> list = new ArrayList<>();
 		Map map = new HashMap<>();
 		
-		Cookie[] c = req.getCookies();
-		System.out.println("==============");
-		for(Cookie cc : c){
-			if(!(cc.getName().equals("JSESSIONID"))){
-			int regNum = Integer.parseInt(cc.getValue());
-			map = lDao.getLatelyList(regNum);
-			System.out.println(cc.getValue());
-			
-			String str = "http://z1.zigbang.com/items/7676969/af2d4be65c803cf7ac380737cdfb14cddf9ba75b.jpg?h=100&q=100";
-			map.put("url",str);
-			
-			System.out.println(str.toString());
-			list.add(map);
-			}
-		}
 		
 		String p= req.getParameter("page") ==null ? "1":req.getParameter("page");
 		int pp = Integer.parseInt(p);
@@ -84,23 +69,46 @@ public class latelycontroller {
 		int end1 = (pp-1)*5;
 		
 		if(pp==1){
-		 start = pp;
+		 start = pp-1;
 		end = pp*5;
 		}else{
-			start = end1+1;
+			start = end1;
 			end = Integer.parseInt(p)*5;
 		}
 		
-		List list1 = pDao.paging(start, end);
-		System.out.println(start +","+end);
-		int cnt = list.size();
-		System.out.println(cnt);
+		Cookie[] c = req.getCookies();
+		
+		
+		for(int i =start; end>c.length? i<c.length : i<end; i++){
+				if(c.length<end){
+				int a = c.length-start-1;
+				
+				map.put("a",a);
+				}
+				if(!(c[i].getName().equals("JSESSIONID"))){
+				int regNum = Integer.parseInt(c[i].getValue());
+				map = lDao.getLatelyList(regNum);
+					
+					
+					String str = "http://z1.zigbang.com/items/7676969/af2d4be65c803cf7ac380737cdfb14cddf9ba75b.jpg?h=100&q=100";
+					map.put("url",str);
+					
+					
+					list.add(map);
+				
+			}
+			
+		}
+		
+		int cnt = c.length;
+		System.out.println(cnt+","+start+","+end);
 		int size = cnt %5 ==0 ? cnt/5 : cnt/5+1;
 		mav.addObject("size",size);
-		System.out.println(list1.toString());
+		
 		mav.addObject("page",p);
 		mav.addObject("list",list);
-		mav.addObject("list1",list1);
+		mav.addObject("map",map);
+	
 		
 		return mav;
 	}
