@@ -243,11 +243,11 @@
 		<form class="navbar-form navbar-right"
 			style="margin-top: 5px; margin-bottom: 5px;">
 			<div class="input-group">
-				<input type="text" class="form-control" name="keyword"
+				<input type="text" class="form-control" id="keyword"
 					placeholder="원하시는 지역명, 지하철역을 입력해주세요"
 					style="width: 300px; height: 40px;">
 				<div class="input-group-btn">
-					<button class="btn btn-default" type="submit" style="height: 40px;">
+					<button class="btn btn-default search" type="button" style="height: 40px;">
 						<i class="glyphicon glyphicon-search"></i>
 					</button>
 				</div>
@@ -295,14 +295,14 @@
 			"async" : false, 
 			"data" : {
 				"keyword" : keyword
-			}.done(function(result) {
-				if(result != null) {
-// 					initMap();
-					console.log(result);
-				} else {
-					window.alert("지역명 또는 지하철역명을 입력해주세요");
-				}
-			})
+			}
+		}).done(function(result) {
+			if(result != null) {
+				// 여기수정하시면 되요!!!!!!!!!!
+				console.log(result);
+			} else {
+				window.alert("지역명 또는 지하철역명을 입력해주세요");
+			}
 		});
 	}
 
