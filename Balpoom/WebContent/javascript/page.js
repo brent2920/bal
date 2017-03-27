@@ -438,7 +438,7 @@ var PagingHelper = {
 
 				sb += "<tr>";
 				sb += "<td style='padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;'>";
-				sb += obj['B_RKIND'] + "|" + "3층  관리비 5만원";
+				sb += obj['B_RKIND'] + " | 3층 | 관리비 5만원";
 				sb += "</td>";
 				sb += "</tr>";
 				sb += "</table>";
