@@ -58,11 +58,11 @@ public class main_controller {
 	@RequestMapping(path ="/testing", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap testing(@RequestParam Map n) {
-		System.out.println("============HashMao=============");
+		//System.out.println("============HashMao=============");
 		ModelAndView mav = new ModelAndView();
 		int cur = Integer.parseInt((String) n.get("curr"));
 		String list = (String) n.get("list");
-		System.out.println("list = "+ list.toString());
+		//System.out.println("list = "+ list.toString());
 		
 		String[] arr = list.split(",");
 		System.out.println("arr_string="+ arr.toString());
@@ -78,7 +78,7 @@ public class main_controller {
 			map.put(i, (urp.get_main_url(input)));
 
 		}
-		System.out.println("==========end Hashmap");
+		//System.out.println("==========end Hashmap");
 		return map;
 	}
 	
@@ -104,7 +104,7 @@ public class main_controller {
 			@RequestParam(name="north") String north
 			) {
 		
-		System.out.println("MPAY_TO ============> " + mpay_to);
+		//System.out.println("MPAY_TO ============> " + mpay_to);
 		// 보증금 세팅 - 문자제거
 		String[] d_from = deposit_from.split("\\s");
 		String[] d_to = deposit_to.split("\\s");
@@ -112,7 +112,7 @@ public class main_controller {
 		// 월세 세팅 - 문자제거
 		String[] m_from = mpay_from.split("\\s");
 		String[] m_to = mpay_to.split("\\s");
-		System.out.println("M_TO ============> " + m_to[0]);
+		//System.out.println("M_TO ============> " + m_to[0]);
 		
 		
 		// 평수 세팅

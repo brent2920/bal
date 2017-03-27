@@ -86,7 +86,7 @@ public class searchDao {
 		String kwd = keyword.replaceAll("\\s", "");
 		
 		URL url = new URL(
-			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyBgNeKcqCZgxXpAgv62ZsFg1VKPNFkJsGA"
+			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyBTaFAHzVHZa_HRpESUqgOgHbAU9z5emRY"
 		);
 
 		

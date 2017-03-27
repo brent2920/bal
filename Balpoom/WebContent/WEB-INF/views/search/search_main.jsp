@@ -55,9 +55,9 @@
 <!-- script -->
 <script>
 $(document).ready(function() {
-	$("#log").append(PagingHelper.log(${location.lat }));
-	$("#lag").append(PagingHelper.lag(${location.lng }));
-     $("#dn").append(PagingHelper.dn(${dn }));
+	//$("#log").append(PagingHelper.log(${location.lat }));
+	//$("#lag").append(PagingHelper.lag(${location.lng }));
+    $("#dn").append(PagingHelper.dn(${dn }));
     $("#nj").append(PagingHelper.nj(${nj }));
     $("#jpglist").append(PagingHelper.jpglist(${mpic }));
     $("#arrlist").append(PagingHelper.arrlist(${mlist }));
@@ -67,3 +67,9 @@ $(document).ready(function() {
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap&libraries=places,visualization"
 	async defer></script>
+	
+<!--  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> -->
+<!--     </script> -->
+<!--    <script async defer -->
+<!--    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS-83LLE8F1nvtVtsy1Adu-j4LeS9qAQg&callback=initMap"> -->
+<!--   </script> -->

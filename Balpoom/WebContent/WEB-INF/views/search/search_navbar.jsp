@@ -504,7 +504,7 @@
 		}).done(function(rst) {
 			// ajax로 날라온거를 rst로 쓰겠다는것 변수명은 맘대로 지정
 			// 			$("#result").append(rst);
-			console.log("덕찬 덕찬rst=>" + JSON.stringify(rst));
+			//console.log("덕찬 덕찬rst=>" + JSON.stringify(rst));
 			console.log("덕찬 사이즈rst.size" + rst.length)
 
 			if (rst.length != 0) {
