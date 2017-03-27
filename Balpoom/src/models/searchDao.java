@@ -25,7 +25,7 @@ public class searchDao {
 		URL url;
 		try {
 			url = new URL(
-				"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyBgNeKcqCZgxXpAgv62ZsFg1VKPNFkJsGA"
+"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyCoX7eyswqqgKnZf7Vmt4Tg3XYrQQwSE3c"
 			);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
@@ -86,7 +86,7 @@ public class searchDao {
 		String kwd = keyword.replaceAll("\\s", "");
 		
 		URL url = new URL(
-			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyBTaFAHzVHZa_HRpESUqgOgHbAU9z5emRY"
+			"https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + kwd + "&key=AIzaSyCoX7eyswqqgKnZf7Vmt4Tg3XYrQQwSE3c"
 		);
 
 		
@@ -114,6 +114,7 @@ public class searchDao {
 			
 			Double lat = Double.parseDouble(location.get("lat").toString());
 			Double lng = Double.parseDouble(location.get("lng").toString());
+			
 			
 			latLng.put("lat", lat);
 			latLng.put("lng", lng);
