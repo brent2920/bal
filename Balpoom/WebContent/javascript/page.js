@@ -1,5 +1,4 @@
 
-
 /**
  * go map!
  */
@@ -16,7 +15,7 @@ var mapBound;
 var locationtemp;
 var markers = [];
 var listtemp = [];
-
+var moreadd = []; // 지도에 값이 더 나타나면 그값을 저장할 리스트 
 
 var allData = {
 	"mKind" : "allPay", // 매물종류
@@ -56,13 +55,15 @@ var allDataTemp = {
 };
 function initMap() {
 	// console.log("initmap");
-
+	console.log(log);
 	map = new google.maps.Map(document.getElementById('map'), {
+		
+	    
 		center : {
-			lat : 37.5326049,
-			lng : 126.8646878
-		// lat : log,
-		// lng : lag
+			//lat : 37.5326049,
+			//lng : 126.8646878
+			lat : log,
+			lng : lag
 		},
 
 		zoom : 15,
@@ -90,15 +91,12 @@ function performSearch() {
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
 
 	if (// 만약 네브바 가 감지 된다면 지도는 고정
-			(jd.rKind[0]) != (jdt.rKind[0]) ||
-			(jd.mKind     != (jdt.mKind  )) ||
-			(jd.deposit_from != jdt.deposit_from) ||
-			(jd.parking != jdt.parking)  ||
-			(jd.pet != jdt.pet) ||
-			(jd.lhok != jdt.lhok)
-			
+	(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
+			|| (jd.deposit_from != jdt.deposit_from)
+			|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
+			|| (jd.lhok != jdt.lhok)
 
-	){
+	) {
 		allDataTemp = allData;
 		console.log("네브바 클릭 변경  탐지");
 		$.ajax({
@@ -111,7 +109,7 @@ function performSearch() {
 
 		}).done(function(listajax) { // 위치 정도 geometry.locaiton
 			console.log("클릭후 새로운 정보 : " + listajax.length);
-			
+
 			list = [];
 			list = listajax;
 			locationtemp = listajax;
@@ -119,7 +117,7 @@ function performSearch() {
 			console.log("클릭후 리스트 사이즈 : list.length : " + list.length);
 		});
 
-	}else {// 네브바는 고정 지도가 움직인다면
+	} else {// 네브바는 고정 지도가 움직인다면
 		console.log("지도 경로 변경 탐지");
 		mapBound = map.getBounds().toJSON();
 		allData.east = mapBound.east;
@@ -142,7 +140,7 @@ function callback(results, status) {
 
 	addMarker(temp);// 처음 디폴트 값으로 찍어 줘야함
 	addMarker(temp3);
-	
+
 	if (list.length == 0) {
 		$("#sh").html("");
 		// console.log("njj.size = " + njj.length);
@@ -150,22 +148,20 @@ function callback(results, status) {
 		njj = [];
 		PagingHelper.gotoPage(1);
 	} else {
-		
+
 		deleteMarkers(); // 리스트는 이제
 		markers = [];
 		for (var i = 0; i < list.length; i++) {
 
 			if (list.length != 0) {// ==========================================================================
 
-				
 				addMarker(list[i]);
-			
 
 			}
 
 			if (i == list.length - 1) {
-				
-				//console.log("다뿌려줬고 이제 새로운 리스트를 불러오자");
+
+				// console.log("다뿌려줬고 이제 새로운 리스트를 불러오자");
 				plist = list;
 				list = [];
 
@@ -193,10 +189,10 @@ function callback(results, status) {
 					}
 
 				});
-			
+
 				console.log("새로운 callback 리스트= " + list.length);
-				console.log("마커스 사이즈는 : "+ markers.length);
-				//console.log("callback arrl size:" + arrl.length);
+				console.log("마커스 사이즈는 : " + markers.length);
+				// console.log("callback arrl size:" + arrl.length);
 
 				PagingHelper.gotoPage(1);
 			}
@@ -214,44 +210,33 @@ function deleteMarkers() {
 	clearMarkers();
 }
 function setMapOnAll(map) {
-	console.log("=======setMapOnAll========= "+ markers.length);
+	console.log("=======setMapOnAll========= " + markers.length);
 
 	for (var i = 0; i < markers.length; i++) {
-		
+
 		markers[i].setMap(map);
 	}
 }
-//function arr_diff (a1, a2) {
-//
-//    var a = [], diff = [];
-//
-//    for (var i = 0; i < a1.length; i++) {
-//        a[a1[i]] = true;
-//    }
-//
-//    for (var i = 0; i < a2.length; i++) {
-//        if (a[a2[i]]) {
-//            delete a[a2[i]];
-//        } else {
-//            a[a2[i]] = true;
-//        }
-//    }
-//
-//    for (var k in a) {
-//        diff.push(k);
-//    }
-//
-//    return diff;
-//};
+var compareJSON = function(obj1, obj2) {
+	console.log("comare JSOn=" + (obj1 == obj2));
+	var ret = {};
+	for ( var i in obj2) {
+		if (!obj1.hasOwnProperty(i) || obj2[i] !== obj1[i]) {
+			ret[i] = obj2[i];
+		}
+	}
+	return ret;
+};
+
 function addMarker(place) {
 	var marker = new google.maps.Marker({
 		position : place.geometry.location,
-		//draggable: true,
-		//animation: google.maps.Animation.DROP,
-		//title: 'Click to zoom'
+		// draggable: true,
+		 animation: google.maps.Animation.DROP,
+		// title: 'Click to zoom'
 		map : map,
 		icon : {
-			url: 'http://maps.gstatic.com/mapfiles/circle.png',
+			url : 'http://maps.gstatic.com/mapfiles/circle.png',
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
 		}
@@ -278,40 +263,32 @@ function addMarker(place) {
 
 	if (list.length == 0) {
 
-		$.ajax({
+		$
+				.ajax({
 
-			"url" : "/gomapin",
-			"type" : "post",
-			"dataType" : "json",
-			"async" : false,
-			"data" : allData
+					"url" : "/gomapin",
+					"type" : "post",
+					"dataType" : "json",
+					"async" : false,
+					"data" : allData
 
-		}).done(function(listajax) { // 위치 정도 geometry.locaiton
-			console.log("새로운 맵 정보 : " + listajax.length);
+				})
+				.done(
+						function(listajax) { // 위치 정도 geometry.locaiton
+							console.log("새로운 맵 정보 : " + listajax.length);
 
-			list = [];
-			list = listajax;
-			locationtemp = listajax;
-			// console.log("add_marker 끝" + JSON.stringify(list));
-			console.log("새로운 리스트 정보 : list.length : " + list.length + " listTemp = "+ listtemp.length);
-			if(list.length >= listtemp.length){
-				//listtemp = listtemp-list;
-				//list = list - listtemp;
-				//listtemp = list;
-				//console.log("after 계산 = "+ list.length);
-				//list = arr_diff(list,listtemp);
-				//console.log("결과값::"+ list.length);
-				var diff = $(list).not(listtemp).get();
-				console.log("diff="+ diff.length);
-				
-			}else{
-				//list = list - listtemp;
-				//console.log("else");
-			}
-		});
+							list = [];
+							list = listajax;
+							locationtemp = listajax;
+							// console.log("add_marker 끝" +
+							// JSON.stringify(list));
+							console.log("새로운 리스트 정보 : list.length : "
+									+ list.length + " listTemp = "
+									+ listtemp.length);
+						
+						});
 
 	}
-
 
 }
 
@@ -482,7 +459,7 @@ var PagingHelper = {
 
 	},
 	'pagingHtml' : function(pTotalCnt) {
-		
+
 		this.data.totalPageCnt = arrl.length;
 		var _ = this;
 
@@ -539,23 +516,19 @@ var PagingHelper = {
 		sb += "</ul>";
 		this.shHtml(this.data.currentPage);
 
-		//console.log("plist=" + plist.length + "list=" + list.length);
+		// console.log("plist=" + plist.length + "list=" + list.length);
 		jd = JSON.parse(JSON.stringify(allData));
 		jdt = JSON.parse(JSON.stringify(allDataTemp));
-		//console.log(jd.rKind[0]);
-		//console.log(jdt.rKind[0]);
+		// console.log(jd.rKind[0]);
+		// console.log(jdt.rKind[0]);
 
 		if (
-				
-				(jd.rKind[0]) != (jdt.rKind[0]) ||
-				(jd.mKind     != (jdt.mKind  )) ||
-				(jd.deposit_from != jdt.deposit_from) ||
-				(jd.parking != jdt.parking)  ||
-				(jd.pet != jdt.pet) ||
-				(jd.lhok != jdt.lhok)
-		
-		
-		
+
+		(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
+				|| (jd.deposit_from != jdt.deposit_from)
+				|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
+				|| (jd.lhok != jdt.lhok)
+
 		) {
 			console
 					.log("==================================================notperformsearch Entered");
