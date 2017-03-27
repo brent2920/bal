@@ -292,7 +292,7 @@
 		$.ajax({
 			"url" : "/detail_search_chk",
 			"dataType" : "json",
-			"async" : false,
+			"async" : false, 
 			"data" : {
 				"keyword" : keyword
 			}.done(function(result) {
