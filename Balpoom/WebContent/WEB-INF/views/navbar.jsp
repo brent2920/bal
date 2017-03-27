@@ -490,7 +490,7 @@
 	
 	
 	
-	document.getElementById("Dsbt").onclick = function(){
+	$("#Dsbt").onclick = function(){
 		var flag6 = document.getElementById("delpass1").value;
 		var xhr2 = new XMLHttpRequest();
 		xhr2.open("get" , "/mydelete?delpass="+flag6, true);

@@ -427,43 +427,47 @@ var PagingHelper = {
 			for (var i = start; i <= end; i++) {
 				var obj = arrl[i];
 				var obj2 = json[count];
-				sb += "<div style='min-height: 125px; background-color: white; margin: 2%'>";
+				var jorm = "";
+				
+				if(obj['B_MPAY'] == 0) {
+					jorm = "전세";
+				} else {
+					jorm = "월세";
+				}
+				
+				
+				sb += "<div class='roomInfo' style='min-height: 125px;' " +
+						"onclick='PagingHelper.linkajax(" + i + ");' mouseenter='mouse_on()'" +
+								"mouseleave='mouse_off()'>";
 				sb += "<table>"
 				sb += "<tr>";
 				sb += "<td rowspan='3'>";
-
-				sb += "<li class='first' onclick='PagingHelper.linkajax(" + i
-						+ ");'>";
-				sb += "<img src=" + obj2
-						+ " style='height: 120px; width: 120px;'>";
-				sb += "</li>";
-
+				sb += "<img src=" + obj2 + " style='height: 120px; width: 120px;'>";
 				sb += "</td>";
 				sb += "<td style='padding-left: 10px; vertical-align: bottom;'>";
 				sb += "<span style='padding: 3px; background-color: #04B486;border-radius: 5px; color: white;'>"
-						+ obj['B_MPAY'] + "</span>";
-				sb += "<b style='color: #29B172; font-size: 20px; vertical-align: middle;'>"
-						+ "2000/30" + "</b>";
+						+ jorm + "</span>";
+				sb += "<b style='color: #29B172; font-size: 20px; vertical-align: middle;'>&nbsp;"
+						+ obj['B_DEPOSIT'] + "/" + obj['B_MPAY'] + "</b>";
 				sb += "</td>";
 				sb += "</tr>";
 
 				sb += "<tr>";
-
-				sb += "<td style='padding-left: 10px; font-size: 14px;'>";
-				sb += "귀한 반전세 풀옵션 원룹입니다<br/>";
-				sb += obj['B_TITLE'];
+				sb += "<td style='padding-left: 10px;'>";
+				sb += "<span style='font-size: 14px;'>" + obj['B_RINFO'] + "</span><br/>";
+				sb += "<span style='font-size: 14px; color: gray;'>" + obj['B_TITLE'] + "</span>";
 				sb += "</td>";
 				sb += "</tr>";
  
 				sb += "<tr>";
 				sb += "<td style='padding-left: 10px; font-size: 12px; color: gray; vertical-align: text-top;'>";
-				sb += obj['B_RKIND'] + " | 3층 | 관리비 5만원";
+				sb += obj['B_RKIND'] + " | " + obj['B_FLOOR'] + " | " + "관리비 " + obj['B_GPAY'];
 				sb += "</td>";
 				sb += "</tr>";
 				sb += "</table>";
 				sb += "</div>";
 
-				sb += "<hr style='margin: 30px;'/>";
+				sb += "<hr style='margin-top: 5px; margin-bottom: 5px;'/>";
 				count++;
 			}
 		}
@@ -505,7 +509,7 @@ var PagingHelper = {
 			if (j > _.data.totalPageCnt)
 				break;
 			if (j == _.data.currentPage) {
-				sbTemp += "<li class='selected'>[<font color='red'>" + j
+				sbTemp += "<li class='selected'>[<font>" + j
 						+ "</font>]</li>";
 			} else {
 				sbTemp += "<li onclick='PagingHelper.gotoPage(" + j + ");'>["
@@ -657,6 +661,7 @@ var PagingHelper = {
 		}
 	}
 }
+
 var temp = {
 	"geometry" : {
 		"location" : {
@@ -700,221 +705,3 @@ var temp3 = {
 	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
 	"place_id" : "ChIJZ934S0KuEmsR_0lxV3PTR4M"
 };
-
-// <div style="min-height: 125px; background-color: white; margin: 2%">
-// <table>
-// <tr>
-// <td rowspan="3"><img src="/images/room.jpg"
-// style="height: 120px; width: 120px;"></td>
-// <td style="padding-left: 10px; vertical-align: bottom;"><span
-// style="padding: 3px; background-color: #04B486; border-radius: 5px; color:
-// white;">월세</span>
-// <b
-// style="color: #29B172; font-size: 20px; vertical-align: middle;">
-// 2000/30 </b></td>
-// </tr>
-// <tr>
-// <td style="padding-left: 10px; font-size: 14px;">
-// 귀한 반전세 풀옵션 원룸입니다
-//
-//
-//
-// </td>
-// </tr>
-// <tr>
-// <td
-// style="padding-left: 10px; font-size: 12px; color: gray; vertical-align:
-// text-top;">
-// 원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
-// </td>
-// </tr>
-// </table>
-// </div>
-// <hr style="margin: 5px;" />
-//
-// <div style="min-height: 125px; background-color: white; margin: 2%">
-// <table>
-// <tr>
-// <td rowspan="3"><img src="/images/room2.jpg"
-// style="height: 120px; width: 120px;"></td>
-// <td style="padding-left: 10px; vertical-align: bottom;"><span
-// style="padding: 3px; background-color: #04B486; border-radius: 5px; color:
-// white;">월세</span>
-// <b
-// style="color: #29B172; font-size: 20px; vertical-align: middle;">
-// 2000/30 </b></td>
-// </tr>
-// <tr>
-// <td style="padding-left: 10px; font-size: 14px;">귀한 반전세 풀옵션
-// 원룸입니다</td>
-// </tr>
-// <tr>
-// <td
-// style="padding-left: 10px; font-size: 12px; color: gray; vertical-align:
-// text-top;">
-// 원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
-// </td>
-//
-// </tr>
-// </table>
-//
-// </div>
-// <div style="min-height: 125px; background-color: white; margin: 2%">
-// <table>
-// <tr>
-// <td rowspan="3"><img src="/images/room.jpg"
-// style="height: 120px; width: 120px;"></td>
-// <td style="padding-left: 10px; vertical-align: bottom;"><span
-// style="padding: 3px; background-color: #04B486; border-radius: 5px; color:
-// white;">월세</span>
-// <b
-// style="color: #29B172; font-size: 20px; vertical-align: middle;">
-// 2000/30 </b></td>
-// </tr>
-// <tr>
-// <td style="padding-left: 10px; font-size: 14px;">
-// 귀한 반전세 풀옵션 원룸입니다
-//
-//
-//
-// </td>
-// </tr>
-// <tr>
-// <td
-// style="padding-left: 10px; font-size: 12px; color: gray; vertical-align:
-// text-top;">
-// 원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
-// </td>
-// </tr>
-// </table>
-// </div>
-// <hr style="margin: 5px;" />
-//
-// <div style="min-height: 125px; background-color: white; margin: 2%">
-// <table>
-// <tr>
-// <td rowspan="3"><img src="/images/room2.jpg"
-// style="height: 120px; width: 120px;"></td>
-// <td style="padding-left: 10px; vertical-align: bottom;"><span
-// style="padding: 3px; background-color: #04B486; border-radius: 5px; color:
-// white;">월세</span>
-// <b
-// style="color: #29B172; font-size: 20px; vertical-align: middle;">
-// 2000/30 </b></td>
-// </tr>
-// <tr>
-// <td style="padding-left: 10px; font-size: 14px;">귀한 반전세 풀옵션
-// 원룸입니다</td>
-// </tr>
-// <tr>
-// <td
-// style="padding-left: 10px; font-size: 12px; color: gray; vertical-align:
-// text-top;">
-// 원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
-// </td>
-//
-// </tr>
-// </table>
-//
-// </div>
-
-// <div style="min-height: 125px; background-color: white; margin: 2%">
-// <table>
-// <tr>
-// <td rowspan="3"><img src="/images/room.jpg"
-// style="height: 120px; width: 120px;"></td>
-// <td style="padding-left: 10px; vertical-align: bottom;"><span
-// style="padding: 3px; background-color: #04B486; border-radius: 5px; color:
-// white;">월세</span>
-// <b
-// style="color: #29B172; font-size: 20px; vertical-align: middle;">
-// 2000/30 </b></td>
-// </tr>
-// <tr>
-// <td style="padding-left: 10px; font-size: 14px;">
-// 귀한 반전세 풀옵션 원룸입니다
-//
-//
-//
-// </td>
-// </tr>
-// <tr>
-// <td
-// style="padding-left: 10px; font-size: 12px; color: gray; vertical-align:
-// text-top;">
-// 원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
-// </td>
-// </tr>
-// </table>
-// </div>
-// <hr style="margin: 5px;" />
-//
-// <div style="min-height: 125px; background-color: white; margin: 2%">
-// <table>
-// <tr>
-// <td rowspan="3"><img src="/images/room2.jpg"
-// style="height: 120px; width: 120px;"></td>
-// <td style="padding-left: 10px; vertical-align: bottom;"><span
-// style="padding: 3px; background-color: #04B486; border-radius: 5px; color:
-// white;">월세</span>
-// <b
-// style="color: #29B172; font-size: 20px; vertical-align: middle;">
-// 2000/30 </b></td>
-// </tr>
-// <tr>
-// <td style="padding-left: 10px; font-size: 14px;">귀한 반전세 풀옵션
-// 원룸입니다</td>
-// </tr>
-// <tr>
-// <td
-// style="padding-left: 10px; font-size: 12px; color: gray; vertical-align:
-// text-top;">
-// 원룸 | 3층 | 21.4m<sup>2</sup> | 관리비 5만원
-// </td>
-//
-// </tr>
-// </table>
-//
-// </div>
-// var map;
-// var infoWindow;
-// var service;
-// function initMap() {
-// // var pos = { lat : ${json.results[0].geometry.location.lat },lng :
-// // ${json.results[0].geometry.location.lng } };
-// var map = new google.maps.Map(document.getElementById('map'), {
-// "center" : {
-// lat : 37.5172363,
-// lng : 127.0473248
-// }, // 변수명으로 설정 가능
-// "scrollwheel" : true, // false 로 할경우 마우스 휠 작동이 안된다
-// "zoom" : 15,
-// styles: [{
-// stylers: [{ visibility: 'simplified' }]
-// }, {
-// elementType: 'labels',
-// stylers: [{ visibility: 'off' }]
-// }]
-// });
-// var marker = new google.maps.Marker({
-// "map" : map, // 이 map 은 위에 var map
-// "position" : {
-// lat : 37.5172363,
-// lng : 127.0473248
-// }, // 변수명으로 설정 가능
-// "title" : '${param.addr}'
-// });
-// infoWindow = new google.maps.InfoWindow();
-// service = new google.maps.places.PlacesService(map);
-// map.addListener('idle', performSearch);
-// }
-//
-// function performSearch() {
-// var request = {
-// bounds: map.getBounds(),
-// keyword: 'best view'
-// };
-// service.radarSearch(request, callback);
-// }
-//
-// setTimeout(initMap, 1000);
