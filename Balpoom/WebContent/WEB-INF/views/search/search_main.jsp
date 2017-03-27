@@ -19,26 +19,25 @@
 		style="height: 86.5%; background-color: white; width: 75%" id="map">
 	</div>
 
-	<!-- 최근 본방 목록 -->
 	<div class="col-md-3"
 		style="height: 100%; margin: 0; padding: 0; background-color: white">
-		<div
-			style="height: 6%; background-color: #222222; color: #919191; line-height: 38px; padding-left: 3%">
-			&gt [검색 결과] 방 개수 <span id="ln" /> )
+		<div style="height: 5%; background-color: #222222; font-size: 14px; vertical-align: bottom; 
+			color: white; line-height: 38px; padding-left: 3%">
+			&gt 검색결과 <span id="ln"></span>개
 		</div>
 
 		<!-- 방리스트 -->
 		<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
 
 			<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
-				<div id="sh"></div>
+				<div id="sh" style="padding: 5px;"></div>
 			</div>
 			<!-- 전/후 -->
-			<nav class="navbar navbar-inverse" style="padding: 0%; margin: 0%">
+			<nav class="navbar navbar-inverse" style="padding: 0%; margin: 0%; border-radius: 0px; height: 5%">
 				<div class="container-fluid">
 					<div align="center">
 						<div id="snav"
-							style="height: 7%; width: 100%; border-radius: 0%; background-color: #222222; line-height: 48px">
+							style="width: 100%; border-radius: 0%; background-color: #222222; line-height: 48px">
 							<div id="paging"></div>
 						</div>
 					</div>
@@ -48,12 +47,25 @@
 	</div>
 
 </div>
-<script>
-</script>
 
-
-<!-- script -->
 <script>
+
+function mouse_on() {
+	console.log("mouseenter!!");
+	$(this).css({
+		"background-color" : "#EBFFFB",
+		"cursor" : "pointer"
+	});
+}
+
+function mouse_off() {
+	console.log("mouseleave!!");
+	$(this).css({
+		"background-color" : "white",
+		"cursor" : "default"
+	});
+}
+
 $(document).ready(function() {
 	//alert(${location.lat }+","+${location.lng});
 	$("#log").append(PagingHelper.log(${location.lat }));
@@ -63,7 +75,8 @@ $(document).ready(function() {
     $("#jpglist").append(PagingHelper.jpglist(${mpic }));
     $("#arrlist").append(PagingHelper.arrlist(${mlist }));
     $("#paging").append(PagingHelper.pagingHtml(${msize }));
-    $("#gotopage").append(PagingHelper.gotoPage(1));});
+    $("#gotopage").append(PagingHelper.gotoPage(1));
+});
 </script>
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=${apiKey }&callback=initMap&libraries=places,visualization"
