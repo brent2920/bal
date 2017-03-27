@@ -1,3 +1,5 @@
+
+
 /**
  * go map!
  */
@@ -9,11 +11,16 @@ var map;
 var infoWindow;
 var service;
 var list = [];// 마커를 찍기위한 리스트
+var plist = [];
 var mapBound;
+var locationtemp;
+var markers = [];
+var listtemp = [];
+
 
 var allData = {
 	"mKind" : "allPay", // 매물종류
-	"rKind" : ["all_room"], // 방종류
+	"rKind" : [ "all_room" ], // 방종류
 	"deposit_from" : "0 만원", // 보증금
 	"deposit_to" : "9999999 만원",
 	"mpay_from" : "0 만원", // 월세
@@ -29,18 +36,35 @@ var allData = {
 	"south" : 37.390248965317404,
 	"north" : 37.614135362297105
 };
+var allDataTemp = {
+	"mKind" : "allPay", // 매물종류
+	"rKind" : [ "all_room" ], // 방종류
+	"deposit_from" : "0 만원", // 보증금
+	"deposit_to" : "9999999 만원",
+	"mpay_from" : "0 만원", // 월세
+	"mpay_to" : "9999999 만원",
+	"parking" : null, // 주자가능
+	"pet" : null, // 애완동물가능
+	"lhok" : null, // LH가능
+	"area" : [], // 평수(면적)
+	"floor" : [], // 층수
 
+	"east" : 127.14252173859859,
+	"west" : 126.65294349152828,
+	"south" : 37.390248965317404,
+	"north" : 37.614135362297105
+};
 function initMap() {
-	//console.log("initmap");
+	// console.log("initmap");
 
 	map = new google.maps.Map(document.getElementById('map'), {
 		center : {
 			lat : 37.5326049,
 			lng : 126.8646878
-			//lat : log,
-			//lng : lag
+		// lat : log,
+		// lng : lag
 		},
-		
+
 		zoom : 15,
 		styles : [ {
 			stylers : [ {
@@ -59,48 +83,91 @@ function initMap() {
 	map.addListener('idle', performSearch);
 
 }
-
 function performSearch() {
-	//console.log("performSearch()");
+	// console.log("performSearch()");
+	// allDataTemp = allData;
+	jd = JSON.parse(JSON.stringify(allData));
+	jdt = JSON.parse(JSON.stringify(allDataTemp));
 
-	mapBound = map.getBounds().toJSON();
-	allData.east = mapBound.east;
-	allData.west = mapBound.west;
-	allData.south = mapBound.south;
-	allData.north = mapBound.north;
+	if (// 만약 네브바 가 감지 된다면 지도는 고정
+			(jd.rKind[0]) != (jdt.rKind[0]) ||
+			(jd.mKind     != (jdt.mKind  )) ||
+			(jd.deposit_from != jdt.deposit_from) ||
+			(jd.parking != jdt.parking)  ||
+			(jd.pet != jdt.pet) ||
+			(jd.lhok != jdt.lhok)
+			
+
+	){
+		allDataTemp = allData;
+		console.log("네브바 클릭 변경  탐지");
+		$.ajax({
+
+			"url" : "/gomapin",
+			"type" : "post",
+			"dataType" : "json",
+			"async" : false,
+			"data" : allData
+
+		}).done(function(listajax) { // 위치 정도 geometry.locaiton
+			console.log("클릭후 새로운 정보 : " + listajax.length);
+			
+			list = [];
+			list = listajax;
+			locationtemp = listajax;
+			// console.log("add_marker 끝" + JSON.stringify(list));
+			console.log("클릭후 리스트 사이즈 : list.length : " + list.length);
+		});
+
+	}else {// 네브바는 고정 지도가 움직인다면
+		console.log("지도 경로 변경 탐지");
+		mapBound = map.getBounds().toJSON();
+		allData.east = mapBound.east;
+		allData.west = mapBound.west;
+		allData.south = mapBound.south;
+		allData.north = mapBound.north;
+
+	}
+
 	var request = {
 		bounds : map.getBounds(),
 		keyword : 'best view'
 	};
 	service.radarSearch(request, callback);
 }
-
 function callback(results, status) {
 
-	//console.log("callback" + results);
-	console.log("리세팅 리스트 길이:" + list.length);
+	// console.log("callback" + results);
+	// console.log("call back 지도 바뀐다:" + list.length);
 
 	addMarker(temp);// 처음 디폴트 값으로 찍어 줘야함
 	addMarker(temp3);
-
-
+	
 	if (list.length == 0) {
 		$("#sh").html("");
-		//console.log("njj.size = " + njj.length);
+		// console.log("njj.size = " + njj.length);
 		arrl = [];
 		njj = [];
 		PagingHelper.gotoPage(1);
 	} else {
-
+		
+		deleteMarkers(); // 리스트는 이제
+		markers = [];
 		for (var i = 0; i < list.length; i++) {
 
-			if (list.length != 0) {
+			if (list.length != 0) {// ==========================================================================
+
+				
 				addMarker(list[i]);
+			
+
 			}
 
 			if (i == list.length - 1) {
-				//console.log("============enter=========");
-				console.log("All data:" + allData);
+				
+				//console.log("다뿌려줬고 이제 새로운 리스트를 불러오자");
+				plist = list;
+				list = [];
 
 				$.ajax({
 					"url" : "/gsearchTest",
@@ -109,8 +176,8 @@ function callback(results, status) {
 					"async" : false,
 					"data" : allData
 
-				}).done(function(listajax) {
-				
+				}).success(function(listajax) {
+
 					if (listajax.length != 0) {
 
 						arrl = listajax;
@@ -123,10 +190,13 @@ function callback(results, status) {
 						}
 					} else {
 						arrl = [];
-						
 					}
 
 				});
+			
+				console.log("새로운 callback 리스트= " + list.length);
+				console.log("마커스 사이즈는 : "+ markers.length);
+				//console.log("callback arrl size:" + arrl.length);
 
 				PagingHelper.gotoPage(1);
 			}
@@ -134,53 +204,115 @@ function callback(results, status) {
 	}
 
 }
-function clearMarkers() {// 현재 보고있는중 작동안함
-	// setMapOnAll(null); // 맵클리어 작동안하고있음
+function clearMarkers() {
+	setMapOnAll(null);
 }
+function showMarkers() {
+	setMapOnAll(map);
+}
+function deleteMarkers() {
+	clearMarkers();
+}
+function setMapOnAll(map) {
+	console.log("=======setMapOnAll========= "+ markers.length);
 
+	for (var i = 0; i < markers.length; i++) {
+		
+		markers[i].setMap(map);
+	}
+}
+//function arr_diff (a1, a2) {
+//
+//    var a = [], diff = [];
+//
+//    for (var i = 0; i < a1.length; i++) {
+//        a[a1[i]] = true;
+//    }
+//
+//    for (var i = 0; i < a2.length; i++) {
+//        if (a[a2[i]]) {
+//            delete a[a2[i]];
+//        } else {
+//            a[a2[i]] = true;
+//        }
+//    }
+//
+//    for (var k in a) {
+//        diff.push(k);
+//    }
+//
+//    return diff;
+//};
 function addMarker(place) {
+	var marker = new google.maps.Marker({
+		position : place.geometry.location,
+		//draggable: true,
+		//animation: google.maps.Animation.DROP,
+		//title: 'Click to zoom'
+		map : map,
+		icon : {
+			url: 'http://maps.gstatic.com/mapfiles/circle.png',
+			anchor : new google.maps.Point(10, 10),
+			scaledSize : new google.maps.Size(10, 17)
+		}
+	});
+	markers.push(marker);
+
+	for (var i = 0; i < markers.length; i++) {
+
+		markers[i].setMap(map);
+	}
+
+	function createMarker(place) {
+		var placeLoc = place.geometry.location;
+		var marker = new google.maps.Marker({
+			map : map,
+			position : place.geometry.location
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.setContent(place.name);
+			infowindow.open(map, this);
+		});
+	}
 
 	if (list.length == 0) {
 
 		$.ajax({
 
+			"url" : "/gomapin",
 			"type" : "post",
 			"dataType" : "json",
 			"async" : false,
-			"url" : "/gomapin?info=" + map.getBounds()
+			"data" : allData
 
-		}).done(function(listajax) {
+		}).done(function(listajax) { // 위치 정도 geometry.locaiton
+			console.log("새로운 맵 정보 : " + listajax.length);
 
 			list = [];
 			list = listajax;
+			locationtemp = listajax;
+			// console.log("add_marker 끝" + JSON.stringify(list));
+			console.log("새로운 리스트 정보 : list.length : " + list.length + " listTemp = "+ listtemp.length);
+			if(list.length >= listtemp.length){
+				//listtemp = listtemp-list;
+				//list = list - listtemp;
+				//listtemp = list;
+				//console.log("after 계산 = "+ list.length);
+				//list = arr_diff(list,listtemp);
+				//console.log("결과값::"+ list.length);
+				var diff = $(list).not(listtemp).get();
+				console.log("diff="+ diff.length);
+				
+			}else{
+				//list = list - listtemp;
+				//console.log("else");
+			}
 		});
 
-	} else {
 	}
 
-	var marker = new google.maps.Marker({
 
-		map : map,
-		position : place.geometry.location,
-		icon : {
-			url : 'http://maps.gstatic.com/mapfiles/circle.png',
-			anchor : new google.maps.Point(10, 10),
-			scaledSize : new google.maps.Size(10, 17)
-		}
-	});
-	google.maps.event.addListener(marker, 'click', function() {
-
-		service.getDetails(place, function(result, status) {
-
-			// if (status !== google.maps.places.PlacesServiceStatus.OK) {
-			// console.error(status);
-			// return;
-			// }
-
-			infoWindow.setContent(result.name);
-			infoWindow.open(map, marker);
-		});
-	});
 }
 
 /**
@@ -208,7 +340,6 @@ var curr = 0;
 var jsonarr = [];
 var log;// 검색결과의 위도
 var lag;// 검색결과의 경도
-
 var PagingHelper = {
 
 	'data' : {
@@ -239,7 +370,6 @@ var PagingHelper = {
 
 		njj = arr;
 	},
-
 	'dn' : function(dnn) {
 
 		dn = dnn;
@@ -250,13 +380,11 @@ var PagingHelper = {
 	'lag' : function(a) {
 		lag = a;
 	},
-
 	'arrlist' : function(arr) {
 
 		arrl = arr;
 
 	},
-
 	'jpglist' : function(jpg) {
 		jpgs = jpg;
 
@@ -264,7 +392,6 @@ var PagingHelper = {
 	'allData' : function(all) {
 		allData = all;
 	},
-
 	'linkajax' : function(num) {
 		location.href = '/detail?num=' + njj[num];
 
@@ -273,7 +400,6 @@ var PagingHelper = {
 		var _ = this;
 
 	},
-
 	'shHtml' : function(n_block) {
 
 		// console.log("shHtml");
@@ -300,7 +426,7 @@ var PagingHelper = {
 			sb = '';
 			arrl = [];
 			njj = [];
-			
+
 		} else {
 			for (var i = start; i <= end; i++) {
 				var obj = arrl[i];
@@ -349,14 +475,12 @@ var PagingHelper = {
 		return sb;
 
 	},
-
 	'button' : function() {
 		if ($('#btt').data('clicked')) {
 		} else {
 		}
 
 	},
-
 	'pagingHtml' : function(pTotalCnt) {
 		
 		this.data.totalPageCnt = arrl.length;
@@ -415,6 +539,32 @@ var PagingHelper = {
 		sb += "</ul>";
 		this.shHtml(this.data.currentPage);
 
+		//console.log("plist=" + plist.length + "list=" + list.length);
+		jd = JSON.parse(JSON.stringify(allData));
+		jdt = JSON.parse(JSON.stringify(allDataTemp));
+		//console.log(jd.rKind[0]);
+		//console.log(jdt.rKind[0]);
+
+		if (
+				
+				(jd.rKind[0]) != (jdt.rKind[0]) ||
+				(jd.mKind     != (jdt.mKind  )) ||
+				(jd.deposit_from != jdt.deposit_from) ||
+				(jd.parking != jdt.parking)  ||
+				(jd.pet != jdt.pet) ||
+				(jd.lhok != jdt.lhok)
+		
+		
+		
+		) {
+			console
+					.log("==================================================notperformsearch Entered");
+			// notperformSearch();
+
+			performSearch();
+
+		}
+
 		return sb;
 	},
 	"makeNum" : function(className, content) {
@@ -431,7 +581,7 @@ var PagingHelper = {
 				: tmp);
 	},// hiㅇ
 	'gotoPage' : function(pageNum) {
-	
+
 		json = "empty";// 받은 정보를 바탕으로 이미지 주소를 다운 받는다
 		this.data.currentPage = pageNum;
 		this.setStartnumEndnum();
@@ -439,8 +589,7 @@ var PagingHelper = {
 		var ends = (this.data.currentPage) * 4 - 1;// 3
 		var starts = ends - 3;//
 		var njjTemp = [];
-		
-		
+
 		PagingHelper.data.totalPageCnt = njj.length;
 
 		for (var i = starts; i < ends; i++) {
@@ -458,22 +607,23 @@ var PagingHelper = {
 						"url" : "/testing?curr=" + this.data.currentPage
 								+ "&list=" + njjTemp
 
-					}).done(function(listajax) {
+					}).success(function(listajax) {
 
 				// json : 이미지 주소들
 				json = JSON.parse(JSON.stringify(listajax));
+				// console.log("json::"+JSON.stringify(json));
 
 			});
 
 			$("#paging").html(this.pagingHtml(this.data.totalPageCnt));
 			$("#sh").html(this.shHtml());
 
-		} else {}
+		} else {
+		}
 
 	},
-
 	'gotoPage_nav' : function(pageNum) {
-	
+
 		json = "empty";// 받은 정보를 바탕으로 이미지 주소를 다운 받는다
 		this.data.currentPage = pageNum; // 현재 페이지를 세팅한다
 		this.setStartnumEndnum();
@@ -482,7 +632,7 @@ var PagingHelper = {
 		var starts = ends - 3;//
 		var njjTemp = [];
 		// console.log("njj=>"+ JSON.stringify(njj));
-		console.log("njj size = " + njj.length);
+		// console.log("njj size = " + njj.length);
 		PagingHelper.data.totalPageCnt = njj.length;
 
 		for (var i = starts; i < ends; i++) {
@@ -507,15 +657,14 @@ var PagingHelper = {
 				json = JSON.parse(JSON.stringify(listajax));
 
 			});
-			//console.log("this.data.toalPageCnt Before enter paging="
-				//	+ this.data.totalPageCnt);
-			//console.log("리스트 의 길이는 =" + list.length);
+			// console.log("this.data.toalPageCnt Before enter paging="
+			// + this.data.totalPageCnt);
+			// console.log("리스트 의 길이는 =" + list.length);
 			$("#paging").html(this.pagingHtml(this.data.totalPageCnt));
 			$("#sh").html(this.shHtml());
 		}
 	}
 }
-
 var temp = {
 	"geometry" : {
 		"location" : {
@@ -545,7 +694,6 @@ var temp2 = {
 
 	]
 };
-
 var temp3 = {
 	"reference" : "CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
 	"html_attributions" : [

@@ -39,18 +39,18 @@ public class search_controller {
 		ModelAndView mav = new ModelAndView("t_search");
 		System.out.println("Search Keyword : " + keyword);
 		HashMap<String, Double> location = new HashMap<>();
-		
-		if(sDao.getLatLng(keyword) == null) {
-			location.put("lat", 37.5662952);
-			location.put("lng", 126.9779451);
-		} else {
-			location = sDao.getLatLng(keyword);
-		}
-			
-		System.out.println("Location : " + location);
-		
-		// 검색키워드에 해당하는 값의 좌표값 addObject
-		mav.addObject("location", location);
+//		
+//		if(sDao.getLatLng(keyword) == null) {
+//			location.put("lat", 37.5662952);
+//			location.put("lng", 126.9779451);
+//		} else {
+//			location = sDao.getLatLng(keyword);
+//		}
+//			
+//		System.out.println("Location : " + location);
+//		
+//		// 검색키워드에 해당하는 값의 좌표값 addObject
+//		mav.addObject("location", location);
 
 		List<HashMap<String, Object>> mlist = rDao.test_room();
 		System.out.println("mlist.size=" + mlist.size());
