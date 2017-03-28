@@ -290,14 +290,6 @@ function addMarker(place,address) {
 
 	
 		}
-		
-<<<<<<< HEAD
-
-		
-=======
-
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
-
 	});
 	attachSecretMessage(marker, address);
 	markers.push(marker);
