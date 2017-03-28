@@ -84,7 +84,8 @@ function initMap() {
 	infoWindow = new google.maps.InfoWindow();
 	service = new google.maps.places.PlacesService(map);
 	map.addListener('idle', performSearch);
-
+	
+	
 }
 function performSearch() {
 	// console.log("performSearch()");
@@ -205,6 +206,7 @@ function callback(results, status) {
 	}
 
 }
+
 function clearMarkers() {
 	setMapOnAll(null);
 }
@@ -255,10 +257,10 @@ function addMarker(place) {
 
 	]
 	});
+	
 	markers.push(marker);
 
 	for (var i = 0; i < markers.length; i++) {
-
 		markers[i].setMap(map);
 	}
 
@@ -266,9 +268,9 @@ function addMarker(place) {
 		var placeLoc = place.geometry.location;
 		var marker = new google.maps.Marker({
 			map : map,
-			position : place.geometry.location
+			position : place.geometry.location,
 		});
-
+		
 		google.maps.event.addListener(marker, 'click', function() {
 			infowindow.setContent(place.name);
 			infowindow.open(map, this);
@@ -277,33 +279,30 @@ function addMarker(place) {
 
 	if (list.length == 0) {
 
-		$
-				.ajax({
+		$.ajax({
 
-					"url" : "/gomapin",
-					"type" : "post",
-					"dataType" : "json",
-					"async" : false,
-					"data" : allData
+			"url" : "/gomapin",
+			"type" : "post",
+			"dataType" : "json",
+			"async" : false,
+			"data" : allData
 
-				})
-				.done(
-						function(listajax) { // 위치 정도 geometry.locaiton
-							console.log("새로운 맵 정보 : " + listajax.length);
+		})
+		.done(
+			function(listajax) { // 위치 정도 geometry.locaiton
+				console.log("새로운 맵 정보 : " + listajax.length);
 
-							list = [];
-							list = listajax;
-							locationtemp = listajax;
-							// console.log("add_marker 끝" +
-							// JSON.stringify(list));
-							console.log("새로운 리스트 정보 : list.length : "
-									+ list.length + " listTemp = "
-									+ listtemp.length);
-						
-						});
-
+				list = [];
+				list = listajax;
+				locationtemp = listajax;
+				// console.log("add_marker 끝" +
+				// JSON.stringify(list));
+				console.log("새로운 리스트 정보 : list.length : "
+						+ list.length + " listTemp = "
+						+ listtemp.length);
+			
+		});
 	}
-
 }
 
 /**
