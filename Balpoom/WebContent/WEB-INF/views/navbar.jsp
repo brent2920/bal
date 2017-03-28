@@ -58,9 +58,9 @@
 	<div class="container-fluid">
 		<c:choose>
 			<c:when test="${sessionScope.id == null && sessionScope.id1 ==null}">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/"> <img alt="발품로고"
-						src="/images/logo.png" width="70px" height="20px" />
+				<div class="navbar-header" style="padding: 0px;">
+					<a class="navbar-brand" href="/" style="padding-top: 8px;"> <img alt="발품로고"
+						src="/images/logo.png" width="83px" height="32px" />
 					</a>
 				</div>
 				<ul class="nav navbar-nav">
