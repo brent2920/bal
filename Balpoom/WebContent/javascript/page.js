@@ -437,9 +437,7 @@ var PagingHelper = {
 				}
 				
 				
-				sb += "<div class='roomInfo' style='min-height: 155px; padding-top: 15px; padding-bottom: 15px;" +
-						"onclick='PagingHelper.linkajax(" + i + ");'" +
-								"onmouseenter='mouse_on();' onmouseleave='mouse_off();'>";
+				sb += "<div class='roomInfo' style='min-height: 155px; padding-top: 15px; padding-bottom: 15px;' onclick='PagingHelper.linkajax(" + i + ")' onmouseenter='mouse_on()' onmouseleave='mouse_off()'>";
 				sb += "<table>"
 				sb += "<tr>";
 				sb += "<td rowspan='3'>";

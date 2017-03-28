@@ -63,6 +63,7 @@ function mouse_on() {
 
 function mouse_off() {
 	console.log("mouse_off() : mouseleave!!");
+	
 	$(".roomInfo").css({
 		"background-color" : "white",
 		"cursor" : "default"
