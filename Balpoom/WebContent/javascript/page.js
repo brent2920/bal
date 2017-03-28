@@ -244,14 +244,25 @@ var compareJSON = function(obj1, obj2) {
 
 function attachSecretMessage(marker, secretMessage) {
 	  var infowindow = new google.maps.InfoWindow({
-	    content: secretMessage
-	  });
+	    //content: secretMessage
+	    content: '<IMG BORDER="90" ALIGN="Left" SRC="/images/room.jpg"  width="105" height="105"> Room number:' + secretMessage
+	});
 
 	  marker.addListener('click', function() {
-		 console.log("click"+ infowindow.status);
-	    infowindow.open(marker.get('map'), marker);
+		
+		  	console.log("infoWindow:"+ infowindow);
+		  	if (isInfoWindowOpen(infowindow)){
+			 
+			    console.log("open");
+				infowindow.close();
+
+			} else {
+				console.log("close=" + infowindow.open.length);;
+				infowindow.open(marker.get('map'), marker);
+				infowindow.open.length = 0;
+			}
 	  });
-	}
+}
 
 function isInfoWindowOpen(infoWindow){
     var map = infoWindow.getMap();
@@ -263,24 +274,20 @@ function addMarker(place,address) {
 		position : place.geometry.location,
 		draggable: true,
 		animation: google.maps.Animation.DROP,
-		// title: 'Click to zoom'
-<<<<<<< HEAD
-		 //title : address,
-=======
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
+
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
 			//url : "images/lion.PNG",
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
-<<<<<<< HEAD
+
 	
 		}
 		
-=======
-		}
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
+
+		
+
 	});
 	attachSecretMessage(marker, address);
 	markers.push(marker);
