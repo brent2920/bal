@@ -15,9 +15,11 @@ var mapBound;
 var locationtemp;
 var markers = [];
 var listtemp = [];
+var njjj = [];
 var moreadd = []; // 지도에 값이 더 나타나면 그값을 저장할 리스트 
 var loca = "default";
 var locatemp = "default";
+var secretMessages = ['This', 'is', 'the', 'secret', 'message'];
 
 var allData = {
 	"mKind" : "allPay", // 매물종류
@@ -84,7 +86,8 @@ function initMap() {
 	infoWindow = new google.maps.InfoWindow();
 	service = new google.maps.places.PlacesService(map);
 	map.addListener('idle', performSearch);
-
+	
+	
 }
 function performSearch() {
 	// console.log("performSearch()");
@@ -143,9 +146,9 @@ function callback(results, status) {
 	// console.log("callback" + results);
 	// console.log("call back 지도 바뀐다:" + list.length);
 
-	addMarker(temp);// 처음 디폴트 값으로 찍어 줘야함
-	addMarker(temp3);
-
+	addMarker(temp,"test");// 처음 디폴트 값으로 찍어 줘야함
+	addMarker(temp3,"test2");
+	//console.log("callback list = "+ JSON.stringify(list));
 	if (list.length == 0) {
 		$("#sh").html("");
 		// console.log("njj.size = " + njj.length);
@@ -153,14 +156,16 @@ function callback(results, status) {
 		njj = [];
 		PagingHelper.gotoPage(1);
 	} else {
-
+		//var njson = JSON.parse(JSON.stringify(njj));
 		deleteMarkers(); // 리스트는 이제
 		markers = [];
+		//console.log("말풍선"+ njjj[0]);
 		for (var i = 0; i < list.length; i++) {
 
 			if (list.length != 0) {// ==========================================================================
-
-				addMarker(list[i]);
+				var njjinput = njjj[i];
+				//console.log("njj[i]="+ njjinput);
+				addMarker(list[i],''+njjj[i]);
 
 			}
 
@@ -182,6 +187,7 @@ function callback(results, status) {
 					if (listajax.length != 0) {
 
 						arrl = listajax;
+						njjj = njj;
 						njj = []
 						for (var i = 0; i < arrl.length; i++) {
 
@@ -189,6 +195,8 @@ function callback(results, status) {
 							njj.push(obj["SELL_NUM"]);
 
 						}
+						//console.log("njj사이즈는 = "+ JSON.stringify(njj));
+						njjj = njj;
 					} else {
 						arrl = [];
 					}
@@ -205,6 +213,7 @@ function callback(results, status) {
 	}
 
 }
+
 function clearMarkers() {
 	setMapOnAll(null);
 }
@@ -233,24 +242,49 @@ var compareJSON = function(obj1, obj2) {
 	return ret;
 };
 
-function addMarker(place) {
+function attachSecretMessage(marker, secretMessage) {
+	  var infowindow = new google.maps.InfoWindow({
+	    content: secretMessage
+	  });
+
+	  marker.addListener('click', function() {
+		 console.log("click"+ infowindow.status);
+	    infowindow.open(marker.get('map'), marker);
+	  });
+	}
+
+function isInfoWindowOpen(infoWindow){
+    var map = infoWindow.getMap();
+    return (map !== null && typeof map !== "undefined");
+}
+
+function addMarker(place,address) {
 	var marker = new google.maps.Marker({
 		position : place.geometry.location,
-		// draggable: true,
-		 animation: google.maps.Animation.DROP,
+		draggable: true,
+		animation: google.maps.Animation.DROP,
 		// title: 'Click to zoom'
+
+		 //title : address,
+
+
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
 			//url : "images/lion.PNG",
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
+
+	
 		}
+		
+
+
 	});
+	attachSecretMessage(marker, address);
 	markers.push(marker);
 
 	for (var i = 0; i < markers.length; i++) {
-
 		markers[i].setMap(map);
 	}
 
@@ -258,44 +292,77 @@ function addMarker(place) {
 		var placeLoc = place.geometry.location;
 		var marker = new google.maps.Marker({
 			map : map,
-			position : place.geometry.location
+			position : place.geometry.location,
 		});
-
+		
 		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.setContent(place.name);
-			infowindow.open(map, this);
+			
+			if (isInfoWindowOpen(infoWindow)){
+			    // do something if it is open
+				console.log("open");
+				infowindow.setContent(place.name);
+				infowindow.close(map, this);
+			} else {
+			    // do something if it is closed
+				console.log("closed");
+				infowindow.setContent(place.name);
+				infowindow.open(map, this);
+			}
+		
 		});
 	}
 
 	if (list.length == 0) {
 
-		$
-				.ajax({
+		$.ajax({
 
-					"url" : "/gomapin",
-					"type" : "post",
-					"dataType" : "json",
-					"async" : false,
-					"data" : allData
+			"url" : "/gomapin",
+			"type" : "post",
+			"dataType" : "json",
+			"async" : false,
+			"data" : allData
 
-				})
-				.done(
-						function(listajax) { // 위치 정도 geometry.locaiton
-							console.log("새로운 맵 정보 : " + listajax.length);
+		})
+		.done(
+			function(listajax) { // 위치 정도 geometry.locaiton
+				console.log("새로운 맵 정보 : " + listajax.length);
 
-							list = [];
-							list = listajax;
-							locationtemp = listajax;
-							// console.log("add_marker 끝" +
-							// JSON.stringify(list));
-							console.log("새로운 리스트 정보 : list.length : "
-									+ list.length + " listTemp = "
-									+ listtemp.length);
-						
-						});
+				list = [];
+				list = listajax;
+				locationtemp = listajax;
+				// console.log("add_marker 끝" +
+				// JSON.stringify(list));
+				console.log("새로운 리스트 정보 : list.length : "
+						+ list.length + " listTemp = "
+						+ listtemp.length);
+			
+		});
+	//==========================================
+		$.ajax({
+			"url" : "/gsearchTest",
+			"type" : "POST",
+			"dataType" : "json",
+			"async" : false,
+			"data" : allData
 
+		}).success(function(listajax) {
+
+			if (listajax.length != 0) {
+
+				arrl = listajax;
+				njjj = []
+				for (var i = 0; i < arrl.length; i++) {
+
+					var obj = arrl[i];
+					njjj.push(obj["SELL_NUM"]);
+
+				}
+				//console.log("njjj사이즈는 = "+ JSON.stringify(njjj));
+			
+			} 
+		});
+		//=======================================
 	}
-
 }
 
 /**

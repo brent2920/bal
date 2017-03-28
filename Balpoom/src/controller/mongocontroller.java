@@ -29,5 +29,9 @@ public class mongocontroller {
 		mDao.OneImage(num);
 		
 	}
+	@RequestMapping("/hospital")
+	public void HosInsert() throws IOException{
+		mDao.insert_hospital_api();
+	}
 
 }

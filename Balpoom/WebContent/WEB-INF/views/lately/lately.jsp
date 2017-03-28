@@ -54,9 +54,8 @@
 
 
 <div style="padding-left: 5%;" >
-<c:choose>
 
-<c:when test="${size ne 0 }">
+
 <div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 2%">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -72,9 +71,9 @@
 		<c:choose>
 			<c:when test="${vs.first}">
 		      <div class="item active">   
-		        <img src="${list.url }" width="100" height="300">
+		     <img src="${list.url }" width="100" height="300"> 
 		        <div class="carousel-caption">
-		          <h4>${list.B_TITLE }</h4>
+		          <h4> <a href="/detail?num=${list.SELL_NUM }" style="color: white;">  ${list.B_TITLE }</a></h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
@@ -82,9 +81,9 @@
 		      
 			<c:otherwise>
 		      <div class="item">   
-		        <img src="${list.url }"  width="100" height="300">
+		       <a href="/detail?num=${list.SELL_NUM }"> </a> <img src="${list.url }"  width="100" height="300">
 		        <div class="carousel-caption">
-		          <h4>${list.B_TITLE }</h4>
+		       <h4>${list.B_TITLE }</h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
@@ -106,13 +105,8 @@
     </a>
 </div>
 
-
-     </c:when>
-     <c:otherwise>
-     
   
-     </c:otherwise>
-</c:choose>
+
 <!-- 사진 슬라이드 끝 -->
 
 

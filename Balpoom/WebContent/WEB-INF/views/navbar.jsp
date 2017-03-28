@@ -89,28 +89,19 @@
 					</a>
 
 						<ul class="dropdown-menu">
-						
 							<li><a href="#"><span data-toggle="modal"
 									data-target="#myLogin">개인 로그인</span> </a></li>
 									
-									
 							<li><a href="#"><span data-toggle="modal"
 									data-target="#brokerLogin">공인중개사 로그인</span></a></li>
-						
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 			</c:when>
 
 
 			<c:otherwise>
-
-
-
-
-
-
 				<c:choose>
-					
 					<c:when test="${sessionScope.id != null }">
 						<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
@@ -120,13 +111,6 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
 							<li><a href="#">관심목록</a></li>
-							<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
-							<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
-							<!-- 					<ul class="dropdown-menu"> -->
-							<!-- 						<li><a href="#">Page 1-1</a></li> -->
-							<!-- 						<li><a href="#">Page 1-2</a></li> -->
-							<!-- 						<li><a href="#">Page 1-3</a></li> -->
-							<!-- 					</ul></li> -->
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
@@ -156,13 +140,6 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
 							<li><a href="#">관심목록</a></li>
-							<!-- 				<li class="dropdown"><a class="dropdown-toggle" -->
-							<!-- 					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a> -->
-							<!-- 					<ul class="dropdown-menu"> -->
-							<!-- 						<li><a href="#">Page 1-1</a></li> -->
-							<!-- 						<li><a href="#">Page 1-2</a></li> -->
-							<!-- 						<li><a href="#">Page 1-3</a></li> -->
-							<!-- 					</ul></li> -->
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
@@ -540,4 +517,21 @@
 			}
 		};
 	};
+	
+	
+	// mouseenter, mouseleave 이벤트처리
+	$(".dropdown").mouseenter(function() {
+		$(this).children().eq(1).css({
+			"display" : "block",
+			"cursor" : "pointer"
+		});
+	});
+
+	$(".dropdown").mouseleave(function() {
+		console.log($(this).children().eq(1));
+		$(this).children().eq(1).css({
+			"display" : "none",
+			"cursor" : "pointer"
+		});
+	});
 </script>

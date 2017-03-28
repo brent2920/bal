@@ -29,6 +29,7 @@ public class Urlpicture {
 		}
 	}
 	public List<String> get_picture_urls(String url) {
+		//url https://www.zigbang.com/items1/7844060
 		Document doc;
 		String jpgurl = null;
 		List<String> arr = new ArrayList<>();
