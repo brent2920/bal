@@ -105,7 +105,7 @@
 					<c:when test="${sessionScope.id != null }">
 						<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
-								src="/images/logo.png" width="70px" height="20px" />
+								src="/images/logo.png" width="83px" height="32px" />
 							</a>
 						</div>
 						<ul class="nav navbar-nav">
@@ -135,7 +135,7 @@
 						<c:when test="${sessionScope.id1 != null}">
 							<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
-								src="/images/logo.png" width="70px" height="20px" />
+								src="/images/logo.png" width="83px" height="32px" />
 							</a>
 						</div>
 						<ul class="nav navbar-nav">
