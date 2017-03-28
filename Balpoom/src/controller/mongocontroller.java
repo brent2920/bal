@@ -22,11 +22,12 @@ public class mongocontroller {
 		mDao.insert();
 	}
 	
-	@RequestMapping("getimg")
+	@RequestMapping("/getimg")
 	public void Mongoget(HttpServletRequest req){
 		String num = req.getParameter("num");
 	
 		mDao.OneImage(num);
+		mDao.find(num);
 	}
 
 }

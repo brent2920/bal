@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 //이미지 경로를 몽고에 넣는 모델
@@ -33,15 +34,12 @@ public class mongoDao {
 		File[] files = file.listFiles();
 		for(File f : files){
 			if(f.isDirectory()){
-				
-				
-			
+
 				File file2 = new File("d:/이현원/사진/"+f.getName()+"/");
 				File[] files2 = file2.listFiles();
 				for(File ff : files2){
 					list.add(ff);
-				
-			
+	
 				}
 				map.put("num", f.getName());
 				
@@ -52,21 +50,16 @@ public class mongoDao {
 				
 			}
 		}
-		
-		
-	
-		
-		
-		
-		
+
 	}
 
 	
 	public List OneImage(String num){
 		
 		System.out.println(num);
-		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num).and("pictures"));
-		Aggregation aggr = Aggregation.newAggregation(a1);
+		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num));
+		AggregationOperation a2 = Aggregation.match(Criteria.where("pictures").is(true));
+		Aggregation aggr = Aggregation.newAggregation(a1,a2);
 		
 		System.out.println(aggr.toString());
 		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
@@ -76,7 +69,16 @@ public class mongoDao {
 		return list;
 		
 	}
-
+	public void find(String num){
+		Criteria c = Criteria.where("num").is(num);
+		
+		Query q = new Query(c);
+		List<Map> list = template.find(q,Map.class,"room");
+		System.out.println(q.toString());
+		for(Map map: list){
+			System.out.println(map.toString());
+		}
+	}
 	
 	
 	
