@@ -65,8 +65,8 @@
 				</div>
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="search">방 검색</a></li>
-					<li><a href="#">관심목록</a></li>
-					<li><a href="#">최근본방</a></li>
+					<li><a href="#">찜목록</a></li>
+					<li><a href="/recent">최근본방</a></li>
 					<li><a href="#" id="nulladd">방 등록</a></li>
 				</ul>
 
@@ -110,7 +110,8 @@
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
-							<li><a href="#">관심목록</a></li>
+							<li><a href="#">찜목록</a></li>
+							<li><a href="/recent">최근본방</a></li>
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
@@ -139,7 +140,8 @@
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
-							<li><a href="#">관심목록</a></li>
+							<li><a href="#">찜목록</a></li>
+							<li><a href="/recent">최근본방</a></li>
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
