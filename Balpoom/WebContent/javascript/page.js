@@ -274,13 +274,6 @@ function addMarker(place,address) {
 		position : place.geometry.location,
 		draggable: true,
 		animation: google.maps.Animation.DROP,
-
-		// title: 'Click to zoom'
-
-		 //title : address,
-
-
-
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
@@ -290,15 +283,7 @@ function addMarker(place,address) {
 
 	
 		}
-		
-<<<<<<< HEAD
-
-		
-=======
-
->>>>>>> branch 'master' of https://github.com/brent2920/bal.git
-
-	});
+});
 	attachSecretMessage(marker, address);
 	markers.push(marker);
 
@@ -749,6 +734,21 @@ var PagingHelper = {
 		}
 	}
 }
+
+$(document).on("mouseenter", ".roomInfo", function() {
+	$(this).css({
+		"background-color" : "#EBFFFB",
+		"cursor" : "pointer"
+	});
+});
+
+$(document).on("mouseleave", ".roomInfo", function() {
+	$(this).css({
+		"background-color" : "white",
+		"cursor" : "default"
+	});
+});
+
 
 var temp = {
 	"geometry" : {

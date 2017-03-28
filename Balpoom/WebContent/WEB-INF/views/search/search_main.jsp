@@ -50,19 +50,19 @@
 
 <script>
 
-$(document).on("mouseenter", ".roomInfo", function() {
-	$(this).css({
-		"background-color" : "#EBFFFB",
-		"cursor" : "pointer"
-	});
-});
+// $(document).on("mouseenter", ".roomInfo", function() {
+// 	$(this).css({
+// 		"background-color" : "#EBFFFB",
+// 		"cursor" : "pointer"
+// 	});
+// });
 
-$(document).on("mouseleave", ".roomInfo", function() {
-	$(this).css({
-		"background-color" : "white",
-		"cursor" : "default"
-	});
-});
+// $(document).on("mouseleave", ".roomInfo", function() {
+// 	$(this).css({
+// 		"background-color" : "white",
+// 		"cursor" : "default"
+// 	});
+// });
 
 $(document).ready(function() {
 	//alert(${location.lat }+","+${location.lng});
