@@ -44,7 +44,7 @@
       google.charts.setOnLoadCallback(drawTable);
 
       function drawTable() {
-        var data = new google.visualization.DataTable();
+        var data = new google.visualization.DataTable(); 
         data.addColumn('string', '제목');
         data.addColumn('string', '방 사진');
         data.addColumn('string', '월세/보증금');
