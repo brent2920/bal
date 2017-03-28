@@ -51,8 +51,6 @@
 <script>
 
 $(document).on("mouseenter", ".roomInfo", function() {
-	console.log("mouse_on() : mouseenter!!");
-	
 	$(this).css({
 		"background-color" : "#EBFFFB",
 		"cursor" : "pointer"
@@ -60,8 +58,6 @@ $(document).on("mouseenter", ".roomInfo", function() {
 });
 
 $(document).on("mouseleave", ".roomInfo", function() {
-	console.log("mouse_off() : mouseleave!!");
-	
 	$(this).css({
 		"background-color" : "white",
 		"cursor" : "default"
