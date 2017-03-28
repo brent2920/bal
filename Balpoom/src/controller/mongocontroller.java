@@ -27,7 +27,7 @@ public class mongocontroller {
 		String num = req.getParameter("num");
 	
 		mDao.OneImage(num);
-		mDao.find(num);
+		
 	}
 
 }
