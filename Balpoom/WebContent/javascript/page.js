@@ -264,16 +264,23 @@ function addMarker(place,address) {
 		draggable: true,
 		animation: google.maps.Animation.DROP,
 		// title: 'Click to zoom'
+<<<<<<< HEAD
 		 //title : address,
+=======
+>>>>>>> branch 'master' of https://github.com/brent2920/bal.git
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
 			//url : "images/lion.PNG",
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
+<<<<<<< HEAD
 	
 		}
 		
+=======
+		}
+>>>>>>> branch 'master' of https://github.com/brent2920/bal.git
 	});
 	attachSecretMessage(marker, address);
 	markers.push(marker);

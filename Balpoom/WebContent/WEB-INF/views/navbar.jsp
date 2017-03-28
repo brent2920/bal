@@ -517,4 +517,21 @@
 			}
 		};
 	};
+	
+	
+	// mouseenter, mouseleave 이벤트처리
+	$(".dropdown").mouseenter(function() {
+		$(this).children().eq(1).css({
+			"display" : "block",
+			"cursor" : "pointer"
+		});
+	});
+
+	$(".dropdown").mouseleave(function() {
+		console.log($(this).children().eq(1));
+		$(this).children().eq(1).css({
+			"display" : "none",
+			"cursor" : "pointer"
+		});
+	});
 </script>
