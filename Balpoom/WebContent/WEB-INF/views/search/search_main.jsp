@@ -52,26 +52,26 @@
 
 <script>
 
-function mouse_on() {
+$(document).on("mouseenter", ".roomInfo", function() {
 	console.log("mouse_on() : mouseenter!!");
 	
-	$(".roomInfo").css({
+	$(this).css({
 		"background-color" : "#EBFFFB",
 		"cursor" : "pointer"
 	});
-}
+});
 
-function mouse_off() {
+$(document).on("mouseleave", ".roomInfo", function() {
 	console.log("mouse_off() : mouseleave!!");
 	
-	$(".roomInfo").css({
+	$(this).css({
 		"background-color" : "white",
 		"cursor" : "default"
 	});
-}
+});
 
 // function mouse_on() {
-// 	console.log($(this).val());
+// 	console.log("mouse_on() : mouseenter!!");
 	
 // 	$(this).css({
 // 		"background-color" : "#EBFFFB",
@@ -80,12 +80,14 @@ function mouse_off() {
 // }
 
 // function mouse_off() {
-// 	console.log("mouseleave!!");
+// 	console.log("mouse_off() : mouseleave!!");
+	
 // 	$(this).css({
 // 		"background-color" : "white",
 // 		"cursor" : "default"
 // 	});
 // }
+
 
 $(document).ready(function() {
 	//alert(${location.lat }+","+${location.lng});

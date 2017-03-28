@@ -420,7 +420,7 @@ var PagingHelper = {
 
 		var count = 0;
 		if (arrl.length == 0) {
-			sb = '';
+			sb = "";
 			arrl = [];
 			njj = [];
 
@@ -437,7 +437,9 @@ var PagingHelper = {
 				}
 				
 				
-				sb += "<div class='roomInfo' style='min-height: 155px; padding-top: 15px; padding-bottom: 15px;' onclick='PagingHelper.linkajax(" + i + ")' onmouseenter='mouse_on()' onmouseleave='mouse_off()'>";
+				sb += "<div class='roomInfo' ";
+				sb += "style='min-height: 155px; padding-top: 15px; padding-bottom: 15px;' ";
+				sb += "onclick='PagingHelper.linkajax(" + i + ");'>";
 				sb += "<table>"
 				sb += "<tr>";
 				sb += "<td rowspan='3'>";
@@ -661,22 +663,6 @@ var PagingHelper = {
 			$("#sh").html(this.shHtml());
 		}
 	}
-}
-
-function mouse_on() {
-	console.log("mouseenter!!");
-	$(this).css({
-		"background-color" : "#EBFFFB",
-		"cursor" : "pointer"
-	});
-}
-
-function mouse_off() {
-	console.log("mouseleave!!");
-	$(this).css({
-		"background-color" : "white",
-		"cursor" : "default"
-	});
 }
 
 var temp = {
