@@ -28,12 +28,10 @@
 
 		<!-- 방리스트 -->
 		<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
-
 			<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
 				<div id="sh" style="padding: 5px;"></div>
-<!-- 				<div class="test" style="height: 155px;" onmouseenter="mouse_on();"><h1>Hello</h1></div> -->
-<!-- 				<div class="test" style="height: 155px;"><h1>Hello</h1></div> -->
 			</div>
+			
 			<!-- 전/후 -->
 			<nav class="navbar navbar-inverse" style="padding: 0%; margin: 0%; border-radius: 0px; height: 5%">
 				<div class="container-fluid">
@@ -69,25 +67,6 @@ $(document).on("mouseleave", ".roomInfo", function() {
 		"cursor" : "default"
 	});
 });
-
-// function mouse_on() {
-// 	console.log("mouse_on() : mouseenter!!");
-	
-// 	$(this).css({
-// 		"background-color" : "#EBFFFB",
-// 		"cursor" : "pointer"
-// 	});
-// }
-
-// function mouse_off() {
-// 	console.log("mouse_off() : mouseleave!!");
-	
-// 	$(this).css({
-// 		"background-color" : "white",
-// 		"cursor" : "default"
-// 	});
-// }
-
 
 $(document).ready(function() {
 	//alert(${location.lat }+","+${location.lng});
