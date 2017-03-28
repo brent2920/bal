@@ -103,8 +103,8 @@
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${sessionScope.id != null }">
-						<div class="navbar-header">
-							<a class="navbar-brand" href="/"> <img alt="발품로고"
+						<div class="navbar-header" style="padding: 0px;">
+							<a class="navbar-brand" href="/" style="padding-top: 8px;">  <img alt="발품로고"
 								src="/images/logo.png" width="83px" height="32px" />
 							</a>
 						</div>
@@ -133,10 +133,10 @@
 						</ul>
 					</c:when>
 						<c:when test="${sessionScope.id1 != null}">
-							<div class="navbar-header">
-							<a class="navbar-brand" href="/"> <img alt="발품로고"
-								src="/images/logo.png" width="83px" height="32px" />
-							</a>
+							<div class="navbar-header" style="padding: 0px;">
+								<a class="navbar-brand" href="/" style="padding-top: 8px;">  <img alt="발품로고"
+									src="/images/logo.png" width="83px" height="32px" />
+								</a>
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
@@ -275,15 +275,18 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label for="inputdefault">비밀번호 입력</label> <input
+								<label for="inputdefault">비밀번호 입력</label>&nbsp;&nbsp;
+								<input
 									class="form-control" id="delpass1" type="password"
 									name="delpass">
 							</div>
 
 							<div class="form-group">
-								<label for="inputdefault">비밀번호 재입력</label> <input
-									class="form-control" id="delpass2" type="password" onkeyup="javascript:DelpassCompare()">
-									<label><span id="cmpResult1"></span></label>
+								<label for="inputdefault">비밀번호 재입력</label>&nbsp;&nbsp;
+								<input class="form-control" id="delpass2" 
+									type="password" onkeyup="javascript:DelpassCompare()">
+									<label>
+									<span id="cmpResult1"></span></label>
 							</div>
 							<button type="button" class="btn btn-success"
 								style="background-color: #04B486;" id="Dsbt" disabled>회원탈퇴</button>
@@ -315,13 +318,15 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label for="inputdefault">비밀번호 입력</label> <input
+								<label for="inputdefault">비밀번호 입력&nbsp;&nbsp;</label>
+								<input
 									class="form-control" id="delpass1" type="password"
 									name="delpass">
 							</div>
 
 							<div class="form-group">
-								<label for="inputdefault">비밀번호 재입력</label> <input
+								<label for="inputdefault">비밀번호 재입력</label>&nbsp;&nbsp;
+								<input
 									class="form-control" id="delpass2" type="password">
 							</div>
 							<button type="submit" class="btn btn-success"
@@ -363,11 +368,13 @@
 									id="Eemail">
 							</div>
 							<div class="form-group">
-								<label for="inputdefault">비밀번호</label> <input
+								<label for="inputdefault">비밀번호&nbsp;&nbsp;
+								</label> <input
 									class="form-control" name="password" type="password" id="pass">
 							</div>
 							<div class="form-group">
-								<label for="inputdefault">비밀번호 확인<span id="cmpResult"></span>
+								<label for="inputdefault">비밀번호 확인&nbsp;&nbsp;
+								<span id="cmpResult"></span>
 								</label> <input class="form-control" type="password" id="rpass"
 									onkeyup="javascript:passCompare()">
 							</div>
@@ -429,12 +436,12 @@
 				.getElementById("rpass").value;
 		if (flag) {
 			flag2 = true;
-			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치합니다.";
+			document.getElementById("cmpResult").innerHTML = "<span class='glyphicon glyphicon-ok-sign'></span>비밀번호가 일치합니다.";
 			document.getElementById("cmpResult").style.color = "green";
 		} else {
 			flag2 = false;
 			document.getElementById("cmpResult").style.color = "red";
-			document.getElementById("cmpResult").innerHTML = "비밀번호가 일치하지 않습니다.";
+			document.getElementById("cmpResult").innerHTML = "<span class='glyphicon glyphicon-exclamation-sign'></span>비밀번호가 일치하지 않습니다.";
 		}
 		sbtChange();
 	}

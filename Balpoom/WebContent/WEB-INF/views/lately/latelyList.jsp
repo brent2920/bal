@@ -1,20 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-현재 있는 페이지는...
-<b>${page }</b>
 
+<div align="center" id="table_div" style="margin-top: 5%;"></div>
 
-
-
-
-<div id="table_div" style="padding-left: 20%"></div>
-
-
-
-
-<hr />
-<div align="center">
+<div align="center" style="margin-top: 30px;">
 	<c:choose>
 		<c:when test="${page eq 1 }">
 			<a>이전</a>
@@ -59,13 +49,13 @@
         data.addColumn('string', '방 사진');
         data.addColumn('string', '월세/보증금');
         data.addColumn('string', '방종류');
-        data.addColumn('string', '방정보');
+        data.addColumn('string', '위지');
         data.addColumn('string', '매물번호');
         data.addRows([
         	
         	   <c:forEach var="list" items="${list }" varStatus="vs" >
-              	['${list.B_TITLE }', "<img src='${list.url}' width='100' height='100' />", '${list.B_MPAY } / ${list.B_DEPOSIT }', '${list.B_RKIND }'
-              		,'${list.B_RINFO}','<a href="/detail?num=${list.SELL_NUM}">${list.SELL_NUM}</a>']
+              	['${list.B_RINFO }', "<img src='${list.url}' width='100' height='100' />", '${list.B_MPAY } / ${list.B_DEPOSIT }', '${list.B_RKIND }'
+              		,'${list.B_TITLE}','<a href="/detail?num=${list.SELL_NUM}">${list.SELL_NUM}</a>']
               	
               	<c:if test="${!vs.last }">,</c:if>
              	</c:forEach>
