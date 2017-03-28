@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,7 +75,8 @@ public class roomadd_controller {
 	
 
 	@RequestMapping("/roominsert")
-	public ModelAndView roominsert(@RequestParam Map map, HttpServletRequest req, HttpSession session) {
+	public ModelAndView roominsert(@RequestParam Map map, HttpServletRequest req, HttpSession session,
+			MultipartFile file) {
 		ModelAndView mav = new ModelAndView();
 		Map Rmap = new HashMap();
 
