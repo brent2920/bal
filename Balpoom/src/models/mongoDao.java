@@ -1,7 +1,7 @@
 package models;
 
 import java.io.File;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,17 +64,30 @@ public class mongoDao {
 		Map map = new HashMap<>();
 		List list = new ArrayList<>();
 
-		File file = new File("d:/이현원/사진/");
+		
+		
+		
+		File file = new File("D:/이현원/사진/");
+
+
+
 		File[] files = file.listFiles();
 		for (File f : files) {
 			if (f.isDirectory()) {
 
-				File file2 = new File("d:/이현원/사진/" + f.getName() + "/");
-				File[] files2 = file2.listFiles();
-				for (File ff : files2) {
-					list.add(ff);
 
-				}
+			
+
+				File file2 = new File("d:/이현원/사진/" + f.getName() + "/");
+
+				File[] files2 = file2.listFiles();
+
+				
+				for(File ff : files2){
+					list.add("/images/사진/"+f.getName()+"/"+ff.getName());
+					
+
+	
 				map.put("num", f.getName());
 
 				map.put("pictures", list);
@@ -86,20 +99,31 @@ public class mongoDao {
 		}
 
 	}
+	}
 
-	public List OneImage(String num) {
+	
+	public String OneImage(String num){
+		
+
 
 		System.out.println(num);
 		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num));
-		AggregationOperation a2 = Aggregation.match(Criteria.where("pictures").is(true));
-		Aggregation aggr = Aggregation.newAggregation(a1, a2);
 
+		
+		Aggregation aggr = Aggregation.newAggregation(a1);
+		
 		System.out.println(aggr.toString());
 		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
 		List<Map> list = result.getMappedResults();
-		System.out.println(list.toString());
 
-		return list;
+		//class java.util.ArrayList
+		
+		String[] ar = list.iterator().next().get("pictures").toString().split(",");
+		
+		return ar[0].toString().substring(
+				ar[0].toString().indexOf("[")+1);
+
+	
 
 	}
 
@@ -112,7 +136,32 @@ public class mongoDao {
 		for (Map map : list) {
 			System.out.println(map.toString());
 		}
+
 	}
+
+	
+	public Map AllImage(String num){
+		
+		System.out.println(num);
+		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num));
+		
+		Aggregation aggr = Aggregation.newAggregation(a1);
+		
+		System.out.println(aggr.toString());
+		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
+		List<Map> list = result.getMappedResults();
+		//class java.util.ArrayList
+		list.iterator().next().get("pictures");
+		Map map = (Map) list.iterator().next().get("pictures");
+		System.out.println(map.getClass());
+		
+		
+		return map;
+		
+	}
+
+	
+
 
 	// public int inserImg() throws IOException {
 	// int r = 0;
@@ -156,3 +205,4 @@ public class mongoDao {
 	// }
 
 }
+

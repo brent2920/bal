@@ -33,7 +33,8 @@ public class latelycontroller {
 		ModelAndView mav = new ModelAndView("t_main_sub");
 		List<Map> list = new ArrayList<>();
 		Map map = new HashMap<>();
-
+		
+		
 		Cookie[] c = req.getCookies();
 		System.out.println("==============");
 		for (Cookie cc : c) {
@@ -42,10 +43,9 @@ public class latelycontroller {
 				map = lDao.getLatelyList(regNum);
 				System.out.println(cc.getValue());
 
-				String str = "http://z1.zigbang.com/items/7676969/af2d4be65c803cf7ac380737cdfb14cddf9ba75b.jpg?h=80&q=60";
-				map.put("url", str);
-
-				System.out.println(str.toString());
+				String ar = mDao.OneImage(String.valueOf(regNum));
+				map.put("url", ar);
+				System.out.println(ar);
 				list.add(map);
 			}
 		}
@@ -60,13 +60,14 @@ public class latelycontroller {
 		ModelAndView mav = new ModelAndView("t_latelyList");
 		List<Map> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
-
+		
+		
+		
 		String p = req.getParameter("page") == null ? "1" : req.getParameter("page");
 		int pp = Integer.parseInt(p);
 		int start = 0;
 		int end = 0;
 		int end1 = (pp - 1) * 5;
-
 		if (pp == 1) {
 			start = pp - 1;
 			end = pp * 5;
@@ -74,7 +75,6 @@ public class latelycontroller {
 			start = end1;
 			end = Integer.parseInt(p) * 5;
 		}
-
 		Cookie[] c = req.getCookies();
 		
 		for (int i = start; end > c.length ? i < c.length : i < end; i++) {
@@ -82,16 +82,17 @@ public class latelycontroller {
 			if (c.length < end) {
 				int a = c.length - start - 1;
 				map.put("aaaa", a);
-				System.out.println(a);
+				System.out.println("aaaaaaa : "+a);
+				
 
 			}
 
 			if (!(c[i].getName().equals("JSESSIONID"))) {
 				int regNum = Integer.parseInt(c[i].getValue());
 				map = lDao.getLatelyList(regNum);
-				
-				
-				//map.put("url", str);
+				String ss = mDao.OneImage(String.valueOf(regNum));
+				System.out.println(ss);
+				map.put("url", ss);
 
 				list.add(map);
 
