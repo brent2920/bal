@@ -116,7 +116,7 @@ div {
 	</div>
 	<hr/>
 	<button  class="btn btn-default btn-lg btn-block" id = "zzim">
-		<span class="glyphicon glyphicon-heart"></span> 찜
+		<span class="glyphicon glyphicon-heart" id="zzim"></span> 찜
 	</button>
 </div>
 
@@ -348,6 +348,8 @@ div {
 				}
 
 			})
+			
+			
 
 	// 찜 추가
 	function zzimadd() {
@@ -393,7 +395,22 @@ div {
 			zzimdel();
 		}
 	});
+	
+	
+
+	
 </script>
+
+<!-- 새로 고침후 찜 버튼 활성화 시키기 -->
+<c:if test="${zzim eq 1}">
+<script>
+	  $("#zzim").addClass("active");
+	  $("#zzim").css("color","red");
+</script>
+</c:if>
+	
+	
+
 
 
 

@@ -65,9 +65,9 @@
 				</div>
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="search">방 검색</a></li>
-					<li><a href="#">찜목록</a></li>
+					<li><a href="#" class="nulladd">찜목록</a></li> 
 					<li><a href="/recent">최근본방</a></li>
-					<li><a href="#" id="nulladd">방 등록</a></li>
+					<li><a href="#" id="nulladd" class="nulladd">방 등록</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -110,7 +110,7 @@
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
-							<li><a href="#">찜목록</a></li>
+							<li><a href="/zzimlist">찜목록</a></li>
 							<li><a href="/recent">최근본방</a></li>
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
@@ -140,7 +140,7 @@
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
-							<li><a href="#">찜목록</a></li>
+							<li><a href="/zzimlist">찜목록</a></li>
 							<li><a href="/recent">최근본방</a></li>
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
@@ -407,12 +407,11 @@
 			</form>
 		</div>
 
-		</li>
-		</ul>
+
 	</div>
 </nav>
 <script>
-	$("#nulladd").click(function() {
+	$(".nulladd").click(function() {
 		window.alert("로그인 후 사용가능합니다")
 
 		$("#login > span").trigger("click");

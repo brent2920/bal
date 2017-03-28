@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,14 +12,59 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import models.CLOBDao;
 import models.zzimlistDao;
+import utils.Urlpicture;
 
 @Controller
 @RequestMapping("/")
 public class zzimlist_controller {
 	@Autowired
 	zzimlistDao zdao;
+	@Autowired
+	Urlpicture upic;
+	@Autowired
+	CLOBDao cdao;
+	
+	@RequestMapping("/zzimlist")
+	public ModelAndView zzimlsit(HttpSession session) throws JsonProcessingException{
+		ModelAndView mav = new ModelAndView();
+		String email = (String)session.getAttribute("email");
+		Map zzimD = new HashMap();
+		zzimD.put("email", email);
+		
+		
+		// 사용자가 선택한 찜 목록 데이터 
+		zdao.zzimlistdel(zzimD);
+		mav.setViewName("zzimlist");
+		
+		
+		// 매물번호를 이용한 사진 불러오기
+		List<HashMap> list = zdao.zzimlist();
+		ArrayList<HashMap> arrList = new ArrayList<>();
+		String input = null;
+		System.out.println("List Size : " + list.size());
+		for(HashMap  map : list) {
+			input = "http://www.zigbang.com/items1/"+ map.get("SELL_NUM").toString();
+			System.out.println("URL : " + input);
+			map.put("IMAGE", (upic.get_main_url(input)));
+			arrList.add(map);
+		}
+		
+				
+		if(arrList.size() == 0){
+			mav.addObject("listsize",0);
+		}else{
+			mav.addObject("zzimlist", arrList);
+		}
+		return mav;
+		
+	}
 	
 	@RequestMapping("/zzimadd")
 	@ResponseBody

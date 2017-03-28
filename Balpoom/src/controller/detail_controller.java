@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import models.alterDao;
 import models.commentDao;
 import models.mongoDao;
 import models.roomDao;
+import models.zzimlistDao;
 import models.CLOBDao;
 import utils.APIKeys;
 import utils.Urlpicture;
@@ -39,15 +41,20 @@ public class detail_controller {
 	@Autowired
 	mongoDao mDao;
 	
-	// 댓글
+	// �뙎湲�
 	@Autowired
 	commentDao cdao;
+	
+	
+	// 찜
+	@Autowired
+	zzimlistDao zdao;
 
 	@RequestMapping("/detail")
 	public ModelAndView detailViewHandler(@RequestParam Map n, 
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 		
-		// 사진처리
+		// �궗吏꾩쿂由�
 		JSONArray picturesJ = null;
 		int num = Integer.parseInt(n.get("num") + "");
 
@@ -126,8 +133,25 @@ public class detail_controller {
 		
 	      
 	    List Clist = cdao.paging(start, end, num);
-		System.out.println("리스트 사이즈 : "+Clist.size());
+		System.out.println("由ъ뒪�듃 �궗�씠利� : "+Clist.size());
 		mav.addObject("Clist",Clist);
+		
+		
+		//===============================================
+		int zr = 0;
+		String email = (String)session.getAttribute("email");
+		Map zmap = new HashMap();
+		zmap.put("sessionid",email);
+		zmap.put("num", num);
+		zr = zdao.zzimActivation(zmap);
+		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   "+zr);
+		if( zr == 1){
+			mav.addObject("zzim",zr);
+		}else{
+			mav.addObject("zzim",zr);
+		}
+		
+		
 		return mav;
 	}
 }
