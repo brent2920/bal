@@ -241,21 +241,13 @@ function addMarker(place) {
 		// draggable: true,
 		 animation: google.maps.Animation.DROP,
 		// title: 'Click to zoom'
-		   title : "안녕",
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
 			//url : "images/lion.PNG",
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
-	
-		},
-		"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
-		"place_id" : "ChIJZ934S0KuEmsR_0lxV3PTR4M",
-		"reference" : "CmRSAAAA63xm_pqSZSM6v3eVji64Ael9avkjcYNxKRPNVlA_06Mi5TfIhXHdJ6JJCvjUgjfqQ0H-uFA8odt17_NB-fGBXv2XpbI_NnCKxnFqcsUXmQLiUP1ATfoANN2feZfObRW1EhAdYjAWa3tqFP8aV_1zaMVlGhSYN-eSQxYD3WyPaxKj1u2VYMBdCg",
-		"html_attributions" : [
-
-	]
+		}
 	});
 	
 	markers.push(marker);
