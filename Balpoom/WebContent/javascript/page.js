@@ -274,13 +274,6 @@ function addMarker(place,address) {
 		position : place.geometry.location,
 		draggable: true,
 		animation: google.maps.Animation.DROP,
-
-		// title: 'Click to zoom'
-
-		 //title : address,
-
-
-
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
