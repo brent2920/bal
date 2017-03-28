@@ -9,10 +9,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <style>
   .container {
-      padding: 80px 120px;
+   
   }
   .person {
       border: 10px solid transparent;
+     
       margin-bottom: 25px;
       width: 80%;
       height: 80%;
@@ -25,7 +26,7 @@
   .carousel-inner img {
       -webkit-filter: grayscale(90%);
       filter: grayscale(90%); /* make all photos black and white */ 
-      width: 30%; /* Set width to 100% */
+      width: 69.5%; /* Set width to 100% */
       margin: auto;
   }
   .carousel-caption h3 {
@@ -52,8 +53,10 @@
   </style>
 
 
-<div style="padding-left: 5%; padding-right: 5%;">
-<div class="col-sm-4 carousel slide" id="myCarousel" data-ride="carousel">
+<div style="padding-left: 5%;" >
+
+
+<div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 2%">
     <!-- Indicators -->
     <ol class="carousel-indicators">
 	    <c:forEach var="i" begin="1" end="${size }" >
@@ -68,9 +71,9 @@
 		<c:choose>
 			<c:when test="${vs.first}">
 		      <div class="item active">   
-		        <img src="${list.url }" alt="${list.SELL_NUM }" width="100" height="300">
+		     <img src="${list.url }" width="100" height="300"> 
 		        <div class="carousel-caption">
-		          <h4>${list.B_TITLE }</h4>
+		          <h4> <a href="/detail?num=${list.SELL_NUM }" style="color: white;">  ${list.B_TITLE }</a></h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
@@ -78,12 +81,13 @@
 		      
 			<c:otherwise>
 		      <div class="item">   
-		        <img src="${list.url }" alt="${list.SELL_NUM }" width="100" height="300">
+		       <a href="/detail?num=${list.SELL_NUM }"> </a> <img src="${list.url }"  width="100" height="300">
 		        <div class="carousel-caption">
-		          <h4>${list.B_TITLE }</h4>
+		       <h4>${list.B_TITLE }</h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
+		      
 			</c:otherwise>
 	      </c:choose>
       
@@ -101,25 +105,89 @@
     </a>
 </div>
 
-<c:forEach begin="1" end="2" step="1">
-	<div class="col-sm-4">
-		<table class="table">
-			<thead>
-				<tr>
-					<th><b style="font-size: 22px;">공지사항</b></th>
-					<th>
-						<div align="right">
-							<button type="button" class="btn btn-default btn-sm">더보기</button>
-						</div>
-					</th>					
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td colspan="2">Test1</td></tr>
-				<tr><td colspan="2">Test2</td></tr>
-				<tr><td colspan="2">Test3</td></tr>
-			</tbody>
-		</table>
+  
+
+<!-- 사진 슬라이드 끝 -->
+
+
+<div class="container" style="padding-top: 2%">
+		<div class="row">
+			<div class="col-sm-5">
+				<table class="table">
+					<thead>
+						<tr>
+							<th><b style="font-size: 22px;"><span class="blink_me">뉴스</span></b></th>
+							<th>
+								<div align="right">
+									<button type="button" class="btn btn-default btn-sm">더보기</button>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="2">
+
+							
+								<a href="http://www.wowtv.co.kr/newscenter/news/view.asp?bcode=T30001000&artid=A201703070193">발품, ‘허위매물 아웃 프로젝트’ 실시…서비스 신뢰 높인다</a>
+
+
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="http://news.donga.com/3/all/20170228/83104100/2">여성 성범죄 소재 ‘발품’ 광고 논란…“女 생존을 광고에 쓰다니” 분통</a></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							
+		<a href="https://s.zigbang.com/event/apt_review/intro.html">리뷰를 남기면 편의점 상품권이...</a>
+								
+								
+							</td>
+						</tr>
+
+						<div class="main-link"></div>
+<script>
+function blinker() {
+    $('.blink_me').fadeOut(1000);
+    $('.blink_me').fadeIn(1000);
+}
+
+setInterval(blinker, 1000);
+
+</script>
+
+
+
+
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-4">
+				<table class="table">
+					<thead>
+						<tr>
+							<th><b style="font-size: 22px;">공지사항</b></th>
+							<th>
+								<div align="right">
+									<button type="button" class="btn btn-default btn-sm">더보기</button>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="2">Test1</td>
+						</tr>
+						<tr>
+							<td colspan="2">Test2</td>
+						</tr>
+						<tr>
+							<td colspan="2">Test3</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-</c:forEach>
-</div>
+	</div>

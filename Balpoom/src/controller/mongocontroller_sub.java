@@ -11,24 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import models.mongoDao;
 
 @Controller
-@RequestMapping("/mongo")
-public class mongocontroller {
+@RequestMapping("/mongosub")
+public class mongocontroller_sub {
 	
 	@Autowired
 	mongoDao mDao;
-	
-	@RequestMapping("/database")
-	public void MongoData() throws IOException{
-		mDao.insert();
-	}
-	
-	@RequestMapping("/getimg")
-	public void Mongoget(HttpServletRequest req){
-		String num = req.getParameter("num");
-	
-		mDao.OneImage(num);
-		
-	}
+
 	@RequestMapping("/hospital")
 	public void HosInsert() throws IOException{
 		mDao.insert_hospital_api();
