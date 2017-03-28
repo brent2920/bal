@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import models.alterDao;
 import models.commentDao;
+import models.mongoDao;
 import models.roomDao;
 import models.CLOBDao;
 import utils.APIKeys;
@@ -35,6 +36,8 @@ public class detail_controller {
 	CLOBDao tDao;
 	@Autowired
 	APIKeys apiKey;
+	@Autowired
+	mongoDao mDao;
 	
 	// 댓글
 	@Autowired
@@ -52,7 +55,8 @@ public class detail_controller {
 		c.setMaxAge(60 * 60);
 		resp.addCookie(c);
 
-		
+		String imagelist= mDao.AllImage(String.valueOf(num));
+		System.out.println(imagelist.toString());
 		List<String> all = urp.get_picture_urls("https://www.zigbang.com/items1/" + num);
 		picturesJ = new JSONArray(all);
 		
@@ -100,7 +104,7 @@ public class detail_controller {
 		mav.addObject("list1",map);
 		mav.addObject("pj", all);
 		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
-		
+		mav.addObject("imglist",imagelist);
 		
 	//=========================================
 		

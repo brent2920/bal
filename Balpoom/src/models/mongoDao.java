@@ -38,11 +38,11 @@ public class mongoDao {
 			List<Map> mlist = new ArrayList();
 			for (Element row : rows) {
 				Map map = new HashMap<>();
-				
+
 				Element lat = row.getElementsByTag("LAT").get(0);
 				Element lng = row.getElementsByTag("LNG").get(0);
 				Element name = row.getElementsByTag("HOSP_NM").get(0);
-			
+
 				map.put("h_name", name.text());
 				map.put("lat", lat.text());
 				map.put("lng", lng.text());
@@ -51,7 +51,7 @@ public class mongoDao {
 
 				System.out.println("mlist size = " + mlist.size());
 			}
-			//System.out.println(mlist.toString());
+			// System.out.println(mlist.toString());
 			template.insert(mlist, "hospital");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,66 +64,48 @@ public class mongoDao {
 		Map map = new HashMap<>();
 		List list = new ArrayList<>();
 
-		
-		
-		
 		File file = new File("D:/이현원/사진/");
-
-
 
 		File[] files = file.listFiles();
 		for (File f : files) {
 			if (f.isDirectory()) {
 
-
-			
-
 				File file2 = new File("d:/이현원/사진/" + f.getName() + "/");
 
 				File[] files2 = file2.listFiles();
 
-				
-				for(File ff : files2){
-					list.add("/images/사진/"+f.getName()+"/"+ff.getName());
-					
+				for (File ff : files2) {
+					list.add("/images/사진/" + f.getName() + "/" + ff.getName());
 
-	
+				}
 				map.put("num", f.getName());
-
+				
 				map.put("pictures", list);
 				template.insert(map, "room");
 				map.remove(f.getName());
 				list.removeAll(list);
 
 			}
+
 		}
-
-	}
 	}
 
-	
-	public String OneImage(String num){
-		
-
+	public String OneImage(String num) {
 
 		System.out.println(num);
 		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num));
 
-		
 		Aggregation aggr = Aggregation.newAggregation(a1);
-		
+
 		System.out.println(aggr.toString());
 		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
 		List<Map> list = result.getMappedResults();
 
-		//class java.util.ArrayList
-		
-		String[] ar = list.iterator().next().get("pictures").toString().split(",");
-		
-		return ar[0].toString().substring(
-				ar[0].toString().indexOf("[")+1);
+		// class java.util.ArrayList
 
-	
+		String[] ar = list.iterator().next().get("pictures").toString().split(",");
+
+		return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1);
 
 	}
 
@@ -139,29 +121,30 @@ public class mongoDao {
 
 	}
 
-	
-	public Map AllImage(String num){
-		
+	public String AllImage(String num) {
+
 		System.out.println(num);
 		AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num));
-		
+
 		Aggregation aggr = Aggregation.newAggregation(a1);
-		
+
 		System.out.println(aggr.toString());
 		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
 		List<Map> list = result.getMappedResults();
-		//class java.util.ArrayList
-		list.iterator().next().get("pictures");
-		Map map = (Map) list.iterator().next().get("pictures");
-		System.out.println(map.getClass());
+		// class java.util.ArrayList
+		Map map = new HashMap<>();
+		String[] ar = new String[] {};
+		String str = "";
+		for (Map map1 : list) {
+			str = map1.get("pictures").toString().substring(1, map1.get("pictures").toString().length() - 1);
+		}
 		
 		
-		return map;
 		
+		
+		return str;
+
 	}
-
-	
-
 
 	// public int inserImg() throws IOException {
 	// int r = 0;
@@ -205,4 +188,3 @@ public class mongoDao {
 	// }
 
 }
-

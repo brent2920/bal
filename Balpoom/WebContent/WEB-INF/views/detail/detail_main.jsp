@@ -59,30 +59,41 @@ td {
 	<div class="container">
 		<br>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-				<li data-target="#myCarousel" data-slide-to="3"></li>
+				<c:forTokens items="${imglist }" delims="," begin="0" var="i" varStatus="vs">
+				<c:choose>
+				<c:when test="${vs.first }">
+				<li data-target="#myCarousel" data-slide-to="${i }" class="active"></li>
+				</c:when>
+				<c:otherwise>
+				<li data-target="#myCarousel" data-slide-to="${i }"></li>
+				</c:otherwise>
+				</c:choose>
+				</c:forTokens>
+				
 			</ol>
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner " role="listbox">
-				<c:forEach var="val" items="${pj }" varStatus="vs">
+				<c:forTokens items="${imglist }" delims="," var="i" varStatus="vs">
+
 					<c:choose>
 						<c:when test="${vs.first}">
 							<div class="item active">
-								<img src=${val } width="400px;" height="300px;">
+								<img src=${i} width="400px;" height="300px;">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="item">
-								<img src=${val } width="400px;" height="300px;">
+								<img src=${i } width="400px;" height="300px;">
 							</div>
 						</c:otherwise>
 					</c:choose>
-				</c:forEach>
+				</c:forTokens>
+
+
 			</div>
 			
 			<!-- Left and right controls -->

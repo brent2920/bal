@@ -60,7 +60,7 @@ public class latelycontroller {
 		ModelAndView mav = new ModelAndView("t_latelyList");
 		List<Map> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
-		
+		Map<String, Object> map1 = new HashMap<>();
 		
 		
 		String p = req.getParameter("page") == null ? "1" : req.getParameter("page");
@@ -81,7 +81,7 @@ public class latelycontroller {
 
 			if (c.length < end) {
 				int a = c.length - start - 1;
-				map.put("aaaa", a);
+				map1.put("aaaa", a);
 				System.out.println("aaaaaaa : "+a);
 				
 
@@ -107,8 +107,8 @@ public class latelycontroller {
 		
 		mav.addObject("page", p);
 		mav.addObject("list", list);
-		mav.addObject("map", map);
-		System.out.println(map.toString());
+		mav.addObject("map", map1);
+		System.out.println(map1.toString());
 		return mav;
 	}
 }
