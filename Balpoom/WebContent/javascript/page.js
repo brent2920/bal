@@ -465,7 +465,7 @@ var PagingHelper = {
 				sb += "</td>";
 				sb += "</tr>";
 				sb += "</table>";
-				sb += "</div>";
+				sb += "</div>"; 
 
 				sb += "<hr style='margin-top: 0px; margin-bottom: 0px;'/>";
 				count++;
