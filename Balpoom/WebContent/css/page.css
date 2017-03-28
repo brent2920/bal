@@ -6,7 +6,7 @@
 }
     
 #paging > ul li {
-    font-size: 15px;
+    font-size: 14px;
     display:inline-block;
     cursor:pointer;
     padding: 0 3px;
@@ -19,6 +19,6 @@
 
 #paging > ul > li.selected {
     color: #04B486;
-    font-size: 15px;
+    font-size: 14px;
     cursor:default;
 }

@@ -437,9 +437,7 @@ var PagingHelper = {
 				}
 				
 				
-				sb += "<div class='roomInfo' style='min-height: 125px;' " +
-						"onclick='PagingHelper.linkajax(" + i + ");' mouseenter='mouse_on()'" +
-								"mouseleave='mouse_off()'>";
+				sb += "<div class='roomInfo' style='min-height: 155px; padding-top: 15px; padding-bottom: 15px;' onclick='PagingHelper.linkajax(" + i + ")' onmouseenter='mouse_on()' onmouseleave='mouse_off()'>";
 				sb += "<table>"
 				sb += "<tr>";
 				sb += "<td rowspan='3'>";
@@ -468,7 +466,7 @@ var PagingHelper = {
 				sb += "</table>";
 				sb += "</div>";
 
-				sb += "<hr style='margin-top: 5px; margin-bottom: 5px;'/>";
+				sb += "<hr style='margin-top: 0px; margin-bottom: 0px;'/>";
 				count++;
 			}
 		}
@@ -476,6 +474,8 @@ var PagingHelper = {
 		return sb;
 
 	},
+	
+	
 	'button' : function() {
 		if ($('#btt').data('clicked')) {
 		} else {
@@ -661,6 +661,22 @@ var PagingHelper = {
 			$("#sh").html(this.shHtml());
 		}
 	}
+}
+
+function mouse_on() {
+	console.log("mouseenter!!");
+	$(this).css({
+		"background-color" : "#EBFFFB",
+		"cursor" : "pointer"
+	});
+}
+
+function mouse_off() {
+	console.log("mouseleave!!");
+	$(this).css({
+		"background-color" : "white",
+		"cursor" : "default"
+	});
 }
 
 var temp = {
