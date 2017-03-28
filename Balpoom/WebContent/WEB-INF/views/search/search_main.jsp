@@ -53,7 +53,7 @@
 <script>
 
 function mouse_on() {
-	console.log("mouseenter!!");
+	console.log("mouse_on() : mouseenter!!");
 	
 	$(".roomInfo").css({
 		"background-color" : "#EBFFFB",
@@ -62,7 +62,7 @@ function mouse_on() {
 }
 
 function mouse_off() {
-	console.log("mouseleave!!");
+	console.log("mouse_off() : mouseleave!!");
 	$(".roomInfo").css({
 		"background-color" : "white",
 		"cursor" : "default"
