@@ -65,8 +65,8 @@
 				</div>
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="search">방 검색</a></li>
-					<li><a href="#">관심목록</a></li>
-					<li><a href="#">최근본방</a></li>
+					<li><a href="#">찜목록</a></li>
+					<li><a href="/recent">최근본방</a></li>
 					<li><a href="#" id="nulladd">방 등록</a></li>
 				</ul>
 
@@ -105,12 +105,13 @@
 					<c:when test="${sessionScope.id != null }">
 						<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
-								src="/images/logo.png" width="70px" height="20px" />
+								src="/images/logo.png" width="83px" height="32px" />
 							</a>
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
-							<li><a href="#">관심목록</a></li>
+							<li><a href="#">찜목록</a></li>
+							<li><a href="/recent">최근본방</a></li>
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
@@ -134,12 +135,13 @@
 						<c:when test="${sessionScope.id1 != null}">
 							<div class="navbar-header">
 							<a class="navbar-brand" href="/"> <img alt="발품로고"
-								src="/images/logo.png" width="70px" height="20px" />
+								src="/images/logo.png" width="83px" height="32px" />
 							</a>
 						</div>
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="search">방 검색</a></li>
-							<li><a href="#">관심목록</a></li>
+							<li><a href="#">찜목록</a></li>
+							<li><a href="/recent">최근본방</a></li>
 							<li><a href="roomadd">방 등록</a></li>
 						</ul>
 
