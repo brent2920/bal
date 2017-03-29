@@ -59,6 +59,9 @@ p  {
 
 var info="default";
 var markersub = "default";
+var arr =[];
+var arr2= [];
+
 $(document).on("mouseenter", ".roomInfo", function() {
 	//markersub.setMap(null);
 	//info.close();
@@ -100,19 +103,34 @@ $(document).on("mouseenter", ".roomInfo", function() {
 	    map: map,
 	   
 	 });
+	 arr.push(markersub);
 	 info = new google.maps.InfoWindow({
 		    content: tag 
 		    //maxWidth: 300
      });
 	 info.open(markersub.get('map'),markersub);
+	 arr2.push(info);
 	
 });
 
 $(document).on("mouseleave", ".roomInfo", function() {
-	
-	 markersub.setMap(null);
-	 info.close();
-	
+	console.log("마커의 배열 = "+ arr.length + " 인포의 길이="+ arr2.length);
+	//markersub.setMap(null);
+	// info.close();
+	if(arr.length==50) {
+		
+		arr = [];
+		
+	}
+	if(arr2.length==50) {
+		arr2= [];
+	}
+	for(var i=0; i < arr.length ;i++){
+		arr[i].setMap(null);
+	}
+	for(var i=0; i < arr2.length ; i++){
+		arr2[i].close();
+	}
 	$(this).css({
 		"background-color" : "white",
 		"cursor" : "default"
