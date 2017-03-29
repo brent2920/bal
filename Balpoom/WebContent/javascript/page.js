@@ -14,6 +14,7 @@ var plist = [];
 var mapBound;
 var locationtemp;
 var markers = [];
+var markerstemp= [];
 var listtemp = [];
 var njjj = [];
 var moreadd = []; // 지도에 값이 더 나타나면 그값을 저장할 리스트 
@@ -91,7 +92,7 @@ function initMap() {
 }
 function performSearch() {
 	// console.log("performSearch()");
-	// allDataTemp = allData;
+	
 	jd = JSON.parse(JSON.stringify(allData));
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
 	
@@ -143,9 +144,7 @@ function performSearch() {
 }
 function callback(results, status) {
 
-	// console.log("callback" + results);
-	// console.log("call back 지도 바뀐다:" + list.length);
-
+	
 	addMarker(temp,"test");// 처음 디폴트 값으로 찍어 줘야함
 	addMarker(temp3,"test2");
 	//console.log("callback list = "+ JSON.stringify(list));
@@ -171,7 +170,7 @@ function callback(results, status) {
 
 			if (i == list.length - 1) {
 
-				// console.log("다뿌려줬고 이제 새로운 리스트를 불러오자");
+				
 				plist = list;
 				list = [];
 
@@ -195,17 +194,18 @@ function callback(results, status) {
 							njj.push(obj["SELL_NUM"]);
 
 						}
-						//console.log("njj사이즈는 = "+ JSON.stringify(njj));
+						
 						njjj = njj;
 					} else {
 						arrl = [];
 					}
 
 				});
-
 				console.log("새로운 callback 리스트= " + list.length);
 				console.log("마커스 사이즈는 : " + markers.length);
+				console.log("마커스 템프 사이즈는 :"+ markerstemp.length);
 				// console.log("callback arrl size:" + arrl.length);
+				
 
 				PagingHelper.gotoPage(1);
 			}
@@ -225,11 +225,15 @@ function deleteMarkers() {
 }
 function setMapOnAll(map) {
 	console.log("=======setMapOnAll========= " + markers.length);
-
+	console.log("셋 맴 언 얼 마커스 사이즈는 : " + markers.length);
+	console.log("셋 맵언 얼마커스 템프 사이즈는 :"+ markerstemp.length);
+if(markers.length != markerstemp.length){
 	for (var i = 0; i < markers.length; i++) {
 
 		markers[i].setMap(map);
 	}
+}
+markerstemp = markers; 
 }
 var compareJSON = function(obj1, obj2) {
 	console.log("comare JSOn=" + (obj1 == obj2));
@@ -246,7 +250,34 @@ function attachSecretMessage(marker, secretMessage) {
 	  var infowindow = new google.maps.InfoWindow({
 	    //content: secretMessage
 	    content: '<IMG BORDER="90" ALIGN="Left" SRC="/images/room.jpg"  width="105" height="105"> Room number:' + secretMessage
-	});
+});
+//=============================================
+	  
+	
+	  
+//=======================================
+
+
+marker.addListener('click', function() {
+		
+		  	console.log("infoWindow:"+ infowindow);
+		  	if (isInfoWindowOpen(infowindow)){
+			 
+			    console.log("open");
+				infowindow.close();
+
+			} else {
+				console.log("close=" + infowindow.open.length);;
+				infowindow.open(marker.get('map'), marker);
+				infowindow.open.length = 0;
+			}
+	  });
+}
+function attachSecretMessage(marker, secretMessage) {
+	  var infowindow = new google.maps.InfoWindow({
+	    //content: secretMessage
+	    content: '<IMG BORDER="90" ALIGN="Left" SRC="/images/room.jpg"  width="105" height="105"> Room number:' + secretMessage
+	  });
 
 	  marker.addListener('click', function() {
 		
@@ -340,7 +371,7 @@ function addMarker(place,address) {
 						+ listtemp.length);
 			
 		});
-	//==========================================
+	
 		$.ajax({
 			"url" : "/gsearchTest",
 			"type" : "POST",
@@ -360,11 +391,11 @@ function addMarker(place,address) {
 					njjj.push(obj["SELL_NUM"]);
 
 				}
-				//console.log("njjj사이즈는 = "+ JSON.stringify(njjj));
+				
 			
 			} 
 		});
-		//=======================================
+	
 	}
 }
 
@@ -507,13 +538,17 @@ var PagingHelper = {
 				}
 				
 				
-				sb += "<div class='roomInfo' ";
+				sb += "<div class='roomInfo' lat='"+obj['B_LONGITUDE'] + "'" + "lng='"+ obj["B_LATITUDE"]+"'";
+				sb += "num='"+obj['SELL_NUM']+"'"+"depo='"+obj['B_DEPOSIT']+"'";
+				sb += "binfo='"+  obj['B_RINFO'] + "'" ;
+				sb += "mpay='"+  obj['B_MPAY'] + "'" + "binfo='"+  obj['B_RINFO'] +"'";
 				sb += "style='min-height: 155px; padding-top: 15px; padding-bottom: 15px;' ";
 				sb += "onclick='PagingHelper.linkajax(" + i + ");'>";
 				sb += "<table>"
 				sb += "<tr>";
 				sb += "<td rowspan='3'>";
 				sb += "<img src=" + obj2 + " style='height: 120px; width: 120px;'>";
+				//sb += "<img src= /images/사진/6112970/0.jpg style='height: 120px; width: 120px;'>";
 				sb += "</td>";
 				sb += "<td style='padding-left: 10px; vertical-align: bottom;'>";
 				sb += "<span style='padding: 3px; background-color: #04B486;border-radius: 5px; color: white;'>"
@@ -626,10 +661,7 @@ var PagingHelper = {
 				|| (jd.lhok != jdt.lhok)
 
 		) {
-			console
-					.log("==================================================notperformsearch Entered");
-			// notperformSearch();
-
+			
 			performSearch();
 
 		}

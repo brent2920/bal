@@ -12,7 +12,14 @@
 	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/javascript/page.js"></script>
 <link rel="stylesheet" href="/css/page.css">
+<style>
 
+p  {
+    border-style: solid;
+    border-bottom-color: #ff0000;
+}
+
+</style>
 
 <div class="well row" style="margin: 0; padding: 0;">
 	<div class="col-md-9"
@@ -27,7 +34,7 @@
 		</div>
 
 		<!-- 방리스트 -->
-		<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
+		<div style="overflow-x: hidden; overflow-y: auto; height: 87%"  >
 			<div style="overflow-x: hidden; overflow-y: auto; height: 87%">
 				<div id="sh" style="padding: 5px;"></div>
 			</div>
@@ -50,19 +57,67 @@
 
 <script>
 
-// $(document).on("mouseenter", ".roomInfo", function() {
-// 	$(this).css({
-// 		"background-color" : "#EBFFFB",
-// 		"cursor" : "pointer"
-// 	});
-// });
+var info="default";
+var markersub = "default";
+$(document).on("mouseenter", ".roomInfo", function() {
+	//markersub.setMap(null);
+	//info.close();
+	console.log("info==>"+ typeof(markersub.infowindow));
+	console.log("off");
+	if (typeof(markersub.infowindow) === "undefined"){
+			console.log("undefined 입니다")
+		}else{
+			console.log("닫겠습니다");
+			markersub.infowindow.close();
+		}
+	$(this).css({
+		"background-color" : "#EBFFFB",
+		"cursor" : "pointer"
+	});
+	var jorm;
+	if( $(this).attr("mpay")*1 == 0) {
+		jorm = "전세";
+	} else {
+		jorm = "월세";
+	}
+	//ALIGN="Left"
+	console.log("num="+$(this).attr("num")*1);
+	var tag  =  '<IMG BORDER="90" ALIGN="Left" SRC="/images/room.jpg"  width="105" height="105">' 
+	  	
+	    tag += "<b style='color: #FF5733; font-size: 20px; vertical-align: middle;'>&nbsp;"
+		tag += $(this).attr("depo")*1 +"/" + $(this).attr("mpay")*1
+		tag +=  "</b>&nbsp"
+		tag +=  "<span style='padding: 3px; background-color: #04B486;border-radius: 5px; color: white;'>"
+		tag +=  jorm
+		tag +=  "</span><br/>"
+		tag +=  $(this).attr("binfo")
+		tag += "<br/><br/>"
+		tag += 'Room number:' +$(this).attr("num")*1 +'<br/>'
 
-// $(document).on("mouseleave", ".roomInfo", function() {
-// 	$(this).css({
-// 		"background-color" : "white",
-// 		"cursor" : "default"
-// 	});
-// });
+	var myLatLng = {lat:$(this).attr("lng")*1, lng: $(this).attr("lat")*1};
+	markersub = new google.maps.Marker({
+	    position: myLatLng,
+	    map: map,
+	   
+	 });
+	 info = new google.maps.InfoWindow({
+		    content: tag 
+		    //maxWidth: 300
+     });
+	 info.open(markersub.get('map'),markersub);
+	
+});
+
+$(document).on("mouseleave", ".roomInfo", function() {
+	
+	 markersub.setMap(null);
+	 info.close();
+	
+	$(this).css({
+		"background-color" : "white",
+		"cursor" : "default"
+	});
+});
 
 $(document).ready(function() {
 	//alert(${location.lat }+","+${location.lng});
