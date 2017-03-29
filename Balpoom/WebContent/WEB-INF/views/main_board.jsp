@@ -38,7 +38,7 @@ body {
 								<a href="http://www.wowtv.co.kr/newscenter/news/view.asp?bcode=T30001000&artid=A201703070193">발품, ‘허위매물 아웃 프로젝트’ 실시…서비스 신뢰 높인다</a>
 
 
-							</td><
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="http://news.donga.com/3/all/20170228/83104100/2">여성 성범죄 소재 ‘발품’ 광고 논란…“女 생존을 광고에 쓰다니” 분통</a></td>

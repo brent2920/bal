@@ -41,6 +41,8 @@ public class latelycontroller {
 			if (!(cc.getName().equals("JSESSIONID"))) {
 				int regNum = Integer.parseInt(cc.getValue());
 				map = lDao.getLatelyList(regNum);
+				if(map==null)
+					map = new HashMap<>();
 				System.out.println(cc.getValue());
 
 				String ar = mDao.OneImage(String.valueOf(regNum));
