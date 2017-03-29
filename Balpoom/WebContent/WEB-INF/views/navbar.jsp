@@ -123,8 +123,8 @@
 								<ul class="dropdown-menu">
 									<li><a href="/broker/change"><span data-toggle="modal"
 											data-target="#myInfo">내정보수정</span></a></li>
-									<li><a href="/broker/change"><span data-toggle="modal"
-											data-target="#myInfo">등록매물관리</span></a></li>
+									<li><a href="/mypage"><span data-toggle="modal"
+											>등록매물관리</span></a></li>
 									<li><a href="#"><span data-toggle="modal"
 									data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>
