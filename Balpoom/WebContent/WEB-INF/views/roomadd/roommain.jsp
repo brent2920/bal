@@ -73,7 +73,7 @@ td, th {
 
 
 <div style="padding-left: 19%; padding-right: 19%; padding-top: 5%">
-<form action="/roominsert" method="post">
+<form action="/roominsert" method="post" enctype="multipart/form-data">
 	<div style="padding: 0; margin: 0; width: 1000px; height: 50px">
 		<h2>¹æµî·Ï</h2>
 	</div>
@@ -381,7 +381,7 @@ td, th {
 						align="left">
 						<img alt="" src="" style="width: 170px; height: 150px; background-color: #EEEEEE;"
 							id="img${i }"> <input type="file" id="file${i }"
-							style="display: none">
+							style="display: none" name="file">
 						<div align="center" style="padding-top: 10px;">
 							<button type="button" id="bbt${i }" 
 								class="btn btn-default" style="color: #646464;
