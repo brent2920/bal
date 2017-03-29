@@ -121,10 +121,12 @@
 									class="glyphicon glyphicon-user"></span> ${sessionScope.id }
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="t_info"><span data-toggle="modal"
-											data-target="">내 정보 수정</span></a></li>
+									<li><a href="/broker/change"><span data-toggle="modal"
+											data-target="#myInfo">내정보수정</span></a></li>
+									<li><a href="/broker/change"><span data-toggle="modal"
+											data-target="#myInfo">등록매물관리</span></a></li>
 									<li><a href="#"><span data-toggle="modal"
-											data-target="#myDelete">회원탈퇴</span> </a></li>
+									data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>
 							<li><a href="/logout"> <span
 									class="glyphicon glyphicon-user" data-toggle="modal"
@@ -152,8 +154,9 @@
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="/broker/change"><span data-toggle="modal"
-											data-target="#myInfo">내 정보 수정</span></a></li>
-											
+											data-target="#myInfo">내정보수정</span></a></li>
+									<li><a href="/broker/change"><span data-toggle="modal"
+											data-target="#myInfo">등록매물관리</span></a></li>
 									<li><a href="#"><span data-toggle="modal"
 									data-target="#myDelete">회원탈퇴</span> </a></li>
 								</ul></li>

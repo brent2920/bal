@@ -146,6 +146,12 @@ public class mongoDao {
 
 	}
 
+	public List<HashMap<String, Object>> getHospitalInfo(int sellNum) {
+		
+		
+		return null;
+	}
+	
 	// public int inserImg() throws IOException {
 	// int r = 0;
 	// Map<String, Object> map = new HashMap<>();

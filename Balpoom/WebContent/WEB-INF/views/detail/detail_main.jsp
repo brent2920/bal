@@ -162,21 +162,30 @@ td {
 </div>
 
 <script>
+	
+	var map;
+	var mapBounds;
 
+// 	mapBounds = map.getBounds().toJSON();
+// 	console.log(JSON.stringify(mapBounds));
+	
 	function initMap() {
 		var roomLocation = {					// 여기에 좌표값 받아와서 EL태그로 표시!
-				lat : ${list1.B_LATITUDE},
-				lng : ${list1.B_LONGITUDE}
+			lat : ${list1.B_LATITUDE},
+			lng : ${list1.B_LONGITUDE}
 		};
 		
-		var map = new google.maps.Map(document.getElementById('map'), {
+		map = new google.maps.Map(document.getElementById('map'), {
 			zoom : 17,
 			center : roomLocation,
 			streetViewControl : true,
 		});
 		
+		
 		setRoomMarker(map);
 	}
+	
+	
 	
 	function setRoomMarker(map) {
 		var roomLocation = {

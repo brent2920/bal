@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.CLOBDao;
@@ -40,7 +42,7 @@ public class detail_controller {
 	APIKeys apiKey;
 	@Autowired
 	mongoDao mDao;
-
+	
 	// 댓글
 	@Autowired
 	commentDao cdao;
@@ -149,5 +151,15 @@ public class detail_controller {
 		}
 
 		return mav;
+	}
+	
+	@RequestMapping("/getApi")
+	@ResponseBody
+	public List<HashMap<String, Object>> getApiInfoHandler(@RequestParam int sellNum) {
+		List<HashMap<String, Object>> hospital = new ArrayList<>();
+		
+		
+		
+		return null;
 	}
 }
