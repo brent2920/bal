@@ -82,15 +82,6 @@ div {
 	vertical-align: middle;
 }
 
-/* .modal-contact { */
-/* 	background-color: #04B486; */
-/* 	border-radius: 10px;  */
-/* 	height: 30px; */
-/* 	margin-left: 30px;  */
-/* 	margin-right: 30px; */
-/* 	font-size: 17px; */
-/* 	color: white; */
-/* } */
 </style>
 
 <div class="well">
@@ -233,7 +224,7 @@ div {
 		 				${i.RCOMMENT }
 		 			</div>
 		 			<div style="font-size: 12px; font-family: 나눔고딕; color: gray; margin-top: 10px;">
-		 				등록 일자 : <fmt:formatDate value="${i.RSYSDATE }" pattern="yyyy/MM/dd/hh/mm"/>
+		 				등록 일자 : <fmt:formatDate value="${i.RSYSDATE }" pattern="yyyy/MM/dd hh:mm"/>
 		 			</div>
 		 		</div>
 		 		<div class="col-sm-2">
