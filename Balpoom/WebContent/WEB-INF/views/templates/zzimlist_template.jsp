@@ -23,8 +23,8 @@ h1 {
 	<div style="min-height: 80%;">
 		<tiles:insertAttribute name="main" />
 	</div>
-<!-- 	<div style="min-height: 10%;"> -->
-<%-- 		<tiles:insertAttribute name="footer" /> --%>
-<!-- 	</div> -->
+	<div style="min-height: 10%;">
+		<tiles:insertAttribute name="footer" />
+	</div>
 </body>
 </html>
