@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.CLOBDao;
 import models.alterDao;
 import models.commentDao;
 import models.mongoDao;
 import models.roomDao;
 import models.zzimlistDao;
-import models.CLOBDao;
 import utils.APIKeys;
 import utils.Urlpicture;
 
@@ -41,10 +41,9 @@ public class detail_controller {
 	@Autowired
 	mongoDao mDao;
 	
-	// �뙎湲�
+	// 댓글
 	@Autowired
 	commentDao cdao;
-	
 	
 	// 찜
 	@Autowired
@@ -153,25 +152,6 @@ public class detail_controller {
 			mav.setViewName("t_detail");
 		}
 		
-		
 		return mav;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

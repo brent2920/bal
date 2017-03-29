@@ -169,7 +169,7 @@ td {
 		var marker = new google.maps.Marker({
 		    position: roomLocation,
 		    map: map,
-		  });
+		});
 	}
 </script>
 <script async defer
