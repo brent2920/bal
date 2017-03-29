@@ -13,7 +13,6 @@
 	</c:when>
 	
 	<c:otherwise>
-<!-- 		<div style="margin-left: 100px; margin-top: 50px"> -->
 		<div align="center" style="margin: 50px">
 			<c:forEach items="${zzimlist }" var="i">
 				<div class="roomInfo" style="float: left; background-color: #F2F2F2; border-radius: 5px; 
