@@ -36,7 +36,8 @@ public class latelycontroller {
 		
 		
 		Cookie[] c = req.getCookies();
-		System.out.println("==============");
+		
+		
 		for (Cookie cc : c) {
 			if (!(cc.getName().equals("JSESSIONID"))) {
 				int regNum = Integer.parseInt(cc.getValue());
@@ -53,11 +54,12 @@ public class latelycontroller {
 		}
 		mav.addObject("size", list.size());
 		mav.addObject("list", list);
+		
 
 		return mav;
 	}
 
-	@RequestMapping("/02")
+	@RequestMapping("/recent")
 	public ModelAndView testHandler(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("t_latelyList");
 		List<Map> list = new ArrayList<>();
@@ -78,7 +80,7 @@ public class latelycontroller {
 			end = Integer.parseInt(p) * 5;
 		}
 		Cookie[] c = req.getCookies();
-		
+		if(c.length>1){
 		for (int i = start; end > c.length ? i < c.length : i < end; i++) {
 
 			if (c.length < end) {
@@ -111,6 +113,10 @@ public class latelycontroller {
 		mav.addObject("list", list);
 		mav.addObject("map", map1);
 		System.out.println(map1.toString());
+	}else{
+		mav.addObject("msg","최근 본 방이 없습니다.");
+		mav.setViewName("t_main");
+	}
 		return mav;
 	}
 }

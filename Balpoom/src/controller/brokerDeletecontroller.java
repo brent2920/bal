@@ -32,7 +32,7 @@ public class brokerDeletecontroller {
 		
 		int r = bDao.brokerDelete(map);
 		System.out.println(r);
-		if(r>1){
+		if(r>0){
 			int a =bDao.roomDelete(map);
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");
 			mav.setViewName("t_main");

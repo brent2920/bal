@@ -37,15 +37,15 @@ public class broker_login_controller {
 		if(map1 !=null){
 			session.setAttribute("id1", map1.get("BK_REGNAME"));
 			session.setAttribute("brokerid", map1.get("ID"));
-			System.out.println(map1.toString()+"!!!!!!!!!!!");
 			
-			mav.setViewName("t_main");
+			
 			mav.addObject("msg","로그인에 성공했습니다.");
+			mav.setViewName("redirect:/");
 
 			}else{
 				
-				mav.setViewName("t_main");
 				mav.addObject("msg","이메일이나 비밀번호를 다시 입력하세요.");
+				mav.setViewName("redirect:/");
 				
 			}
 		return mav;

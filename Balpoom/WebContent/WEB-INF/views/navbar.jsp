@@ -122,7 +122,8 @@
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="/broker/change"><span data-toggle="modal"
-											data-target="#myInfo">내정보수정</span></a></li>
+											data-target="#myInfo">내정보수정</span></a>
+											</li>
 									<li><a href="/mypage"><span data-toggle="modal"
 											>등록매물관리</span></a></li>
 									<li><a href="#"><span data-toggle="modal"
@@ -155,7 +156,7 @@
 								<ul class="dropdown-menu">
 									<li><a href="/broker/change"><span data-toggle="modal"
 											data-target="#myInfo">내정보수정</span></a></li>
-									<li><a href="/broker/change"><span data-toggle="modal"
+									<li><a href="/broker/page"><span data-toggle="modal"
 											data-target="#myInfo">등록매물관리</span></a></li>
 									<li><a href="#"><span data-toggle="modal"
 									data-target="#myDelete">회원탈퇴</span> </a></li>
@@ -322,6 +323,7 @@
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호 입력&nbsp;&nbsp;</label>
+								<b id="rst"></b>
 								<input
 									class="form-control" id="delpass1" type="password"
 									name="delpass">
@@ -333,11 +335,11 @@
 									class="form-control" id="delpass2" type="password">
 							</div>
 							<button type="submit" class="btn btn-success"
-								style="background-color: #04B486;">회원탈퇴</button>
+								style="background-color: #04B486;" id="delbnt">회원탈퇴</button>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+								data-dismiss="modal" >Close</button>
 						</div>
 					</div>
 				</div>
@@ -545,4 +547,26 @@
 			"cursor" : "pointer"
 		});
 	});
+</script>
+
+<script>
+ $(function(){
+  $('#delpass1').keyup(function(){
+   $('span[id=rst]').text('');
+  }); //#user_pass.keyup
+
+  $('#delpass2').keyup(function(){
+   if($('#delpass1').val()!=$('#delpass2').val()){
+	   $("#delbnt").prop("disabled",true);
+    $('b[id=rst]').text('');
+    $('b[id=rst]').html(" 비밀번호가 일치하지 않습니다.");
+    $('b[id=rst]').css("color","red");
+   }else{
+		$("#delbnt").prop("disabled",false);
+    $('b[id=rst]').text('');
+    $('b[id=rst]').html("비밀번호가 일치합니다.");
+    $('b[id=rst]').css("color","green");
+   }
+  }); //#chpass.keyup
+ });
 </script>

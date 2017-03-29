@@ -8,4 +8,13 @@
 <!-- 			<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" /> -->
 	</definition>
 
+
+
+	<definition name="brokerpage" template="/WEB-INF/views/templates/mypage_template.jsp">
+			<put-attribute name="title" value="발품 | 더이상 허위매물에 속지말자" />
+			<put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp" />
+			<put-attribute name="main" value="/WEB-INF/views/mypage/brokerpage.jsp" />
+<!-- 			<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" /> -->
+	</definition>
+
 </tiles-definitions>

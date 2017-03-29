@@ -1,9 +1,12 @@
 package models;
 
+import java.util.HashMap;
+
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,11 +67,15 @@ public class joinDao {
 		
 		//=============중개사ajax===============================================
 		public int brokerajax(String id){
+			Map map = new HashMap<>();
+			map.put("id", id);
 			SqlSession session = factory.openSession();
 			int r = 0;
 			try{
-				r = session.selectOne("join.brokerjoinajax",id);
-			
+			r = session.selectOne("join.brokerjoinajax",map);
+				System.out.println(map.toString());
+				
+				System.out.println(r);
 			}catch(Exception e){
 				e.printStackTrace();
 			}finally{

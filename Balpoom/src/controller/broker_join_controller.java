@@ -54,7 +54,7 @@ public class broker_join_controller {
 		int r = aDao.insertOneAgent(map);
 		
 		if(r==1){
-			mav.setViewName("/broker_join/welcome");
+			mav.setViewName("redirect:/");
 		}else{
 			
 			mav.addObject("fail","fail");
@@ -69,6 +69,7 @@ public class broker_join_controller {
 
 				
 		int rst = jDao.brokerajax(id);
+	
 		if(rst==1)
 			 writer.write("y");
 		else

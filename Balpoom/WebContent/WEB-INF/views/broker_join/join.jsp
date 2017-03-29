@@ -121,13 +121,12 @@
 				</div>
 				<hr />
 				<div class="form-group">
-					<label for="bk_address" style="float: left; width: 115">부동산
-						주소:</label>
+					<label for="bk_address" style="float: left; width: 115">부동산 주소:</label>
 					<button class="btn" name="btn" type="button"
-						id="postcodify_search_button">검색</button>
-					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" style="float: left; width: 250" />
-					<br /> 
-					<label for="bk_address" style="float: left; width: 115">상세주소:</label> <input type="text" class="form-control "
+						id="postcodify_search_button" style="height: 35">검색</button>
+					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" style="float: left; width: 200"/>
+					<b style="color: gray">&emsp;부동산 주소를 입력해주세요.</b><br/>
+					<label for="bk_address" style="float: left; width: 115">상세주소:</label> <input type="text" class="form-control"
 						id="bk_address" name="bk_address" style="float: left; width: 250" />
 
 				</div>
