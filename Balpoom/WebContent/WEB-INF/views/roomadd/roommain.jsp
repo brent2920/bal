@@ -235,7 +235,7 @@ td, th {
 		<tr>
 			<td id="title" rowspan="2">관리비</td>
 			<td id="memo" colspan="3">
-				<table>
+				<table style="margin-left: -10px;">
 					<tr class="mCost">
 						<td><input type="text" class="form-control"
 							style="width: 100%; margin-right: 12px; text-align: right;" disabled id="b_gpay3" name="b_gpay"></td>
@@ -264,14 +264,13 @@ td, th {
 		<tr>
 			<td id="title">주차 여부</td>
 			<td id="memo" colspan="3">
-				<table>
-					<tr class="mCost">
-						<td><input type="checkbox" style="padding-right: 10px" id="b_parking1" name="b_parking" value="가능">있음</td>
-						<td><input type="checkbox" checked="checked"
-							style="margin-left: 10px" id="b_parking2" name="b_parking" value="불가능">없음</td>
-					</tr>
-				</table>
-
+				<span>
+					<span class="mCost">
+						<input type="checkbox" id="b_parking1" name="b_parking" value="가능">있음
+						<input type="checkbox" checked="checked"
+							style="margin-left: 10px" id="b_parking2" name="b_parking" value="불가능">없음
+					</span>
+				</span>
 			</td>
 		</tr>
 
@@ -290,14 +289,12 @@ td, th {
 		<tr>
 			<td id="title">입주 가능일</td>
 			<td id="memo" colspan="3">
-				<table>
-					<tr class="mCost">
-						<td>
-							<input type="text" id="datepicker"
-								placeholder="날짜를 선택해주세요" class="form-control" name="b_enterdate">
-						</td>
-					</tr>
-				</table>
+				<span>
+					<span class="mCost">
+						<input type="text" id="datepicker"
+							placeholder="날짜를 선택해주세요" class="form-control" name="b_enterdate">
+					</span>
+				</span>
 			</td>
 
 		</tr>
@@ -398,8 +395,8 @@ td, th {
 			</td>
 		</tr>
 	</table>
-	
-	<div align="center" style="margin-top: 40px;">
+	<br/>
+	<div align="center" style="margin-top: 20px; margin-bottom: 80px;">
 		<button type="submit" class="btn btn-primary" 
 			style="font-size: 20px; padding-left: 20px; padding-right: 20px;
 			padding-top: 10px; padding-bottom: 10px;">등록</button>
@@ -700,4 +697,3 @@ $("#b_size").keyup(function() {
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=${apiKey }&callback=initMap1"
 	async defer></script>
-
