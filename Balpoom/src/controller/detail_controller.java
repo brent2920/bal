@@ -147,8 +147,10 @@ public class detail_controller {
 		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   "+zr);
 		if( zr == 1){
 			mav.addObject("zzim",zr);
+			mav.setViewName("t_detail");
 		}else{
 			mav.addObject("zzim",zr);
+			mav.setViewName("t_detail");
 		}
 		
 		
