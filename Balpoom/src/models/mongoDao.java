@@ -139,15 +139,29 @@ public class mongoDao {
 			str = map1.get("pictures").toString().substring(1, map1.get("pictures").toString().length() - 1);
 		}
 		
-		
-		
-		
 		return str;
 
 	}
 
-	public List<HashMap<String, Object>> getHospitalInfo(int sellNum) {
+	public List<HashMap<String, Object>> getHospitalInfo(HashMap<String, Object> bounds) {
 		
+		double east = Double.parseDouble(bounds.get("east").toString());
+		double west = Double.parseDouble(bounds.get("west").toString());
+		double south = Double.parseDouble(bounds.get("south").toString());
+		double north = Double.parseDouble(bounds.get("north").toString());
+		
+		Criteria latCondition = Criteria.where("lat").gt(south).lt(north);
+		Criteria lngCondition = Criteria.where("lng").gt(west).lt(east);
+		
+		AggregationOperation condition_1 = Aggregation.match(latCondition);
+		AggregationOperation condition_2 = Aggregation.match(lngCondition);
+		
+		Aggregation aggr = Aggregation.newAggregation(condition_1, condition_2);
+		AggregationResults<HashMap> result
+			= template.aggregate(aggr, "hospital", HashMap.class);
+		List<HashMap> rstList = result.getMappedResults();
+		
+		System.out.println("Hospital List Size : " + rstList.size());
 		
 		return null;
 	}

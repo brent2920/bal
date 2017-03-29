@@ -154,20 +154,32 @@ td {
 	<h3>위치</h3>
 	<div id="map" align="center"></div>
 	
-	<div align="center">
-		<button>
-			
+	<div align="center" style="margin-top: 20px;">
+		<button type="button" class="btn btn-default" id="hosBtn" style="border: none;">
+			<img width="60px;" height="60px;" src="/images/map/detail/hospital_selected.png">
+			<div id="btnName" style="margin-top: 10px;">병원</div>
 		</button>
 	</div>
 </div>
 
 <script>
-	
 	var map;
 	var mapBounds;
 
-// 	mapBounds = map.getBounds().toJSON();
-// 	console.log(JSON.stringify(mapBounds));
+	$("#hosBtn").click(function() {
+		mapBounds = map.getBounds().toJSON();
+		console.log(JSON.stringify(mapBounds));
+		
+		$.ajax({
+			"url" : "/getApiInfo",
+			"type" : "get",
+			"dataType" : "json",
+			"async" : false,
+			"data" : mapBounds
+		}).done(function(rst) {
+			console.log(rst);
+		});
+	});
 	
 	function initMap() {
 		var roomLocation = {					// 여기에 좌표값 받아와서 EL태그로 표시!
@@ -195,7 +207,7 @@ td {
 		
 		var image = {
 			url : "/images/map/detail/room_marker.png",
-			size : new google.maps.Size(92, 92),
+			size : new google.maps.Size(93, 92),
 			anchor: new google.maps.Point(46, 46)
 		};
 		
