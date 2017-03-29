@@ -143,12 +143,12 @@ public class mongoDao {
 
 	}
 
-	public List<HashMap<String, Object>> getHospitalInfo(HashMap<String, Object> bounds) {
+	public List<HashMap> getHospitalInfo(HashMap<String, Object> bounds) {
 		
-		double east = Double.parseDouble(bounds.get("east").toString());
-		double west = Double.parseDouble(bounds.get("west").toString());
-		double south = Double.parseDouble(bounds.get("south").toString());
-		double north = Double.parseDouble(bounds.get("north").toString());
+		String east = bounds.get("east").toString();
+		String west = bounds.get("west").toString();
+		String south = bounds.get("south").toString();
+		String north = bounds.get("north").toString();
 		
 		Criteria latCondition = Criteria.where("lat").gt(south).lt(north);
 		Criteria lngCondition = Criteria.where("lng").gt(west).lt(east);
@@ -157,13 +157,17 @@ public class mongoDao {
 		AggregationOperation condition_2 = Aggregation.match(lngCondition);
 		
 		Aggregation aggr = Aggregation.newAggregation(condition_1, condition_2);
+		
+		System.out.println(aggr.toString());	// 쿼리문 체크!
+		
 		AggregationResults<HashMap> result
 			= template.aggregate(aggr, "hospital", HashMap.class);
 		List<HashMap> rstList = result.getMappedResults();
-		
 		System.out.println("Hospital List Size : " + rstList.size());
+		System.out.println("list 내용체크 : " + rstList.get(0).get("h_name") + " / " 
+				+ rstList.get(0).get("lat") + " / " + rstList.get(0).get("lng") );
 		
-		return null;
+		return rstList;
 	}
 	
 	// public int inserImg() throws IOException {

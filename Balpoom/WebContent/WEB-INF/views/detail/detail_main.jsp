@@ -155,7 +155,7 @@ td {
 	<div id="map" align="center"></div>
 	
 	<div align="center" style="margin-top: 20px;">
-		<button type="button" class="btn btn-default" id="hosBtn" style="border: none;">
+		<button type="button" class="btn btn-default selected" id="hosBtn" style="border: none;">
 			<img width="60px;" height="60px;" src="/images/map/detail/hospital_selected.png">
 			<div id="btnName" style="margin-top: 10px;">병원</div>
 		</button>
@@ -165,8 +165,29 @@ td {
 <script>
 	var map;
 	var mapBounds;
+	
+	var hospitalInfo;
 
-	$("#hosBtn").click(function() {
+	$("#hosBtn").on("click", function() {
+
+		
+		
+		if (!($(this).hasClass("selected"))) {		// 선택되지 않았을 때
+			$(this).addClass("selected");
+			$(this).find("img").prop("src", "/images/map/detail/hospital_selected.png");
+			$(this).find("#btnName").css("color", "black");
+			initMap();
+			
+		} else {									// 선택됬을 때
+			$(this).removeClass("selected");
+			$(this).find("img").prop("src", "/images/map/detail/hospital_unselected.png");
+			$(this).find("#btnName").css("color", "silver");
+			
+		}
+	});
+
+	function Ajax() {
+		
 		mapBounds = map.getBounds().toJSON();
 		console.log(JSON.stringify(mapBounds));
 		
@@ -178,8 +199,9 @@ td {
 			"data" : mapBounds
 		}).done(function(rst) {
 			console.log(rst);
+			hospitalInfo = rst;
 		});
-	});
+	}
 	
 	function initMap() {
 		var roomLocation = {					// 여기에 좌표값 받아와서 EL태그로 표시!
@@ -193,8 +215,9 @@ td {
 			streetViewControl : true,
 		});
 		
-		
+		Ajax();
 		setRoomMarker(map);
+		setHospitalMarker(map);
 	}
 	
 	
@@ -214,6 +237,26 @@ td {
 		
 		var marker = new google.maps.Marker({
 		    position : roomLocation,
+		    map : map,
+		    icon : image
+		});
+	}
+	
+	function setHospitalMarker(map) {
+		var hsptLocation = {
+			lat : hospitalInfo.lat,
+			lng : hospitalInfo.lng
+		};
+		
+		var image = {
+			url : "/images/map/detail/hospital_marker.png",
+			size : new google.maps.Size(76, 77),
+			anchor: new google.maps.Point(28, 28)
+		};
+		
+		
+		var marker = new google.maps.Marker({
+		    position : hsptLocation,
 		    map : map,
 		    icon : image
 		});

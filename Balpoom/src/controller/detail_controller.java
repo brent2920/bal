@@ -155,13 +155,13 @@ public class detail_controller {
 	
 	@RequestMapping("/getApiInfo")
 	@ResponseBody
-	public List<HashMap<String, Object>> getApiInfoHandler(
+	public List<HashMap> getApiInfoHandler(
 			@RequestParam HashMap<String, Object> bounds) {
-		System.out.println(bounds);
-		List<HashMap<String, Object>> hospital = new ArrayList<>();
+		System.out.println("Detail Map Bounds : " + bounds);
+		List<HashMap> hospital = new ArrayList<>();
 		hospital = mDao.getHospitalInfo(bounds);
 		
 		
-		return null;
+		return hospital;
 	}
 }
