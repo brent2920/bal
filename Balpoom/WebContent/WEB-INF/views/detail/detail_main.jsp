@@ -164,7 +164,10 @@ td {
 <script>
 
 	function initMap() {
-		var roomLocation = {lat : ${list1.B_LATITUDE}, lng : ${list1.B_LONGITUDE}};		// 여기에 좌표값 받아와서 EL태그로 표시!
+		var roomLocation = {					// 여기에 좌표값 받아와서 EL태그로 표시!
+				lat : ${list1.B_LATITUDE},
+				lng : ${list1.B_LONGITUDE}
+		};
 		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom : 17,
@@ -172,9 +175,26 @@ td {
 			streetViewControl : true,
 		});
 		
+		setRoomMarker(map);
+	}
+	
+	function setRoomMarker(map) {
+		var roomLocation = {
+			lat : ${list1.B_LATITUDE},
+			lng : ${list1.B_LONGITUDE}
+		};
+		
+		var image = {
+			url : "/images/map/detail/room_marker.png",
+			size : new google.maps.Size(92, 92),
+			anchor: new google.maps.Point(46, 46)
+		};
+		
+		
 		var marker = new google.maps.Marker({
-		    position: roomLocation,
-		    map: map,
+		    position : roomLocation,
+		    map : map,
+		    icon : image
 		});
 	}
 </script>

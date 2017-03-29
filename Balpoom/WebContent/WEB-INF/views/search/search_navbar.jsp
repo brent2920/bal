@@ -12,11 +12,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/javascript/page.js"></script>
-<style type="text/css">
-/* .dropdown-menu > div { */
-/* 	padding: 20px; */
-/* } */
-</style>
 
 <nav class="navbar navbar-inverse"
 	style="background-color: #F2F2F2; border-radius: 0%; margin-bottom: 0%">

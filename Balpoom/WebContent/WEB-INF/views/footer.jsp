@@ -19,9 +19,9 @@
 				</a>
 			</p>
 		<div class="i-copyright">
-			상호 : (주)발품  &nbsp;|&nbsp;  공동대표 : 엄상원, 문병용, 정덕찬, 이현원  &nbsp;|&nbsp;  사업자등록번호: 120-87-61559<br />
-			주소 : 서울특별시 강남구 역삼동 826-27 12층  &nbsp;|&nbsp;  연락처 : 02-3673-3535<br/>
-			<p class="i-links">
+			상호: (주)발품  &nbsp;|&nbsp;  공동대표: 엄상원, 문병용, 정덕찬, 이현원  &nbsp;|&nbsp;  사업자등록번호: 120-87-61559<br />
+			주소: 서울특별시 강남구 역삼동 826-27 12층  &nbsp;|&nbsp;  연락처 : 02-3673-3535<br/>
+			<p class="i-links" style="font-size: 13px;">
 				<a href="//company.zigbang.com" target="_blank">회사소개</a> |
 				<a href="//s.zigbang.com/agree/user-agreement-last.html" target="_blank">이용약관</a> |
 				<a href="//s.zigbang.com/agree/user-privacy-last.html" target="_blank">개인정보 처리방침</a> |

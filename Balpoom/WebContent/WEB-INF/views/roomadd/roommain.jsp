@@ -601,17 +601,6 @@ $("#b_size").keyup(function() {
 	}
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
 <script>
 	// ดÞทย 
 	$(function() {
