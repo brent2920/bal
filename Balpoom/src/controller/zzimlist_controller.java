@@ -39,13 +39,13 @@ public class zzimlist_controller {
 		zzimD.put("email", email);
 		
 		
-		// 사용자가 선택한 찜 목록 데이터 
+		// �궗�슜�옄媛� �꽑�깮�븳 李� 紐⑸줉 �뜲�씠�꽣 
 		zdao.zzimlistdel(zzimD);
 		mav.setViewName("zzimlist");
 		
 		
-		// 매물번호를 이용한 사진 불러오기
-		List<HashMap> list = zdao.zzimlist();
+		// 留ㅻЪ踰덊샇瑜� �씠�슜�븳 �궗吏� 遺덈윭�삤湲�
+		List<HashMap> list = zdao.zzimlist(email);
 		ArrayList<HashMap> arrList = new ArrayList<>();
 		String input = null;
 		System.out.println("List Size : " + list.size());

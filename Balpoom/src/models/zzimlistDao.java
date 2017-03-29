@@ -15,7 +15,7 @@ public class zzimlistDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	// room 에 있는 매물정보 로 데이터 불러오기
+	// room �뿉 �엳�뒗 留ㅻЪ�젙蹂� 濡� �뜲�씠�꽣 遺덈윭�삤湲�
 		public Map zzimfind(int num){
 			Map map = new HashMap();
 			SqlSession session = factory.openSession();
@@ -28,7 +28,7 @@ public class zzimlistDao {
 			}
 			return map;
 		}
-		// 찜리스트 등록
+		// 李쒕━�뒪�듃 �벑濡�
 		public int zzimadd(Map map){
 			int r = 0;
 			SqlSession session = factory.openSession();
@@ -42,7 +42,7 @@ public class zzimlistDao {
 			return r;
 		}
 		
-		// 찜리스트 삭제
+		// 李쒕━�뒪�듃 �궘�젣
 		public int zzimdel(Map map){
 			SqlSession session = factory.openSession();
 			int r = 0;
@@ -59,7 +59,7 @@ public class zzimlistDao {
 		}
 		
 		
-		// 새로 고침 후 찜 버튼 활성화
+		// �깉濡� 怨좎묠 �썑 李� 踰꾪듉 �솢�꽦�솕
 		
 		public int zzimActivation(Map map){
 			int r = 0;
@@ -74,13 +74,14 @@ public class zzimlistDao {
 			return r;
 		}
 		
-		// 찜 리스트
-		public List zzimlist(){
+		// 李� 由ъ뒪�듃
+		public List zzimlist(String email){
 			List list = new ArrayList();
 			SqlSession session = factory.openSession();
-			
+			Map map = new HashMap();
+			map.put("email", email);
 			try{
-				list = session.selectList("zzim.list");
+				list = session.selectList("zzim.list", map);
 			}catch(Exception e){
 				e.printStackTrace();
 			}finally{
@@ -89,7 +90,7 @@ public class zzimlistDao {
 			return list;
 		}
 		
-		// room 과 zzimlist 를 비교해서 room 에 없는 데이터 삭제 하기
+		// room 怨� zzimlist 瑜� 鍮꾧탳�빐�꽌 room �뿉 �뾾�뒗 �뜲�씠�꽣 �궘�젣 �븯湲�
 		public int zzimlistdel(Map map){
 			int r= 0;
 			SqlSession session = factory.openSession();

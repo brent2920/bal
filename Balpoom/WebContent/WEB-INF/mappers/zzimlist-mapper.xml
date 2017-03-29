@@ -27,8 +27,8 @@
 	select count(*) from zzimlist where SELL_NUM = #{num} and SESSIONID = #{sessionid}
 </select>
 
-<select id="list"  resultType="java.util.HashMap">
-	select * from zzimlist
+<select id="list"  resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from zzimlist where sessionid = #{email}
 </select>
 
 <delete id="zzimdel" parameterType="java.util.HashMap">
