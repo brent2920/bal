@@ -153,6 +153,12 @@ td {
 <div style="margin: 2em;">
 	<h3>위치</h3>
 	<div id="map" align="center"></div>
+	
+	<div align="center">
+		<button>
+			
+		</button>
+	</div>
 </div>
 
 <script>
