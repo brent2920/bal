@@ -420,12 +420,12 @@
 		Ajax();
 	});
 
-// 	$(".additionalOpt").click(function() {
-// 		if ($(this).prop("checked"))
-// 			$(this).prop("checked", false);
-// 		else
-// 			$(this).prop("checked", true);
-// 	});
+	$(".additionalOpt").click(function() {
+		if ($(this).prop("checked"))
+			$(this).prop("checked", false);
+		else
+			$(this).prop("checked", true);
+	});
 	
 	$(".additionalOpt_area_li").click(function() {
 		if ($(this).find("input").prop("checked")) {

@@ -134,11 +134,7 @@
                      </a></li>
                   </ul>
                </c:when>
-               
-               
-               
-               
-               
+
                   <c:when test="${sessionScope.id1 != null}">
                      <div class="navbar-header" style="padding: 0px;">
                         <a class="navbar-brand" href="/" style="padding-top: 8px;">  <img alt="발품로고"
@@ -178,10 +174,6 @@
                   
                </c:otherwise>
             </c:choose>
-
-
-
-
          </c:otherwise>
       </c:choose>
 
@@ -423,8 +415,6 @@
 <script>
    $(".nulladd").click(function() {
       window.alert("로그인 후 사용가능합니다")
-
-      $("#login > span").trigger("click");
    })
 </script>
 
@@ -505,15 +495,6 @@
       }
    }
    
-   
-   
-   
-   
-   
-   
-   
-   
-
    // 이메일 중복 여부 확인
 
    document.getElementById("Eemail").onblur = function() {
