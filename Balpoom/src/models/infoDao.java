@@ -13,11 +13,11 @@ public class infoDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	public Map info(String id){
+	public Map info(String email){
 		SqlSession session = factory.openSession();
 		Map map = new HashMap();
 		try{
-			map = session.selectOne("info.find", id);
+			map = session.selectOne("info.find", email);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

@@ -32,9 +32,9 @@ public class info_controller {
 	@RequestMapping("/t_info")
 	public ModelAndView infomain(HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		String id = (String)session.getAttribute("id");
-		System.out.println(id+"...................");
-		Map info = idao.info(id);
+		String email = (String)session.getAttribute("email");
+		System.out.println(email+"...................");
+		Map info = idao.info(email);
 		String tele = (String)info.get("TELENUM");
 		String tele1 =tele.split("-")[0];
 		String tele2 =tele.split("-")[1];

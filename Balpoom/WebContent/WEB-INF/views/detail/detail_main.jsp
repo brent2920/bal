@@ -155,41 +155,75 @@ td {
 	<div id="map" align="center"></div>
 	
 	<div align="center" style="margin-top: 20px;">
-		<button type="button" class="btn btn-default selected" id="hosBtn" style="border: none;">
+		<div class="btn btn-default selected" id="hosBtn" style="border: none;">
 			<img width="60px;" height="60px;" src="/images/map/detail/hospital_selected.png">
 			<div id="btnName" style="margin-top: 10px;">병원</div>
-		</button>
+		</div>
 	</div>
 </div>
 
 <script>
-	var map;
-	var mapBounds;
+	var roomLocation = {			// 방 좌표(지도 중간지점역할)
+		lat : ${list1.B_LATITUDE},
+		lng : ${list1.B_LONGITUDE}
+	};
 	
+	console.log(roomLocation);
+	
+	var map;
+	var roomMarker;
+	var hospitalMarker = [];
+	var mapBounds = {
+		east : ${list1.B_LONGITUDE} + 0.0036844272613241174,
+		west : ${list1.B_LONGITUDE} - 0.0036844272613809608,
+		south : ${list1.B_LATITUDE} - 0.0040662938383111396,
+		north : ${list1.B_LATITUDE} + 0.0040662365040777786
+	};
+	
+	// 병원정보가 들어갈 객체
 	var hospitalInfo;
-
-	$("#hosBtn").on("click", function() {
-
+	
+	function initMap() {
 		
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 17,
+			center : roomLocation,
+			streetViewControl : true,
+		});
 		
-		if (!($(this).hasClass("selected"))) {		// 선택되지 않았을 때
-			$(this).addClass("selected");
-			$(this).find("img").prop("src", "/images/map/detail/hospital_selected.png");
-			$(this).find("#btnName").css("color", "black");
-			initMap();
-			
-		} else {									// 선택됬을 때
-			$(this).removeClass("selected");
-			$(this).find("img").prop("src", "/images/map/detail/hospital_unselected.png");
-			$(this).find("#btnName").css("color", "silver");
-			
-		}
-	});
-
+		setRoomMarker(map);
+		setHospitalMarker(map);
+	}
+	
 	function Ajax() {
 		
-		mapBounds = map.getBounds().toJSON();
 		console.log(JSON.stringify(mapBounds));
+		
+		// center 좌표로부터 맵 bounds 간격 확인
+// 		console.log("east-c = " + (mapBounds.east - ${list1.B_LONGITUDE}));
+// 		console.log("c-west = " + (${list1.B_LONGITUDE} - mapBounds.west));
+// 		console.log("c-south = " + (${list1.B_LATITUDE} - mapBounds.south));
+// 		console.log("north-c = " + (mapBounds.north - ${list1.B_LATITUDE}));
+		
+		
+	}
+	
+	function setRoomMarker(map) {
+		
+		var image = {
+			url : "/images/map/detail/room_marker.png",
+			size : new google.maps.Size(93, 92),
+			anchor: new google.maps.Point(46, 46)
+		};
+			
+		roomMarker = new google.maps.Marker({
+		    position : roomLocation,
+		    map : map,
+		    icon : image
+		});
+	}
+	
+	function setHospitalMarker(map) {
 		
 		$.ajax({
 			"url" : "/getApiInfo",
@@ -198,71 +232,59 @@ td {
 			"async" : false,
 			"data" : mapBounds
 		}).done(function(rst) {
-			console.log(rst);
 			hospitalInfo = rst;
+			var image = {
+				url : "/images/map/detail/hospital_marker.png",
+				size : new google.maps.Size(47, 47),
+				anchor: new google.maps.Point(24, 24)
+			};
+			
+			for(var i=0; i<hospitalInfo.length; i++) {
+				var hospital = hospitalInfo[i];
+				hospitalMarker = new google.maps.Marker({
+				    position : {
+				    	lat : Number(hospital.lat),
+				    	lng : Number(hospital.lng)
+				    },
+				    map : map,
+				    icon : image,
+				    title: hospital.h_name
+				});
+			}
 		});
 	}
 	
-	function initMap() {
-		var roomLocation = {					// 여기에 좌표값 받아와서 EL태그로 표시!
-			lat : ${list1.B_LATITUDE},
-			lng : ${list1.B_LONGITUDE}
-		};
+	function delHospitalMarker() {
 		
-		map = new google.maps.Map(document.getElementById('map'), {
-			zoom : 17,
-			center : roomLocation,
-			streetViewControl : true,
-		});
-		
-		Ajax();
-		setRoomMarker(map);
-		setHospitalMarker(map);
 	}
 	
+	// ============== 이벤트처리부 ==============
 	
+	$("#hosBtn").on("mouseenter", function() {
+		$(this).css("cursor", "pointer");
+	});
 	
-	function setRoomMarker(map) {
-		var roomLocation = {
-			lat : ${list1.B_LATITUDE},
-			lng : ${list1.B_LONGITUDE}
-		};
+	$("#hosBtn").on("mouseelave", function() {
+		$(this).css("cursor", "default");
+	});
+ 
+	$("#hosBtn").on("click", function() {
 		
-		var image = {
-			url : "/images/map/detail/room_marker.png",
-			size : new google.maps.Size(93, 92),
-			anchor: new google.maps.Point(46, 46)
-		};
-		
-		
-		var marker = new google.maps.Marker({
-		    position : roomLocation,
-		    map : map,
-		    icon : image
-		});
-	}
-	
-	function setHospitalMarker(map) {
-		var hsptLocation = {
-			lat : hospitalInfo.lat,
-			lng : hospitalInfo.lng
-		};
-		
-		var image = {
-			url : "/images/map/detail/hospital_marker.png",
-			size : new google.maps.Size(76, 77),
-			anchor: new google.maps.Point(28, 28)
-		};
-		
-		
-		var marker = new google.maps.Marker({
-		    position : hsptLocation,
-		    map : map,
-		    icon : image
-		});
-	}
+		if (!($(this).hasClass("selected"))) {		// 해제 -> 선택
+			$(this).addClass("selected");
+			$(this).find("img").prop("src", "/images/map/detail/hospital_selected.png");
+			$(this).find("#btnName").css("color", "black");
+			mapBounds = map.getBounds().toJSON();
+			initMap();
+			
+		} else {									// 선택 -> 해제
+			$(this).removeClass("selected");
+			$(this).find("img").prop("src", "/images/map/detail/hospital_unselected.png");
+			$(this).find("#btnName").css("color", "silver");
+			Ajax();
+		}
+	});
 </script>
 <script async defer
-      src="https://maps.googleapis.com/maps/api/js?
-      key=${apiKey }&callback=initMap"></script>
+      src="https://maps.googleapis.com/maps/api/js?key=${apiKey }&callback=initMap"></script>
  

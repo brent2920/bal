@@ -154,7 +154,7 @@ function callback(results, status) {
 		arrl = [];
 		njj = [];
 		PagingHelper.gotoPage(1);
-	} else {
+	}else {
 		//var njson = JSON.parse(JSON.stringify(njj));
 		deleteMarkers(); // 리스트는 이제
 		markers = [];
@@ -514,8 +514,8 @@ var PagingHelper = {
 		} else {
 			curr = n_block
 		}
-		end = (curr * 4) - 1;
-		start = end - 3;
+		end = (curr * 4) - 1;//3
+		start = end - 3;//0,1,2,3
 		if (end >= _.data.totalCnt) {
 			end = _.data.totalCnt - 1;
 		}
@@ -527,9 +527,11 @@ var PagingHelper = {
 			njj = [];
 
 		} else {
+			console.log("스타트 :"+ start + "앤드 : "+ end+ "json_size=" + json.length);
 			for (var i = start; i <= end; i++) {
 				var obj = arrl[i];
 				var obj2 = json[count];
+				console.log("obj2 = "+ obj2);
 				var jorm = "";
 				
 				if(obj['B_MPAY'] == 0) {
@@ -537,7 +539,7 @@ var PagingHelper = {
 				} else {
 					jorm = "월세";
 				}
-				
+				console.log("========================================>"+i);
 				
 				sb += "<div class='roomInfo' lat='"+obj['B_LONGITUDE'] + "'" + "lng='"+ obj["B_LATITUDE"]+"'";
 				sb += "num='"+obj['SELL_NUM']+"'"+"depo='"+obj['B_DEPOSIT']+"'";
@@ -548,8 +550,13 @@ var PagingHelper = {
 				sb += "<table>"
 				sb += "<tr>";
 				sb += "<td rowspan='3'>";
-				sb += "<img src=" + obj2 + " style='height: 120px; width: 120px;'>";
-				//sb += "<img src= /images/사진/6112970/0.jpg style='height: 120px; width: 120px;'>";
+				var sell = "/images/사진/";
+				 sell += obj['SELL_NUM']*1;
+				sell+= "/0.jpg"
+				console.log("셀 넘버 = "+  sell);
+				
+				sb += "<img src=" + sell + " style='height: 120px; width: 120px;'>";
+				
 				sb += "</td>";
 				sb += "<td style='padding-left: 10px; vertical-align: bottom;'>";
 				sb += "<span style='padding: 3px; background-color: #04B486;border-radius: 5px; color: white;'>"

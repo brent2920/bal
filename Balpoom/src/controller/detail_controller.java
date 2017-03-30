@@ -161,10 +161,10 @@ public class detail_controller {
 	@ResponseBody
 	public List<HashMap> getApiInfoHandler(
 			@RequestParam HashMap<String, Object> bounds) {
+		
 		System.out.println("Detail Map Bounds : " + bounds);
 		List<HashMap> hospital = new ArrayList<>();
 		hospital = mDao.getHospitalInfo(bounds);
-		
 		
 		return hospital;
 	}
