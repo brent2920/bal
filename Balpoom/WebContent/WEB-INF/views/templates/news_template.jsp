@@ -6,7 +6,7 @@
 
 <html>
 	<head>
-		<title><tiles:getAsString name="title" /></title>
+		<title><tiles:getAsString name="title"/></title>
 	</head>
 	<body>
 		<div>

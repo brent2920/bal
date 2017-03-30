@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -197,15 +195,15 @@
 							</ul>
 							<hr style="margin-top: 8px; margin-bottom: 8px;" />
 							<ul style="list-style: none; -webkit-padding-start: 0px;">
-								<li class="additionalOpt_li"
+								<li class="additionalOpt_area_li"
 									style="padding-top: 5px; padding-bottom: 5px;"><input
 									class="additionalOpt" type="checkbox" name="area" value="lt_5">
 									5평 이하</li>
-								<li class="additionalOpt_li"
+								<li class="additionalOpt_area_li"
 									style="padding-top: 5px; padding-bottom: 5px;"><input
 									class="additionalOpt" type="checkbox" name="area"
 									value="bt_5_10"> 5평 ~ 10평 이하</li>
-								<li class="additionalOpt_li"
+								<li class="additionalOpt_area_li"
 									style="padding-top: 5px; padding-bottom: 5px;"><input
 									class="additionalOpt" type="checkbox" name="area" value="gt_10">
 									10평 이상</li>
@@ -422,12 +420,25 @@
 		Ajax();
 	});
 
-	$(".additionalOpt").click(function() {
-		if ($(this).prop("checked"))
-			$(this).prop("checked", false);
-		else
-			$(this).prop("checked", true);
+// 	$(".additionalOpt").click(function() {
+// 		if ($(this).prop("checked"))
+// 			$(this).prop("checked", false);
+// 		else
+// 			$(this).prop("checked", true);
+// 	});
+	
+	$(".additionalOpt_area_li").click(function() {
+		if ($(this).find("input").prop("checked")) {
+			$(this).find("input").prop("checked", false);
+		} else {
+			$(".additionalOpt_area_li").each(function() {
+				$(this).find("input").prop("checked", false);
+			});
+			$(this).find("input").prop("checked", true);
+		}
+		Ajax();
 	});
+	
 
 	// ===========================================================================
 
