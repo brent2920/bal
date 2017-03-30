@@ -113,6 +113,12 @@ function performSearch() {
 			|| (jd.pet    != jdt.pet)
 			|| (jd.parking != jdt.parking)
 			|| (jd.lhok != jdt.lhok)
+			|| (jd.area[0] != jdt.area[0])
+			|| (jd.floor[0] != jdt.floor[0])
+			|| (jd.floor[1] != jdt.floor[1])
+			|| (jd.floor[2] != jdt.floor[2])
+			|| (jd.floor[3] != jdt.floor[3])
+			
 			
 			
 			
@@ -678,6 +684,11 @@ var PagingHelper = {
 				|| (jd.pet    != jdt.pet)
 				|| (jd.parking != jdt.parking)
 				|| (jd.lhok != jdt.lhok)
+				|| (jd.area[0] != jdt.area[0])
+				|| (jd.floor[0] != jdt.floor[0])
+				|| (jd.floor[1] != jdt.floor[1])
+				|| (jd.floor[2] != jdt.floor[2])
+				|| (jd.floor[3] != jdt.floor[3])
 				
 				
 			
