@@ -3,7 +3,7 @@
 
 <mapper namespace="info">
 <select id="find" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from join where id=#{id}
+		select * from join where eemail=#{email}
 </select>
 
 <select id="passcheckAjax" resultType="java.lang.Integer" parameterType="java.util.HashMap">
