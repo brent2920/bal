@@ -171,6 +171,8 @@ td {
 	console.log(roomLocation);
 	
 	var map;
+	var mapZoom = 17;		// 초기값 17
+	var mapCenter = roomLocation;
 	var roomMarker;
 	var hospitalMarker = [];
 	var mapBounds = {
@@ -180,32 +182,47 @@ td {
 		north : ${list1.B_LATITUDE} + 0.0040662365040777786
 	};
 	
+	var isDelMarker = false;
+	
 	// 병원정보가 들어갈 객체
 	var hospitalInfo;
 	
 	function initMap() {
 		
 		map = new google.maps.Map(document.getElementById('map'), {
-			zoom : 17,
-			center : roomLocation,
+			zoom : mapZoom,
+			center : mapCenter,
 			streetViewControl : true,
+		});
+		
+		map.addListener('dragstart', function() {
+			console.log("drag start!!");
+			
+			map.addListener('idle', function() {
+				console.log("idle!!");
+				if(isDelMarker == false) {
+					viewHospitalMarkers();
+				} else {
+					delHospitalMarker();
+				}
+			});
+		});
+		
+		map.addListener('zoom_changed', function() {
+			console.log("zoom_changed!!");
+			
+			map.addListener('idle', function() {
+				console.log("idle!!");
+				if(isDelMarker == false) {
+					viewHospitalMarkers();
+				} else {
+					delHospitalMarker();
+				}
+			});
 		});
 		
 		setRoomMarker(map);
 		setHospitalMarker(map);
-	}
-	
-	function Ajax() {
-		
-		console.log(JSON.stringify(mapBounds));
-		
-		// center 좌표로부터 맵 bounds 간격 확인
-// 		console.log("east-c = " + (mapBounds.east - ${list1.B_LONGITUDE}));
-// 		console.log("c-west = " + (${list1.B_LONGITUDE} - mapBounds.west));
-// 		console.log("c-south = " + (${list1.B_LATITUDE} - mapBounds.south));
-// 		console.log("north-c = " + (mapBounds.north - ${list1.B_LATITUDE}));
-		
-		
 	}
 	
 	function setRoomMarker(map) {
@@ -232,30 +249,49 @@ td {
 			"async" : false,
 			"data" : mapBounds
 		}).done(function(rst) {
-			hospitalInfo = rst;
-			var image = {
-				url : "/images/map/detail/hospital_marker.png",
-				size : new google.maps.Size(47, 47),
-				anchor: new google.maps.Point(24, 24)
-			};
 			
-			for(var i=0; i<hospitalInfo.length; i++) {
-				var hospital = hospitalInfo[i];
-				hospitalMarker = new google.maps.Marker({
-				    position : {
-				    	lat : Number(hospital.lat),
-				    	lng : Number(hospital.lng)
-				    },
-				    map : map,
-				    icon : image,
-				    title: hospital.h_name
-				});
+			if(isDelMarker == true) {
+				
+			} else {
+				hospitalInfo = rst;
+				var image = {
+					url : "/images/map/detail/hospital_marker.png",
+					size : new google.maps.Size(29, 30),
+					anchor: new google.maps.Point(15, 15)
+				};
+				
+				for(var i=0; i<hospitalInfo.length; i++) {
+					var hospital = hospitalInfo[i];
+					hospitalMarker = new google.maps.Marker({
+					    position : {
+					    	lat : Number(hospital.lat),
+					    	lng : Number(hospital.lng)
+					    },
+					    map : map,
+					    icon : image,
+					    title: hospital.h_name
+					});
+				}
 			}
 		});
 	}
 	
+	function viewHospitalMarkers() {
+		isDelMarker = false;
+		setChangedMapStatus();
+		initMap();
+	}
+	
 	function delHospitalMarker() {
-		
+		isDelMarker = true;
+		setChangedMapStatus();
+		initMap();
+	}
+	
+	function setChangedMapStatus() {
+		mapBounds = map.getBounds().toJSON();
+		mapZoom = map.getZoom();
+		mapCenter = map.getCenter();
 	}
 	
 	// ============== 이벤트처리부 ==============
@@ -274,14 +310,15 @@ td {
 			$(this).addClass("selected");
 			$(this).find("img").prop("src", "/images/map/detail/hospital_selected.png");
 			$(this).find("#btnName").css("color", "black");
-			mapBounds = map.getBounds().toJSON();
-			initMap();
+			
+			viewHospitalMarkers();
 			
 		} else {									// 선택 -> 해제
 			$(this).removeClass("selected");
 			$(this).find("img").prop("src", "/images/map/detail/hospital_unselected.png");
 			$(this).find("#btnName").css("color", "silver");
-			Ajax();
+			
+			delHospitalMarker();
 		}
 	});
 </script>
