@@ -190,7 +190,7 @@
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">로그인</h4>
+                     <h4 class="modal-title">개인 로그인</h4>
                   </div>
                   <div class="modal-body">
 
@@ -228,7 +228,7 @@
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">로그인</h4>
+                     <h4 class="modal-title">공인 중개사 로그인</h4>
                   </div>
                   <div class="modal-body">
 
@@ -270,7 +270,7 @@
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">회원탈퇴</h4>
+                     <h4 class="modal-title">개인 회원탈퇴</h4>
                   </div>
                   <div class="modal-body">
 
@@ -286,7 +286,7 @@
                         <input class="form-control" id="delpass2" 
                            type="password" onkeyup="javascript:DelpassCompare()">
                            <label>
-                           <span id="cmpResult1"></span></label>
+                           <span id="cmpResult2"></span></label>
                      </div>
                      <button type="button" class="btn btn-success"
                         style="background-color: #04B486;" id="Dsbt" disabled onclick="javascript:Del()" >회원탈퇴</button>
@@ -313,7 +313,7 @@
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">회원탈퇴</h4>
+                     <h4 class="modal-title">공인 중개사 회원탈퇴</h4>
                   </div>
                   <div class="modal-body">
 
@@ -325,14 +325,15 @@
                            name="delpass">
                      </div>
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="inputdefault">비밀번호 재입력</label>&nbsp;&nbsp;
-                        <input
-                           class="form-control" id="delpass4" type="password">
-                           
+                        <input class="form-control" id="delpass4" 
+                           type="password" onkeyup="javascript:DelpassCompare1()">
+                           <label>
+                           <span id="cmpResult1"></span></label>
                      </div>
                      <button type="submit" class="btn btn-success"
-                        style="background-color: #04B486;" id="delbnt" onclick="javascript:Del()" >회원탈퇴</button>
+                        style="background-color: #04B486;" id="delbnt"  disabled>회원탈퇴</button>
                   </div>
                   <div class="modal-footer">
                      <button type="button" class="btn btn-default"
@@ -355,7 +356,7 @@
                <div class="modal-content">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">회원가입</h4>
+                     <h4 class="modal-title">개인 회원가입</h4>
                   </div>
                   <div class="modal-body">
 
@@ -463,97 +464,125 @@
       var flag5 = document.getElementById("delpass1").value == document.getElementById("delpass2").value;
       if (flag5) {
          flag4 = true;
-         document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치합니다.";
-         document.getElementById("cmpResult1").style.color = "green";
+         document.getElementById("cmpResult2").innerHTML = "비밀번호가 일치합니다.";
+         document.getElementById("cmpResult2").style.color = "green";
       } else {
          flag4 = false;
-         document.getElementById("cmpResult1").style.color = "red";
-         document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치하지 않습니다.";
+         document.getElementById("cmpResult2").style.color = "red";
+         document.getElementById("cmpResult2").innerHTML = "비밀번호가 일치하지 않습니다.";
       }
       DsbtChange();
    }
    
    
+
+
+   // 공인 중개사 회원 탈퇴
    
-   function Del(){
-      //var flag6 = document.getElementById("delpass1").value;
-      var flag7 = $("#delpass1").val();
-      var xhr2 = new XMLHttpRequest();
-      xhr2.open("get" , "/mydelete?delpass="+flag7, true);
-      xhr2.send();
-      xhr2.onreadystatechange = function(){
-         if(xhr2.readyState==4 && xhr2.status==200) {
-            var txt2 = xhr2.responseText;
-            console.log(txt2);
-            if(txt2 == 'NN') {
-                window.alert("패스워드를 잘못 입력하셨습니다");
-            }else {
-                window.alert("회원탈퇴가 정상적으로 처리 되었습니다");
-                location.href="/";
-            }
-         }
+   var fla3 = true, fla4 = false;
+   function DsbtChange1() {
+      if (fla3 && fla4) {
+         document.getElementById("delbnt").disabled = false;
+      } else {
+         document.getElementById("delbnt").disabled = true;
       }
    }
-   
-   // 이메일 중복 여부 확인
+   function DelpassCompare1() {
 
-   document.getElementById("Eemail").onblur = function() {
-      var xhr1 = new XMLHttpRequest();
-      // this .. 이 스크립트를 호출시킨 DOM 객체
-      // document.getElementById("id")
-      xhr1.open("get", "/EmailcheckAjax?Eemail=" + this.value, true);
-      xhr1.send();
-      xhr1.onreadystatechange = function() {
-         if (xhr1.readyState == 4 && xhr1.status == 200) {
-            var txt1 = xhr1.responseText;
-            console.log(txt1);
-            if (txt1 == 'YYYYY') {
-               document.getElementById("EchkResult").innerHTML = "이미 등록되어 있는 이메일 주소 입니다";
-               document.getElementById("EchkResult").style.color = "red";
-            } else {
-               document.getElementById("EchkResult").innerHTML = "사용 가능한 이메일 주소 입니다";
-               document.getElementById("EchkResult").style.color = "green";
-            }
-         }
-      };
-   };
+      var fla5 = document.getElementById("delpass3").value == document.getElementById("delpass4").value;
+      if (fla5) {
+         fla4 = true;
+         document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치합니다.";
+         document.getElementById("cmpResult1").style.color = "green";
+      } else {
+         fla4 = false;
+         document.getElementById("cmpResult1").style.color = "red";
+         document.getElementById("cmpResult1").innerHTML = "비밀번호가 일치하지 않습니다.";
+      }
+      DsbtChange1();
+   }
+   
+     
    
    
-   // mouseenter, mouseleave 이벤트처리
-   $(".dropdown").mouseenter(function() {
-      $(this).children().eq(1).css({
-         "display" : "block",
-         "cursor" : "pointer"
-      });
-   });
+ 
+	function Del() {
+		var flag7 = $("#delpass1").val();
+		var xhr2 = new XMLHttpRequest();
+		xhr2.open("get", "/mydelete?delpass=" + flag7, true);
+		xhr2.send();
+		xhr2.onreadystatechange = function() {
+			if (xhr2.readyState == 4 && xhr2.status == 200) {
+				var txt2 = xhr2.responseText;
+				console.log(txt2);
+				if (txt2 == 'NN') {
+					window.alert("패스워드를 잘못 입력하셨습니다");
+				} else {
+					window.alert("회원탈퇴가 정상적으로 처리 되었습니다");
+					location.href = "/";
+				}
+			}
+		}
+	}
 
-   $(".dropdown").mouseleave(function() {
-      console.log($(this).children().eq(1));
-      $(this).children().eq(1).css({
-         "display" : "none",
-         "cursor" : "pointer"
-      });
-   });
+	// 이메일 중복 여부 확인
+
+	document.getElementById("Eemail").onblur = function() {
+		var xhr1 = new XMLHttpRequest();
+		// this .. 이 스크립트를 호출시킨 DOM 객체
+		// document.getElementById("id")
+		xhr1.open("get", "/EmailcheckAjax?Eemail=" + this.value, true);
+		xhr1.send();
+		xhr1.onreadystatechange = function() {
+			if (xhr1.readyState == 4 && xhr1.status == 200) {
+				var txt1 = xhr1.responseText;
+				console.log(txt1);
+				if (txt1 == 'YYYYY') {
+					document.getElementById("EchkResult").innerHTML = "이미 등록되어 있는 이메일 주소 입니다";
+					document.getElementById("EchkResult").style.color = "red";
+				} else {
+					document.getElementById("EchkResult").innerHTML = "사용 가능한 이메일 주소 입니다";
+					document.getElementById("EchkResult").style.color = "green";
+				}
+			}
+		};
+	};
+
+	// mouseenter, mouseleave 이벤트처리
+	$(".dropdown").mouseenter(function() {
+		$(this).children().eq(1).css({
+			"display" : "block",
+			"cursor" : "pointer"
+		});
+	});
+
+	$(".dropdown").mouseleave(function() {
+		console.log($(this).children().eq(1));
+		$(this).children().eq(1).css({
+			"display" : "none",
+			"cursor" : "pointer"
+		});
+	});
 </script>
 
 <script>
- $(function(){
-  $('#delpass3').keyup(function(){
-   $('span[id=rst]').text('');
-  }); //#user_pass.keyup
+//  $(function(){
+//   $('#delpass3').keyup(function(){
+//    $('span[id=rst]').text('');
+//   }); //#user_pass.keyup
 
-  $('#delpass4').keyup(function(){
-   if($('#delpass3').val()!=$('#delpass4').val()){
-      $("#delbnt").prop("disabled",true);
-    $('b[id=rst]').text('');
-    $('b[id=rst]').html(" 비밀번호가 일치하지 않습니다.");
-    $('b[id=rst]').css("color","red");
-   }else{
-      $("#delbnt").prop("disabled",false);
-    $('b[id=rst]').text('');
-    $('b[id=rst]').html("비밀번호가 일치합니다.");
-    $('b[id=rst]').css("color","green");
-   }
-  }); //#chpass.keyup
- });
+//   $('#delpass4').keyup(function(){
+//    if($('#delpass3').val()!=$('#delpass4').val()){
+//       $("#delbnt").prop("disabled",true);
+//     $('b[id=rst]').text('');
+//     $('b[id=rst]').html(" 비밀번호가 일치하지 않습니다.");
+//     $('b[id=rst]').css("color","red");
+//    }else{
+//       $("#delbnt").prop("disabled",false);
+//     $('b[id=rst]').text('');
+//     $('b[id=rst]').html("비밀번호가 일치합니다.");
+//     $('b[id=rst]').css("color","green");
+//    }
+//   }); //#chpass.keyup
+//  });
 </script>
