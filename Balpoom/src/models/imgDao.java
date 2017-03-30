@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -37,20 +40,27 @@ public class imgDao {
 		
 		return list;
 	}
-	//방 삭제될때 마다 호출 해야하는 Dao
-	public void imageDelete2(String realpath){
+	//
+	//회원 탈퇴했을때 방 사진 삭제
+	public void imageDelete2(String realpath,String id){
 		List<Map> list = new ArrayList<>();
 		SqlSession session = factory.openSession();
+		Map mapid = new HashedMap();
+	
 		try{
 			//delete from picture where sell_num not in (select sell_num from room);
 			//room테이블에서는 삭제되었지만 picture에 남아있는 방 번호를 리스트로 뽑아낸다
-			list = session.selectList("image.list");
+			mapid.put("id", id);
+			list = session.selectList("image.list",mapid);
 			//리스트를 맵으로 뽑아낸다.
 			for(Map map : list){
 				String str = map.get("SELL_NUM").toString();
-				System.out.println(str+"!!!!!!!!");
+				
 				//하나의 방 번호 폴더의 절대 경로를 설정
-				File file = new File(realpath+"\\"+str);
+				File file = new File(realpath+"/"+str);
+				
+				
+				
 				//폴더 안에 있는 파일을 배열형태로 받아준다
 				File[] files = file.listFiles();
 				System.out.println(file.getAbsolutePath());
@@ -81,12 +91,63 @@ public class imgDao {
 		
 	
 	}
+	
+	//방 하나씩 삭제 했을때
+	public void imageDelete3(String realpath,String id,int num){
+		List<Map> list = new ArrayList<>();
+		SqlSession session = factory.openSession();
+		Map mapid = new HashedMap();
+	
+		try{
+			//delete from picture where sell_num not in (select sell_num from room);
+			//room테이블에서는 삭제되었지만 picture에 남아있는 방 번호를 리스트로 뽑아낸다
+			mapid.put("id", id);
+			mapid.put("num", num);
+			list = session.selectList("image.list",mapid);
+			//리스트를 맵으로 뽑아낸다.
+			for(Map map : list){
+				String str = map.get("SELL_NUM").toString();
+				
+				//하나의 방 번호 폴더의 절대 경로를 설정
+				File file = new File(realpath+"/"+str);
+				
+				
+				
+				//폴더 안에 있는 파일을 배열형태로 받아준다
+				File[] files = file.listFiles();
+				System.out.println(file.getAbsolutePath());
+				//폴더안에 있는 파일을 삭제한다.
+				for(File f :  files){
+					boolean b = f.delete();
+					
+				}
+				//폴더를 삭제한다.
+				boolean b = file.delete();
+	
+				
+				//몽고에 있는 것도 삭제
+				
+				template.remove(Criteria.where("num").is(str), "room");
+				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		
+	
+	}
+	
 	//데이터베이스 picture테이블에 방번호 삽입
-	public void insert(int num){
+	public void insert(int num,String id){
+	
 		SqlSession session = factory.openSession();
 		int r = 0;
 		Map map = new HashedMap();
 		map.put("num", num);
+		map.put("id", id);
 		try{
 			r= session.insert("image.insert",map);
 			if(r==1){

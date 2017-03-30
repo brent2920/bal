@@ -70,7 +70,7 @@ public class mydelete_controller {
 		String file22 = file2.getPath();
 		String realpath2 = (String)req.getRealPath(file22);
 		if(r == 1){
-			iDao.imageDelete2(realpath2);
+			iDao.imageDelete2(realpath2,Eemail);
 			int b = mdao.mydeleteRoom(Eemail);
 		System.out.println("딜리트 room  ===> "+b);
 		session.removeAttribute("email");
