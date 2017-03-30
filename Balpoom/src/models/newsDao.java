@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,23 @@ public class newsDao {
 			session.close();
 		}
 		return nlist;
+	}
+	
+	public  int delete_news(String url){
+		SqlSession session = factory.openSession();
+		Map m = new HashMap<>();
+		
+		int n = 0;
+		
+		try{
+		
+			n = session.delete("news.delete_news",url);
+			
+		}catch(Exception e){
+			
+		}
+		System.out.println("n retur value = "+ n);
+		return n;
 	}
 	
 

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +24,7 @@ import models.imgDao;
 public class imgcontroller {
 	@Autowired
 	imgDao iDao;
+	
 	@RequestMapping("/i")
 	public ModelAndView image(){
 		ModelAndView mav = new ModelAndView("/testing/test3_hyunwon");
@@ -33,7 +37,7 @@ public class imgcontroller {
 			HttpServletRequest req) throws IllegalStateException, IOException{
 		
 		String[] ar = req.getParameterValues("file");
-		File file1 = new File("/images/사진/" + req.getParameter("num"));
+		File file1 = new File("/images/�궗吏�/" + req.getParameter("num"));
 		if(!file1.exists()){
 			file1.mkdirs();
 		}
@@ -41,8 +45,28 @@ public class imgcontroller {
 		byte[] fileData = file.getBytes();
 		FileOutputStream fos = null;
 		for(int i =0; i<ar.length; i++)
-		fos = new FileOutputStream("/images/사진/"+req.getParameter("num")+i);
+		fos = new FileOutputStream("/images/�궗吏�/"+req.getParameter("num")+i);
 		fos.write(fileData);
 	
 	}
+	@RequestMapping("/delete")
+	public void imagedelete(){
+		List<Map> list = new ArrayList<>();
+		list = iDao.imageDelete();
+		for(Map map : list){
+		String str = map.get("SELL_NUM").toString();
+		File file = new File("D:\\이현원\\project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Balpoom\\images\\사진\\"+str);
+		
+		File[] files = file.listFiles();
+		System.out.println(file.getAbsolutePath());
+		for(File f :  files){
+			boolean b = f.delete();
+			
+		}
+		 boolean b = file.delete();
+		
+		
+		}
+	}
+	
 }
