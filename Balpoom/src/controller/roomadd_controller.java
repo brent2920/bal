@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +46,9 @@ public class roomadd_controller {
 	
 	@Autowired
 	ApplicationContext application;
+	
+	@Autowired
+	MongoTemplate template;
 	
 	
 	@RequestMapping("/roomadd")
@@ -219,39 +224,53 @@ public class roomadd_controller {
 
 		String b_petpossible = (String) map.get("b_petpossible");
 		System.out.println("�렖 媛��뒫 �뿬遺� : " + b_petpossible);
-
-		String id = (String) session.getAttribute("email");
+		String id ="";
+		if(session.getAttribute("email") !=null){
+		 id = (String) session.getAttribute("email");
+		}else{
+			 id = (String)session.getAttribute("brokerid");
+		}
+		
 		System.out.println("媛��엯�옄 �씠硫붿씪 : " + id);
 		
 		int rr = (int)(Math.random()* 99999);
 		System.out.println("諛⑸쾲�샇 : "+rr);
 		
-		
-		
+		//몽고에 방번호 삽입
 		File file1 = new File("/images/사진/" +rr);
+		
 		String filepath = file1.getPath();
 		String realpath = (String)req.getRealPath(filepath);
 		System.out.println("절대 경로는 과연 잘 나올가?  ===> "+realpath);
 		File Dir = new File(realpath);
 		System.out.println(Dir.getPath());
-		
+		System.out.println(rr+"처음");
 		while(!Dir.isDirectory()){
 			Dir.mkdirs();
 			if(Dir.exists()){
-				rr++;
 				break;
 			}
 		}
+		System.out.println(rr+"나중");
+		Map mongomap = new HashMap<>();
+		List mongolist = new ArrayList<>();
+		String sell_num_string = String.valueOf(rr);
+		mongomap.put("num", sell_num_string);
 		
-		for (MultipartFile f : file) {
-			if (f.getOriginalFilename().equals("")) {
+		
+		
+		for ( int i=0; i<file.length; i++) {
+			if (file[i].getOriginalFilename().equals("")) {
 				continue;
 			} else {
-				System.out.println("파일이 잘 넘어 왔나요?====> " + f.getOriginalFilename());
-				String mdm = f.getOriginalFilename();
+				System.out.println("파일이 잘 넘어 왔나요?====> " + file[i].getOriginalFilename());
+				String mdm = file[i].getOriginalFilename();
 				System.out.println("파일 잘 들어갔나요? ---> "+mdm.toString());
-				InputStream fis = f.getInputStream();
-				FileOutputStream fos = new FileOutputStream(realpath+"/"+mdm);
+				InputStream fis = file[i].getInputStream();
+				FileOutputStream fos = new FileOutputStream(realpath+"/"+i+".jpg");
+				//몽고 데이터 삽입
+				mongolist.add("/images/사진/"+sell_num_string+"/"+i+".jpg");
+				
 				int size = 0;
 					while((size = fis.read())!= -1){
 							fos.write(size);
@@ -261,7 +280,8 @@ public class roomadd_controller {
 					fis.close();
 			}
 		}
-		
+		mongomap.put("pictures", mongolist);
+		template.insert(mongomap,"room");
 		
 		Rmap.put("id", id);
 		Rmap.put("sell_num", rr);

@@ -121,7 +121,7 @@
 									class="glyphicon glyphicon-user"></span> ${sessionScope.id }
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="/broker/change"><span data-toggle="modal"
+									<li><a href="/t_info"><span data-toggle="modal"
 											data-target="#myInfo">내정보수정</span></a>
 											</li>
 									<li><a href="/mypage"><span data-toggle="modal"
