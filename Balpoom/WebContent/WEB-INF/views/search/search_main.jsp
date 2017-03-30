@@ -70,7 +70,7 @@ $(document).on("mouseenter", ".roomInfo", function() {
 	if (typeof(markersub.infowindow) === "undefined"){
 			console.log("undefined 입니다")
 		}else{
-			console.log("닫겠습니다");
+			
 			markersub.infowindow.close();
 		}
 	$(this).css({
@@ -85,8 +85,10 @@ $(document).on("mouseenter", ".roomInfo", function() {
 	}
 	//ALIGN="Left"
 	console.log("num="+$(this).attr("num")*1);
-	var tag  =  '<IMG BORDER="90" ALIGN="Left" SRC="/images/room.jpg"  width="105" height="105">' 
-	  	
+	//var rnum = $(this).attr("num")*1;
+		var src = "/images/"+ $(this).attr("num")*1 + "/0.jpg";
+		var tag  =  '<IMG BORDER="90" ALIGN="Left" SRC="'+ src +'"  width="105" height="105">' 
+		
 	    tag += "<b style='color: #FF5733; font-size: 20px; vertical-align: middle;'>&nbsp;"
 		tag += $(this).attr("depo")*1 +"/" + $(this).attr("mpay")*1
 		tag +=  "</b>&nbsp"
