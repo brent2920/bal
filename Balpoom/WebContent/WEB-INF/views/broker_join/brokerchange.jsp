@@ -20,7 +20,7 @@
 
 
 
-	<form action="/broker/ChangeResult" method="post">
+	<form action="/brokerChangeResult" method="post">
 
 		<div class="container" style="padding-left: 10%; padding-right: 10%;">
 			<h2>중개사 정보수정</h2>

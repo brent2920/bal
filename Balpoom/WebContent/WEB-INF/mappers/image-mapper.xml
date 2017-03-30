@@ -6,6 +6,6 @@
 </select>
 
 <insert id="insert" parameterType="java.util.HashMap">
-	insert into picture value #{num}
+	insert into picture values (#{num})
 </insert>
 </mapper>

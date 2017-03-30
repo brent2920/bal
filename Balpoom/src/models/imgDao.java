@@ -38,7 +38,7 @@ public class imgDao {
 		return list;
 	}
 	//방 삭제될때 마다 호출 해야하는 Dao
-	public void imageDelete2(){
+	public void imageDelete2(String realpath){
 		List<Map> list = new ArrayList<>();
 		SqlSession session = factory.openSession();
 		try{
@@ -50,7 +50,7 @@ public class imgDao {
 				String str = map.get("SELL_NUM").toString();
 				System.out.println(str+"!!!!!!!!");
 				//하나의 방 번호 폴더의 절대 경로를 설정
-				File file = new File("D:\\이현원\\project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Balpoom\\images\\사진\\"+str);
+				File file = new File(realpath+"\\"+str);
 				//폴더 안에 있는 파일을 배열형태로 받아준다
 				File[] files = file.listFiles();
 				System.out.println(file.getAbsolutePath());

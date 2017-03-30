@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import models.latelyDao;
 import models.mongoDao;
+import models.newsDao;
 import models.pagingDao;
 
 @Controller
@@ -27,7 +28,9 @@ public class latelycontroller {
 	pagingDao pDao;
 	@Autowired
 	mongoDao mDao;
-
+	@Autowired
+	newsDao nDao;
+	
 	@RequestMapping("/01")
 	public ModelAndView latelyList(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("t_main_sub");
@@ -52,6 +55,9 @@ public class latelycontroller {
 				list.add(map);
 			}
 		}
+		List news = nDao.get_news();
+		
+		mav.addObject("news",news);
 		mav.addObject("size", list.size());
 		mav.addObject("list", list);
 		
@@ -114,7 +120,7 @@ public class latelycontroller {
 		mav.addObject("map", map1);
 		System.out.println(map1.toString());
 	}else{
-		mav.addObject("msg","ÃÖ±Ù º» ¹æÀÌ ¾ø½À´Ï´Ù.");
+		mav.addObject("msg","ï¿½Ö±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		mav.setViewName("t_main");
 	}
 		return mav;
