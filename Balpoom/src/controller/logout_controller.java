@@ -27,6 +27,7 @@ public class logout_controller {
 			
 			session.removeAttribute("id");
 			session.removeAttribute("id1");
+			session.removeAttribute("email");
 			session.removeAttribute("brokerid");
 			
 			mav.setViewName("t_main");
