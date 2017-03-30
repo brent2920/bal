@@ -52,7 +52,8 @@ public class imgDao {
 			//room테이블에서는 삭제되었지만 picture에 남아있는 방 번호를 리스트로 뽑아낸다
 			mapid.put("id", id);
 			
-			list = session.selectList("image.list",mapid);
+			list = session.selectList("image.list2",mapid);
+			
 			//리스트를 맵으로 뽑아낸다.
 			for(Map map : list){
 				String str = map.get("SELL_NUM").toString();
@@ -64,7 +65,7 @@ public class imgDao {
 				
 				//폴더 안에 있는 파일을 배열형태로 받아준다
 				File[] files = file.listFiles();
-				System.out.println(file.getAbsolutePath()+"!!!!!!!!!");
+				
 				//폴더안에 있는 파일을 삭제한다.
 				for(File f :  files){
 					boolean b = f.delete();
@@ -72,7 +73,7 @@ public class imgDao {
 				}
 				//폴더를 삭제한다.
 				boolean b = file.delete();
-	
+			
 				
 				//몽고에 있는 것도 삭제
 				int num = Integer.parseInt(str);

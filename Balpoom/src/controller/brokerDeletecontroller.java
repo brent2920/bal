@@ -40,7 +40,9 @@ public class brokerDeletecontroller {
 		File file2 = new File("/images/사진/");
 		String file22 = file2.getPath();
 		String realpath2 = (String)req.getRealPath(file22);
+		
 		if(r>0){
+			
 			iDao.imageDelete2(realpath2,brokerid);
 			int a =bDao.roomDelete(map);
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");

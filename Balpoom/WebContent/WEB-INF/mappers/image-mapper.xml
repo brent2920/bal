@@ -4,7 +4,9 @@
 <select id="list" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 	select * from picture where sell_num  not in (select sell_num from room) and id = #{id} order by rownum 
 </select>
-
+<select id="list2" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from picture where sell_num  in (select sell_num from room) and id = #{id} order by rownum 
+</select>
 <insert id="insert" parameterType="java.util.HashMap">
 	insert into picture values (#{num},#{id})
 </insert>
