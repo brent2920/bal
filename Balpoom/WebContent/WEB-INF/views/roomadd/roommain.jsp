@@ -106,7 +106,7 @@ td, th {
 		</tr>
 		<tr>
 			<td id="memo"><input type="text" id="sample4_postcode"
-				placeholder="우편번호" class="form-control" style="width: 70%;">
+				placeholder="우편번호" class="form-control" style="width: 70%;" required readonly>
 			</td>
 			<td id="memo4">
 				<input type="button" onclick="sample4_execDaumPostcode()"
@@ -117,12 +117,12 @@ td, th {
 		<tr>
 			<td id="memo" colspan="2"><input type="text"
 				id="sample4_roadAddress" placeholder="도로명주소" class="form-control"
-				style="width: 100%;"></td>
+				style="width: 100%;" readonly required></td>
 		</tr>
 		<tr>
 			<td id="memo" colspan="2"><input type="text"
 				id="sample4_jibunAddress" placeholder="지번주소" class="form-control"
-				style="width: 100%" name="b_title"></td>
+				style="width: 100%" name="b_title" readonly required></td>
 		</tr>
 		<tr>
 			<td id="memo" colspan="2"><input type="text" id=""
@@ -138,7 +138,7 @@ td, th {
 		<tr>
 
 			<td id="title">방 종류</td>
-			<td id="memo"><select class="form-control" style="width: 85%" name="b_rkind">
+			<td id="memo"><select class="form-control" style="width: 85%" name="b_rkind" >
 					<option selected>방종류선택</option>
 					<option value="원룸">원룸</option>
 					<option value="1.5룸">1.5룸</option>
@@ -164,7 +164,7 @@ td, th {
 
 		<tr>
 
-			<td id="memo" colspan="4"><font style="color: red">금액을 입력해주세요</font>
+			<td id="memo" colspan="4"><font style="color: red" required>금액을 입력해주세요</font>
 
 
 				<div style="display: none; height: 50px" id="junse">
@@ -178,9 +178,9 @@ td, th {
 				<div style="display: none; height: 50px;" id="wolse">
 					<input type="number"
 						style="width: 25%; float: left; text-align: right;"
-						class="form-control" placeholder="보증금" name="b_deposit"> <input
+						class="form-control" placeholder="보증금" name="b_deposit" > <input
 						type="number" style="width: 25%; float: left; text-align: right;"
-						class="form-control" placeholder="월세" name="b_mpay">
+						class="form-control" placeholder="월세" name="b_mpay" >
 					<button type="button" id="btn2" style="float: left;" class="btn">취소</button>
 				</div>
 
@@ -206,7 +206,7 @@ td, th {
 			<td id="title" rowspan="2">건물크기<br /> (1P = 3.3058㎡)
 			</td>
 			<td id="memo"><input type="number" class="form-control"
-				style="width: 50%" placeholder="평수" name="b_size" id="b_size"></td>
+				style="width: 50%" placeholder="평수" name="b_size" id="b_size" required></td>
 		</tr>
 
 
@@ -292,7 +292,7 @@ td, th {
 				<span>
 					<span class="mCost">
 						<input type="text" id="datepicker"
-							placeholder="날짜를 선택해주세요" class="form-control" name="b_enterdate">
+							placeholder="날짜를 선택해주세요" class="form-control" name="b_enterdate" required>
 					</span>
 				</span>
 			</td>
@@ -302,7 +302,7 @@ td, th {
 		<tr>
 			<td id="title">근처역</td>
 			<td colspan="3">
-				<input type="text" name="b_nstation" class="form-control" placeholder="근처에 있는 역을 입력해주세요">
+				<input type="text" name="b_nstation" class="form-control" placeholder="근처에 있는 역을 입력해주세요" required>
 			</td>
 			
 		</tr>
@@ -347,7 +347,7 @@ td, th {
 		<tr>
 			<td id="title">방 제목</td>
 			<td id="memo6"><input type="text" class="form-control"
-				placeholder="예 ) 신논현역 도보 5분거리, 혼자 살기 좋은 방 입니다." name="b_rinfo"></td>
+				placeholder="예 ) 신논현역 도보 5분거리, 혼자 살기 좋은 방 입니다." name="b_rinfo" required></td>
 
 		</tr>
 
@@ -355,7 +355,7 @@ td, th {
 			<td id="title1">방 정보</td>
 			<td>
 				<textarea rows="15px" cols="90px"
-					placeholder="방에 대한 추가 설명을 적어주세요. " class="form-control" name="b_detail"></textarea>
+					placeholder="방에 대한 추가 설명을 적어주세요. " class="form-control" name="b_detail" required></textarea>
 			</td>
 		</tr>
 	</table>
@@ -401,11 +401,12 @@ td, th {
 			style="font-size: 20px; padding-left: 20px; padding-right: 20px;
 			padding-top: 10px; padding-bottom: 10px;">등록</button>
 		<a href="/">
-			<button type="submit" class="btn btn-danger" 
+			<button type="button" class="btn btn-danger" 
 				style="font-size: 20px; padding-left: 20px; padding-right: 20px;
-				padding-top: 10px; padding-bottom: 10px;">취소</button>
+				padding-top: 10px; padding-bottom: 10px;" id="roomclose">취소</button>
 		</a>
-	</div>
+		</div>
+
 </form>
 </div>
 
@@ -413,6 +414,11 @@ td, th {
 
 
 <script>
+
+
+
+
+
 	$("#junseadd").click(function() {
 		$("#junse").fadeIn(500);
 	})
