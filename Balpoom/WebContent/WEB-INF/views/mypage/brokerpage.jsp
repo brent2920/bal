@@ -86,7 +86,7 @@
 	$("#complateok").click(function(){
 		var sell = $("#sell").val();
 		var comp = new XMLHttpRequest();
-		comp.open("get", "/complate?sell="+sell, true);
+		comp.open("get", "/broker/complate?sell="+sell, true);
 		comp.send();
 		comp.onreadystatechange = function(){
 			if (comp.status == 200 && comp.readyState == 4) {

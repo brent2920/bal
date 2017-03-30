@@ -87,7 +87,30 @@ public class commentDao {
 		return r;
 	}
 	
+	public int Byecomment(Map map){
+		int r = 0;
+		SqlSession session = factory.openSession();
+		try{
+			r = session.delete("rcomment.byecomment", map);
+			if(r == 1)
+				session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return r;
+	}
+	
 }
+
+
+
+
+
+
+
+
 
 		
 

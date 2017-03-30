@@ -81,9 +81,10 @@ public class mypage_controller {
 		File file2 = new File("/images/사진/");
 		String file22 = file2.getPath();
 		String realpath2 = (String)req.getRealPath(file22);
+		int num = Integer.parseInt(sell);
 		if (r == 1) {
 			//방 삭제 되었을때 사진 폴더 삭제하는 메서드
-			iDao.imageDelete2(realpath2);
+			iDao.imageDelete3(realpath2,id,num);
 			yesNo = "CY";
 		} else {
 

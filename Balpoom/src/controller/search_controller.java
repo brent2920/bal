@@ -107,7 +107,6 @@ public class search_controller {
 		mav.addObject("mlist", json_arr.toString());
 		mav.addObject("msize", mlist.size());
 		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
-		mav.setViewName("t_search");
 		System.out.println("mlist size=>" + json_arr.length() + " msize = " + mlist.size());
 		System.out.println("dn=" + defnum + "nj=" + numbersj);
 		System.out.println("urlcolj= " + urlcolj);

@@ -251,7 +251,7 @@ public class roomadd_controller {
 		
 		while(true){
 			Dir.mkdirs();
-			iDao.insert(rr);
+			iDao.insert(rr,id);
 			if(Dir.exists()){
 				break;
 			}
