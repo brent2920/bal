@@ -12,4 +12,13 @@
 <select id="onedelete" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 	select * from picture where sell_num =#{num} and id = #{id}
 </select>
+
+<delete id="delete" parameterType="java.util.HashMap">
+delete from picture where id=#{id} and sell_num=#{num}
+
+</delete>
+<delete id="deleteall" parameterType="java.util.HashMap">
+delete from picture where id=#{id}
+
+</delete>
 </mapper>

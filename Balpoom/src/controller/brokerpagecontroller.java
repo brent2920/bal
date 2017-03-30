@@ -34,6 +34,7 @@ public class brokerpagecontroller {
 	mongoDao mDao;
 	@Autowired
 	imgDao iDao;
+	
 
 	@RequestMapping("/page")
 	@ResponseBody
@@ -83,6 +84,7 @@ public class brokerpagecontroller {
 		int num = Integer.parseInt(sell);
 		if (r == 1) {
 			iDao.imageDelete3(realpath2,id,num);
+			
 			yesNo = "CY";
 		} else {
 
