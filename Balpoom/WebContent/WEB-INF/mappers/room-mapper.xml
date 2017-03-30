@@ -23,8 +23,6 @@
 	</select>
 
 
-	
-
 	<select id="getRoomList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 
 		select SELL_NUM, B_DEPOSIT, B_MPAY, B_GPAY, B_FLOOR, B_RINFO, B_TITLE, B_RKIND, B_LATITUDE, B_LONGITUDE  FROM ROOM WHERE
@@ -83,7 +81,7 @@
 				</when>
 			</choose>
 			
-			<if test="underground != '' and low_floor != '' and mid_floor != '' and high_floor != ''">
+			<if test="underground != null and low_floor != null and mid_floor != null and high_floor != null">
 				<choose>
 					<when test="underground == 'underground'">
 						<choose>
