@@ -85,15 +85,19 @@ public class detail_controller {
 
 		if (agentmap != null) {
 
-			if (agentmap.get("BK_REGNAME").toString().length() > 3) {
-				String REGNAME = agentmap.get("BK_REGNAME").toString();
+			String REGNAME = agentmap.get("BK_REGNAME").toString();
+			
+			if (REGNAME.contains("(")&&REGNAME.contains(")")) {
 				String BK_REGNAME = REGNAME.substring(agentmap.get("BK_REGNAME").toString().indexOf("(") + 1,
 						agentmap.get("BK_REGNAME").toString().indexOf(")"));
 
 				agentmap.put("BK_REGNAME", BK_REGNAME);
+			}else{
+				agentmap.put("BK_REGNAME", REGNAME);
 			}
+			
 			String BK_OFFICENAME = agentmap.get("BK_OFFICENAME").toString();
-			if (BK_OFFICENAME.length() > 3) {
+			if (BK_OFFICENAME.contains("(")&& BK_OFFICENAME.contains(")")) {
 				BK_OFFICENAME = agentmap.get("BK_OFFICENAME").toString().substring(
 						agentmap.get("BK_OFFICENAME").toString().indexOf("(") + 1,
 						agentmap.get("BK_OFFICENAME").toString().indexOf(")"));

@@ -104,7 +104,7 @@ public class mongoDao {
 		// class java.util.ArrayList
 
 		String[] ar = list.iterator().next().get("pictures").toString().split(",");
-
+		
 		return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1);
 
 	}

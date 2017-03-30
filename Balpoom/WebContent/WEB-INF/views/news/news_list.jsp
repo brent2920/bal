@@ -4,7 +4,8 @@
 
 
 
-
+<c:choose>
+	<c:when test="${email eq 'master@master.com' }">
 <div class="wrap-950 news-container">
 	<div class="content">
 		<h2>뉴스</h2>
@@ -29,8 +30,35 @@
 		</ul>
 	</div>
 </div>
+</c:when>
+<c:otherwise>
+<div class="wrap-950 news-container">
+	<div class="content">
+		<h2>뉴스</h2>
+		<ul>
+			<div class="row">
+				<c:forEach var="obj" items="${news }" varStatus="status">
+					<div class="col-sm-10">
+						<li><a href="${obj.URL }" target="_blank">"${obj.TITLE }"
+								<span>"${obj.DATES }"</span>
+						</a></li>
+					</div>
+					<div class="col-sm-2">
+					
+					</div>
 
+				</c:forEach>
+			</div>
+
+		</ul>
+	</div>
 </div>
+
+
+</c:otherwise>
+
+</c:choose>
+
 <script>
 	$(".commentdel").click(function() {
 		//alert($(this).val());

@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-
+import java.util.List;
 import java.util.Map;
 
 
@@ -14,17 +14,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.loginDao;
+import models.newsDao;
 
 @Controller
 @RequestMapping("/")
 public class login_controller {
 	@Autowired
 	loginDao ldao;
+	@Autowired
+	newsDao ndao;
+	
 	
 		@RequestMapping("/login")
 		public ModelAndView mav(@RequestParam Map map, HttpSession session  ) throws IOException {
 			ModelAndView mav = new ModelAndView();
-			Map id = ldao.login(map);		
+			Map id = ldao.login(map);	
+			List<Map> news = ndao.get_news();
+			mav.addObject("news",news);
 			
 			if(id != null){
 				String uid = (String)id.get("ID");

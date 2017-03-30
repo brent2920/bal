@@ -40,8 +40,10 @@ public class brokerpagecontroller {
 		ArrayList<HashMap> arrList = new ArrayList<>();
 		String input = null;
 		System.out.println("List Size : " + list.size());
+		//몽고에서 이미지 하나 가져오기
 		for (HashMap Imap : list) {
 			String num = Imap.get("SELL_NUM").toString();
+			
 			String img = mDao.OneImage(num);
 			Imap.put("IMAGE", img);
 			arrList.add(Imap);
