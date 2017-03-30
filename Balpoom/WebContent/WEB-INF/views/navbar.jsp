@@ -135,6 +135,11 @@
 							</a></li>
 						</ul>
 					</c:when>
+					
+					
+					
+					
+					
 						<c:when test="${sessionScope.id1 != null}">
 							<div class="navbar-header" style="padding: 0px;">
 								<a class="navbar-brand" href="/" style="padding-top: 8px;">  <img alt="발품로고"
@@ -292,7 +297,7 @@
 									<label>
 									<span id="cmpResult1"></span></label>
 							</div>
-							<button type="button" class="btn btn-success"
+							<button type="submit" class="btn btn-success"
 								style="background-color: #04B486;" id="Dsbt" disabled>회원탈퇴</button>
 						</div>
 						<div class="modal-footer">
@@ -325,14 +330,15 @@
 								<label for="inputdefault">비밀번호 입력&nbsp;&nbsp;</label>
 								<b id="rst"></b>
 								<input
-									class="form-control" id="delpass1" type="password"
+									class="form-control" id="delpass3 type="password"
 									name="delpass">
 							</div>
 
 							<div class="form-group">
 								<label for="inputdefault">비밀번호 재입력</label>&nbsp;&nbsp;
 								<input
-									class="form-control" id="delpass2" type="password">
+									class="form-control" id="delpass4" type="password">
+									
 							</div>
 							<button type="submit" class="btn btn-success"
 								style="background-color: #04B486;" id="delbnt">회원탈퇴</button>
@@ -551,12 +557,12 @@
 
 <script>
  $(function(){
-  $('#delpass1').keyup(function(){
+  $('#delpass3').keyup(function(){
    $('span[id=rst]').text('');
   }); //#user_pass.keyup
 
-  $('#delpass2').keyup(function(){
-   if($('#delpass1').val()!=$('#delpass2').val()){
+  $('#delpass4').keyup(function(){
+   if($('#delpass3').val()!=$('#delpass4').val()){
 	   $("#delbnt").prop("disabled",true);
     $('b[id=rst]').text('');
     $('b[id=rst]').html(" 비밀번호가 일치하지 않습니다.");

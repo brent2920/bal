@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.imgDao;
 import models.mydeleteDao;
 
 @Controller
@@ -19,6 +20,8 @@ import models.mydeleteDao;
 public class mydelete_controller {
 		@Autowired
 		mydeleteDao mdao;
+		@Autowired
+		imgDao iDao;
 	
 //		@RequestMapping("/mydelete")
 //		public ModelAndView mydelete(@RequestParam Map map, HttpSession session){
@@ -60,6 +63,7 @@ public class mydelete_controller {
 		String yesNo = "";
 		//System.out.println("딜리트 join  ===> "+r);
 		if(r == 1){
+			iDao.imageDelete2();
 			int b = mdao.mydeleteRoom(Eemail);
 		System.out.println("딜리트 room  ===> "+b);
 		session.removeAttribute("email");

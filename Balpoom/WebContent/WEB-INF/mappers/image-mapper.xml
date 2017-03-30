@@ -4,4 +4,8 @@
 <select id="list" resultType="java.util.HashMap">
 	select sell_num from picture where sell_num not in (select sell_num from room)
 </select>
+
+<insert id="insert" parameterType="java.util.HashMap">
+	insert into picture value #{num}
+</insert>
 </mapper>

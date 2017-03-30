@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.imgDao;
+import models.mongoDao;
 import models.mypageDao;
 import utils.Urlpicture;
 
@@ -24,7 +26,13 @@ public class mypage_controller {
 	mypageDao mdao;
 	@Autowired
 	Urlpicture upic;
-
+	@Autowired
+	mongoDao mDao;
+	@Autowired
+	imgDao iDao;
+	
+	
+	
 	@RequestMapping("/mypage")
 	@ResponseBody
 	public ModelAndView mypage(HttpSession session) {
@@ -36,12 +44,12 @@ public class mypage_controller {
 		ArrayList<HashMap> arrList = new ArrayList<>();
 		String input = null;
 		System.out.println("List Size : " + list.size());
+		//몽고에서 이미지 하나 가져오기
 		for (HashMap Imap : list) {
-			input = "http://www.zigbang.com/items1/" + Imap.get("SELL_NUM").toString();
-			System.out.println("URL : " + input);
-			map.put("IMAGE", (upic.get_main_url(input)));
-			String sell = Imap.get("SELL_NUM").toString();
-			System.out.println("sell num ssibal ==> "+sell);
+			String num = Imap.get("SELL_NUM").toString();
+			
+			String img = mDao.OneImage(num);
+			Imap.put("IMAGE", img);
 			arrList.add(Imap);
 		}
 
@@ -68,6 +76,8 @@ public class mypage_controller {
 		System.out.println("complate? ===> "+r);
 
 		if (r == 1) {
+			//방 삭제 되었을때 사진 폴더 삭제하는 메서드
+			iDao.imageDelete2();
 			yesNo = "CY";
 		} else {
 

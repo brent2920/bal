@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import models.imgDao;
 import models.roomaddDao;
 import utils.APIKeys;
 
@@ -49,6 +50,9 @@ public class roomadd_controller {
 	
 	@Autowired
 	MongoTemplate template;
+	
+	@Autowired
+	imgDao iDao;
 	
 	
 	@RequestMapping("/roomadd")
@@ -244,14 +248,15 @@ public class roomadd_controller {
 		System.out.println("절대 경로는 과연 잘 나올가?  ===> "+realpath);
 		File Dir = new File(realpath);
 		System.out.println(Dir.getPath());
-		System.out.println(rr+"처음");
-		while(!Dir.isDirectory()){
+		
+		while(true){
 			Dir.mkdirs();
+			iDao.insert(rr);
 			if(Dir.exists()){
 				break;
 			}
 		}
-		System.out.println(rr+"나중");
+		
 		Map mongomap = new HashMap<>();
 		List mongolist = new ArrayList<>();
 		String sell_num_string = String.valueOf(rr);

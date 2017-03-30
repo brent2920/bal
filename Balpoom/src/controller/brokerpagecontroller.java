@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.brokerpageDao;
+import models.imgDao;
 import models.mongoDao;
 import models.mypageDao;
 import utils.Urlpicture;
@@ -28,6 +30,8 @@ public class brokerpagecontroller {
 	Urlpicture upic;
 	@Autowired
 	mongoDao mDao;
+	@Autowired
+	imgDao iDao;
 
 	@RequestMapping("/page")
 	@ResponseBody
@@ -72,6 +76,7 @@ public class brokerpagecontroller {
 		System.out.println("complate? ===> "+r);
 
 		if (r == 1) {
+			iDao.imageDelete2();
 			yesNo = "CY";
 		} else {
 

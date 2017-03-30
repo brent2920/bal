@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.brokerdeleteDao;
+import models.imgDao;
 
 @Controller
 @RequestMapping("/")
@@ -20,6 +21,9 @@ public class brokerDeletecontroller {
 
 	@Autowired
 	brokerdeleteDao bDao;
+	@Autowired
+	imgDao iDao;
+	
 	@RequestMapping("/brokerdelete")
 	public ModelAndView BrokerDelete( HttpServletRequest req
 			,HttpSession session){
@@ -33,6 +37,7 @@ public class brokerDeletecontroller {
 		int r = bDao.brokerDelete(map);
 		System.out.println(r);
 		if(r>0){
+			iDao.imageDelete2();
 			int a =bDao.roomDelete(map);
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");
 			mav.setViewName("t_main");
