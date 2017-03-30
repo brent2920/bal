@@ -66,13 +66,15 @@ public class joinDao {
 		}
 		
 		//=============중개사ajax===============================================
-		public int brokerajax(String id){
+		public int brokerajax(String email){
 			Map map = new HashMap<>();
-			map.put("id", id);
+			map.put("id", email);
+		
 			SqlSession session = factory.openSession();
 			int r = 0;
 			try{
 			r = session.selectOne("join.brokerjoinajax",map);
+		
 				System.out.println(map.toString());
 				
 				System.out.println(r);

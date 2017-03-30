@@ -29,6 +29,7 @@ public class join_controller {
 			map.put("uimg", uimg);
 			map.put("telenum", telenum);
 			int r = jdao.join(map);
+			
 			if(r==1){
 				mav.setViewName("t_main");	
 			}
@@ -72,9 +73,9 @@ public class join_controller {
 			ModelAndView mav = new ModelAndView("t_join02");
 			// boolean rst = mdao.useAvailableCheck(id);
 			boolean rst = jdao.emailajax(Eemail);
-			
+			int rrr = jdao.brokerajax(Eemail);
 			// 'YYYYY' or 'NNNNN'  �̷� ���ڸ� ������ָ� �ȴ�.
-			if(rst) 
+			if(rst || rrr==1) 
 				return "YYYYY";
 			else
 				return "NNNNN";

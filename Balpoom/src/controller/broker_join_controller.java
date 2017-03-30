@@ -69,8 +69,9 @@ public class broker_join_controller {
 
 				
 		int rst = jDao.brokerajax(id);
+		boolean rrr = jDao.emailajax(id);
 	
-		if(rst==1)
+		if(rst==1 || rrr)
 			 writer.write("y");
 		else
 			writer.write("n");
