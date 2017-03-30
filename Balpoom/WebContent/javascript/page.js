@@ -65,7 +65,8 @@ function initMap() {
 		
 	    
 		center : {
-		
+			//lat : 37.5326049,
+			//lng : 126.8646878
 			lat : log,
 			lng : lag
 		},
@@ -96,13 +97,8 @@ function performSearch() {
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
 	
 
-	//"mpay_from" : "0 만원", // 월세
-	//"mpay_to" : "9999999 만원",
-//	"lhok" : null, // LH가능
-//	"area" : [], // 평수(면적)
-//	"floor" : [], // 층수
+
 	if (// 만약 네브바 가 감지 된다면 지도는 고정
-			
 	(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
 			|| (jd.deposit_from != jdt.deposit_from)
 			|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
@@ -121,8 +117,6 @@ function performSearch() {
 			
 			
 			
-			
-		
 
 	) {
 		allDataTemp = allData;
@@ -137,12 +131,11 @@ function performSearch() {
 
 		}).done(function(listajax) { // 위치 정도 geometry.locaiton
 			console.log("클릭후 새로운 정보 : " + listajax.length);
-			console.log("jd_mpay_tp="+ jd.mpay_to + " jdk_mpay_to: "+ jdt.mpay_to);
 			
 			list = [];
 			list = listajax;
 			locationtemp = listajax;
-	
+			// console.log("add_marker 끝" + JSON.stringify(list));
 			console.log("클릭후 리스트 사이즈 : list.length : " + list.length);
 		});
 
@@ -167,20 +160,26 @@ function callback(results, status) {
 
 	
 	addMarker(temp,"test");// 처음 디폴트 값으로 찍어 줘야함
-	
-
+	addMarker(temp3,"test2");
+	//console.log("callback list = "+ JSON.stringify(list));
 	if (list.length == 0) {
 		$("#sh").html("");
-		deleteMarkers();
-		markers = [];
+		// console.log("njj.size = " + njj.length);
+		 for(var i=0; i <500 ; i++){
+			 deleteMarkers();
+			 markers = [];
+			 
+		 }
 		arrl = [];
 		njj = [];
 		PagingHelper.gotoPage(1);
 	}else {
-	
-		deleteMarkers(); // 리스트는 이제
-		markers = [];
-		
+		//var njson = JSON.parse(JSON.stringify(njj));
+		 for(var i=0; i <500 ; i++){
+			 deleteMarkers(); // 리스트는 이제
+			 markers = [];
+			 
+		 }
 		for (var i = 0; i < list.length; i++) {
 
 			if (list.length != 0) {
@@ -298,7 +297,7 @@ function attachSecretMessage(marker, secretMessage) {
 	  var infowindow = new google.maps.InfoWindow({
 	    //content: secretMessage
 	    content: '<IMG BORDER="90" ALIGN="Left" SRC="/images/room.jpg"  width="105" height="105"> Room number:' + secretMessage
- });
+	  });
 
 	  marker.addListener('click', function() {
 		
@@ -329,9 +328,13 @@ function addMarker(place,address) {
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
+			//url : "images/lion.png",
+			//url : "/images/house.png",
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
-		
+			//size : new google.maps.Size(76, 77),
+			//anchor: new google.maps.Point(28, 28)
+
 	
 		}
 	});
@@ -352,12 +355,12 @@ function addMarker(place,address) {
 		google.maps.event.addListener(marker, 'click', function() {
 			
 			if (isInfoWindowOpen(infoWindow)){
-		
+			    // do something if it is open
 				console.log("open");
 				infowindow.setContent(place.name);
 				infowindow.close(map, this);
 			} else {
-			  
+			    // do something if it is closed
 				console.log("closed");
 				infowindow.setContent(place.name);
 				infowindow.open(map, this);
@@ -384,6 +387,7 @@ function addMarker(place,address) {
 				list = [];
 				list = listajax;
 				locationtemp = listajax;
+
 				console.log("새로운 리스트 정보 : list.length : "
 						+ list.length + " listTemp = "
 						+ listtemp.length);
@@ -446,6 +450,7 @@ var PagingHelper = {
 
 	'data' : {
 		currentPage : 1
+
 		,
 		pageSize : 3,
 		maxListCount : 5,
@@ -494,12 +499,14 @@ var PagingHelper = {
 		loca = val;
 	
 		
-		console.log("정보 검색창 center값이 바뀌었습니다");
+		console.log("정보 검색창이 center값이 바뀌었습니다");
 		var location = JSON.parse(JSON.stringify(loca));
-		console.log("로카 : "+ location.lat +" lng:"+ location.lng);
-		lag = location.lng;
+		console.log("로카 : "+ location.lat +" lng:"+ location.lng);//===========================
 		log = location.lat;
+		lag = location.lng;
 		initMap();
+			
+		
 	},
 	'allData' : function(all) {
 		allData = all;
@@ -541,11 +548,11 @@ var PagingHelper = {
 			njj = [];
 
 		} else {
-			//console.log("스타트 :"+ start + "앤드 : "+ end+ "json_size=" + json.length);
+			console.log("스타트 :"+ start + "앤드 : "+ end+ "json_size=" + json.length);
 			for (var i = start; i <= end; i++) {
 				var obj = arrl[i];
 				var obj2 = json[count];
-				//console.log("obj2 = "+ obj2);
+				console.log("obj2 = "+ obj2);
 				var jorm = "";
 				
 				if(obj['B_MPAY'] == 0) {
@@ -553,7 +560,7 @@ var PagingHelper = {
 				} else {
 					jorm = "월세";
 				}
-			
+				console.log("========================================>"+i);
 				
 				sb += "<div class='roomInfo' lat='"+obj['B_LONGITUDE'] + "'" + "lng='"+ obj["B_LATITUDE"]+"'";
 				sb += "num='"+obj['SELL_NUM']+"'"+"depo='"+obj['B_DEPOSIT']+"'";
@@ -567,7 +574,7 @@ var PagingHelper = {
 				var sell = "/images/사진/";
 				 sell += obj['SELL_NUM']*1;
 				sell+= "/0.jpg"
-			
+				console.log("셀 넘버 = "+  sell);
 				
 				sb += "<img src=" + sell + " style='height: 120px; width: 120px;'>";
 				
@@ -673,7 +680,9 @@ var PagingHelper = {
 		jd = JSON.parse(JSON.stringify(allData));
 		jdt = JSON.parse(JSON.stringify(allDataTemp));
 	
-		if ((jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
+		if (
+
+		(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
 				|| (jd.deposit_from != jdt.deposit_from)
 				|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
 				|| (jd.lhok != jdt.lhok)
@@ -688,9 +697,7 @@ var PagingHelper = {
 				|| (jd.floor[1] != jdt.floor[1])
 				|| (jd.floor[2] != jdt.floor[2])
 				|| (jd.floor[3] != jdt.floor[3])
-				
-				
-			
+
 		) {
 			
 			performSearch();
@@ -808,7 +815,7 @@ var temp = {
 	"html_attributions" : [
 
 	],
-	"url" : "/images/map/detail/room_marker.png"
+	
 	
 	
 };
@@ -816,7 +823,7 @@ var temp2 = {
 	"geometry" : {
 		"location" : {
 			"lat" : 39.032,
-			"lng" : 152.20760719999998
+			"lng" : 125.75
 		}
 	},
 	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
@@ -834,7 +841,7 @@ var temp3 = {
 	"geometry" : {
 		"location" : {
 			"lng" :39.032,
-			"lat" :152.20760719999998
+			"lat" : 125.75
 		}
 	},
 	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",

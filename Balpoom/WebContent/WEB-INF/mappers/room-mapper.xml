@@ -98,46 +98,87 @@
 										</choose>
 									</when>
 									<otherwise>
-										AND B_FLOOR in('반지하', '1층', '2층', '3층')
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												AND B_FLOOR NOT IN('4층', '5층', '6층')
+											</when>
+											<otherwise>
+												AND B_FLOOR in('반지하', '1층', '2층', '3층')
+											</otherwise>
+										</choose>
 									</otherwise>
 								</choose>
 							</when>
 							<otherwise>
-								AND B_FLOOR = '반지하'
-							</otherwise>
-						</choose>
-					</when>
-					
-					<when test="low_floor == 'low_floor'">
-						<choose>
-							<when test="mid_floor == 'mid_floor'">
 								<choose>
-									<when test="high_floor">
-										AND B_FLOOR NOT IN('반지하')
+									<when test="mid_floor == 'mid_floor'">
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												AND B_FLOOR NOT IN('1층', '2층', '3층')
+											</when>
+											<otherwise>
+												AND B_FLOOR in('반지하', '4층', '5층', '6층')
+											</otherwise>
+										</choose>
 									</when>
 									<otherwise>
-										AND B_FLOOR in('1층', '2층', '3층', '4층', '5층', '6층')
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												AND B_FLOOR NOT IN('1층', '2층', '3층', '4층', '5층', '6층')
+											</when>
+											<otherwise>
+												AND B_FLOOR='반지하'
+											</otherwise>
+										</choose>
 									</otherwise>
 								</choose>
-							</when>
-							<otherwise>
-								AND B_FLOOR in('반지하', '1층', '2층', '3층')
-							</otherwise>
-						</choose>
-					</when>
-					
-					<when test="mid_floor == 'mid_floor'">
-						<choose>
-							<when test="high_floor == 'high_floor'">
-								AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층')
-							</when>
-							<otherwise>
-								AND B_FLOOR in(='4층', '5층', '6층')
 							</otherwise>
 						</choose>
 					</when>
 					<otherwise>
-						AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+						<choose>
+							<when test="low_floor == 'low_floor'">
+								<choose>
+									<when test="mid_floor == 'mid_floor'">
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												AND B_FLOOR NOT IN('반지하')
+											</when>
+											<otherwise>
+												AND B_FLOOR IN('1층', '2층', '3층', '4층', '5층', '6층')
+											</otherwise>
+										</choose>
+									</when>
+									<otherwise>
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												AND B_FLOOR NOT IN('반지하', '4층', '5층', '6층')
+											</when>
+											<otherwise>
+												AND B_FLOOR IN('1층', '2층', '3층')
+											</otherwise>
+										</choose>
+									</otherwise>
+								</choose>
+							</when>
+							<otherwise>
+								<choose>
+									<when test="mid_floor == 'mid_floor'">
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층')
+											</when>
+											<otherwise>
+												AND B_FLOOR IN('4층', '5층', '6층')
+											</otherwise>
+										</choose>
+									</when>
+									<otherwise>
+										AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+									</otherwise>
+								</choose>
+							</otherwise>
+						</choose>
 					</otherwise>
 				</choose>
 			</if>
@@ -153,31 +194,70 @@
 
 
 <!-- 
-		<if test="underground == 'underground'">
-			AND B_FLOOR = '반지하'
-		</if>
-		<if test="low_floor == 'low_floor'">
-			<choose>
-				<when test="underground == 'underground'">
-					AND B_FLOOR in('반지하', '1층', '2층', '3층')
-				</when>
-				<otherwise>
-					AND B_FLOOR in('1층', '2층', '3층')
-				</otherwise>
-			</choose>
-		</if>
-		<if test="mid_floor == 'mid_floor'">
-			OR B_FLOOR in('4층', '5층', '6층')
-			<choose>
-				<when test="underground == 'underground'">
-					OR B_FLOOR in('반지하', '1층', '2층', '3층')
-				</when>
-				<otherwise>
-					OR B_FLOOR in('4층', '5층', '6층')
-				</otherwise>
-			</choose>
-		</if>
-		<if test="high_floor == 'high_floor'">
-			OR B_FLOOR not in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
-		</if>
+
+<if test="underground != null and low_floor != null and mid_floor != null and high_floor != null">
+				<choose>
+					<when test="underground == 'underground'">
+						<choose>
+							<when test="low_floor == 'low_floor'">
+								<choose>
+									<when test="mid_floor == 'mid_floor'">
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												
+											</when>
+											<otherwise>
+												AND B_FLOOR in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+											</otherwise>
+										</choose>
+									</when>
+									<otherwise>
+										AND B_FLOOR in('반지하', '1층', '2층', '3층')
+									</otherwise>
+								</choose>
+							</when>
+							<otherwise>
+								AND B_FLOOR = '반지하'
+							</otherwise>
+						</choose>
+					</when>
+					
+					<otherwise>
+						<choose>
+							<when test="low_floor == 'low_floor'">
+								<choose>
+									<when test="mid_floor == 'mid_floor'">
+										<choose>
+											<when test="high_floor">
+												AND B_FLOOR NOT IN('반지하')
+											</when>
+											<otherwise>
+												AND B_FLOOR in('1층', '2층', '3층', '4층', '5층', '6층')
+											</otherwise>
+										</choose>
+									</when>
+									<otherwise>
+										AND B_FLOOR in('1층', '2층', '3층')
+									</otherwise>
+								</choose>
+							</when>
+							
+							<when test="mid_floor == 'mid_floor'">
+								<choose>
+									<when test="high_floor == 'high_floor'">
+										AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층')
+									</when>
+									<otherwise>
+										AND B_FLOOR in(='4층', '5층', '6층')
+									</otherwise>
+								</choose>
+							</when>
+							<otherwise>
+								AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+							</otherwise>
+						</choose>
+					</otherwise>
+				</choose>
+			</if>
+
  -->

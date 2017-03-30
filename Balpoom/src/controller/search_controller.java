@@ -43,7 +43,7 @@ public class search_controller {
 		ModelAndView mav = new ModelAndView("t_search");
 		System.out.println("Search Keyword : " + keyword);
 		HashMap<String, Double> location = new HashMap<>();
-	
+		
 		if(sDao.getLatLng(keyword) == null) {
 			location.put("lat", 37.5662952);
 			location.put("lng", 126.9779451);
