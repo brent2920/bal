@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +37,11 @@ public class brokerDeletecontroller {
 		
 		int r = bDao.brokerDelete(map);
 		System.out.println(r);
+		File file2 = new File("/images/사진/");
+		String file22 = file2.getPath();
+		String realpath2 = (String)req.getRealPath(file22);
 		if(r>0){
-			iDao.imageDelete2();
+			iDao.imageDelete2(realpath2);
 			int a =bDao.roomDelete(map);
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");
 			mav.setViewName("t_main");

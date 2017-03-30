@@ -1,8 +1,11 @@
 package controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +52,8 @@ public class mydelete_controller {
 		
 	@RequestMapping("/mydelete")
 	@ResponseBody
-		public String mydelete(@RequestParam Map map, HttpSession session, @RequestParam(name="delpass")String password){
+		public String mydelete(@RequestParam Map map, HttpSession session, @RequestParam(name="delpass")String password,
+				HttpServletRequest req){
 		Map dMap = new HashMap();
 		ModelAndView mav = new ModelAndView();
 		//String password = (String)map.get("delpass");
@@ -62,8 +66,11 @@ public class mydelete_controller {
 		//int cnt = 0;
 		String yesNo = "";
 		//System.out.println("딜리트 join  ===> "+r);
+		File file2 = new File("/images/사진/");
+		String file22 = file2.getPath();
+		String realpath2 = (String)req.getRealPath(file22);
 		if(r == 1){
-			iDao.imageDelete2();
+			iDao.imageDelete2(realpath2);
 			int b = mdao.mydeleteRoom(Eemail);
 		System.out.println("딜리트 room  ===> "+b);
 		session.removeAttribute("email");
