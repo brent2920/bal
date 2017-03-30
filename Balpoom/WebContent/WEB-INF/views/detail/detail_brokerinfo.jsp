@@ -273,7 +273,7 @@ div {
 		<button type="button" class="btn btn-danger" id="ccansle">취소</button>
 	</div>
 
-</div>
+	</div>
 
 <div style="height: 50px"></div>
 

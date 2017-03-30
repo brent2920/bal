@@ -91,7 +91,7 @@ function initMap() {
 	
 }
 function performSearch() {
-	// console.log("performSearch()");
+
 	
 	jd = JSON.parse(JSON.stringify(allData));
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
@@ -158,13 +158,12 @@ function callback(results, status) {
 		//var njson = JSON.parse(JSON.stringify(njj));
 		deleteMarkers(); // 리스트는 이제
 		markers = [];
-		//console.log("말풍선"+ njjj[0]);
+		
 		for (var i = 0; i < list.length; i++) {
 
-			if (list.length != 0) {// ==========================================================================
+			if (list.length != 0) {
 				var njjinput = njjj[i];
-				//console.log("njj[i]="+ njjinput);
-				addMarker(list[i],''+njjj[i]);
+			    addMarker(list[i],''+njjj[i]);
 
 			}
 
@@ -308,9 +307,12 @@ function addMarker(place,address) {
 		map : map,
 		icon : {
 			url : 'http://maps.gstatic.com/mapfiles/circle.png',
-			//url : "images/lion.PNG",
+			//url : "images/lion.png",
+			//url : "/images/house.png",
 			anchor : new google.maps.Point(10, 10),
 			scaledSize : new google.maps.Size(10, 17)
+			//size : new google.maps.Size(76, 77),
+			//anchor: new google.maps.Point(28, 28)
 
 	
 		}
@@ -364,8 +366,7 @@ function addMarker(place,address) {
 				list = [];
 				list = listajax;
 				locationtemp = listajax;
-				// console.log("add_marker 끝" +
-				// JSON.stringify(list));
+
 				console.log("새로운 리스트 정보 : list.length : "
 						+ list.length + " listTemp = "
 						+ listtemp.length);
@@ -647,12 +648,10 @@ var PagingHelper = {
 		sb += "</ul>";
 		this.shHtml(this.data.currentPage);
 
-		// console.log("plist=" + plist.length + "list=" + list.length);
+		
 		jd = JSON.parse(JSON.stringify(allData));
 		jdt = JSON.parse(JSON.stringify(allDataTemp));
-		// console.log(jd.rKind[0]);
-		// console.log(jdt.rKind[0]);
-
+	
 		if (
 
 		(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
@@ -712,7 +711,7 @@ var PagingHelper = {
 
 				// json : 이미지 주소들
 				json = JSON.parse(JSON.stringify(listajax));
-				// console.log("json::"+JSON.stringify(json));
+			
 
 			});
 
@@ -725,15 +724,13 @@ var PagingHelper = {
 	},
 	'gotoPage_nav' : function(pageNum) {
 
-		json = "empty";// 받은 정보를 바탕으로 이미지 주소를 다운 받는다
-		this.data.currentPage = pageNum; // 현재 페이지를 세팅한다
+		json = "empty";
+		this.data.currentPage = pageNum; 
 		this.setStartnumEndnum();
 
 		var ends = (this.data.currentPage) * 4 - 1;// 3
 		var starts = ends - 3;//
 		var njjTemp = [];
-		// console.log("njj=>"+ JSON.stringify(njj));
-		// console.log("njj size = " + njj.length);
 		PagingHelper.data.totalPageCnt = njj.length;
 
 		for (var i = starts; i < ends; i++) {
@@ -754,13 +751,11 @@ var PagingHelper = {
 
 					}).done(function(listajax) {
 
-				// json : 이미지 주소들
+				
 				json = JSON.parse(JSON.stringify(listajax));
 
 			});
-			// console.log("this.data.toalPageCnt Before enter paging="
-			// + this.data.totalPageCnt);
-			// console.log("리스트 의 길이는 =" + list.length);
+		
 			$("#paging").html(this.pagingHtml(this.data.totalPageCnt));
 			$("#sh").html(this.shHtml());
 		}

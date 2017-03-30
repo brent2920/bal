@@ -8,10 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import models.alterDao;
+import models.newsDao;
 import models.roomDao;
 import utils.Urlpicture;
 
@@ -35,10 +30,14 @@ public class main_controller {
 	Urlpicture urp;
 	@Autowired
 	alterDao aDao;
+	@Autowired
+	newsDao ndao;
 
 	@RequestMapping("/")
 	public ModelAndView mainHandler(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("t_main");
+		List<Map> news = ndao.get_news();
+		mav.addObject("news",news);
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			int rr = cookies.length;
