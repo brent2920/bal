@@ -64,6 +64,8 @@ body {
 					</tbody>
 				</table>
 			</div>
+			
+			
 			<div class="col-sm-6">
 				<table class="table">
 					<thead>
