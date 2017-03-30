@@ -164,9 +164,13 @@ public class mongoDao {
 			= template.aggregate(aggr, "hospital", HashMap.class);
 		List<HashMap> rstList = result.getMappedResults();
 		System.out.println("Hospital List Size : " + rstList.size());
-		System.out.println("list 내용체크 : " + rstList.get(0).get("h_name") + " / " 
-				+ rstList.get(0).get("lat") + " / " + rstList.get(0).get("lng") );
 		
+		if(rstList.isEmpty()) {
+			System.out.println("List is Empty!!");
+			System.out.println(rstList);
+		} else {
+			System.out.println("list 내용체크 : " + rstList);
+		}
 		return rstList;
 	}
 	
