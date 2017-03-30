@@ -10,7 +10,7 @@ public class APIKeys {
 	//AIzaSyD4vzBQiYomL-S8Fwvp1649W56W_9SmDE4
 
 
-	static String GOOGLE_MAP_KEY = "AIzaSyCm6aXkRRr_msMRm2QN22uiaL5SHvlqMJY";
+	static String GOOGLE_MAP_KEY = "AIzaSyBM8DG6PEteNKl-mrgJmKa24GJrHqNZ9Ss";
 
 
 	public static String getGOOGLE_MAP_KEY() {
