@@ -96,30 +96,26 @@ function performSearch() {
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
 	
 
-	//"mpay_from" : "0 만원", // 월세
-	//"mpay_to" : "9999999 만원",
-//	"lhok" : null, // LH가능
-//	"area" : [], // 평수(면적)
-//	"floor" : [], // 층수
+
 	if (// 만약 네브바 가 감지 된다면 지도는 고정
 			
 	(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
 			|| (jd.deposit_from != jdt.deposit_from)
 			|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
 			|| (jd.lhok != jdt.lhok)
-			|| (jd.deposit_to != jdt.deposit_to)
-			|| (jd.mpay_from != jdt.mpay_from)
-			|| (jd.mpay_to   != jdt.mpay_to)
-			|| (jd.pet    != jdt.pet)
-			|| (jd.parking != jdt.parking)
-			|| (jd.lhok != jdt.lhok)
-			|| (jd.area[0] != jdt.area[0])
-			|| (jd.floor[0] != jdt.floor[0])
-			|| (jd.floor[1] != jdt.floor[1])
-			|| (jd.floor[2] != jdt.floor[2])
-			|| (jd.floor[3] != jdt.floor[3])
-			
-			
+//			|| (jd.deposit_to != jdt.deposit_to)
+//			|| (jd.mpay_from != jdt.mpay_from)
+//			|| (jd.mpay_to   != jdt.mpay_to)
+//			|| (jd.pet    != jdt.pet)
+//			|| (jd.parking != jdt.parking)
+//			|| (jd.lhok != jdt.lhok)
+//			|| (jd.area[0] != jdt.area[0])
+//			|| (jd.floor[0] != jdt.floor[0])
+//			|| (jd.floor[1] != jdt.floor[1])
+//			|| (jd.floor[2] != jdt.floor[2])
+//			|| (jd.floor[3] != jdt.floor[3])
+//			
+//			
 			
 			
 		
@@ -171,8 +167,8 @@ function callback(results, status) {
 
 	if (list.length == 0) {
 		$("#sh").html("");
-		deleteMarkers();
-		markers = [];
+		//deleteMarkers();
+		//markers = [];
 		arrl = [];
 		njj = [];
 		PagingHelper.gotoPage(1);
@@ -678,19 +674,19 @@ var PagingHelper = {
 				|| (jd.deposit_from != jdt.deposit_from)
 				|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
 				|| (jd.lhok != jdt.lhok)
-				|| (jd.deposit_to != jdt.deposit_to)
-				|| (jd.mpay_from != jdt.mpay_from)
-				|| (jd.mpay_to   != jdt.mpay_to)
-				|| (jd.pet    != jdt.pet)
-				|| (jd.parking != jdt.parking)
-				|| (jd.lhok != jdt.lhok)
-				|| (jd.area[0] != jdt.area[0])
-				|| (jd.floor[0] != jdt.floor[0])
-				|| (jd.floor[1] != jdt.floor[1])
-				|| (jd.floor[2] != jdt.floor[2])
-				|| (jd.floor[3] != jdt.floor[3])
-				
-				
+//				|| (jd.deposit_to != jdt.deposit_to)
+//				|| (jd.mpay_from != jdt.mpay_from)
+//				|| (jd.mpay_to   != jdt.mpay_to)
+//				|| (jd.pet    != jdt.pet)
+//				|| (jd.parking != jdt.parking)
+//				|| (jd.lhok != jdt.lhok)
+//				|| (jd.area[0] != jdt.area[0])
+//				|| (jd.floor[0] != jdt.floor[0])
+//				|| (jd.floor[1] != jdt.floor[1])
+//				|| (jd.floor[2] != jdt.floor[2])
+//				|| (jd.floor[3] != jdt.floor[3])
+//				
+//				
 			
 		) {
 			
