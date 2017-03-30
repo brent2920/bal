@@ -23,12 +23,9 @@ body {
 				<table class="table">
 					<thead>
 						<tr>
-							<th><b style="font-size: 22px;"><span class="blink_me">뉴스</span></b></th>
-
+							<th><b style="font-size: 22px;">뉴스</b></th>
 							<th>
-
 								<div align="right">
-
 									<a href="/news_list"><button type="button"
 											class="btn btn-default btn-sm">더보기</button></a>
 								</div>
@@ -36,31 +33,15 @@ body {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td colspan="2">
-							<c:forEach var="i" begin="0" end="3" varStatus="status">
-									<tr>
-										<td colspan="2"><a href=${news[i].URL }>, ${news[i].TITLE }</a></td>
-									</tr>
-
-								</c:forEach>
-							</td>
-
-						</tr>
-
-						<div class="main-link"></div>
-						<script>
-							function blinker() {
-								$('.blink_me').fadeOut(1000);
-								$('.blink_me').fadeIn(1000);
-							}
-
-							setInterval(blinker, 1000);
-						</script>
-
-
-
-
+						<c:forEach var="i" begin="0" end="3" varStatus="status">
+							<c:if test="${news[i] != null }">
+								<tr>
+									<td colspan="2">
+										<a href="${news[i].URL }">${news[i].TITLE }</a>
+									</td>
+								</tr>
+							</c:if>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -71,8 +52,6 @@ body {
 							<th><b style="font-size: 22px;">공지사항</b></th>
 							<th>
 								<div align="right">
-									<button type="button" class="btn btn-default btn-sm">관리자
-										공지사항 관리</button>
 									<button type="button" class="btn btn-default btn-sm">더보기</button>
 								</div>
 
