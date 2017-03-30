@@ -8,9 +8,12 @@ public class APIKeys {
 	//AIzaSyAAE5JejbaQYPmos43wLK3mBPVlkonWUOE
 	//AIzaSyAkcL0U9iE0uwxqFMSvh7nhM6cFRmyynzk
 	//AIzaSyD4vzBQiYomL-S8Fwvp1649W56W_9SmDE4
+	//AIzaSyCm6aXkRRr_msMRm2QN22uiaL5SHvlqMJY
 
 
-	static String GOOGLE_MAP_KEY = "AIzaSyDDY37uJsM2QgFCKGOEwt4Wj5e-ZZEtH1c";
+
+	static String GOOGLE_MAP_KEY = "AIzaSyAkcL0U9iE0uwxqFMSvh7nhM6cFRmyynzk";
+
 
 
 	public static String getGOOGLE_MAP_KEY() {
