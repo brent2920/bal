@@ -86,7 +86,7 @@ $(document).on("mouseenter", ".roomInfo", function() {
 	//ALIGN="Left"
 	console.log("num="+$(this).attr("num")*1);
 	//var rnum = $(this).attr("num")*1;
-		var src = "/images/"+ $(this).attr("num")*1 + "/0.jpg";
+		var src = "/images/사진/"+ $(this).attr("num")*1 + "/0.jpg";
 		var tag  =  '<IMG BORDER="90" ALIGN="Left" SRC="'+ src +'"  width="105" height="105">' 
 		
 	    tag += "<b style='color: #FF5733; font-size: 20px; vertical-align: middle;'>&nbsp;"
