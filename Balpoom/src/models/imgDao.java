@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,7 +45,7 @@ public class imgDao {
 		List<Map> list = new ArrayList<>();
 		SqlSession session = factory.openSession();
 		Map mapid = new HashedMap();
-	
+		
 		try{
 			//delete from picture where sell_num not in (select sell_num from room);
 			//room테이블에서는 삭제되었지만 picture에 남아있는 방 번호를 리스트로 뽑아낸다
@@ -74,12 +73,8 @@ public class imgDao {
 	
 				
 				//몽고에 있는 것도 삭제
-				AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(str));
-
-				Aggregation aggr = Aggregation.newAggregation(a1);
-
-				System.out.println(aggr.toString());
-				template.remove(aggr, "room");
+				session.delete("image.deleteall",mapid);
+				template.remove(new Query(Criteria.where("num").is(str)), "room");
 				
 			}
 		}catch(Exception e){
@@ -123,11 +118,12 @@ public class imgDao {
 				}
 				//폴더를 삭제한다.
 				boolean b = file.delete();
-	
+				session.delete("image.delete",mapid);
 				
 				//몽고에 있는 것도 삭제
-				
-				template.remove(Criteria.where("num").is(str), "room");
+				System.out.println(str.getClass());
+				System.out.println(str);
+				template.remove(new Query(Criteria.where("num").is(str)), "room");
 				
 			}
 		}catch(Exception e){

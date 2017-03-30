@@ -83,17 +83,65 @@
 				</when>
 			</choose>
 			
-			<if test="underground == 'underground'">
-				OR B_FLOOR = '반지하'
-			</if>
-			<if test="low_floor == 'low_floor'">
-				OR B_FLOOR in('1층', '2층', '3층')
-			</if>
-			<if test="mid_floor == 'mid_floor'">
-				OR B_FLOOR in('4층', '5층', '6층')
-			</if>
-			<if test="high_floor == 'high_floor'">
-				OR B_FLOOR not in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+			<if test="underground != '' and low_floor != '' and mid_floor != '' and high_floor != ''">
+				<choose>
+					<when test="underground == 'underground'">
+						<choose>
+							<when test="low_floor == 'low_floor'">
+								<choose>
+									<when test="mid_floor == 'mid_floor'">
+										<choose>
+											<when test="high_floor == 'high_floor'">
+												
+											</when>
+											<otherwise>
+												AND B_FLOOR in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+											</otherwise>
+										</choose>
+									</when>
+									<otherwise>
+										AND B_FLOOR in('반지하', '1층', '2층', '3층')
+									</otherwise>
+								</choose>
+							</when>
+							<otherwise>
+								AND B_FLOOR = '반지하'
+							</otherwise>
+						</choose>
+					</when>
+					
+					<when test="low_floor == 'low_floor'">
+						<choose>
+							<when test="mid_floor == 'mid_floor'">
+								<choose>
+									<when test="high_floor">
+										AND B_FLOOR NOT IN('반지하')
+									</when>
+									<otherwise>
+										AND B_FLOOR in('1층', '2층', '3층', '4층', '5층', '6층')
+									</otherwise>
+								</choose>
+							</when>
+							<otherwise>
+								AND B_FLOOR in('반지하', '1층', '2층', '3층')
+							</otherwise>
+						</choose>
+					</when>
+					
+					<when test="mid_floor == 'mid_floor'">
+						<choose>
+							<when test="high_floor == 'high_floor'">
+								AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층')
+							</when>
+							<otherwise>
+								AND B_FLOOR in(='4층', '5층', '6층')
+							</otherwise>
+						</choose>
+					</when>
+					<otherwise>
+						AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+					</otherwise>
+				</choose>
 			</if>
 			
 			AND B_LATITUDE BETWEEN #{south} AND #{north}
@@ -104,3 +152,34 @@
 		select * from ROOM where 	SELL_NUM=7676969
 	</select>
 </mapper>
+
+
+<!-- 
+		<if test="underground == 'underground'">
+			AND B_FLOOR = '반지하'
+		</if>
+		<if test="low_floor == 'low_floor'">
+			<choose>
+				<when test="underground == 'underground'">
+					AND B_FLOOR in('반지하', '1층', '2층', '3층')
+				</when>
+				<otherwise>
+					AND B_FLOOR in('1층', '2층', '3층')
+				</otherwise>
+			</choose>
+		</if>
+		<if test="mid_floor == 'mid_floor'">
+			OR B_FLOOR in('4층', '5층', '6층')
+			<choose>
+				<when test="underground == 'underground'">
+					OR B_FLOOR in('반지하', '1층', '2층', '3층')
+				</when>
+				<otherwise>
+					OR B_FLOOR in('4층', '5층', '6층')
+				</otherwise>
+			</choose>
+		</if>
+		<if test="high_floor == 'high_floor'">
+			OR B_FLOOR not in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
+		</if>
+ -->

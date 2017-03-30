@@ -159,7 +159,7 @@
                            <li><a href="/broker/page"><span data-toggle="modal"
                                  data-target="#myInfo">등록매물관리</span></a></li>
                            <li><a href="#"><span data-toggle="modal"
-                           data-target="#myDelete">회원탈퇴</span> </a></li>
+                           data-target="#myDelete1">회원탈퇴</span> </a></li>
                         </ul></li>
                      <li><a href="/logout"> <span
                            class="glyphicon glyphicon-user" data-toggle="modal"
@@ -305,7 +305,7 @@
       <c:otherwise>
       
          <!-- 공인 중개사 회원 탈퇴! -->
-      <div class="modal fade" id="myDelete" role="dialog">
+      <div class="modal fade" id="myDelete1" role="dialog">
          <form action="/brokerdelete" method="post">
             <div class="modal-dialog">
 
