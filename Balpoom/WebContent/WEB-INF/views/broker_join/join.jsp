@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<form action="/broker_join/data" method="post">
+	<form action="/broker_join_data" method="post">
 
 		<div class="container" style="padding-left: 10%; padding-right: 10%;">
 			<h2>중개사 회원가입</h2>
@@ -338,7 +338,7 @@
 	
 		$("#id123").blur(function(){
 			$.ajax({
-				"url" : "/broker_join/brokercheckAjax",
+				"url" : "/brokercheckAjax",
 				"method" : "post",
 				"data" : {
 					"id123" : $("#id123").val()
