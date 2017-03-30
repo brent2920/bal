@@ -14,10 +14,14 @@
 		select count(*) as cnt from rcomment where roomnumber = #{roomnumber}
 	</select>
 	
-	
+	<!-- 직접 댓글 삭제 -->
 	<delete id="delcomment" parameterType="java.util.HashMap">
 		delete from rcomment where num = #{num} and email = #{email}
 	</delete>
-
+	
+	<!-- 회원 탈퇴시 댓글 삭제 -->
+	<delete id="byecomment" parameterType="java.util.HashMap">
+		delete from rcomment where email = #{email}
+	</delete>
 </mapper>
 
