@@ -816,7 +816,7 @@ var temp = {
 var temp2 = {
 	"geometry" : {
 		"location" : {
-			"lat" : -33.8615479,
+			"lat" : 39.032,
 			"lng" : 152.20760719999998
 		}
 	},
@@ -834,8 +834,8 @@ var temp3 = {
 	],
 	"geometry" : {
 		"location" : {
-			"lng" : 126.7348962,
-			"lat" : 37.5386459
+			"lng" :39.032,
+			"lat" :152.20760719999998
 		}
 	},
 	"id" : "2e3dec069aed3a50278a0f8556d7520d84d3c4e6",
