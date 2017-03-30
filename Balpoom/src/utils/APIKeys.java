@@ -12,7 +12,9 @@ public class APIKeys {
 
 
 
-	static String GOOGLE_MAP_KEY = "AIzaSyAdJrOMudQhgiQf3y4SEo4B-gGcmQtZB-o";
+
+	static String GOOGLE_MAP_KEY = "AIzaSyB7rPQITd2SVLFx6SiEhk8P_GPWxQN32Y0";
+
 
 
 

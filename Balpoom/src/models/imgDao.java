@@ -40,6 +40,7 @@ public class imgDao {
 		return list;
 	}
 	//
+	
 	//회원 탈퇴했을때 방 사진 삭제
 	public void imageDelete2(String realpath,String id){
 		List<Map> list = new ArrayList<>();
@@ -50,6 +51,7 @@ public class imgDao {
 			//delete from picture where sell_num not in (select sell_num from room);
 			//room테이블에서는 삭제되었지만 picture에 남아있는 방 번호를 리스트로 뽑아낸다
 			mapid.put("id", id);
+			
 			list = session.selectList("image.list",mapid);
 			//리스트를 맵으로 뽑아낸다.
 			for(Map map : list){
@@ -62,7 +64,7 @@ public class imgDao {
 				
 				//폴더 안에 있는 파일을 배열형태로 받아준다
 				File[] files = file.listFiles();
-				System.out.println(file.getAbsolutePath());
+				System.out.println(file.getAbsolutePath()+"!!!!!!!!!");
 				//폴더안에 있는 파일을 삭제한다.
 				for(File f :  files){
 					boolean b = f.delete();
@@ -73,6 +75,8 @@ public class imgDao {
 	
 				
 				//몽고에 있는 것도 삭제
+				int num = Integer.parseInt(str);
+				mapid.put("num", num);
 				session.delete("image.deleteall",mapid);
 				template.remove(new Query(Criteria.where("num").is(str)), "room");
 				

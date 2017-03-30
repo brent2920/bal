@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="image">
 <select id="list" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-	select * from picture where sell_num  not in (select sell_num from room) and id = #{id}
+	select * from picture where sell_num  not in (select sell_num from room) and id = #{id} order by rownum 
 </select>
 
 <insert id="insert" parameterType="java.util.HashMap">
@@ -18,7 +18,7 @@ delete from picture where id=#{id} and sell_num=#{num}
 
 </delete>
 <delete id="deleteall" parameterType="java.util.HashMap">
-delete from picture where id=#{id}
+delete from picture where id=#{id} and sell_num=#{num}
 
 </delete>
 </mapper>

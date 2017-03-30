@@ -490,13 +490,12 @@ var PagingHelper = {
 		loca = val;
 	
 		
-		console.log("정보 검색창이 center값이 바뀌었습니다");
+		console.log("정보 검색창 center값이 바뀌었습니다");
 		var location = JSON.parse(JSON.stringify(loca));
 		console.log("로카 : "+ location.lat +" lng:"+ location.lng);
 		lag = location.lng;
+		log = location.lat;
 		initMap();
-			
-		
 	},
 	'allData' : function(all) {
 		allData = all;

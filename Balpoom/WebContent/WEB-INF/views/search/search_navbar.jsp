@@ -276,6 +276,8 @@
 				"keyword" : keyword
 			}
 		}).done(function(result) {
+			console.log(result);
+			
 			if(result != null) {
 				$("#loca").append(PagingHelper.loca(result));
 			} else {

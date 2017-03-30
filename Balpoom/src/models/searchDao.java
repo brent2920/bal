@@ -89,7 +89,7 @@ public class searchDao {
 	
 	// 메인화면에서 검색 키워드 입력시 해당 키워드의 좌표값 얻어오는 메서드
 	public HashMap<String, Double> getLatLng(String keyword) throws Exception {
-		HashMap<String, Double> latLng = new HashMap<>();
+		HashMap<String, Double> latLng = null;
 		String result = "";
 		String kwd = keyword.replaceAll("\\s", "");
 		
@@ -127,9 +127,11 @@ public class searchDao {
 			Double lat = Double.parseDouble(location.get("lat").toString());
 			Double lng = Double.parseDouble(location.get("lng").toString());
 			
-			
+			latLng = new HashMap<>();
 			latLng.put("lat", lat);
 			latLng.put("lng", lng);
+			
+			System.out.println(keyword + "의 좌표 : " + latLng);
 		} catch (IOException e) {
 			return null;
 		}
