@@ -11,5 +11,11 @@
 		select TITLE,URL,DATES  from  news
 	</select>
 	
+	<delete id="delete_news">
+		delete from news where url= #{url}
+	</delete>
+	
+	
+	
 </mapper>
 	

@@ -73,6 +73,29 @@ public class news_controller {
 		return news;
 		
 	}
-
+	///news_delete
+	@RequestMapping("/news_delete")
+	@ResponseBody
+	public String news_delete(@RequestParam Map map){
+		System.out.println("news_delete");
+		String str = "";
+		String url = (String) map.get("url");
+		ModelAndView mav = new ModelAndView();
+		int n = ndao.delete_news(url);
+		System.out.println("returning /news_delete_controller="+ n);
+		mav.setViewName("news_list");
+		
+		   System.out.println(n);
+		 	if(n == 1){
+				System.out.println("YYY???");
+				str = "YYY";
+				
+			}else{
+				System.out.println("NNN???");
+				str = "NNN";
+			}
+		return str;
+		
+	}
 
 }
