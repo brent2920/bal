@@ -267,7 +267,7 @@ td {
 	$("#hosBtn").on("mouseelave", function() {
 		$(this).css("cursor", "default");
 	});
-
+ 
 	$("#hosBtn").on("click", function() {
 		
 		if (!($(this).hasClass("selected"))) {		// 해제 -> 선택
