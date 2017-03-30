@@ -105,7 +105,7 @@ public class mongoDao {
 
 		String[] ar = list.iterator().next().get("pictures").toString().split(",");
 		
-		return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1);
+		return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1,ar[0].length()-1);
 
 	}
 

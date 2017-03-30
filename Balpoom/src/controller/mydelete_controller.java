@@ -24,6 +24,7 @@ import models.mydeleteDao;
 public class mydelete_controller {
 		@Autowired
 		mydeleteDao mdao;
+		
 		@Autowired
 		imgDao iDao;
 	
@@ -44,13 +45,14 @@ public class mydelete_controller {
 		Map bMap = new HashMap();
 		bMap.put("email", Eemail);
 		int r = mdao.mydelete(dMap);	
-		int bye = cdao.Byecomment(bMap);
 		String yesNo = "";
 		File file2 = new File("/images/사진/");
 		String file22 = file2.getPath();
 		String realpath2 = (String)req.getRealPath(file22);
-		if(r == 1 && bye == 1){
-			iDao.imageDelete2(realpath2,Eemail);
+		if(r == 1){
+			iDao.imageDelete2(realpath2, Eemail);
+			int bye = cdao.Byecomment(bMap);
+			
 			int b = mdao.mydeleteRoom(Eemail);
 		System.out.println("딜리트 room  ===> "+b);
 		session.removeAttribute("email");
