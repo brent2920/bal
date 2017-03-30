@@ -50,12 +50,15 @@ public class imgcontroller {
 	
 	}
 	@RequestMapping("/delete")
-	public void imagedelete(){
+	public void imagedelete(HttpServletRequest req){
 		List<Map> list = new ArrayList<>();
 		list = iDao.imageDelete();
+		File file2 = new File("/images/사진/");
+		String file22 = file2.getPath();
+		String realpath2 = (String)req.getRealPath(file22);
 		for(Map map : list){
 		String str = map.get("SELL_NUM").toString();
-		File file = new File("D:\\이현원\\project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Balpoom\\images\\사진\\"+str);
+		File file = new File(realpath2+"\\"+str);
 		
 		File[] files = file.listFiles();
 		System.out.println(file.getAbsolutePath());

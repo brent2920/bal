@@ -256,8 +256,8 @@ td {
 				hospitalInfo = rst;
 				var image = {
 					url : "/images/map/detail/hospital_marker.png",
-					size : new google.maps.Size(47, 47),
-					anchor: new google.maps.Point(24, 24)
+					size : new google.maps.Size(29, 30),
+					anchor: new google.maps.Point(15, 15)
 				};
 				
 				for(var i=0; i<hospitalInfo.length; i++) {

@@ -17,7 +17,7 @@ import models.agentDao;
 import models.joinDao;
 
 @Controller
-@RequestMapping("/broker_join")
+@RequestMapping("/")
 public class broker_join_controller {
 	@Autowired
 	agentDao aDao;
@@ -27,14 +27,14 @@ public class broker_join_controller {
 
 	
 	
-	@RequestMapping("/join")
+	@RequestMapping("/broker_join")
 	public ModelAndView broker_join(){
 		ModelAndView mav = new ModelAndView("t_brokerjoin");
 		
 		
 		return mav;
 	}
-	@RequestMapping("/data")
+	@RequestMapping("/broker_join_data")
 	public ModelAndView broker_join_data(HttpServletRequest req, @RequestParam Map map){
 		
 		ModelAndView mav = new ModelAndView("t_brokerjoin");
@@ -54,7 +54,7 @@ public class broker_join_controller {
 		int r = aDao.insertOneAgent(map);
 		
 		if(r==1){
-			mav.setViewName("redirect:/");
+			mav.setViewName("t_main");
 		}else{
 			
 			mav.addObject("fail","fail");

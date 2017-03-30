@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,8 @@ public class brokerpagecontroller {
 
 	@RequestMapping("/complate")
 	@ResponseBody
-	public String complate(HttpSession session, @RequestParam (name="sell")String sell) {
+	public String complate(HttpSession session, @RequestParam (name="sell")String sell,
+			HttpServletRequest req) {
 		String yesNo = "";
 		String id = (String) session.getAttribute("brokerid");
 		Map map = new HashMap();
@@ -74,9 +77,11 @@ public class brokerpagecontroller {
 		map.put("sell", sell);
 		int r = bdao.complate(map);
 		System.out.println("complate? ===> "+r);
-
+		File file2 = new File("/images/사진/");
+		String file22 = file2.getPath();
+		String realpath2 = (String)req.getRealPath(file22);
 		if (r == 1) {
-			iDao.imageDelete2();
+			iDao.imageDelete2(realpath2);
 			yesNo = "CY";
 		} else {
 

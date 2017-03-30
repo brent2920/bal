@@ -19,14 +19,14 @@ import models.loginDao;
 
 
 @Controller
-@RequestMapping("/broker")
+@RequestMapping("/")
 public class broker_login_controller {
 	
 	@Autowired
 	loginDao lDao;
 	@Autowired
 	brokerchangeDao bDao;
-	@RequestMapping("/login")
+	@RequestMapping("/brokerlogin")
 	public ModelAndView brokerlogin(HttpSession session, @RequestParam Map map){
 		ModelAndView mav = new ModelAndView();
 		Map map1 = new HashMap<>();
@@ -40,19 +40,19 @@ public class broker_login_controller {
 			
 			
 			mav.addObject("msg","로그인에 성공했습니다.");
-			mav.setViewName("redirect:/");
+			mav.setViewName("t_main");
 
 			}else{
 				
 				mav.addObject("msg","이메일이나 비밀번호를 다시 입력하세요.");
-				mav.setViewName("redirect:/");
+				mav.setViewName("t_main");
 				
 			}
 		return mav;
 		}
 	
 	//=====================================중개사 정보 수정
-	@RequestMapping("/change")
+	@RequestMapping("/brokerchange")
 	public ModelAndView brokerChange(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		String brokerid = (String) session.getAttribute("brokerid");
@@ -68,7 +68,7 @@ public class broker_login_controller {
 		return mav;
 		
 	}
-	@RequestMapping("/ChangeResult")
+	@RequestMapping("/brokerChangeResult")
 	public ModelAndView brokerChangeResult(@RequestParam Map map, HttpServletRequest req
 			,HttpSession session){
 		ModelAndView mav = new ModelAndView();
