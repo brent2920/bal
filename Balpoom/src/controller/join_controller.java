@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.informationDao;
 import models.joinDao;
 import models.latelyDao;
 import models.mongoDao;
@@ -32,6 +33,8 @@ public class join_controller {
 	mongoDao mDao;
 	@Autowired
 	newsDao nDao;
+	@Autowired
+	informationDao infoDao;
 		@RequestMapping("/join")
 		public ModelAndView join(@RequestParam Map map,HttpServletRequest req){
 			ModelAndView mav = new ModelAndView();
@@ -70,6 +73,8 @@ public class join_controller {
 
 			}
 			List news = nDao.get_news();
+			List list = infoDao.getTitle();
+			mav.addObject("infolist",list);
 			mav.addObject("news",news);
 			mav.addObject("size", latelylist.size());
 			mav.addObject("list", latelylist);

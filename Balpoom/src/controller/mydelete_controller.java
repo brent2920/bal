@@ -1,10 +1,13 @@
 package controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import models.commentDao;
 import models.imgDao;
+import models.latelyDao;
+import models.mongoDao;
 import models.mydeleteDao;
 
 @Controller
@@ -30,6 +35,12 @@ public class mydelete_controller {
 	
 		@Autowired
 		commentDao cdao;
+		
+		@Autowired
+		latelyDao lDao;
+		
+		@Autowired
+		mongoDao monDao;
 
 		
 	@RequestMapping("/mydelete")
@@ -49,6 +60,32 @@ public class mydelete_controller {
 		File file2 = new File("/images/사진/");
 		String file22 = file2.getPath();
 		String realpath2 = (String)req.getRealPath(file22);
+		Cookie[] cookies = req.getCookies();
+		Map latelymap = new HashMap<>();
+		List latelylist = new ArrayList<>();
+		if (cookies != null) {
+			int rr = cookies.length;
+			System.out.println(rr);
+			if (rr > 1) {
+				for (Cookie cc : cookies) {
+					if (!(cc.getName().equals("JSESSIONID"))) {
+						int regNum = Integer.parseInt(cc.getValue());
+						latelymap = lDao.getLatelyList(regNum);
+						if(latelymap==null)
+							latelymap = new HashMap<>();
+						System.out.println(cc.getValue());
+
+						String ar = monDao.OneImage(String.valueOf(regNum));
+						latelymap.put("url", ar);
+						System.out.println(ar);
+						latelylist.add(latelymap);
+					}
+				}
+			}
+
+		}
+		mav.addObject("size", latelylist.size());
+		mav.addObject("list", latelylist);
 		if(r == 1){
 			iDao.imageDelete2(realpath2, Eemail);
 			int bye = cdao.Byecomment(bMap);
@@ -57,6 +94,7 @@ public class mydelete_controller {
 		System.out.println("딜리트 room  ===> "+b);
 		session.removeAttribute("email");
 		session.removeAttribute("id");
+	
 			yesNo ="YY";
 		}else if(r == 0){
 			

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.informationDao;
 import models.latelyDao;
 import models.mongoDao;
 import models.newsDao;
@@ -27,6 +28,9 @@ public class logout_controller {
 	mongoDao mDao;
 	@Autowired
 	latelyDao lDao;
+	@Autowired
+	informationDao infoDao;
+	
 	
 	
 		@RequestMapping("/logout")
@@ -67,7 +71,8 @@ public class logout_controller {
 			session.removeAttribute("id1");
 			session.removeAttribute("email");
 			session.removeAttribute("brokerid");
-			
+			List list = infoDao.getTitle();
+			mav.addObject("infolist",list);
 			mav.setViewName("t_main");
 			return mav;
 		}

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.brokerchangeDao;
+import models.informationDao;
 import models.latelyDao;
 import models.loginDao;
 import models.mongoDao;
@@ -36,6 +37,9 @@ public class broker_login_controller {
 	loginDao loDao;
 	@Autowired	
 	brokerchangeDao bDao;
+	
+	@Autowired
+	informationDao infoDao;
 	
 	@RequestMapping("/brokerlogin")
 	public ModelAndView brokerlogin(HttpSession session, @RequestParam Map map,
@@ -85,6 +89,8 @@ public class broker_login_controller {
 			}
 
 		}
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
 		List news = nDao.get_news();
 		mav.addObject("news",news);
 		mav.addObject("size", latelylist.size());
@@ -174,6 +180,8 @@ public class broker_login_controller {
 			}
 
 		}
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
 		List news = nDao.get_news();
 		mav.addObject("news",news);
 		mav.addObject("size", latelylist.size());

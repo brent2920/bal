@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.imgDao;
+import models.informationDao;
 import models.latelyDao;
 import models.mongoDao;
 import models.newsDao;
@@ -66,6 +67,8 @@ public class roomadd_controller {
 	
 	@Autowired
 	newsDao nDao;
+	@Autowired
+	informationDao infoDao;
 	
 	
 	@RequestMapping("/roomadd")
@@ -368,6 +371,8 @@ public class roomadd_controller {
 			}
 
 		}
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
 		List news = nDao.get_news();
 		mav.addObject("news",news);
 		mav.addObject("size", latelylist.size());

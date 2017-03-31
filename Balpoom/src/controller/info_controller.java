@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.infoporfileChange;
+import models.informationDao;
+import models.newsDao;
 import models.infoDao;
 
 @Controller
@@ -25,7 +28,10 @@ public class info_controller {
 	
 	@Autowired
 	infoporfileChange iffc;
-
+	@Autowired
+	informationDao inDao;
+	@Autowired
+	newsDao nDao;
 
 	
 	
@@ -67,6 +73,10 @@ public class info_controller {
 			session.setAttribute("id", map.get("id"));
 			mav.setViewName("t_main");			
 		}	
+		List list = inDao.getTitle();
+		mav.addObject("infolist",list);
+		List<Map> news = nDao.get_news();
+		mav.addObject("news",news);
 		return mav;
 	}
 	

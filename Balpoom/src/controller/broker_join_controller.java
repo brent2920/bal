@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.agentDao;
+import models.informationDao;
 import models.joinDao;
 
 @Controller
@@ -24,7 +26,9 @@ public class broker_join_controller {
 	
 	@Autowired
 	joinDao jDao;
-
+	
+	@Autowired
+	informationDao infoDao;
 	
 	
 	@RequestMapping("/broker_join")
@@ -55,10 +59,13 @@ public class broker_join_controller {
 		
 		if(r==1){
 			mav.setViewName("t_main");
+			
 		}else{
 			
 			mav.addObject("fail","fail");
 		}
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
 		return mav;
 	}
 	@RequestMapping("/brokercheckAjax")

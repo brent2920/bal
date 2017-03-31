@@ -37,6 +37,7 @@ public class infomationcontroller {
 		System.out.println(map.toString());
 		int r = infoDao.insertInfomation(map);
 		String str = "";
+		
 		if(r==1){
 			System.out.println("YYY???");
 			str = "YYY";

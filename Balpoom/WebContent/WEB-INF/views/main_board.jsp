@@ -14,8 +14,8 @@ body {
 }
 </style>
 
-
-<c:if test="${size ne 0 }"></c:if>
+<c:choose>
+<c:when test="${size ne 0 }">
  <style>
   .container {
    
@@ -65,7 +65,7 @@ body {
 <div style="padding-left: 5%;" >
 
 
-<div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 1%">
+<div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 1%; padding-bottom: 1%">
     <!-- Indicators -->
     <ol class="carousel-indicators">
 	   
@@ -99,7 +99,8 @@ body {
 			<c:otherwise>
 			
 			
-		      <div class="item">     <c:choose> 
+		      <div class="item">    
+		       <c:choose> 
 		      <c:when test="${list.url eq null }"> 
 		      <img src="/images/soldout.jpg" width="100" height="300"> 	
 		        </c:when>
@@ -131,16 +132,27 @@ body {
       <span class="sr-only">Next</span>
     </a>
 </div>
-
+</div>
+  </c:when>
+  <c:otherwise>
+  <div style="padding-left: 5%;"  class="col-sm-3">
+   <img src="/images/profile.jpg" width="300" height="200"> 
+  
+  </div>
+  
+  
+  </c:otherwise>
+  </c:choose>
+  
   
 
 <!-- 사진 슬라이드 끝 -->
 
 
 
-	<div class="container" style="padding-top: 2%">
+	<div class="container" style="padding-top: 2%;">
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-4">
 				<table class="table">
 					<thead>
 						<tr>
@@ -168,7 +180,7 @@ body {
 			</div>
 			
 			
-			<div class="col-sm-4">
+			<div class="col-sm-5">
 				<table class="table">
 					<thead>
 						<tr>
@@ -195,5 +207,5 @@ body {
 			</div>
 		</div>
 	</div>
-	</div>
+	
 </body>

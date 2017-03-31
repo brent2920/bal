@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.informationDao;
 import models.latelyDao;
 import models.loginDao;
 import models.mongoDao;
@@ -32,6 +33,8 @@ public class login_controller {
 	mongoDao mDao;
 	@Autowired
 	latelyDao lDao;
+	@Autowired
+	informationDao infoDao;
 	
 	
 		@RequestMapping("/login")
@@ -65,6 +68,8 @@ public class login_controller {
 				}
 
 			}
+			List list = infoDao.getTitle();
+			mav.addObject("infolist",list);
 			mav.addObject("news",news);
 			mav.addObject("size", latelylist.size());
 			mav.addObject("list", latelylist);
@@ -82,6 +87,7 @@ public class login_controller {
 			
 				
 			}
+			
 			return mav;
 		}
 }

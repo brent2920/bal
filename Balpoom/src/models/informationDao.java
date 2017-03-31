@@ -74,11 +74,16 @@ public class informationDao {
 			
 			AggregationOperation a1 = Aggregation.match(Criteria.where("num").is(num));
 			Aggregation aggr = Aggregation.newAggregation(a1);
-			System.out.println(aggr.toString());
+			
 			
 		AggregationResults<Map>  result=   template.aggregate(aggr,"information", Map.class);
-			System.out.println(result.toString());
-		list.add(result);
+		List<Map> mongolist = result.getMappedResults();
+		Map mongoMap = new HashMap<>();
+		for(Map map1 : mongolist){
+		mongoMap.put("detail",map1.get("detail"));
+		}
+		list.add(mongoMap);
+			System.out.println(list.toString());
 		}catch(Exception e){
 			e.printStackTrace();
 			session.rollback();

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import models.informationDao;
 import models.latelyDao;
 import models.mongoDao;
 import models.newsDao;
@@ -31,6 +32,8 @@ public class latelycontroller {
 	@Autowired
 	newsDao nDao;
 	
+	@Autowired
+	informationDao infoDao;
 //	@RequestMapping("/01")
 //	public ModelAndView latelyList(HttpServletRequest req) {
 //		ModelAndView mav = new ModelAndView("t_main");
@@ -71,7 +74,7 @@ public class latelycontroller {
 		List<Map> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> map1 = new HashMap<>();
-		
+		List news = nDao.get_news();
 		
 		String p = req.getParameter("page") == null ? "1" : req.getParameter("page");
 		int pp = Integer.parseInt(p);
@@ -122,7 +125,11 @@ public class latelycontroller {
 	}else{
 		mav.addObject("msg","�ֱ� �� ���� �����ϴ�.");
 		mav.setViewName("t_main");
-	}
+	}	
+		mav.addObject("news",news);
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
+		mav.addObject("news",news);
 		return mav;
 	}
 }

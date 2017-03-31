@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import models.brokerdeleteDao;
 import models.imgDao;
+import models.informationDao;
+import models.newsDao;
 
 @Controller
 @RequestMapping("/")
@@ -24,6 +27,11 @@ public class brokerDeletecontroller {
 	brokerdeleteDao bDao;
 	@Autowired
 	imgDao iDao;
+	
+	@Autowired
+	informationDao infoDao;
+	@Autowired
+	newsDao nDao;
 	
 	@RequestMapping("/brokerdelete")
 	public ModelAndView BrokerDelete( HttpServletRequest req
@@ -45,15 +53,19 @@ public class brokerDeletecontroller {
 			
 			iDao.imageDelete2(realpath2,brokerid);
 			int a =bDao.roomDelete(map);
+			
 			mav.addObject("dmsg","회원탈퇴가 정상적으로 처리되었습니다.");
 			mav.setViewName("t_main");
 			session.removeAttribute("brokerid");
 			session.removeAttribute("id1");
 		}else{
+			
 			mav.addObject("dmsg","회원탈퇴가 실패했습니다.");
 			mav.setViewName("t_main");
 			}
-		
+		List news = nDao.get_news();
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
 		return mav;
 		
 	}
