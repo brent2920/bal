@@ -163,14 +163,16 @@
 
 			</otherwise>
 		</choose>
-		
+<!-- 직관적인 노가다 -->
+<!-- 		<if test="room != null"> -->
 <!-- 		 AND B_FLOOR IN -->
 <!-- 			<foreach collection="room" item="item" index="index" -->
 <!-- 				separator="," open=" (" close=")"> -->
 <!-- 					#{item} -->
-<!--                #{Type[index]}  -->
+<!--                #{Type[index]} 	 -->
 <!-- 			</foreach> -->
-	
+<!-- 		</if> -->
+		
 
 	
 		AND B_LATITUDE BETWEEN #{south} AND #{north}

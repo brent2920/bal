@@ -106,9 +106,21 @@ div {
 		${list1.B_LOCATION }
 	</div>
 	<hr/>
+<c:choose>
+  <c:when test="${sessionScope.id != null || sessionScope.id1 !=null}">
+
 	<button  class="btn btn-default btn-lg btn-block" id = "zzim">
 		<span class="glyphicon glyphicon-heart" id="zzim"></span> 찜
 	</button>
+	</c:when>
+	<c:otherwise>
+		<button  class="btn btn-default btn-lg btn-block" id = "zzimm">
+		<span class="glyphicon glyphicon-heart" id="zzimm"></span> 찜
+		</button>
+	
+	</c:otherwise>
+	
+</c:choose>	
 </div>
 
 <div class="well">
@@ -282,6 +294,8 @@ div {
 	//댓글 -> 로그인이 안되어있으면 window.alert 창..
 
 	// 댓글 삭제
+
+ 
 	$(".commentdel").click(function() {
 		//alert($(this).val());
 		var delC = new XMLHttpRequest();
@@ -373,6 +387,11 @@ div {
 			}
 		}
 	}
+	  $("#zzimm").click(function() {
+	      window.alert("로그인 후 사용가능합니다")
+	   })
+
+
 
 	$("#zzim").on("click", function() {
 		if (!($(this).hasClass("active"))) {
