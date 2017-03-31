@@ -95,7 +95,7 @@ function performSearch() {
 	
 	jd = JSON.parse(JSON.stringify(allData));
 	jdt = JSON.parse(JSON.stringify(allDataTemp));
-	
+	console.log("perform_search() ALL data="+ JSON.stringify(allData));
 
 
 	if (// 만약 네브바 가 감지 된다면 지도는 고정
@@ -119,6 +119,7 @@ function performSearch() {
 			
 
 	) {
+		console.log("allData_perform_search="+JSON.stringify(allData));
 		allDataTemp = allData;
 		console.log("네브바 클릭 변경  탐지");
 		$.ajax({
@@ -244,9 +245,9 @@ function deleteMarkers() {
 	clearMarkers();
 }
 function setMapOnAll(map) {
-	console.log("=======setMapOnAll========= " + markers.length);
-	console.log("셋 맴 언 얼 마커스 사이즈는 : " + markers.length);
-	console.log("셋 맵언 얼마커스 템프 사이즈는 :"+ markerstemp.length);
+	//console.log("=======setMapOnAll========= " + markers.length);
+	//console.log("셋 맴 언 얼 마커스 사이즈는 : " + markers.length);
+	//console.log("셋 맵언 얼마커스 템프 사이즈는 :"+ markerstemp.length);
 if(markers.length != markerstemp.length){
 	for (var i = 0; i < markers.length; i++) {
 
@@ -380,8 +381,7 @@ function addMarker(place,address) {
 			"data" : allData
 
 		})
-		.done(
-			function(listajax) { // 위치 정도 geometry.locaiton
+		.done(function(listajax) { // 위치 정도 geometry.locaiton
 				console.log("새로운 맵 정보 : " + listajax.length);
 
 				list = [];
@@ -447,7 +447,7 @@ var jsonarr = [];
 var log;// 검색결과의 위도
 var lag;// 검색결과의 경도
 var PagingHelper = {
-
+	
 	'data' : {
 		currentPage : 1
 
@@ -521,8 +521,8 @@ var PagingHelper = {
 	},
 	
 	'shHtml' : function(n_block) {
-
-		// console.log("shHtml");
+		console.log("shHtml");
+		 console.log("shHtml");
 		var _ = this;
 		if (typeof n_block == 'undefined')
 			n_block = curr;
@@ -552,7 +552,7 @@ var PagingHelper = {
 			for (var i = start; i <= end; i++) {
 				var obj = arrl[i];
 				var obj2 = json[count];
-				console.log("obj2 = "+ obj2);
+				//console.log("obj2 = "+ obj2);
 				var jorm = "";
 				
 				if(obj['B_MPAY'] == 0) {
@@ -560,7 +560,7 @@ var PagingHelper = {
 				} else {
 					jorm = "월세";
 				}
-				console.log("========================================>"+i);
+				//console.log("========================================>"+i);
 				
 				sb += "<div class='roomInfo' lat='"+obj['B_LONGITUDE'] + "'" + "lng='"+ obj["B_LATITUDE"]+"'";
 				sb += "num='"+obj['SELL_NUM']+"'"+"depo='"+obj['B_DEPOSIT']+"'";
@@ -574,7 +574,7 @@ var PagingHelper = {
 				var sell = "/images/사진/";
 				 sell += obj['SELL_NUM']*1;
 				sell+= "/0.jpg"
-				console.log("셀 넘버 = "+  sell);
+				//console.log("셀 넘버 = "+  sell);
 				
 				sb += "<img src=" + sell + " style='height: 120px; width: 120px;'>";
 				
@@ -619,7 +619,7 @@ var PagingHelper = {
 
 	},
 	'pagingHtml' : function(pTotalCnt) {
-
+		console.log("paginghtml");
 		this.data.totalPageCnt = arrl.length;
 		var _ = this;
 
@@ -679,10 +679,11 @@ var PagingHelper = {
 		
 		jd = JSON.parse(JSON.stringify(allData));
 		jdt = JSON.parse(JSON.stringify(allDataTemp));
-	
-		if (
-
-		(jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
+		console.log("=================비교값===================");
+		console.log("alldataTemp의 값은 바뀌기 점값=>"+ JSON.stringify(allDataTemp));
+		console.log("alldata의 값은 바뀐후값 =>"+ JSON.stringify(allData));
+		console.log("=================비교끝====================");
+		if ((jd.rKind[0]) != (jdt.rKind[0]) || (jd.mKind != (jdt.mKind))
 				|| (jd.deposit_from != jdt.deposit_from)
 				|| (jd.parking != jdt.parking) || (jd.pet != jdt.pet)
 				|| (jd.lhok != jdt.lhok)
@@ -699,11 +700,11 @@ var PagingHelper = {
 				|| (jd.floor[3] != jdt.floor[3])
 
 		) {
-			
+			console.log("달라요");
 			performSearch();
 
 		}
-
+		console.log("다른점이 없네요");
 		return sb;
 	},
 	"makeNum" : function(className, content) {
@@ -720,7 +721,7 @@ var PagingHelper = {
 				: tmp);
 	},// hiㅇ
 	'gotoPage' : function(pageNum) {
-
+		console.log("gotoPage");
 		json = "empty";// 받은 정보를 바탕으로 이미지 주소를 다운 받는다
 		this.data.currentPage = pageNum;
 		this.setStartnumEndnum();
@@ -760,45 +761,8 @@ var PagingHelper = {
 		} else {
 		}
 
-	},
-	'gotoPage_nav' : function(pageNum) {
-
-		json = "empty";
-		this.data.currentPage = pageNum; 
-		this.setStartnumEndnum();
-
-		var ends = (this.data.currentPage) * 4 - 1;// 3
-		var starts = ends - 3;//
-		var njjTemp = [];
-		PagingHelper.data.totalPageCnt = njj.length;
-
-		for (var i = starts; i < ends; i++) {
-
-			njjTemp.push(njj[i]);
-		}
-
-		$("#ln").html(njj.length);
-		if (njjTemp.length != 0) {
-			$.ajax(
-					{
-
-						"type" : "get",
-						"dataType" : "json",
-						"async" : false,
-						"url" : "/testing?curr=" + this.data.currentPage
-								+ "&list=" + njjTemp
-
-					}).done(function(listajax) {
-
-				
-				json = JSON.parse(JSON.stringify(listajax));
-
-			});
-		
-			$("#paging").html(this.pagingHtml(this.data.totalPageCnt));
-			$("#sh").html(this.shHtml());
-		}
 	}
+	
 }
 
 var temp = {

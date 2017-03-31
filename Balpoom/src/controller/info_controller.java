@@ -48,10 +48,10 @@ public class info_controller {
 		return mav;
 	}
 	@RequestMapping("/infochange")
-	public ModelAndView infochange(@RequestParam Map map, HttpSession session, @RequestParam (name="file") MultipartFile file) throws Exception{
-		Map img = iffc.execute(file);
-		String uimg = (String)img.get("filelink");
-		map.put("uimg", uimg);
+	public ModelAndView infochange(@RequestParam Map map, HttpSession session) throws Exception{
+		//Map img = iffc.execute(file);
+		//String uimg = (String)img.get("filelink");
+		//map.put("uimg", uimg);
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
 		String num1 = (String)map.get("telenum1");

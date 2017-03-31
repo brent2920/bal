@@ -2,262 +2,354 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="room">
 
-<!-- Parameter Type / Result Type은 필요에 따라 추가 -->
+	<!-- Parameter Type / Result Type은 필요에 따라 추가 -->
 	<insert id="insertList" parameterType="java.util.HashMap">
-		insert into room values(#{sell_num},#{b_title},#{b_deposit},
+		insert into room
+		values(#{sell_num},#{b_title},#{b_deposit},
 		#{b_mpay},#{b_rkind},#{b_floor},#{b_size},#{b_gpay},#{b_glist},
 		#{b_eleve},#{b_parking},#{b_rinfo},#{b_enterdate},'불가능',
 		#{b_option},#{b_detail},#{b_location},#{b_nstation},
 		#{b_latitude},#{b_longitude},#{b_petpossible},#{id},0,0,
 		#{b_local1},#{b_local2},#{b_local3},#{b_size_m2},#{b_floor_all})
-		
+
 	</insert>
-	
+
 	<insert id="insertOne">
-	
+
 	</insert>
-	
-	
-	<select id="getRoomInfo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+
+
+	<select id="getRoomInfo" resultType="java.util.HashMap"
+		parameterType="java.lang.Integer">
 		select * from room where SELL_NUM = #{regNum}
 	</select>
 
 
-	<select id="getRoomList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	<select id="getRoomList" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
 
-		select SELL_NUM, B_DEPOSIT, B_MPAY, B_GPAY, B_FLOOR, B_RINFO, B_TITLE, B_RKIND, B_LATITUDE, B_LONGITUDE  FROM ROOM WHERE
-			<choose>
-				<when test="mKind == 'jPay'">
-					B_MPAY = 0 AND
-				</when>
-				<when test="mKind == 'mPay'">
-					B_MPAY <![CDATA[>]]> 0 AND
-					B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} AND 
-				</when>
-				<when test="mKind == 'allPay'">
-					B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} AND 
-				</when>
-			</choose>
-			
-			<if test="one_open == 'one_open'">
-				B_RKIND='원룸(오픈형)' AND
-			</if>
-			<if test="one_seperate == 'one_seperate'">
-				B_RKIND='원룸(분리형)' AND
-			</if>
-			<if test="one_dfloor == 'one_dfloor'">
-				B_RKIND='원룸(복층형)' AND
-			</if>
-			<if test="two_room == 'two_room'">
-				B_RKIND='투룸' AND
-			</if>
-			<if test="gt_three == 'gt_three'">
-				B_RKIND='쓰리룸+' AND
-			</if>
-			
-			B_DEPOSIT BETWEEN #{deposit_from} AND #{deposit_to} 
-			
-			<if test="parking == '가능'">
-				AND B_PARKING='가능'
-			</if>
-			
-			<if test="pet == '가능'">
-				AND B_PETPOSSIBLE='가능'
-			</if>
-			
-			<if test="lhok == '가능'">
-				AND B_LHOK='가능'
-			</if>
-			
-			<choose>
-				<when test="area == 1">
-					AND B_SIZE <![CDATA[<]]> 5
-				</when>
-				<when test="area == 2">
-					AND B_SIZE BETWEEN 5 AND 10
-				</when>
-				<when test="area == 3">
-					AND B_SIZE <![CDATA[>]]> 10
-				</when>
-			</choose>
-			
-			<if test="underground != null and low_floor != null and mid_floor != null and high_floor != null">
-				<choose>
-					<when test="underground == 'underground'">
-						<choose>
-							<when test="low_floor == 'low_floor'">
-								<choose>
-									<when test="mid_floor == 'mid_floor'">
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												
-											</when>
-											<otherwise>
-												AND B_FLOOR in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
-											</otherwise>
-										</choose>
-									</when>
-									<otherwise>
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												AND B_FLOOR NOT IN('4층', '5층', '6층')
-											</when>
-											<otherwise>
-												AND B_FLOOR in('반지하', '1층', '2층', '3층')
-											</otherwise>
-										</choose>
-									</otherwise>
-								</choose>
-							</when>
-							<otherwise>
-								<choose>
-									<when test="mid_floor == 'mid_floor'">
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												AND B_FLOOR NOT IN('1층', '2층', '3층')
-											</when>
-											<otherwise>
-												AND B_FLOOR in('반지하', '4층', '5층', '6층')
-											</otherwise>
-										</choose>
-									</when>
-									<otherwise>
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												AND B_FLOOR NOT IN('1층', '2층', '3층', '4층', '5층', '6층')
-											</when>
-											<otherwise>
-												AND B_FLOOR='반지하'
-											</otherwise>
-										</choose>
-									</otherwise>
-								</choose>
-							</otherwise>
-						</choose>
-					</when>
-					<otherwise>
-						<choose>
-							<when test="low_floor == 'low_floor'">
-								<choose>
-									<when test="mid_floor == 'mid_floor'">
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												AND B_FLOOR NOT IN('반지하')
-											</when>
-											<otherwise>
-												AND B_FLOOR IN('1층', '2층', '3층', '4층', '5층', '6층')
-											</otherwise>
-										</choose>
-									</when>
-									<otherwise>
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												AND B_FLOOR NOT IN('반지하', '4층', '5층', '6층')
-											</when>
-											<otherwise>
-												AND B_FLOOR IN('1층', '2층', '3층')
-											</otherwise>
-										</choose>
-									</otherwise>
-								</choose>
-							</when>
-							<otherwise>
-								<choose>
-									<when test="mid_floor == 'mid_floor'">
-										<choose>
-											<when test="high_floor == 'high_floor'">
-												AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층')
-											</when>
-											<otherwise>
-												AND B_FLOOR IN('4층', '5층', '6층')
-											</otherwise>
-										</choose>
-									</when>
-									<otherwise>
-										AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
-									</otherwise>
-								</choose>
-							</otherwise>
-						</choose>
-					</otherwise>
-				</choose>
-			</if>
-			
-			AND B_LATITUDE BETWEEN #{south} AND #{north}
-			AND B_LONGITUDE BETWEEN #{west} AND #{east}
+		select SELL_NUM, B_DEPOSIT, B_MPAY, B_GPAY, B_FLOOR, B_RINFO, B_TITLE,
+		B_RKIND, B_LATITUDE, B_LONGITUDE FROM ROOM WHERE
+		
+<!-- 		<choose> -->
+<!-- 			<when -->
+<!-- 				test="underground != '' or low_floor != '' or mid_floor != '' or high_floor != ''"> -->
+		
+<!-- 			</when> -->
+<!-- 		</choose> -->
+
+
+
+
+		<choose>
+			<when test="mKind == 'jPay'">
+				B_MPAY = 0 AND
+			</when>
+			<when test="mKind == 'mPay'">
+				B_MPAY <![CDATA[>]]>
+				0 AND
+				B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} AND
+			</when>
+			<when test="mKind == 'allPay'">
+				B_MPAY BETWEEN #{mpay_from} AND #{mpay_to} AND
+			</when>
+		</choose>
+
+		<if test="one_open == 'one_open'">
+			B_RKIND='원룸(오픈형)' AND
+		</if>
+		<if test="one_seperate == 'one_seperate'">
+			B_RKIND='원룸(분리형)' AND
+		</if>
+		<if test="one_dfloor == 'one_dfloor'">
+			B_RKIND='원룸(복층형)' AND
+		</if>
+		<if test="two_room == 'two_room'">
+			B_RKIND='투룸' AND
+		</if>
+		<if test="gt_three == 'gt_three'">
+			B_RKIND='쓰리룸+' AND
+		</if>
+
+		B_DEPOSIT BETWEEN #{deposit_from} AND #{deposit_to}
+
+		<if test="parking == '가능'">
+			AND B_PARKING='가능'
+		</if>
+
+		<if test="pet == '가능'">
+			AND B_PETPOSSIBLE='가능'
+		</if>
+
+		<if test="lhok == '가능'">
+			AND B_LHOK='가능'
+		</if>
+
+		<choose>
+			<when test="area == 1">
+				AND B_SIZE <![CDATA[<]]>
+				5
+			</when>
+			<when test="area == 2">
+				AND B_SIZE BETWEEN 5 AND 10
+			</when>
+			<when test="area == 3">
+				AND B_SIZE <![CDATA[>]]>
+				10
+			</when>
+		</choose>
+<!-- 좀 더 직관적인 노가다  -->
+		<choose>
+			<when
+				test="underground != '' and low_floor=='' and mid_floor=='' and high_floor==''">
+				AND ( B_FLOOR in ('반지하'))
+			</when>
+			<when
+				test="underground == '' and low_floor!='' and mid_floor=='' and high_floor==''">
+				AND ( B_FLOOR in ('1층','2층','3층'))
+			</when>
+			<when
+				test="underground == '' and low_floor=='' and mid_floor!='' and high_floor==''">
+				AND ( B_FLOOR in ('4층','5층','6층'))
+			</when>
+			<when
+				test="underground == '' and low_floor=='' and mid_floor=='' and high_floor!=''">
+				AND ( B_FLOOR in ('7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+			</when>
+			<when
+				test="underground != '' and low_floor!='' and mid_floor=='' and high_floor==''">
+				AND ( B_FLOOR in ('반지하','1층','2층','3층'))
+			</when>
+			<when
+				test="underground != '' and low_floor=='' and mid_floor!='' and high_floor==''">
+				AND ( B_FLOOR in ('반지하','3층','4층','5층'))
+			</when>
+			<when
+				test="underground != '' and low_floor!='' and mid_floor=='' and high_floor!=''">
+				AND ( B_FLOOR in ('반지하','1층','2층','3층','7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+			</when>
+			<when
+				test="underground == '' and low_floor!='' and mid_floor!='' and high_floor==''">
+				AND ( B_FLOOR in ('1층','2층','3층','4층','5층','6층'))
+			</when>
+			<when
+				test="underground == '' and low_floor!='' and mid_floor=='' and high_floor!=''">
+				AND ( B_FLOOR in ('1층','2층','3층','7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+			</when>
+			<when
+				test="underground == '' and low_floor=='' and mid_floor!='' and high_floor!=''">
+				AND ( B_FLOOR in ('4층','5층','6층','7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+			</when>
+			<when
+				test="underground == '' and low_floor!='' and mid_floor=='' and high_floor!=''">
+				AND ( B_FLOOR in ('1층','2층','3층','7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+			</when>
+			<when
+				test="underground != '' and low_floor=='' and mid_floor=='' and high_floor!=''">
+				AND ( B_FLOOR in ('반치하' ,'7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+			</when>
+			<when
+				test="underground != '' and low_floor!='' and mid_floor!='' and high_floor==''">
+				AND ( B_FLOOR in ('반지하','1층','2층','3층','4층','5층','6층'))
+			</when>
+			<when
+				test="underground == '' and low_floor!='' and mid_floor!='' and high_floor!=''">
+				AND ( B_FLOOR in ('1층','2층','3층','4층','5층','6층','12층'))
+			</when>
+
+
+			<otherwise>
+				AND ( B_FLOOR in ('반지하','1층','2층','3층','4층','5층','6층','4층','5층','6층','7층','8층','9층','10층','11층','12층','15층','16층','20층','25층','30층'))
+
+			</otherwise>
+		</choose>
+		
+<!-- 		 AND B_FLOOR IN -->
+<!-- 			<foreach collection="room" item="item" index="index" -->
+<!-- 				separator="," open=" (" close=")"> -->
+<!-- 					#{item} -->
+<!--                #{Type[index]}  -->
+<!-- 			</foreach> -->
+	
+
+	
+		AND B_LATITUDE BETWEEN #{south} AND #{north}
+		AND B_LONGITUDE BETWEEN #{west} AND #{east}
 	</select>
 
-	<select id="room_deposit"  resultType="java.util.HashMap">
-		select * from ROOM where 	SELL_NUM=7676969
+	<select id="room_deposit" resultType="java.util.HashMap">
+		select * from ROOM where
+		SELL_NUM=7676969
 	</select>
 </mapper>
 
 
-<!-- 
 
-<if test="underground != null and low_floor != null and mid_floor != null and high_floor != null">
-				<choose>
-					<when test="underground == 'underground'">
-						<choose>
-							<when test="low_floor == 'low_floor'">
-								<choose>
-									<when test="mid_floor == 'mid_floor'">
-										<choose>
-											<when test="high_floor == 'high_floor'">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 덕찬 코드 -->
+
+<!-- 	<if test="(underground != null and low_floor != null and mid_floor != null and high_floor != null) or "> -->
+<!-- 				<choose> -->
+<!-- 					<when test="underground == 'underground'"> -->
+<!-- 						<choose> -->
+<!-- 							<when test="low_floor == 'low_floor'"> -->
+<!-- 								<choose> -->
+<!-- 									<when test="mid_floor == 'mid_floor'"> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
 												
-											</when>
-											<otherwise>
-												AND B_FLOOR in('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
-											</otherwise>
-										</choose>
-									</when>
-									<otherwise>
-										AND B_FLOOR in('반지하', '1층', '2층', '3층')
-									</otherwise>
-								</choose>
-							</when>
-							<otherwise>
-								AND B_FLOOR = '반지하'
-							</otherwise>
-						</choose>
-					</when>
-					
-					<otherwise>
-						<choose>
-							<when test="low_floor == 'low_floor'">
-								<choose>
-									<when test="mid_floor == 'mid_floor'">
-										<choose>
-											<when test="high_floor">
-												AND B_FLOOR NOT IN('반지하')
-											</when>
-											<otherwise>
-												AND B_FLOOR in('1층', '2층', '3층', '4층', '5층', '6층')
-											</otherwise>
-										</choose>
-									</when>
-									<otherwise>
-										AND B_FLOOR in('1층', '2층', '3층')
-									</otherwise>
-								</choose>
-							</when>
-							
-							<when test="mid_floor == 'mid_floor'">
-								<choose>
-									<when test="high_floor == 'high_floor'">
-										AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층')
-									</when>
-									<otherwise>
-										AND B_FLOOR in(='4층', '5층', '6층')
-									</otherwise>
-								</choose>
-							</when>
-							<otherwise>
-								AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층')
-							</otherwise>
-						</choose>
-					</otherwise>
-				</choose>
-			</if>
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR in('반지하', '1층', '2층', '3층', '4층', '5층', '6층') -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</when> -->
+<!-- 									<otherwise> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
+<!-- 												AND B_FLOOR NOT IN('4층', '5층', '6층') -->
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR in('반지하', '1층', '2층', '3층') -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</otherwise> -->
+<!-- 								</choose> -->
+<!-- 							</when> -->
+<!-- 							<otherwise> -->
+<!-- 								<choose> -->
+<!-- 									<when test="mid_floor == 'mid_floor'"> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
+<!-- 												AND B_FLOOR NOT IN('1층', '2층', '3층') -->
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR in('반지하', '4층', '5층', '6층') -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</when> -->
+<!-- 									<otherwise> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
+<!-- 												AND B_FLOOR NOT IN('1층', '2층', '3층', '4층', '5층', '6층') -->
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR='반지하' -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</otherwise> -->
+<!-- 								</choose> -->
+<!-- 							</otherwise> -->
+<!-- 						</choose> -->
+<!-- 					</when> -->
+<!-- 					<otherwise> -->
+<!-- 						<choose> -->
+<!-- 							<when test="low_floor == 'low_floor'"> -->
+<!-- 								<choose> -->
+<!-- 									<when test="mid_floor == 'mid_floor'"> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
+<!-- 												AND B_FLOOR NOT IN('반지하') -->
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR IN('1층', '2층', '3층', '4층', '5층', '6층') -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</when> -->
+<!-- 									<otherwise> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
+<!-- 												AND B_FLOOR NOT IN('반지하', '4층', '5층', '6층') -->
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR IN('1층', '2층', '3층') -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</otherwise> -->
+<!-- 								</choose> -->
+<!-- 							</when> -->
+<!-- 							<otherwise> -->
+<!-- 								<choose> -->
+<!-- 									<when test="mid_floor == 'mid_floor'"> -->
+<!-- 										<choose> -->
+<!-- 											<when test="high_floor == 'high_floor'"> -->
+<!-- 												AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층') -->
+<!-- 											</when> -->
+<!-- 											<otherwise> -->
+<!-- 												AND B_FLOOR IN('4층', '5층', '6층') -->
+<!-- 											</otherwise> -->
+<!-- 										</choose> -->
+<!-- 									</when> -->
+<!-- 									<otherwise> -->
+<!-- 										AND B_FLOOR NOT IN('반지하', '1층', '2층', '3층', '4층', '5층', '6층') -->
+<!-- 									</otherwise> -->
+<!-- 								</choose> -->
+<!-- 							</otherwise> -->
+<!-- 						</choose> -->
+<!-- 					</otherwise> -->
+<!-- 				</choose> -->
+<!-- 			</if> -->
+			
+<!-- 			AND B_LATITUDE BETWEEN #{south} AND #{north} -->
+<!-- 			AND B_LONGITUDE BETWEEN #{west} AND #{east} -->
+<!-- 	</select> -->
 
- -->
+<!-- 	<select id="room_deposit"  resultType="java.util.HashMap"> -->
+<!-- 		select * from ROOM where 	SELL_NUM=7676969 -->
+<!-- 	</select> -->
+<!-- </mapper> -->
+
+<!--  -->
+
+<!-- <if test="underground != null and low_floor != null and mid_floor != 
+	null and high_floor != null"> <choose> <when test="underground == 'underground'"> 
+	<choose> <when test="low_floor == 'low_floor'"> <choose> <when test="mid_floor 
+	== 'mid_floor'"> <choose> <when test="high_floor == 'high_floor'"> </when> 
+	<otherwise> AND B_FLOOR in('반지하', '1층', '2층', '3층', '4층', '5층', '6층') </otherwise> 
+	</choose> </when> <otherwise> AND B_FLOOR in('반지하', '1층', '2층', '3층') </otherwise> 
+	</choose> </when> <otherwise> AND B_FLOOR = '반지하' </otherwise> </choose> 
+	</when> <otherwise> <choose> <when test="low_floor == 'low_floor'"> <choose> 
+	<when test="mid_floor == 'mid_floor'"> <choose> <when test="high_floor"> 
+	AND B_FLOOR NOT IN('반지하') </when> <otherwise> AND B_FLOOR in('1층', '2층', 
+	'3층', '4층', '5층', '6층') </otherwise> </choose> </when> <otherwise> AND B_FLOOR 
+	in('1층', '2층', '3층') </otherwise> </choose> </when> <when test="mid_floor 
+	== 'mid_floor'"> <choose> <when test="high_floor == 'high_floor'"> AND B_FLOOR 
+	NOT IN('반지하', '1층', '2층', '3층') </when> <otherwise> AND B_FLOOR in(='4층', 
+	'5층', '6층') </otherwise> </choose> </when> <otherwise> AND B_FLOOR NOT IN('반지하', 
+	'1층', '2층', '3층', '4층', '5층', '6층') </otherwise> </choose> </otherwise> </choose> 
+	</if> -->
+	
+	
+	

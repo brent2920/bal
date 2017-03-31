@@ -290,23 +290,33 @@ public class gomap_controller {
 		String low_floor="";
 		String mid_floor="";
 		String high_floor="";
+		List<String> room = new ArrayList<String>();
 		
+		//String [] room = {underground,low_floor,mid_floor,high_floor};
+		
+
+	
+		System.out.println("underground:"+ underground + " low_floor="+low_floor + "  mid_floor="+mid_floor
+				+"high_floor="+ high_floor);
 		for(String m : floor) {
-			if(m.equals("underground"))
+			if(m.equals("underground")){
 				underground = m;
-			
-			else if(m.equals("low_floor"))
+			    room.add("반지하");
+			}else if(m.equals("low_floor")){
 				low_floor = m;
-			
-			else if(m.equals("mid_floor"))
+				room.add("1층");
+			}else if(m.equals("mid_floor")){
 				mid_floor = m;
-			
-			else if(m.equals("high_floor"))
+				room.add("2층");
+			}else if(m.equals("high_floor")){
 				high_floor = m;
+				room.add("3층");
+			}
 		}
-		
+		System.out.println("룸 리스트 사이즈"+ room.toString() + " 사이즈:"+ room.size());
 		@SuppressWarnings("rawtypes")
 		Map searchConditions = new HashMap<>();
+		 
 			searchConditions.put("mKind", mKind);
 			searchConditions.put("one_open", one_open);
 			searchConditions.put("one_seperate", one_seperate);
@@ -329,6 +339,9 @@ public class gomap_controller {
 			searchConditions.put("west", west);
 			searchConditions.put("south", south);
 			searchConditions.put("north", north);
+			searchConditions.put("room", room);
+	
+		
 		//System.out.println(searchConditions);
 		Iterator<String> keys = searchConditions.keySet().iterator();
 		while (keys.hasNext()) {
@@ -337,13 +350,9 @@ public class gomap_controller {
 		}
 			
 			List<Map> rList = rd.getRoomList(searchConditions);
-			//System.out.println("rList ="+ rList.toString());
-			//System.out.println("Room List Size : " + rList.size());
+			
 			m_return = new ObjectMapper().writeValueAsString(rList);
-			//System.out.println("M_return=" + m_return);
 		
-		//System.out.println("m_return:"+m_return);
-		//System.out.println("==================/gsearchTest End==========");
 		return m_return;
 	}
 
