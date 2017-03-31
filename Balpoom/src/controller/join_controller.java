@@ -1,6 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.joinDao;
+import models.latelyDao;
+import models.mongoDao;
+import models.newsDao;
 
 @Controller
 
@@ -17,9 +26,14 @@ import models.joinDao;
 public class join_controller {
 	@Autowired
 	joinDao jdao;
-	
+	@Autowired
+	latelyDao lDao;
+	@Autowired
+	mongoDao mDao;
+	@Autowired
+	newsDao nDao;
 		@RequestMapping("/join")
-		public ModelAndView join(@RequestParam Map map){
+		public ModelAndView join(@RequestParam Map map,HttpServletRequest req){
 			ModelAndView mav = new ModelAndView();
 			String num1 = (String)map.get("telenum1");
 			String num2 = (String)map.get("telenum2");
@@ -29,6 +43,35 @@ public class join_controller {
 			map.put("uimg", uimg);
 			map.put("telenum", telenum);
 			int r = jdao.join(map);
+			Cookie[] cookies = req.getCookies();
+			Map latelymap = new HashMap<>();
+			List latelylist = new ArrayList<>();
+			
+			if (cookies != null) {
+				int rr = cookies.length;
+				System.out.println(rr);
+				if (rr > 1) {
+					for (Cookie cc : cookies) {
+						if (!(cc.getName().equals("JSESSIONID"))) {
+							int regNum = Integer.parseInt(cc.getValue());
+							latelymap = lDao.getLatelyList(regNum);
+							if(latelymap==null)
+								latelymap = new HashMap<>();
+							System.out.println(cc.getValue());
+
+							String ar = mDao.OneImage(String.valueOf(regNum));
+							latelymap.put("url", ar);
+							System.out.println(ar);
+							latelylist.add(latelymap);
+						}
+					}
+				}
+
+			}
+			List news = nDao.get_news();
+			mav.addObject("news",news);
+			mav.addObject("size", latelylist.size());
+			mav.addObject("list", latelylist);
 			
 			if(r==1){
 				mav.setViewName("t_main");	

@@ -31,39 +31,39 @@ public class latelycontroller {
 	@Autowired
 	newsDao nDao;
 	
-	@RequestMapping("/01")
-	public ModelAndView latelyList(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView("t_main_sub");
-		List<Map> list = new ArrayList<>();
-		Map map = new HashMap<>();
-		
-		
-		Cookie[] c = req.getCookies();
-		
-		
-		for (Cookie cc : c) {
-			if (!(cc.getName().equals("JSESSIONID"))) {
-				int regNum = Integer.parseInt(cc.getValue());
-				map = lDao.getLatelyList(regNum);
-				if(map==null)
-					map = new HashMap<>();
-				System.out.println(cc.getValue());
-
-				String ar = mDao.OneImage(String.valueOf(regNum));
-				map.put("url", ar);
-				System.out.println(ar);
-				list.add(map);
-			}
-		}
-		List news = nDao.get_news();
-		
-		mav.addObject("news",news);
-		mav.addObject("size", list.size());
-		mav.addObject("list", list);
-		
-
-		return mav;
-	}
+//	@RequestMapping("/01")
+//	public ModelAndView latelyList(HttpServletRequest req) {
+//		ModelAndView mav = new ModelAndView("t_main");
+//		List<Map> list = new ArrayList<>();
+//		Map map = new HashMap<>();
+//		
+//		
+//		Cookie[] c = req.getCookies();
+//		
+//		
+//		for (Cookie cc : c) {
+//			if (!(cc.getName().equals("JSESSIONID"))) {
+//				int regNum = Integer.parseInt(cc.getValue());
+//				map = lDao.getLatelyList(regNum);
+//				if(map==null)
+//					map = new HashMap<>();
+//				System.out.println(cc.getValue());
+//
+//				String ar = mDao.OneImage(String.valueOf(regNum));
+//				map.put("url", ar);
+//				System.out.println(ar);
+//				list.add(map);
+//			}
+//		}
+//		List news = nDao.get_news();
+//		
+//		mav.addObject("news",news);
+//		mav.addObject("size", list.size());
+//		mav.addObject("list", list);
+//		
+//
+//		return mav;
+//	}
 
 	@RequestMapping("/recent")
 	public ModelAndView testHandler(HttpServletRequest req) {

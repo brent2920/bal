@@ -14,10 +14,122 @@ body {
 }
 </style>
 
-<body>
+
+<c:if test="${size ne 0 }"></c:if>
+ <style>
+  .container {
+   
+  }
+  .person {
+      border: 10px solid transparent;
+     
+      margin-bottom: 25px;
+      width: 80%;
+      height: 80%;
+      opacity: 0.7;
+  }
+  .person:hover {
+      border-color: #f1f1f1;
+      
+  }
+  .carousel-inner img {
+      -webkit-filter: grayscale(90%);
+      filter: grayscale(90%); /* make all photos black and white */ 
+      width: 69.5%; /* Set width to 100% */
+      margin: auto;
+  }
+  .carousel-caption h3 {
+      color: #fff !important;
+  }
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+  }  
+  
+  
+ 
+  .carousel-control.left,  .carousel-control.right {
+ 
+    background-image: linear-gradient(to right,rgba(0,0,0,.0) 0,rgba(0,0,0,.0001) 100%);
+  
+}
+  
+  
+  
+  
+  
+  </style>
+
+
+<div style="padding-left: 5%;" >
+
+
+<div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 1%">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+	    <c:forEach var="i" begin="1" end="${size }" >
+	      <li data-target="#myCarousel" data-slide-to="${i }" class="active"></li>
+	    </c:forEach>
+    </ol>
+    
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+	<c:forEach var="list" items="${list }" varStatus="vs">
+		<c:choose>
+			<c:when test="${vs.first}">
+		      <div class="item active"> 
+		      <c:choose> 
+		      <c:when test="${list.url eq null }"> 
+		      <img src="/images/soldout.jpg" width="100" height="300"> 	
+		        </c:when>
+		        <c:otherwise>
+		     <img src="${list.url }" width="100" height="300"> 		        
+		        </c:otherwise>
+		        </c:choose>
+		        <div class="carousel-caption">
+		          <h4> <a href="/detail?num=${list.SELL_NUM }" style="color: white;">  ${list.B_TITLE }</a></h4>
+		          <p>${list.B_RINFO }</p>
+		        </div>      
+		      </div>
+			</c:when>
+		      
+			<c:otherwise>
+		      <div class="item">   
+		       <a href="/detail?num=${list.SELL_NUM }"> </a> <img src="${list.url }"  width="100" height="300">
+		        <div class="carousel-caption">
+		       <h4>${list.B_TITLE }</h4>
+		          <p>${list.B_RINFO }</p>
+		        </div>      
+		      </div>
+		      
+			</c:otherwise>
+	      </c:choose>
+      
+ 	</c:forEach>
+     </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+  
+
+<!-- 사진 슬라이드 끝 -->
+
+
+
 	<div class="container" style="padding-top: 2%">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 				<table class="table">
 					<thead>
 						<tr>
@@ -45,7 +157,7 @@ body {
 			</div>
 			
 			
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<table class="table">
 					<thead>
 						<tr>
@@ -72,5 +184,6 @@ body {
 				</table>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>

@@ -102,11 +102,18 @@ public class mongoDao {
 		List<Map> list = result.getMappedResults();
 
 		// class java.util.ArrayList
-
+		if(list.size()>0){
 		String[] ar = list.iterator().next().get("pictures").toString().split(",");
 		
+		String str = ar[0].toString();
+		if(str.contains("]")){
 		return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1,ar[0].length()-1);
-
+		}else{
+			return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1,ar[0].length());
+		}
+		}
+		return null;
+		
 	}
 
 	public void find(String num) {

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -33,6 +34,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.imgDao;
+import models.latelyDao;
+import models.mongoDao;
+import models.newsDao;
 import models.roomaddDao;
 import utils.APIKeys;
 
@@ -54,12 +58,26 @@ public class roomadd_controller {
 	@Autowired
 	imgDao iDao;
 	
+	@Autowired
+	mongoDao mDao;
+	
+	@Autowired
+	latelyDao lDao;
+	
+	@Autowired
+	newsDao nDao;
+	
 	
 	@RequestMapping("/roomadd")
-	public ModelAndView mav() {
+	public ModelAndView mav(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomadd");
 		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
+		
+		
+		
+		
+		
 		return mav;
 	}
 
@@ -321,9 +339,39 @@ public class roomadd_controller {
 		if(r == 1){
 			mav.setViewName("t_main");
 			mav.addObject("addroom","방등록이 완료 되었습니다!!");
+		
 		}else{
 			mav.setViewName("t_main");
 		}
+		Cookie[] cookies = req.getCookies();
+		Map latelymap = new HashMap<>();
+		List latelylist = new ArrayList<>();
+		
+		if (cookies != null) {
+			int rr1 = cookies.length;
+			System.out.println(rr1);
+			if (rr1 > 1) {
+				for (Cookie cc : cookies) {
+					if (!(cc.getName().equals("JSESSIONID"))) {
+						int regNum = Integer.parseInt(cc.getValue());
+						latelymap = lDao.getLatelyList(regNum);
+						if(latelymap==null)
+							latelymap = new HashMap<>();
+						System.out.println(cc.getValue());
+
+						String ar1 = mDao.OneImage(String.valueOf(regNum));
+						latelymap.put("url", ar1);
+						System.out.println(ar1);
+						latelylist.add(latelymap);
+					}
+				}
+			}
+
+		}
+		List news = nDao.get_news();
+		mav.addObject("news",news);
+		mav.addObject("size", latelylist.size());
+		mav.addObject("list", latelylist);
 		return mav;
 
 	}
