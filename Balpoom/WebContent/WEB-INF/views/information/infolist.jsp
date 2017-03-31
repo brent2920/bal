@@ -4,6 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<c:if test="${msg ne null }">
+window.alert("${msg }");
+</c:if>
+
+
 <c:choose>
 	<c:when test="${email eq 'master@master.com' }">
 		<div class="wrap-950 news-container" style="margin-top: 5%; margin-left: 15%; margin-right: 15%;">
@@ -98,7 +103,7 @@
 			"url" : "/informationdelete",
 			"data" : {
 
-				"url" : $(this).val()
+				"num" : $(this).val()
 			},
 			"method" : "post"
 		}).done(function(rst) {

@@ -10,7 +10,7 @@ insert into info values(information.NEXTVAL,#{title},#{id})
 </select>
 
 <select id="selectall" resultType="java.util.HashMap">
-	select * from info
+	select * from info order by num desc
 </select>
 
 <select id="detail" resultType="java.util.HashMap">

@@ -55,5 +55,21 @@ public class infomationcontroller {
 		mav.addObject("list",list);
 		return mav;
 	}
+	@RequestMapping("/informationdelete")
+	public String deleteinfomation(@RequestParam Map map){
+		int r =0;
+		String str ="";
+		
+		 r = infoDao.deleteData(map);
+		 System.out.println(r);
+		 if(r>0){
+			 System.out.println("yyy?");
+			 str="YYY";
+		 }else{
+			 System.out.println("nnn?");
+			 str ="NNN";
+		 }
+		return str;
+	}
 	
 }

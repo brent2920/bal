@@ -198,7 +198,7 @@ body {
 					<c:forEach var="i" begin="0" end="3" items="${infolist }">
 						<c:if test="${i ne numm }">
 						<tr>
-							<td colspan="2">${i.NUM } |${i.TITLE } | ${i.ID } </td>
+							<td colspan="2">${i.NUM } &nbsp;<a href="/informationdetail?num=${i.NUM}" >${i.TITLE }</a></td>
 						</tr>
 						</c:if>
 						</c:forEach>

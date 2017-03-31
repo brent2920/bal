@@ -13,7 +13,8 @@
 		</div>
 		
 		<!-- 등록 모달 -->
-		<div class="modal fade" id="myWrite" role="dialog">
+	
+			<div class="modal fade" id="myWrite" role="dialog">
 			<div class="modal-dialog modal-la">
 				<div class="modal-content" style="padding: 40px;">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -28,16 +29,19 @@
 						<textarea class="form-control" rows="5" cols="50" name="detail" id="detail"></textarea>
 					</div>
 					<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
-						<button type="submit" class="btn btn-primary" id="rwrite" >
+						<button type="submit" class="btn btn-default" id="rwrite" 
+						data-dismiss="modal">
 							등록
 						</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">
+						<button type="button" class="btn btn-default">
 							닫기
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		
 	</c:when>
 	
 	<c:otherwise>
@@ -64,7 +68,7 @@
 			"method" : "post"
 		}).done(function(rst){
 			if (rst == 'YYY') {
-				window.alert("댓글이 성공적으로 등록되었습니다.");
+				window.alert("공지사항이 성공적으로 등록되었습니다.");
 				location.reload();
 			} else {
 				window.alert("등록중 오류가 발생 하였습니다. 관리자에게 문의해주세요.");
