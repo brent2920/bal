@@ -545,6 +545,6 @@
 			}
 		});
 
-		PagingHelper.gotoPage_nav(1);
+		PagingHelper.gotoPage(1);
 	}
 </script>
