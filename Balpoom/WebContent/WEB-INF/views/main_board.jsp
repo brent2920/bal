@@ -68,9 +68,7 @@ body {
 <div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 1%">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-	    <c:forEach var="i" begin="1" end="${size }" >
-	      <li data-target="#myCarousel" data-slide-to="${i }" class="active"></li>
-	    </c:forEach>
+	   
     </ol>
     
     <!-- Wrapper for slides -->
@@ -80,6 +78,8 @@ body {
 		<c:choose>
 			<c:when test="${vs.first}">
 		      <div class="item active"> 
+		     
+		     
 		      <c:choose> 
 		      <c:when test="${list.url eq null }"> 
 		      <img src="/images/soldout.jpg" width="100" height="300"> 	
@@ -88,6 +88,7 @@ body {
 		     <img src="${list.url }" width="100" height="300"> 		        
 		        </c:otherwise>
 		        </c:choose>
+		        
 		        <div class="carousel-caption">
 		          <h4> <a href="/detail?num=${list.SELL_NUM }" style="color: white;">  ${list.B_TITLE }</a></h4>
 		          <p>${list.B_RINFO }</p>
@@ -96,10 +97,20 @@ body {
 			</c:when>
 		      
 			<c:otherwise>
-		      <div class="item">   
-		       <a href="/detail?num=${list.SELL_NUM }"> </a> <img src="${list.url }"  width="100" height="300">
+			
+			
+		      <div class="item">     <c:choose> 
+		      <c:when test="${list.url eq null }"> 
+		      <img src="/images/soldout.jpg" width="100" height="300"> 	
+		        </c:when>
+		        <c:otherwise>
+		     <img src="${list.url }" width="100" height="300"> 		        
+		        </c:otherwise>
+		        </c:choose>
+		        
+		      
 		        <div class="carousel-caption">
-		       <h4>${list.B_TITLE }</h4>
+		    <h4> <a href="/detail?num=${list.SELL_NUM }" style="color: white;">  ${list.B_TITLE }</a></h4>
 		          <p>${list.B_RINFO }</p>
 		        </div>      
 		      </div>
@@ -164,22 +175,21 @@ body {
 							<th><b style="font-size: 22px;">공지사항</b></th>
 							<th>
 								<div align="right">
-									<button type="button" class="btn btn-default btn-sm">더보기</button>
+									<a href="/informationlist"><button type="button" class="btn btn-default btn-sm">더보기</button>
+											</a>								
 								</div>
 
 							</th>
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="i" begin="0" end="3" items="${infolist }">
+						<c:if test="${i ne numm }">
 						<tr>
-							<td colspan="2">Test1</td>
+							<td colspan="2">${i.NUM } |${i.TITLE } | ${i.ID } </td>
 						</tr>
-						<tr>
-							<td colspan="2">Test2</td>
-						</tr>
-						<tr>
-							<td colspan="2">Test3</td>
-						</tr>
+						</c:if>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

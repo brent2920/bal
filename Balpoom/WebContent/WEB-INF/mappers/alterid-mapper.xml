@@ -6,7 +6,7 @@
 	select * from agent where id = #{alterid} AND ROWNUM =1
 </select>
 
-<select id="person" parameterType="java.lang.String" resultType="java.util.HashMap">
+<select id="person" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	select * from join where EEMAIL = #{alterid}
 </select>
 

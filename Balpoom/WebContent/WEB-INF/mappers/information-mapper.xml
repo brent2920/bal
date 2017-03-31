@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="information">
+
+<insert id="insert" parameterType="java.util.HashMap">
+insert into info values(information.NEXTVAL,#{title},#{id})
+</insert>
+<select id="select" resultType="java.util.HashMap">
+	select num from info where rownum =1 order by num desc
+</select>
+
+<select id="selectall" resultType="java.util.HashMap">
+	select * from info
+</select>
+
+<select id="detail" resultType="java.util.HashMap">
+	select * from info where num = #{num}
+</select>
+
+<delete id="delete" parameterType="java.util.HashMap">
+	delete from info where num = #{num}
+</delete>
+</mapper>

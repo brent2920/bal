@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
@@ -23,6 +25,10 @@ public class imgDao {
 	SqlSessionFactory factory;
 	@Autowired
 	MongoTemplate template;
+	@Autowired
+	HttpServletRequest req;
+	@Autowired
+	HttpServletResponse resp;
 	//초기 이미지를 삭제하는 Dao 건드릴 필요가 없다.
 	public List imageDelete(){
 		List<Map> list = new ArrayList<>();
@@ -76,11 +82,20 @@ public class imgDao {
 			
 				
 				//몽고에 있는 것도 삭제
+				
 				int num = Integer.parseInt(str);
 				mapid.put("num", num);
 				session.delete("image.deleteall",mapid);
 				template.remove(new Query(Criteria.where("num").is(str)), "room");
-				
+				Cookie[] cookie = req.getCookies();
+				if(cookie.length>1){
+					for(Cookie c : cookie){
+						if(c.getName().equals(str)){
+							c.setMaxAge(0);
+							resp.addCookie(c);
+						}
+					}
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -129,8 +144,17 @@ public class imgDao {
 				System.out.println(str.getClass());
 				System.out.println(str);
 				template.remove(new Query(Criteria.where("num").is(str)), "room");
-				
+				Cookie[] cookie = req.getCookies();
+				if(cookie.length>1){
+					for(Cookie c : cookie){
+						if(c.getName().equals(str)){
+							c.setMaxAge(0);
+							resp.addCookie(c);
+						}
+					}
+				}
 			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

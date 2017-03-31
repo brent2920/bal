@@ -72,6 +72,7 @@ public class detail_controller {
 		Map map = new HashMap<>();
 		map = rd.getSelectedRoomInfo(num);
 		String aterid = map.get("ID").toString();
+		
 		Map map1 = new HashMap<>();
 		map1.put("alterid", aterid);
 
@@ -82,7 +83,8 @@ public class detail_controller {
 		Map personmap = new HashMap<>();
 		agentmap = aDao.agentInfo(map1);
 		personmap = aDao.personInfo(map1);
-
+		System.out.println(agentmap+"!!!!!!!!!!");
+		System.out.println(personmap+"!!!!!!!!!!");
 		if (agentmap != null) {
 
 			String REGNAME = agentmap.get("BK_REGNAME").toString();
@@ -103,13 +105,45 @@ public class detail_controller {
 						agentmap.get("BK_OFFICENAME").toString().indexOf(")"));
 			}
 			agentmap.put("reg", BK_OFFICENAME);
-			mav.addObject("list", agentmap);
-			mav.setViewName("t_detail");
+			
+			
+			// ===============================================
+			int zr = 0;
+			String email = (String) session.getAttribute("email");
+			Map zmap = new HashMap();
+			zmap.put("sessionid", email);
+			zmap.put("num", num);
+			zr = zdao.zzimActivation(zmap);
+			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   " + zr);
+			if (zr == 1) {
+				mav.addObject("zzim", zr);
+				mav.addObject("list", agentmap);
+				mav.setViewName("t_detail");
+			} else {
+				mav.addObject("zzim", zr);
+				mav.addObject("list", agentmap);
+				mav.setViewName("t_detail");
+			}
 
 		} else {
-
-			mav.addObject("list", personmap);
-			mav.setViewName("t_detail1");
+			// ===============================================
+			int zr = 0;
+			String email = (String) session.getAttribute("email");
+			Map zmap = new HashMap();
+			zmap.put("sessionid", email);
+			zmap.put("num", num);
+			zr = zdao.zzimActivation(zmap);
+			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   " + zr);
+			if (zr == 1) {
+				mav.addObject("zzim", zr);
+				mav.addObject("list", personmap);
+				mav.setViewName("t_detail1");
+			} else {
+				mav.addObject("zzim", zr);
+				mav.addObject("list", personmap);
+				mav.setViewName("t_detail1");
+			}
+		
 		}
 		mav.addObject("list2", map2);
 		mav.addObject("list1", map);
@@ -138,21 +172,7 @@ public class detail_controller {
 		System.out.println("由ъ뒪�듃 �궗�씠利� : " + Clist.size());
 		mav.addObject("Clist", Clist);
 
-		// ===============================================
-		int zr = 0;
-		String email = (String) session.getAttribute("email");
-		Map zmap = new HashMap();
-		zmap.put("sessionid", email);
-		zmap.put("num", num);
-		zr = zdao.zzimActivation(zmap);
-		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   " + zr);
-		if (zr == 1) {
-			mav.addObject("zzim", zr);
-			mav.setViewName("t_detail");
-		} else {
-			mav.addObject("zzim", zr);
-			mav.setViewName("t_detail");
-		}
+	
 
 		return mav;
 	}

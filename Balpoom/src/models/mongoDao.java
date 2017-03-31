@@ -79,7 +79,7 @@ public class mongoDao {
 
 				}
 				map.put("num", f.getName());
-				
+
 				map.put("pictures", list);
 				template.insert(map, "room");
 				map.remove(f.getName());
@@ -100,20 +100,22 @@ public class mongoDao {
 		System.out.println(aggr.toString());
 		AggregationResults<Map> result = template.aggregate(aggr, "room", Map.class);
 		List<Map> list = result.getMappedResults();
+		String result1 ="";
 
 		// class java.util.ArrayList
-		if(list.size()>0){
-		String[] ar = list.iterator().next().get("pictures").toString().split(",");
-		
-		String str = ar[0].toString();
-		if(str.contains("]")){
-		return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1,ar[0].length()-1);
-		}else{
-			return ar[0].toString().substring(ar[0].toString().indexOf("[") + 1,ar[0].length());
+		if (list.size() > 0) {
+			String[] ar = list.iterator().next().get("pictures").toString().split(",");
+
+			String str = ar[0].toString();
+			if (str.contains("]")) {
+				result1= ar[0].toString().substring(ar[0].toString().indexOf("[") + 1, ar[0].length() - 1);
+			} else {
+				result1= ar[0].toString().substring(ar[0].toString().indexOf("[") + 1, ar[0].length());
+			}
 		}
-		}
-		return null;
 		
+		return result1;
+
 	}
 
 	public void find(String num) {
@@ -145,34 +147,33 @@ public class mongoDao {
 		for (Map map1 : list) {
 			str = map1.get("pictures").toString().substring(1, map1.get("pictures").toString().length() - 1);
 		}
-		
+
 		return str;
 
 	}
 
 	public List<HashMap> getHospitalInfo(HashMap<String, Object> bounds) {
-		
+
 		String east = bounds.get("east").toString();
 		String west = bounds.get("west").toString();
 		String south = bounds.get("south").toString();
 		String north = bounds.get("north").toString();
-		
+
 		Criteria latCondition = Criteria.where("lat").gt(south).lt(north);
 		Criteria lngCondition = Criteria.where("lng").gt(west).lt(east);
-		
+
 		AggregationOperation condition_1 = Aggregation.match(latCondition);
 		AggregationOperation condition_2 = Aggregation.match(lngCondition);
-		
+
 		Aggregation aggr = Aggregation.newAggregation(condition_1, condition_2);
-		
-		System.out.println(aggr.toString());	// 쿼리문 체크!
-		
-		AggregationResults<HashMap> result
-			= template.aggregate(aggr, "hospital", HashMap.class);
+
+		System.out.println(aggr.toString()); // 쿼리문 체크!
+
+		AggregationResults<HashMap> result = template.aggregate(aggr, "hospital", HashMap.class);
 		List<HashMap> rstList = result.getMappedResults();
 		System.out.println("Hospital List Size : " + rstList.size());
-		
-		if(rstList.isEmpty()) {
+
+		if (rstList.isEmpty()) {
 			System.out.println("List is Empty!!");
 			System.out.println(rstList);
 		} else {
@@ -180,7 +181,7 @@ public class mongoDao {
 		}
 		return rstList;
 	}
-	
+
 	// public int inserImg() throws IOException {
 	// int r = 0;
 	// Map<String, Object> map = new HashMap<>();

@@ -41,5 +41,21 @@
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
 
 	</definition>
+	<definition name="t_infolist" template="/WEB-INF/views/templates/news_template.jsp">
+		<put-attribute name="title" value="발품 | 더이상 허위매물에 속지말자" />
+		<put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/information/infolist.jsp" />
+		<put-attribute name="reg" value="/WEB-INF/views/information/infofooter.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+
+	</definition>
 	
+	
+	<definition name="t_infoidetail" template="/WEB-INF/views/templates/info_template.jsp">
+		<put-attribute name="title" value="발품 | 더이상 허위매물에 속지말자" />
+		<put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/information/infodetail.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+
+	</definition>
 </tiles-definitions>

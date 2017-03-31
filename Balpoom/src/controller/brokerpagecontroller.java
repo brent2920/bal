@@ -24,7 +24,7 @@ import models.mypageDao;
 import utils.Urlpicture;
 
 @Controller
-@RequestMapping("/broker")
+@RequestMapping("/")
 public class brokerpagecontroller {
 	@Autowired
 	brokerpageDao bdao;
@@ -36,7 +36,7 @@ public class brokerpagecontroller {
 	imgDao iDao;
 	
 
-	@RequestMapping("/page")
+	@RequestMapping("/brokerPage")
 	@ResponseBody
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -67,7 +67,7 @@ public class brokerpagecontroller {
 		return mav;
 	}
 
-	@RequestMapping("/complate")
+	@RequestMapping("/brokercomplate")
 	@ResponseBody
 	public String complate(HttpSession session, @RequestParam (name="sell")String sell,
 			HttpServletRequest req) {

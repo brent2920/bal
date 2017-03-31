@@ -54,7 +54,11 @@
         data.addRows([
         	
         	   <c:forEach var="list" items="${list }" varStatus="vs" >
-              	['${list.B_RINFO }', "<img src='${list.url}' width='100' height='100' />", '${list.B_MPAY } / ${list.B_DEPOSIT }', '${list.B_RKIND }'
+              	['${list.B_RINFO }', 
+              		
+              		"<img src='${list.url}' width='100' height='100' />",
+              		
+              		'${list.B_MPAY } / ${list.B_DEPOSIT }', '${list.B_RKIND }'
               		,'${list.B_TITLE}','<a href="/detail?num=${list.SELL_NUM}">${list.SELL_NUM}</a>']
               	
               	<c:if test="${!vs.last }">,</c:if>

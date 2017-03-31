@@ -156,7 +156,7 @@
                         <ul class="dropdown-menu">
                            <li><a href="/brokerchange"><span data-toggle="modal"
                                  data-target="#myInfo">내정보수정</span></a></li>
-                           <li><a href="/broker/page"><span data-toggle="modal"
+                           <li><a href="/brokerPage"><span data-toggle="modal"
                                  data-target="#myInfo">등록매물관리</span></a></li>
                            <li><a href="#"><span data-toggle="modal"
                            data-target="#myDelete1">회원탈퇴</span> </a></li>

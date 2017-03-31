@@ -101,8 +101,8 @@ public class latelycontroller {
 				int regNum = Integer.parseInt(c[i].getValue());
 				map = lDao.getLatelyList(regNum);
 				String ss = mDao.OneImage(String.valueOf(regNum));
-				System.out.println(ss);
 				map.put("url", ss);
+				System.out.println(ss+"!!!!!!!!!!!!");
 
 				list.add(map);
 

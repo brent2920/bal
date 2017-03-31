@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.alterDao;
+import models.informationDao;
 import models.latelyDao;
 import models.mongoDao;
 import models.newsDao;
@@ -38,6 +39,8 @@ public class main_controller {
 	mongoDao mDao;
 	@Autowired
 	latelyDao lDao;
+	@Autowired
+	informationDao infoDao;
 
 	@RequestMapping("/")
 	public ModelAndView mainHandler(HttpServletRequest req) {
@@ -72,6 +75,9 @@ public class main_controller {
 			}
 
 		}
+		System.out.println(latelylist.toString());
+		List information = infoDao.getTitle();
+		mav.addObject("infolist",information);
 		mav.addObject("news",news);
 		mav.addObject("size", latelylist.size());
 		mav.addObject("list", latelylist);

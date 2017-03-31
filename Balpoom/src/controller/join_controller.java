@@ -42,6 +42,7 @@ public class join_controller {
 			String uimg = "/images/profile.jpg";
 			map.put("uimg", uimg);
 			map.put("telenum", telenum);
+			System.out.println(map.toString());
 			int r = jdao.join(map);
 			Cookie[] cookies = req.getCookies();
 			Map latelymap = new HashMap<>();

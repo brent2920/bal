@@ -4,7 +4,7 @@
 
 <mapper namespace="join">
 	<insert id="add" parameterType="java.util.HashMap">
-		insert into join values(#{id}, #{Eemail}, #{password},  #{telenum},sysdate, #{uimg})
+		insert into join values(#{id}, #{Eemail}, #{password},  #{telenum},sysdate)
 	</insert>
 	
 <!-- 	<select id="ajax" parameterType="java.lang.String" resultType="java.lang.Integer"> -->

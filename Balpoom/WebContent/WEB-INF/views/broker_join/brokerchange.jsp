@@ -31,8 +31,8 @@
 
 				<div class="form-group">
 					<label for="bk_address" style="float: left; width: 115">등록인
-						이름:</label> <input type="text" class="form-control" id="bk_regname"
-						name="bk_regname" style="float: left; width: 250" /> <b
+						이름:</label> <input type="text" class="form-control" id="bk_regname" value="${list.BK_REGNAME }"
+					required="required"	name="bk_regname" style="float: left; width: 250" /> <b
 						style="color: gray; width: 300">&emsp; 등록인 이름을 입력하세요.</b>
 				</div>
 
@@ -47,7 +47,7 @@
 
 				<div class="form-group">
 					<label for="bk_password" style="float: left; width: 115">비밀번호:</label>
-					<input type="password" class="form-control" id="bk_password"
+					<input type="password" class="form-control" id="bk_password" required="required"
 						placeholder="비밀번호를 입력하세요" style="float: left; width: 250"
 						name="bk_password" /> <b style="color: gray">&emsp; 비밀번호를 입력하세요.</b>
 				</div>
@@ -55,22 +55,23 @@
 
 				<div class="form-group">
 					<label for="bk_password1" style="float: left; width: 115">비밀번호
-						확인:</label> <input type="password" style="float: left; width: 250"
+						확인:</label> <input type="password" style="float: left; width: 250" required="required"
 						class="form-control" id="bk_password1" placeholder="비밀번호를 입력하세요" />&emsp;<b id ="rst"></b><br/>
 				</div>
 
 				<div class="form-group">
 					<label for="bk_contact" style="float: left; width: 115">개인
-						연락처:</label> <select name="bk_contact" class="form-control"
+						연락처:</label> <select name="bk_contact" class="form-control" 
 						style="float: left; width: 80">
+						<option>${list.bk_contact0 }</option>
 						<option>010</option>
 						<option>011</option>
 						<option>016</option>
 						<option>017</option>
 						<option>018</option>
 						<option>019</option>
-					</select> <input type="text" class="form-control " id="bk_contact"
-						name="bk_contact" style="float: left; width: 85" /> <input
+					</select> <input type="text" class="form-control " id="bk_contact" value="${list.bk_contact1 }" required="required"
+						name="bk_contact" style="float: left; width: 85" /> <input value="${list.bk_contact2 }" required="required"
 						type="text" class="form-control " id="bk_contact"
 						name="bk_contact" style="float: left; width: 85" /> <b
 						style="color: gray"> &emsp; 개인 휴대전화 번호를 입력하세요.</b>
@@ -80,15 +81,15 @@
 				<br />
 				<div class="form-group">
 					<label for="bk_address" style="float: left; width: 115">부동산
-						이름:</label> <input type="text" class="form-control" id="bk_officename"
-						name="bk_officename" style="float: left; width: 250" value="${list.BK_OFFICENAME }"  disabled="disabled"/>
+						이름:</label><input type="text" class="form-control" id="bk_officename"
+						name="bk_officename" style="float: left; width: 250" value="${list.BK_OFFICENAME }"  required="required" disabled="disabled"/>
 				</div>
 <br/>	
 
 				<div class="form-group">
 					<label for="bk_email" style="float: left; width: 115">부동산
 						이메일:</label> <input type="email" style="float: left; width: 250"
-						class="form-control" id="bk_email" placeholder="Enter email"
+						class="form-control" id="bk_email" placeholder="Enter email" value="${list.BK_EMAIL }" required="required"
 						name="bk_email" /> <b style="color: gray">&emsp;중개사무소 이메일을
 						입력해주세요.</b>
 				</div>
@@ -96,6 +97,7 @@
 					<label for="bk_contact" style="float: left; width: 115">사무소
 						유선번호:</label> <select name="bk_agentnum" class="form-control"
 						style="float: left; width: 80">
+						<option>${list.bk_num0 }</option>
 						<option>02</option>
 						<option>031</option>
 						<option>032</option>
@@ -112,9 +114,9 @@
 						<option>062</option>
 						<option>063</option>
 						<option>064</option>
-					</select> <input type="text" class="form-control" id="bk_agentnum"
+					</select> <input type="text" class="form-control" id="bk_agentnum" value="${list.bk_num1 }" required="required"
 						name="bk_agentnum" style="float: left; width: 85" /> <input
-						type="text" class="form-control" id="bk_agentnum"
+						type="text" class="form-control" id="bk_agentnum" value="${list.bk_num2 }" required="required"
 						name="bk_agentnum" style="float: left; width: 85" /> <b
 						style="color: gray">&emsp;사무소 유선번호를 지역번호부터 입력해주세요.</b>
 				</div>
@@ -123,17 +125,18 @@
 					<label for="bk_address" style="float: left; width: 115">부동산 주소:</label>
 					<button class="btn" name="btn" type="button"
 						id="postcodify_search_button" style="height: 35">검색</button>
-					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" style="float: left; width: 200"/>
+					<input type="text" class="form-control postcodify_address" id="bk_address" name="bk_address" 
+					required="required" readonly="readonly" style="float: left; width: 200"/>
 					<b style="color: gray">&emsp;부동산 주소를 입력해주세요.</b><br/>
-					<label for="bk_address" style="float: left; width: 115">상세주소:</label> <input type="text" class="form-control"
-						id="bk_address" name="bk_address" style="float: left; width: 250" />
+					<label for="bk_address" style="float: left; width: 115" >상세주소:</label> <input type="text" class="form-control"
+					required="required" id="bk_address" name="bk_address" style="float: left; width: 250" />
 
 				</div>
 				<hr />
 
 				<div class="form-group">
 					<label for="bk_num" style="float: left; width: 115">중개등록번호:</label>
-					<input type="text" class="form-control" id="bk_num" name="bk_num"
+					<input type="text" class="form-control" id="bk_num" name="bk_num" required="required"
 						style="float: left; width: 250" disabled="disabled" value="${list.BK_NUM }"/><br/>
 				</div>
 

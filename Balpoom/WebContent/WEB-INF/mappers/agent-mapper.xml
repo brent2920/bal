@@ -10,7 +10,7 @@
 	<!-- 부동산 중개업자 등록입니다 -->
 	<insert id="insertOneAgent">
 		insert into agent values(#{bk_officename},#{bk_num},#{bk_address},#{bk_agentnum},
-	#{bk_contact},#{bk_email},#{bk_password},#{id},agent_sell_nuM.NEXTVAL,#{bk_regname})
+	#{bk_contact},#{bk_email},#{bk_password},#{id},agent_sell_num.NEXTVAL,#{bk_regname})
 	</insert>
 
 

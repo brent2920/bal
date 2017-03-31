@@ -8,18 +8,18 @@
 	<c:when test="${email eq 'master@master.com' }">
 		<div class="wrap-950 news-container" style="margin-top: 5%; margin-left: 15%; margin-right: 15%;">
 			<div class="content" >
-				<h1 align="center">NEWS</h1>
+				<h1 align="center">공지사항</h1>
 				<table class="table">
 					<thead>
 						<tr>
 							<th style="text-align: center;">
-								순번
+								글번호
 							</th>
 							<th>
-								기사제목
+								제목
 							</th>
 							<th style="text-align: center;">
-								등록일
+								등록인
 							</th>
 							<th style="text-align: center;">
 								삭제
@@ -27,19 +27,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="obj" items="${news }" varStatus="status">
+						<c:forEach var="obj" items="${infolist }" varStatus="status">
 							<tr>
-								<td style="text-align: center;">${status.index +1 }</td>
+								<td style="text-align: center;">${obj.NUM }</td>
 								<td>
-									<a href="${obj.URL }" target="_blank">${obj.TITLE }</a>
+									<a href = "/informationdetail?num="${obj.NUM }>${obj.TITLE }</a>
 								</td>
 								<td style="text-align: center;">
-									<fmt:formatDate value="${obj.DATES }"/> 
+									"${obj.ID }"
 								</td>
 								
 								<td style="text-align: center;">
 									<button class="btn commentdel" type="button"
-										style="background-color: white;" value="${obj.URL }">
+										style="background-color: white;" value="${obj.NUM }">
 										<span class="glyphicon glyphicon-remove-circle"></span>
 									</button>
 								</td>
@@ -50,33 +50,35 @@
 			</div>
 		</div>
 	</c:when>
+	
+	
 	<c:otherwise>
 		<div class="wrap-950 news-container" style="margin-top: 5%; margin-left: 20%; margin-right: 20%;">
 			<div class="content">
-				<h1 align="center">NEWS</h1>
+				<h1 align="center">공지사항</h1>
 				<table class="table">
 					<thead>
 						<tr>
 							<th style="text-align: center;">
-								순번
+								글 번호
 							</th>
 							<th>
-								기사제목
+								제목
 							</th>
 							<th style="text-align: center;">
-								등록일
+								등록인
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="obj" items="${news }" varStatus="status">
+						<c:forEach var="obj" items="${infolist }" varStatus="status">
 							<tr>
-								<td style="text-align: center;">${status.index +1 }</td>
+								<td style="text-align: center;">${obj.NUM}</td>
 								<td>
-									<a href="${obj.URL }" target="_blank">${obj.TITLE }</a>
+									<a href ="/informationdetail?num=${obj.NUM }">${obj.TITLE }</a>
 								</td>
 								<td style="text-align: center;">
-									<fmt:formatDate value="${obj.DATES }"/> 
+									"${obj.ID }"
 								</td>
 							</tr>
 						</c:forEach>
@@ -93,7 +95,7 @@
 		//alert($(this).val());
 		console.log("commendal");
 		$.ajax({
-			"url" : "/news_delete",
+			"url" : "/informationdelete",
 			"data" : {
 
 				"url" : $(this).val()
