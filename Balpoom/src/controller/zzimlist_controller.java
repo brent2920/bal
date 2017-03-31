@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.CLOBDao;
+import models.massageDao;
 import models.zzimlistDao;
 import utils.Urlpicture;
 
@@ -31,6 +32,9 @@ public class zzimlist_controller {
 	@Autowired
 	CLOBDao cdao;
 	
+	@Autowired
+	massageDao msgdao;
+	
 	@RequestMapping("/zzimlist")
 	public ModelAndView zzimlsit(HttpSession session) throws JsonProcessingException{
 		ModelAndView mav = new ModelAndView();
@@ -42,6 +46,26 @@ public class zzimlist_controller {
 		// �궗�슜�옄媛� �꽑�깮�븳 李� 紐⑸줉 �뜲�씠�꽣 
 		zdao.zzimlistdel(zzimD);
 		mav.setViewName("zzimlist");
+		
+		
+		// 메세지.=========================
+		List list1 = new ArrayList();
+		Map msgmap = new HashMap();
+		String eemail ="";
+		if(session.getAttribute("email") != null){
+		eemail =(String)session.getAttribute("email");
+		}
+		msgmap.put("email", eemail);
+		list1 = msgdao.msgfind(msgmap);
+		if(list1 != null){
+			System.out.println("잘들어갓냐?");
+			mav.addObject("msglist",list1);
+		
+		}else{
+			System.out.println("잘안들어갔나?");
+			
+		}
+		// 메세지.=========================
 		
 		
 		// 留ㅻЪ踰덊샇瑜� �씠�슜�븳 �궗吏� 遺덈윭�삤湲�
@@ -74,15 +98,19 @@ public class zzimlist_controller {
 		String email = (String)session.getAttribute("email");
 		Map map = zdao.zzimfind(num);
 		map.put("sessionid", email);
-		String t = (String)map.get("B_TITLE");
+		
+		if(map.get("B_GLIST") == null){
+			map.put("B_GLIST", "없음");
+		}
+		if(map.get("B_OPTION") == null){
+			map.put("B_OPTION", "없음");
+		}
+	
 		if(map != null){
 			r = zdao.zzimadd(map);
 			if(r == 1){
 				yesNo = "ZY";
-			}else{	
 			}
-		}else{
-			
 		}
 
 		return yesNo;

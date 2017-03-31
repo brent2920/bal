@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import models.CLOBDao;
 import models.alterDao;
 import models.commentDao;
+import models.massageDao;
 import models.mongoDao;
 import models.roomDao;
 import models.zzimlistDao;
@@ -50,6 +51,9 @@ public class detail_controller {
 	// 찜
 	@Autowired
 	zzimlistDao zdao;
+	
+	@Autowired
+	massageDao msgdao;
 
 	@RequestMapping("/detail")
 	public ModelAndView detailViewHandler(@RequestParam Map n, HttpServletRequest req, HttpServletResponse resp,
@@ -108,6 +112,12 @@ public class detail_controller {
 			
 			
 			// ===============================================
+			
+			
+			
+			
+			
+			
 			int zr = 0;
 			String email = (String) session.getAttribute("email");
 			Map zmap = new HashMap();
@@ -128,6 +138,7 @@ public class detail_controller {
 		} else {
 			// ===============================================
 			int zr = 0;
+			
 			String email = (String) session.getAttribute("email");
 			Map zmap = new HashMap();
 			zmap.put("sessionid", email);

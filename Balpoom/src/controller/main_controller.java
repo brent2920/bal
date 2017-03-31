@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import models.alterDao;
 import models.informationDao;
 import models.latelyDao;
+import models.massageDao;
 import models.mongoDao;
 import models.newsDao;
 import models.roomDao;
@@ -41,12 +43,35 @@ public class main_controller {
 	latelyDao lDao;
 	@Autowired
 	informationDao infoDao;
+	@Autowired
+	massageDao msgdao;
 
 	@RequestMapping("/")
-	public ModelAndView mainHandler(HttpServletRequest req) {
+	public ModelAndView mainHandler(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_main");
 		List<Map> news = ndao.get_news();
 		mav.addObject("news",news);
+		
+		
+		
+		// 메세지.=========================
+				List list = new ArrayList();
+				Map msgmap = new HashMap();
+				String eemail ="";
+				if(session.getAttribute("email") != null){
+				eemail =(String)session.getAttribute("email");
+				}
+				msgmap.put("email", eemail);
+				list = msgdao.msgfind(msgmap);
+				if(list != null){
+					System.out.println("잘들어갓냐?");
+					mav.addObject("msglist",list);
+				
+				}else{
+					System.out.println("잘안들어갔나?");
+					
+				}
+				// 메세지.=========================
 		
 		
 		
@@ -97,7 +122,7 @@ public class main_controller {
 
 	}
 
-	// search paging ajax 처리
+	// search paging ajax 泥섎━
 	@RequestMapping(path = "/testing", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap testing(@RequestParam Map n) {
@@ -142,17 +167,17 @@ public class main_controller {
 			@RequestParam(name = "south") String south, @RequestParam(name = "north") String north) {
 
 		// System.out.println("MPAY_TO ============> " + mpay_to);
-		// 보증금 세팅 - 문자제거
+		// 蹂댁쬆湲� �꽭�똿 - 臾몄옄�젣嫄�
 		String[] d_from = deposit_from.split("\\s");
 		String[] d_to = deposit_to.split("\\s");
 
-		// 월세 세팅 - 문자제거
+		// �썡�꽭 �꽭�똿 - 臾몄옄�젣嫄�
 		String[] m_from = mpay_from.split("\\s");
 		String[] m_to = mpay_to.split("\\s");
 		// System.out.println("M_TO ============> " + m_to[0]);
 
-		// 평수 세팅
-		// 0 : 전체 / 1 : 5평 이하 / 2 : 5~10평 / 3 : 10평 이상
+		// �룊�닔 �꽭�똿
+		// 0 : �쟾泥� / 1 : 5�룊 �씠�븯 / 2 : 5~10�룊 / 3 : 10�룊 �씠�긽
 		int areaFlag = 0;
 		for (String m : area) {
 			if (m.equals("lt_5"))
@@ -163,7 +188,7 @@ public class main_controller {
 				areaFlag = 3;
 		}
 
-		// 방종류 처리
+		// 諛⑹쥌瑜� 泥섎━
 		String one_open = "";
 		String one_seperate = "";
 		String one_dfloor = "";
@@ -187,7 +212,7 @@ public class main_controller {
 				gt_three = m;
 		}
 
-		// 층수 처리
+		// 痢듭닔 泥섎━
 		String underground = "";
 		String low_floor = "";
 		String mid_floor = "";

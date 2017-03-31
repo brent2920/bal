@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import models.informationDao;
 import models.latelyDao;
 import models.loginDao;
+import models.massageDao;
 import models.mongoDao;
 import models.newsDao;
 
@@ -35,6 +36,8 @@ public class login_controller {
 	latelyDao lDao;
 	@Autowired
 	informationDao infoDao;
+	@Autowired
+	massageDao msgdao;
 	
 	
 		@RequestMapping("/login")
@@ -80,9 +83,24 @@ public class login_controller {
 				System.out.println(eemail);
 				session.setAttribute("id", uid);
 				session.setAttribute("email", eemail);
+				// 쪽지.=========================
+				List list1 = new ArrayList();
+				Map msgmap = new HashMap();
+			
+				msgmap.put("email", eemail);
+				list1 = msgdao.msgfind(msgmap);
+				if(list1 != null){
+					
+					mav.addObject("msglist",list1);
+					
+				}else{
+					
+				}
+				
+				// 쪽지....=========================
 				mav.setViewName("t_main");
 			}else{
-				mav.addObject("msg","이메일 이나 패스워드가 잘못되었습니다");
+				mav.addObject("msg","�씠硫붿씪 �씠�굹 �뙣�뒪�썙�뱶媛� �옒紐삳릺�뿀�뒿�땲�떎");
 				mav.setViewName("t_main");
 			
 				

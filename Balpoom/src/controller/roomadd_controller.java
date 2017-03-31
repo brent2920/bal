@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.imgDao;
 import models.informationDao;
 import models.latelyDao;
+import models.massageDao;
 import models.mongoDao;
 import models.newsDao;
 import models.roomaddDao;
@@ -70,13 +71,35 @@ public class roomadd_controller {
 	@Autowired
 	informationDao infoDao;
 	
+	@Autowired
+	massageDao msgdao;
+	
 	
 	@RequestMapping("/roomadd")
-	public ModelAndView mav(HttpServletRequest req) {
+	public ModelAndView mav(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomadd");
 		mav.addObject("apiKey", apiKey.getGOOGLE_MAP_KEY());
 		
+		
+		// 메세지.=========================
+		List list = new ArrayList();
+		Map msgmap = new HashMap();
+		String eemail ="";
+		if(session.getAttribute("email") != null){
+		eemail =(String)session.getAttribute("email");
+		}
+		msgmap.put("email", eemail);
+		list = msgdao.msgfind(msgmap);
+		if(list != null){
+			System.out.println("잘들어갓냐?");
+			mav.addObject("msglist",list);
+		
+		}else{
+			System.out.println("잘안들어갔나?");
+			
+		}
+		// 메세지.=========================
 		
 		
 		

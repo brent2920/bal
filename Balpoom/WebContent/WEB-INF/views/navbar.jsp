@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -125,6 +126,10 @@
                                  </li>
                            <li><a href="/mypage"><span data-toggle="modal"
                                  >등록매물관리</span></a></li>
+                                     <!-- ========================== 쪽지================= -->
+                                  <li><a href="#"><span data-toggle="modal"
+                           data-target="#mymsg" id="mymsgb">메세지보관함</span> </a></li>
+                                     <!-- ========================== 쪽지================= -->
                            <li><a href="#"><span data-toggle="modal"
                            data-target="#myDelete">회원탈퇴</span> </a></li>
                         </ul></li>
@@ -207,6 +212,98 @@
                      </div>
                      <button type="submit" class="btn btn-success"
                         style="background-color: #04B486;">로그인</button>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+      
+      
+      
+       
+         <!-- ========================= 쪽지 ========================= -->
+       <div class="modal fade" id="mymsg" role="dialog">
+         <form action="" method="post">
+            <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">메세지보관함</h4>
+                  </div>
+                  <div class="modal-body">
+			<c:choose>
+				<c:when test="${msglist.size() eq 0}">
+				 	<span>등록된 메세지가 없습니다</span>
+			</c:when>
+			<c:otherwise>
+	
+                 <div class="table1" style="margin-top: 30px; height: 30%; overflow-x:hidden; overflow-y:auto; " >
+	 	<c:forEach items="${msglist  }" var="i" >
+	 		<div class="row">
+		 		<div class="col-sm-10">
+		 			<img alt="${i.ID}" src="/images/cmtIcon.png" width="18px;" height="18px;">
+		 			<b style="font-size: 15px; font-family: 나눔고딕;"> ${i.ID}(${i.EMAIL })</b><br/>
+		 			<div style="font-size: 14px; font-family: 나눔고딕; margin-top: 10px;">
+		 				${i.MASSAGE }
+		 			</div>
+		 			<div style="font-size: 12px; font-family: 나눔고딕; color: gray; margin-top: 10px;">
+		 				보낸 날짜 : <fmt:formatDate value="${i.MSYSDATE }" pattern="yyyy/MM/dd hh:mm"/>
+		 			</div>
+		 		</div>
+		 		<div class="col-sm-2">
+		 		<button class="btn msgsend" type="button" style="background-color: white;" value="${i.EMAIL }" id="sendemail">
+		 				<span class="glyphicon glyphicon glyphicon-envelope" data-toggle="modal" data-target="#msgsend"></span>
+		 			</button>
+		 			<button class="btn msgdel" type="button" style="background-color: white;" value="${i.MSG_SEQ }" >
+		 				<span class="glyphicon glyphicon-remove-circle"></span>
+		 			</button>
+		 		</div>
+		 	</div>
+		 
+		 	<hr style="margin-top: 20px; margin-bottom: 20px;"/>
+	 	</c:forEach>
+	 </div>
+			</c:otherwise>
+            </c:choose>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+            </div>
+            </div>
+         </form>
+      </div>
+      
+      
+      <!-- 쪽지 답변 하기 -->
+      <div class="modal fade" id="msgsend" role="dialog">
+         <form action="/login" method="post">
+            <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">답장하기</h4>
+                  </div>
+                  <div class="modal-body">
+
+               
+
+                     <div class="form-group">
+                        <label for="inputdefault">메세지를 입력해주세요</label> <input
+                           class="form-control" id="msgsendmsg" type="text"
+                           name="msgsendmsg">
+                     </div>
+                     <button type="button" class="btn btn-success"
+                        style="background-color: #04B486;" id="msgsendgo">답장</button>
                   </div>
                   <div class="modal-footer">
                      <button type="button" class="btn btn-default"
@@ -566,7 +663,52 @@
 </script>
 
 <script>
-//  $(function(){
+
+
+//메시지 삭제
+$(".msgdel").click(function(){
+		var msg = new XMLHttpRequest();
+		msg.open("get", "/massagedel?msgdell="+$(this).val(), true);
+		msg.send();
+		msg.onreadystatechange = function() {
+			if (msg.readyState == 4 && msg.status == 200) {
+				var msg2 = msg.responseText;
+				console.log(msg2);
+				if (msg2 == 'DMY') {
+					window.alert("메세지가 삭제 되었습니다");
+					location.reload();
+				} else {
+					window.alert("메세지 삭제중 오류가 발생하였습니다");
+					location.reload();
+				}
+			}
+		}
+	})
+	
+	// 답장보내기
+	 $("#msgsendgo").click(function(){
+		 var send = $("#msgsendmsg").val();
+		 var sendemail = $("#sendemail").val();
+		var msgsend = new XMLHttpRequest();
+		msgsend.open("get", "/msgsendmsg?msgsendmsg="+send+"&sendemail="+sendemail, true);
+		msgsend.send();
+		msgsend.onreadystatechange = function() {
+			if (msgsend.readyState == 4 && msgsend.status == 200) {
+				var msg2 = msgsend.responseText;
+				console.log(msg2);
+				if (msg2 == 'SDMY') {
+					window.alert("답장이 정상적으로 처리되었습니다");
+					location.reload();
+				} else {
+					window.alert("답장을 보내는 중 오류가 발생하였습니다");
+					location.reload();
+				}
+			}
+		}
+	})
+	
+	
+	//  $(function(){
 //   $('#delpass3').keyup(function(){
 //    $('span[id=rst]').text('');
 //   }); //#user_pass.keyup
@@ -585,4 +727,5 @@
 //    }
 //   }); //#chpass.keyup
 //  });
+
 </script>

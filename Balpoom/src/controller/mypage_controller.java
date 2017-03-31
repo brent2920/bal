@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.imgDao;
+import models.massageDao;
 import models.mongoDao;
 import models.mypageDao;
 import utils.Urlpicture;
@@ -34,6 +35,9 @@ public class mypage_controller {
 	@Autowired
 	imgDao iDao;
 	
+	@Autowired
+	massageDao msgdao;
+	
 	
 	
 	@RequestMapping("/mypage")
@@ -47,7 +51,7 @@ public class mypage_controller {
 		ArrayList<HashMap> arrList = new ArrayList<>();
 		String input = null;
 		System.out.println("List Size : " + list.size());
-		//몽고에서 이미지 하나 가져오기
+		//紐쎄퀬�뿉�꽌 �씠誘몄� �븯�굹 媛��졇�삤湲�
 		for (HashMap Imap : list) {
 			String num = Imap.get("SELL_NUM").toString();
 			
@@ -62,6 +66,25 @@ public class mypage_controller {
 			mav.addObject("list", arrList);
 
 		}
+		
+		// 메세지.=========================
+				List list1 = new ArrayList();
+				Map msgmap = new HashMap();
+				String eemail ="";
+				if(session.getAttribute("email") != null){
+				eemail =(String)session.getAttribute("email");
+				}
+				msgmap.put("email", eemail);
+				list1 = msgdao.msgfind(msgmap);
+				if(list1 != null){
+					System.out.println("잘들어갓냐?");
+					mav.addObject("msglist",list1);
+				
+				}else{
+					System.out.println("잘안들어갔나?");
+					
+				}
+				// 메세지.=========================
 
 		mav.setViewName("mypage");
 		return mav;
@@ -78,13 +101,13 @@ public class mypage_controller {
 		map.put("sell", sell);
 		int r = mdao.complate(map);
 		System.out.println("complate? ===> "+r);
-		File file2 = new File("/images/사진/");
+		File file2 = new File("/images/�궗吏�/");
 		String file22 = file2.getPath();
 		String realpath2 = (String)req.getRealPath(file22);
 		System.out.println(realpath2+"!!!!!!!!!!");
 		int num = Integer.parseInt(sell);
 		if (r == 1) {
-			//방 삭제 되었을때 사진 폴더 삭제하는 메서드
+			//諛� �궘�젣 �릺�뿀�쓣�븣 �궗吏� �뤃�뜑 �궘�젣�븯�뒗 硫붿꽌�뱶
 			iDao.imageDelete3(realpath2,id,num);
 			yesNo = "CY";
 		} else {

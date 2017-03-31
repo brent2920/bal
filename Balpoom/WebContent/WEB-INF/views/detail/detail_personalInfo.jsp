@@ -385,3 +385,12 @@ div {
 		}
 	}
 </script>
+<!-- 새로 고침후 찜 버튼 활성화 시키기 -->
+<c:if test="${zzim eq 1}">
+<script>
+	  $("#zzim").addClass("active");
+	  $("#zzim").css("color","red");
+</script>
+</c:if>
+	
+	

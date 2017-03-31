@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import models.informationDao;
 import models.latelyDao;
+import models.massageDao;
 import models.mongoDao;
 import models.newsDao;
 import models.pagingDao;
@@ -34,6 +36,9 @@ public class latelycontroller {
 	
 	@Autowired
 	informationDao infoDao;
+	
+	@Autowired
+	massageDao msgdao;
 //	@RequestMapping("/01")
 //	public ModelAndView latelyList(HttpServletRequest req) {
 //		ModelAndView mav = new ModelAndView("t_main");
@@ -69,7 +74,7 @@ public class latelycontroller {
 //	}
 
 	@RequestMapping("/recent")
-	public ModelAndView testHandler(HttpServletRequest req) {
+	public ModelAndView testHandler(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t_latelyList");
 		List<Map> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
@@ -130,6 +135,28 @@ public class latelycontroller {
 		List information = infoDao.getTitle();
 		mav.addObject("infolist",information);
 		mav.addObject("news",news);
+		
+		
+		// 메세지.=========================
+		List list1 = new ArrayList();
+		Map msgmap = new HashMap();
+		String eemail ="";
+		if(session.getAttribute("email") != null){
+		eemail =(String)session.getAttribute("email");
+		}
+		msgmap.put("email", eemail);
+		list1 = msgdao.msgfind(msgmap);
+		if(list1 != null){
+			System.out.println("잘들어갓냐?");
+			mav.addObject("msglist",list1);
+		
+		}else{
+			System.out.println("잘안들어갔나?");
+			
+		}
+		// 메세지.=========================
+		
+		
 		return mav;
 	}
 }
