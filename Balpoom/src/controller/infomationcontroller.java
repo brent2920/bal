@@ -1,8 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,34 @@ public class infomationcontroller {
 	
 	
 	@RequestMapping("/informationlist")
-	public ModelAndView InfoAllList(){
+	public ModelAndView InfoAllList(HttpServletRequest req){
 		ModelAndView mav = new ModelAndView("t_infolist");
 		List list = infoDao.getTitle();
 		mav.addObject("infolist",list);
+		List pagelist = new ArrayList<>();
+		int cnt = list.size();
+		int size = cnt % 10 == 0 ? cnt / 10 : cnt / 10 + 1;
+		String p = req.getParameter("page") == null ? "1" : req.getParameter("page");
+		int pp = Integer.parseInt(p);
+		int start = 0;
+		int end = 0;
+		int end1 = (pp - 1) * 10;
+		if (pp == 1) {
+			start = pp - 1;
+			end = pp * 10;
+		} else {
+			start = end1;
+			end = Integer.parseInt(p) * 10;
+		}
+		pagelist.removeAll(pagelist);
+		for(int i=start; end>list.size()? i<list.size() : i<end; i++){
+			pagelist.add(list.get(i));
+		}
+	
+		mav.addObject("size",size);
+		mav.addObject("cnt",cnt);
+		mav.addObject("page", p);
+		mav.addObject("pagelist", pagelist);
 		return mav;
 	}
 	@RequestMapping("/informationinsert")

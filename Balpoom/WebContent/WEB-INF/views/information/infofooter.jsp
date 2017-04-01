@@ -2,6 +2,37 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+	<div align="center" style="margin-top: 30px;">
+	<c:choose>
+		<c:when test="${page eq 1 }">
+			<a>이전</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/informationlist?page=${page -1}">이전</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:forEach var="p" begin="1" end="${size}" varStatus="vs">
+		<c:choose>
+			<c:when test="${page eq p }">
+				<b style="color: red">${p }</b>
+			</c:when>
+			<c:otherwise>
+				<a href="/informationlist?page=${p }">${p }</a>
+			</c:otherwise>
+		</c:choose>
+		<c:if test="${vs.last eq false }">|</c:if>
+
+	</c:forEach>
+	<c:choose>
+		<c:when test="${page eq size }">
+			<a>다음</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/informationlist?page=${page +1}">다음</a>
+		</c:otherwise>
+	</c:choose>
+</div>
 
 <c:choose>
 	<c:when test="${email eq 'master@master.com' }">
@@ -78,3 +109,4 @@
 	});
 				
 </script>
+
