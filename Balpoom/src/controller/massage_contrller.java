@@ -27,7 +27,6 @@ public class massage_contrller {
 		@RequestMapping("/massage")
 		@ResponseBody
 		public String msg(@RequestParam (name="massage")String massage, 
-				@RequestParam (name="msgroomnumber")int msgroomnumber,
 				HttpSession session, @RequestParam(name="registr")String registr){
 			Map map = new HashMap();
 			String id = (String)session.getAttribute("id");

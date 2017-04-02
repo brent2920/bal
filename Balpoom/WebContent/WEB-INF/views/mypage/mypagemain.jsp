@@ -23,7 +23,7 @@
 						<input type="text" id="sell"  value="${i.SELL_NUM }">
 					</div>
 						<div>
-							<img alt="${i.SELL_NUM}" src="${i.IMAGE }" style="width: 150px; height: 150px;">
+							<img alt="${i.SELL_NUM}" src="${i.IMAGE }" style="width: 220px; height: 150px;">
 						</div>
 						<div align="center" style="margin-top: 10px; font-size: 13px; color: #585858;">
 							<b>[ 매물번호: ${i.SELL_NUM} ]</b>
@@ -39,8 +39,9 @@
 						</div>
 					</div>
 					<div>
+					<br/>
 					<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#complate" id="commentadd" style="width: 150px">판매완료</button>
+							data-target="#complate" id="commentadd" style="width: 220px">판매완료</button>
 					</div>
 				</div>
 			</c:forEach>

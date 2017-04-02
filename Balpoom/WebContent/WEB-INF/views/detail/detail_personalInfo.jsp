@@ -123,8 +123,18 @@ div {
 	<div class="office_address">
 		${list1.B_TITLE }
 	</div>
-	<div class="agent_name">
-		[등록인] ${list.ID }
+	<div class="agent_name"> 
+	<c:choose>
+		<c:when test="${sessionScope.email eq list.EEMAIL }">
+		</c:when>
+		<c:otherwise>
+		[등록인] ${list.ID }	
+			<button class="btn" type="button"  id="msgbtn" data-toggle="modal"
+			data-target="#myMsg">
+		 				<span class="glyphicon glyphicon-envelope"></span>
+		 	</button>
+		</c:otherwise>
+	</c:choose>
 	</div>
 	<div class="agency_number">
 		이메일 : ${list.EEMAIL }
@@ -203,6 +213,30 @@ div {
 			</div>
 			<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
 				<button type="submit" class="btn btn-primary" id="rwrite" >
+					등록</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					id="rclose">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ======================= 메세지 ======================== -->
+<div class="modal fade" id="myMsg" role="dialog">
+	<div class="modal-dialog modal-la">
+		<div class="modal-content" style="padding: 10px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-contact" align="center">메세지를 입력해주세요</div>
+			<div style="height: 20px"></div>
+			<div>
+				<input type="text" placeholder="메세지를 입력해주세요" class="form-control"
+					name="massage" id="massage">
+			</div>
+			<div style="display: none;">
+				<input type="text" value="${list.EEMAIL }" name="registr" id="registr">
+			</div>
+			<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+				<button type="button" class="btn btn-primary" id="rmsg" >
 					등록</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal"
 					id="rclose">닫기</button>
@@ -332,6 +366,28 @@ div {
 							location.reload();
 						} else {
 							window.alert("댓글 등록중 오류가 발생 하였습니다");
+						}
+					}
+				}
+
+			})
+			
+			
+			// 메세지
+			$("#rmsg").click(function() {
+				var msg = new XMLHttpRequest();
+				msg.open("get", "/massage?massage=" + $("#massage").val()
+						+ "&registr=" + $("#registr").val(), true);
+				msg.send();
+				msg.onreadystatechange = function() {
+					if (msg.status == 200 && msg.readyState == 4) {
+						var mmsg = msg.responseText;
+						console.log(mmsg);
+						if (mmsg == 'MY') {
+							window.alert("메세지가 정상적으로 전송 되었습니다");
+							location.reload();
+						} else {
+							window.alert("메세지 전송중 오류가 발생 하였습니다");
 						}
 					}
 				}

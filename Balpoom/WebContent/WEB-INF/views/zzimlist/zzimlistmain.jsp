@@ -18,7 +18,7 @@
 				<div class="roomInfo" style="float: left; background-color: #F2F2F2; border-radius: 5px; 
 					padding: 20px; margin: 20px;" align="left" onclick="pageMove(${i.SELL_NUM})">
 					<div>
-						<img alt="${i.SELL_NUM}" src="${i.IMAGE }" style="width: 150px; height: 150px;">
+						<img alt="${i.SELL_NUM}" src="${i.IMAGE }" style="width: 350px; height: 150px;">
 					</div>
 					<div align="center" style="margin-top: 10px; font-size: 13px; color: #585858;">
 						<b>[ 매물번호: ${i.SELL_NUM} ]</b>
