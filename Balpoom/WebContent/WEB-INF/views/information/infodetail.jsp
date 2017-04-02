@@ -23,8 +23,10 @@
 <div class="form-group">
 <c:if test="${hi.detail ne null }">
 <br/><br/>
- <div class="alert alert-info" align="center">
+ <div class="alert alert-info">
+ <div align="center">
    <h3> <strong>공지사항 내용</strong> </h3><br/>
+   </div>
    <hr/>&emsp; ${hi.detail }
   </div>
 </c:if>
