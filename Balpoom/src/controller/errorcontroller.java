@@ -1,21 +1,20 @@
 package controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/error")
+@RequestMapping("/")
 public class errorcontroller {
 	
-	@RequestMapping("/404")
-	public ModelAndView error404(){
-		ModelAndView mav = new ModelAndView();
+	
+	@RequestMapping("/error")
+	public ModelAndView error(){
+		ModelAndView mav = new ModelAndView("t_error");
+		
 		return mav;
 	}
-	@RequestMapping("/500")
-	public ModelAndView error500(){
-		ModelAndView mav = new ModelAndView();
-		return mav;
-	}
+
 }

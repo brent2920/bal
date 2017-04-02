@@ -36,15 +36,22 @@
 	</filter-mapping>
 	
 	<error-page>
-		<exception-type>*</exception-type>
-		<location>/WEB-INF/views/error/error.jsp</location>
+		<error-code>400</error-code>
+		<location>/error</location>
 	</error-page>
+		
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/404</location>
+		<location>/error</location>
 	</error-page>
+		
 	<error-page>
 		<error-code>500</error-code>
-		<location>/error/500</location>
+		<location>/error</location>
 	</error-page>
+	<error-page>
+		<exception-type>*</exception-type>
+		<location>/error</location>
+	</error-page>
+
 </web-app>
