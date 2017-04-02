@@ -43,7 +43,7 @@ public class zzimlist_controller {
 		zzimD.put("email", email);
 		
 		
-		// �궗�슜�옄媛� �꽑�깮�븳 李� 紐⑸줉 �뜲�씠�꽣 
+		
 		zdao.zzimlistdel(zzimD);
 		mav.setViewName("zzimlist");
 		
