@@ -40,7 +40,7 @@
 
 <script>
 	function pageMove(snum) {
-		location.replace("http://localhost/detail?num=" + snum);
+		location.replace("/detail?num=" + snum);
 	}
 
 	$(document).on("mouseenter", ".roomInfo", function() {
