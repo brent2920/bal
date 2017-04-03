@@ -128,7 +128,7 @@ public class latelycontroller {
 		mav.addObject("map", map1);
 		System.out.println(map1.toString());
 	}else{
-		mav.addObject("msg","ï¿½Ö±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+		mav.addObject("msg","ìµœê·¼ ë³¸ ë°©ì´ ì—†ìŠµë‹ˆë‹¤.");
 		mav.setViewName("t_main");
 	}	
 		mav.addObject("news",news);
@@ -137,7 +137,7 @@ public class latelycontroller {
 		mav.addObject("news",news);
 		
 		
-//		// ¸Ş¼¼Áö.=========================
+//		// ï¿½Ş¼ï¿½ï¿½ï¿½.=========================
 //		List list1 = new ArrayList();
 //		Map msgmap = new HashMap();
 //		String eemail ="";
@@ -147,14 +147,14 @@ public class latelycontroller {
 //		msgmap.put("email", eemail);
 //		list1 = msgdao.msgfind(msgmap);
 //		if(list1 != null){
-//			System.out.println("Àßµé¾î°«³Ä?");
+//			System.out.println("ï¿½ßµï¿½î°«ï¿½ï¿½?");
 //			mav.addObject("msglist",list1);
 //		
 //		}else{
-//			System.out.println("Àß¾Èµé¾î°¬³ª?");
+//			System.out.println("ï¿½ß¾Èµï¿½î°¬ï¿½ï¿½?");
 //			
 //		}
-//		// ¸Ş¼¼Áö.=========================
+//		// ï¿½Ş¼ï¿½ï¿½ï¿½.=========================
 		
 		
 		return mav;

@@ -15,7 +15,7 @@ body {
 </style>
 
 <c:choose>
-<c:when test="${size ne 0 }">
+<c:when test="${size gt 0 }">
  <style>
   .container {
    
@@ -62,7 +62,7 @@ body {
   </style>
 
 
-<div style="padding-left: 5%;" >
+<div style="padding-left: 5%; padding-top: 2%; " >
 
 
 <div class="col-sm-3 carousel slide" id="myCarousel" data-ride="carousel" style="padding-top: 1%; padding-bottom: 1%">
@@ -135,7 +135,8 @@ body {
 </div>
   </c:when>
   <c:otherwise>
-  <div style="padding-left: 5%;"  class="col-sm-3">
+  
+  <div style="padding-left: 5%; padding-top: 2%;"  class="col-sm-3" >
    <img src="/images/profile.jpg" width="300" height="200"> 
   
   </div>

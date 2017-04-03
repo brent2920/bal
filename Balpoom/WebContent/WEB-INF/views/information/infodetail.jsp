@@ -12,7 +12,7 @@
 <div class="col-sm-3 alert alert-success">
 <strong>공지사항 번호&emsp;</strong>${hi.NUM }<br/>
 </div>
-<div class ="col-sm-3 alert alert-danger" style="height: ">
+<div class ="col-sm-9 alert alert-danger" style="height: ">
 <strong>공지사항 제목&emsp;</strong>${hi.TITLE }<br/>
 
 </div>

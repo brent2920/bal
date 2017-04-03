@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class logout_controller {
 	
 	
 		@RequestMapping("/logout")
-		public ModelAndView logout(HttpSession session, HttpServletRequest req){
+		public ModelAndView logout(HttpSession session, HttpServletRequest req, HttpServletResponse resp){
 			ModelAndView mav = new ModelAndView();
 			List<Map> news = ndao.get_news();
 			mav.addObject("news",news);
@@ -47,18 +48,8 @@ public class logout_controller {
 				System.out.println(rr);
 				if (rr > 1) {
 					for (Cookie cc : cookies) {
-						if (!(cc.getName().equals("JSESSIONID"))) {
-							int regNum = Integer.parseInt(cc.getValue());
-							latelymap = lDao.getLatelyList(regNum);
-							if(latelymap==null)
-								latelymap = new HashMap<>();
-							System.out.println(cc.getValue());
-
-							String ar = mDao.OneImage(String.valueOf(regNum));
-							latelymap.put("url", ar);
-							System.out.println(ar);
-							latelylist.add(latelymap);
-						}
+						cc.setMaxAge(0);
+						resp.addCookie(cc);
 					}
 				}
 
@@ -66,6 +57,9 @@ public class logout_controller {
 			mav.addObject("news",news);
 			mav.addObject("size", latelylist.size());
 			mav.addObject("list", latelylist);
+			
+		
+			
 			
 			session.removeAttribute("id");
 			session.removeAttribute("id1");
