@@ -62,6 +62,21 @@ public class massage_contrller {
 			return mav;
 		}
 		
+		
+		@RequestMapping("/Bmassagefind")
+		@ResponseBody
+		public ModelAndView Bmassagefind(HttpSession session){
+			List list = new ArrayList();
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("t_main");
+			Map msgmap = new HashMap();
+			String eemail = (String)session.getAttribute("brokerid");
+			msgmap.put("email", eemail);
+			list = msgdao.msgfind(msgmap);
+			mav.addObject("msglist",list);
+			return mav;
+		}
+		
 		@RequestMapping("/massagedel")
 		@ResponseBody
 		public String massagedel(HttpSession session, @RequestParam (name="msgdell")int msg_seq){
@@ -83,6 +98,30 @@ public class massage_contrller {
 			return yesNo;
 		}
 		
+		// 공인 중개사 메세지 삭제
+				@RequestMapping("/massagedeld")
+				@ResponseBody
+				public String massagedeld(HttpSession session, @RequestParam (name="msgdell")int msg_seq){
+					String yesNo = "";
+					Map map = new HashMap();
+					String email = (String)session.getAttribute("brokerid");
+					System.out.println("메세지 잘떠?세션 이메일 ==> "+email);
+					map.put("email",email);
+					map.put("msg_seq", msg_seq);
+					 int r = msgdao.msadel(map);
+					 System.out.println("메세지 삭제 여부 ========> "+r);
+					 if(r == 1){
+						 yesNo ="DMYD";
+					 }else{
+						 yesNo ="DMND"; 
+					 }
+					
+					
+					return yesNo;
+		
+				}
+		
+		
 		@RequestMapping("/msgsendmsg")
 		@ResponseBody
 		public String msgsendmsg(@RequestParam(name="msgsendmsg") String msgsendmsg,
@@ -101,6 +140,30 @@ public class massage_contrller {
 				yesNo ="SDMY";
 			}else{
 				yesNo="SDMN";
+			}
+			
+			return yesNo;
+			
+		}
+		
+		@RequestMapping("/msgsendmsgb")
+		@ResponseBody
+		public String msgsendmsgb(@RequestParam(name="msgsendmsg") String msgsendmsg,
+				@RequestParam (name="sendemail")String sendemail,HttpSession session) {
+			String yesNo = "";
+			Map map = new HashMap();
+			String email = (String)session.getAttribute("brokerid");
+			String id = (String)session.getAttribute("id1");
+			System.out.println(msgsendmsg+"/"+sendemail+"/"+email+"/"+id);
+			map.put("id", id);
+			map.put("email", email);
+			map.put("registr", sendemail);
+			map.put("massage", msgsendmsg);
+			int r = msgdao.massageadd(map);
+			if (r == 1){
+				yesNo ="SDMYD";
+			}else{
+				yesNo="SDMND";
 			}
 			
 			return yesNo;

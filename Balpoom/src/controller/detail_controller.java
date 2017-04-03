@@ -119,9 +119,18 @@ public class detail_controller {
 			
 			
 			int zr = 0;
-			String email = (String) session.getAttribute("email");
 			Map zmap = new HashMap();
-			zmap.put("sessionid", email);
+			//zmap.put("sessionid", email);
+			//String email = (String) session.getAttribute("email");
+			String email = "";
+			if(session.getAttribute("email")!= null){
+				email = (String)session.getAttribute("email");
+				zmap.put("sessionid", email);
+			}else if(session.getAttribute("brokerid")!=null){
+				email = (String)session.getAttribute("brokerid");
+				zmap.put("sessionid", email);
+			}
+			
 			zmap.put("num", num);
 			zr = zdao.zzimActivation(zmap);
 			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   " + zr);

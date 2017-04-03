@@ -38,9 +38,17 @@ public class zzimlist_controller {
 	@RequestMapping("/zzimlist")
 	public ModelAndView zzimlsit(HttpSession session) throws JsonProcessingException{
 		ModelAndView mav = new ModelAndView();
-		String email = (String)session.getAttribute("email");
+		Map map = new HashMap();
+		String email ="";
+		if(session.getAttribute("email")!= null){
+			email = (String)session.getAttribute("email");
+			map.put("email", email);
+		}else if(session.getAttribute("brokerid")!=null){
+			email = (String)session.getAttribute("brokerid");
+			map.put("email", email);
+		}
 		Map zzimD = new HashMap();
-		zzimD.put("email", email);
+		//zzimD.put("email", email);
 		
 		
 		
@@ -73,11 +81,11 @@ public class zzimlist_controller {
 		ArrayList<HashMap> arrList = new ArrayList<>();
 		String input = null;
 		System.out.println("List Size : " + list.size());
-		for(HashMap  map : list) {
-			input = "http://www.zigbang.com/items1/"+ map.get("SELL_NUM").toString();
+		for(HashMap  mapp : list) {
+			input = "http://www.zigbang.com/items1/"+ mapp.get("SELL_NUM").toString();
 			System.out.println("URL : " + input);
-			map.put("IMAGE", (upic.get_main_url(input)));
-			arrList.add(map);
+			mapp.put("IMAGE", (upic.get_main_url(input)));
+			arrList.add(mapp);
 		}
 		
 				
@@ -95,10 +103,28 @@ public class zzimlist_controller {
 	public String zzimadd(@RequestParam (name="roomnumber") int num, HttpSession session){
 		String yesNo = "";
 		int r = 0;
-		String email = (String)session.getAttribute("email");
-		Map map = zdao.zzimfind(num);
-		map.put("sessionid", email);
 		
+//		String email = (String)session.getAttribute("email");
+		Map map = zdao.zzimfind(num);
+		String email = "";
+		if(session.getAttribute("email")!= null){
+			email = (String)session.getAttribute("email");
+			map.put("sessionid", email);
+		}else if(session.getAttribute("brokerid")!=null){
+			email = (String)session.getAttribute("brokerid");
+			map.put("sessionid", email);
+		}
+		
+		if(map.get("B_TITLE") == null){
+			map.put("B_TITLE", "없음");
+		}
+		if(map.get("B_LOCATION") == null){
+			map.put("B_LOCATION", "없음");
+		}
+		if(map.get("B_LOCAL1") == null){
+			map.put("B_LOCAL1", "없음");
+		}
+
 		if(map.get("B_GLIST") == null){
 			map.put("B_GLIST", "없음");
 		}
@@ -120,10 +146,20 @@ public class zzimlist_controller {
 	public String zzimdel(@RequestParam (name="roomnumber")int num, HttpSession session){
 		String yesNo = "";
 		int r = 0;
-		String email = (String)session.getAttribute("email");
 		Map map = new HashMap();
+		//String email = (String)session.getAttribute("email");
+		String email = "";
+		if(session.getAttribute("email")!= null){
+			email = (String)session.getAttribute("email");
+			map.put("sessionid", email);
+		}else if(session.getAttribute("brokerid")!=null){
+			email = (String)session.getAttribute("brokerid");
+			map.put("sessionid", email);
+		}
+		
+	
 		map.put("num", num);
-		map.put("sessionid", email);
+		
 		 r = zdao.zzimdel(map);
 		 if ( r == 1){
 			 yesNo = "ZN";

@@ -163,6 +163,10 @@
                                  data-target="#myInfo">내정보수정</span></a></li>
                            <li><a href="/brokerPage"><span data-toggle="modal"
                                  data-target="#myInfo">등록매물관리</span></a></li>
+                                 <!-- ========================== 쪽지================= -->
+                                  <li><a href="#"><span data-toggle="modal"
+                           data-target="#mymsg1">메세지보관함</span> </a></li>
+                                     <!-- ========================== 쪽지================= -->
                            <li><a href="#"><span data-toggle="modal"
                            data-target="#myDelete1">회원탈퇴</span> </a></li>
                         </ul></li>
@@ -313,6 +317,99 @@
             </div>
          </form>
       </div>
+      
+      
+      <!-- 공인 중개사 쪽지 -->
+      
+      <div class="modal fade" id="mymsg1" role="dialog">
+         <form action="" method="post">
+            <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">메세지보관함</h4>
+                  </div>
+                  <div class="modal-body">
+			<c:choose>
+				<c:when test="${msglist1.size() eq 0}">
+				 	<span>등록된 메세지가 없습니다</span>
+			</c:when>
+			<c:otherwise>
+	
+                 <div class="table1" style="margin-top: 30px; height: 30%; overflow-x:hidden; overflow-y:auto; " >
+	 	<c:forEach items="${msglist1  }" var="i" >
+	 		<div class="row">
+		 		<div class="col-sm-10">
+		 			<img alt="${i.ID}" src="/images/cmtIcon.png" width="18px;" height="18px;">
+		 			<b style="font-size: 15px; font-family: 나눔고딕;"> ${i.ID}(${i.EMAIL })</b><br/>
+		 			<div style="font-size: 14px; font-family: 나눔고딕; margin-top: 10px;">
+		 				${i.MASSAGE }
+		 			</div>
+		 			<div style="font-size: 12px; font-family: 나눔고딕; color: gray; margin-top: 10px;">
+		 				보낸 날짜 : <fmt:formatDate value="${i.MSYSDATE }" pattern="yyyy/MM/dd hh:mm"/>
+		 			</div>
+		 		</div>
+		 		<div class="col-sm-2">
+		 		<button class="btn msgsend" type="button" style="background-color: white;" value="${i.EMAIL }" id="sendemail1">
+		 				<span class="glyphicon glyphicon glyphicon-envelope" data-toggle="modal" data-target="#msgsendd"></span>
+		 			</button>
+		 			<button class="btn msgdel1" type="button" style="background-color: white;" value="${i.MSG_SEQ }" >
+		 				<span class="glyphicon glyphicon-remove-circle"></span>
+		 			</button>
+		 		</div>
+		 	</div>
+		 
+		 	<hr style="margin-top: 20px; margin-bottom: 20px;"/>
+	 	</c:forEach>
+	 </div>
+			</c:otherwise>
+            </c:choose>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+            </div>
+            </div>
+         </form>
+      </div>
+      
+      
+      <!-- 쪽지 답변 하기 -->
+      <div class="modal fade" id="msgsendd" role="dialog">
+         <form action="/login" method="post">
+            <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">답장하기</h4>
+                  </div>
+                  <div class="modal-body">
+
+               
+
+                     <div class="form-group">
+                        <label for="inputdefault">메세지를 입력해주세요</label> <input
+                           class="form-control" id="msgsendmsg1" type="text"
+                           name="msgsendmsg1">
+                     </div>
+                     <button type="button" class="btn btn-success"
+                        style="background-color: #04B486;" id="msgsendgoo">답장</button>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+      
+      
       
       
       <!-- 공인중개사 로그인 -->
@@ -697,6 +794,49 @@ $(".msgdel").click(function(){
 				var msg2 = msgsend.responseText;
 				console.log(msg2);
 				if (msg2 == 'SDMY') {
+					window.alert("답장이 정상적으로 처리되었습니다");
+					location.reload();
+				} else {
+					window.alert("답장을 보내는 중 오류가 발생하였습니다");
+					location.reload();
+				}
+			}
+		}
+	})
+		//==================================================================
+		// 공인 중개사 메시지 삭제
+$(".msgdel1").click(function(){
+		var msgz = new XMLHttpRequest();
+		msgz.open("get", "/massagedeld?msgdell="+$(this).val(), true);
+		msgz.send();
+		msgz.onreadystatechange = function() {
+			if (msgz.readyState == 4 && msgz.status == 200) {
+				var msgz2 = msgz.responseText;
+				console.log(msgz2);
+				if (msgz2 == 'DMYD') {
+					window.alert("메세지가 삭제 되었습니다");
+					location.reload();
+				} else {
+					window.alert("메세지 삭제중 오류가 발생하였습니다");
+					location.reload();
+				}
+			}
+		}
+	})
+		
+	
+	// 공인 중개사 답장보내기
+	 $("#msgsendgoo").click(function(){
+		 var send1 = $("#msgsendmsg1").val();
+		 var sendemail1 = $("#sendemail1").val();
+		var msgsend1 = new XMLHttpRequest();
+		msgsend1.open("get", "/msgsendmsgb?msgsendmsg="+send1+"&sendemail="+sendemail1, true);
+		msgsend1.send();
+		msgsend1.onreadystatechange = function() {
+			if (msgsend1.readyState == 4 && msgsend1.status == 200) {
+				var msg3 = msgsend1.responseText;
+				console.log(msg3);
+				if (msg3 == 'SDMYD') {
 					window.alert("답장이 정상적으로 처리되었습니다");
 					location.reload();
 				} else {

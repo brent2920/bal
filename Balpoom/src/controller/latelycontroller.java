@@ -137,24 +137,24 @@ public class latelycontroller {
 		mav.addObject("news",news);
 		
 		
-		// 메세지.=========================
-		List list1 = new ArrayList();
-		Map msgmap = new HashMap();
-		String eemail ="";
-		if(session.getAttribute("email") != null){
-		eemail =(String)session.getAttribute("email");
-		}
-		msgmap.put("email", eemail);
-		list1 = msgdao.msgfind(msgmap);
-		if(list1 != null){
-			System.out.println("잘들어갓냐?");
-			mav.addObject("msglist",list1);
-		
-		}else{
-			System.out.println("잘안들어갔나?");
-			
-		}
-		// 메세지.=========================
+//		// 메세지.=========================
+//		List list1 = new ArrayList();
+//		Map msgmap = new HashMap();
+//		String eemail ="";
+//		if(session.getAttribute("email") != null){
+//		eemail =(String)session.getAttribute("email");
+//		}
+//		msgmap.put("email", eemail);
+//		list1 = msgdao.msgfind(msgmap);
+//		if(list1 != null){
+//			System.out.println("잘들어갓냐?");
+//			mav.addObject("msglist",list1);
+//		
+//		}else{
+//			System.out.println("잘안들어갔나?");
+//			
+//		}
+//		// 메세지.=========================
 		
 		
 		return mav;

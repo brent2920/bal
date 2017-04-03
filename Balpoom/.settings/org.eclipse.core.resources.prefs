@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/views/detail/detail_main.jsp=UTF-8
+encoding//src/controller/broker_login_controller.java=UTF-8
 encoding//src/controller/detail_controller.java=UTF-8
 encoding//src/controller/imgcontroller.java=UTF-8
 encoding//src/controller/login_controller.java=UTF-8

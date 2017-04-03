@@ -20,6 +20,7 @@ import models.brokerchangeDao;
 import models.informationDao;
 import models.latelyDao;
 import models.loginDao;
+import models.massageDao;
 import models.mongoDao;
 import models.newsDao;
 
@@ -41,6 +42,9 @@ public class broker_login_controller {
 	@Autowired
 	informationDao infoDao;
 	
+	@Autowired
+	massageDao msgdao;
+	
 	@RequestMapping("/brokerlogin")
 	public ModelAndView brokerlogin(HttpSession session, @RequestParam Map map,
 			HttpServletRequest req){
@@ -53,14 +57,30 @@ public class broker_login_controller {
 		if(map1 !=null){
 			session.setAttribute("id1", map1.get("BK_REGNAME"));
 			session.setAttribute("brokerid", map1.get("ID"));
+			// 쪽지.=========================
+						List list1 = new ArrayList();
+						Map msgmap = new HashMap();
+					
+						msgmap.put("email", map1.get("ID"));
+						list1 = msgdao.msgfind(msgmap);
+						if(list1 != null){
+							
+							mav.addObject("msglist1",list1);
+							
+						}else{
+							
+						}
+						
+						// 쪽지....=========================
+//						mav.addObject("msg","로그인이 되셨습니다.");
 			
 			
-			mav.addObject("msg","로그인에 성공했습니다.");
+		//	mav.addObject("msg","濡쒓렇�씤�뿉 �꽦怨듯뻽�뒿�땲�떎.");
 			mav.setViewName("t_main");
 
 			}else{
 				
-				mav.addObject("msg","이메일이나 비밀번호를 다시 입력하세요.");
+				mav.addObject("msg","�씠硫붿씪�씠�굹 鍮꾨�踰덊샇瑜� �떎�떆 �엯�젰�븯�꽭�슂.");
 				mav.setViewName("t_main");
 				
 			}
